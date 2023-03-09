@@ -1,0 +1,18 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/finedUI?allowPublicKeyRetrieval=true&useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
+    username: ssafy
+    password: ssafy
+  jpa:
+    defer-datasource-initialization: true
+    database: mysql
+    hibernate:
+      ddl:
+        auto: update
+    generate-ddl: false
+    properties:
+      hibernate:
+        format_sql: true
+
+
