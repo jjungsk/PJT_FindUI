@@ -2,7 +2,6 @@ package com.ssafy.finedui.db.entity;
 
 
 import lombok.Getter;
-
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
@@ -11,8 +10,8 @@ import java.time.LocalDateTime;
 @Getter
 public class PersonalData {
     @Id @GeneratedValue
-    @Column(name= "personal_data_id")
-    private Long id;
+    @Column(name= "missing_id")
+    private Long missingId;
 
 
     @ManyToOne(fetch = FetchType.LAZY)
