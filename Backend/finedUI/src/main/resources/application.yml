@@ -8,11 +8,36 @@ spring:
     defer-datasource-initialization: true
     database: mysql
     hibernate:
-      ddl-auto: update
+      ddl:
+        auto: update
     generate-ddl: false
     properties:
       hibernate:
         format_sql: true
-        show_sql: true
+  servlet:
+    multipart:
+      enabled: true
+      location: /Users/SSAFY/
+      max-request-size: 30MB
+      max-file-size: 10MB
+image:
+  upload:
+    path: /Users/SSAFY/
+cloud:
+  aws:
+    region:
+      static: ap-northeast-2
+    s3:
+      bucket: finedui-ajh
+    credentials:
+      access-key: AKIA3WSTMVY35UWKIAXY
+      secret-key: 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
+    stack:
+      auto: false
 
-
+logging:
+  level:
+    com:
+      amazonaws:
+        util:
+          EC2MetadataUtils: ERROR
