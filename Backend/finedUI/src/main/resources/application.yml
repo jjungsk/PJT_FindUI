@@ -8,8 +8,7 @@ spring:
     defer-datasource-initialization: true
     database: mysql
     hibernate:
-      ddl:
-        auto: update
+      ddl-auto: update
     generate-ddl: false
     properties:
       hibernate:
@@ -41,3 +40,4 @@ logging:
       amazonaws:
         util:
           EC2MetadataUtils: ERROR
+

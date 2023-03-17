@@ -29,10 +29,10 @@ public class PersonalData {
     private String name;
 
     @Column(name = "birth_date")
-    private int birthDate;
+    private Integer birthDate;
 
     @Column(name = "gender")
-    private int gender;
+    private Integer gender;
 
     @Column(name = "front_image")
     private String frontImage;
@@ -60,7 +60,7 @@ public class PersonalData {
     private Boolean isMissing;
 
     @Builder
-    public PersonalData(Long missing_idx, String name, User user, int birthDate, int gender, String frontImage, String otherImage1, String otherImage2, Timestamp missingTime, Point missingLocation, Timestamp createDate, Timestamp updateDate, Boolean isMissing) {
+    public PersonalData(Long missing_idx, String name, User user, Integer birthDate, Integer gender, String frontImage, String otherImage1, String otherImage2, Timestamp missingTime, Point missingLocation, Timestamp createDate, Timestamp updateDate, Boolean isMissing) {
         this.missingIdx = missing_idx;
         this.name = name;
         this.user = user;

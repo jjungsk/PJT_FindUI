@@ -1,6 +1,7 @@
 package com.ssafy.finedui.api.service.personaldata;
 
 import com.ssafy.finedui.api.dto.personaldata.PersonalDataRequestDto;
+import com.ssafy.finedui.api.dto.personaldata.PersonalDataResponseDto;
 import com.ssafy.finedui.db.repository.PersonalDataRepository;
 import com.ssafy.finedui.db.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -23,5 +24,10 @@ public class PersonalDataServiceImpl implements PersonalDataService{
         }
         System.out.println(personalDataRequestDto.getFrontImage());
         personalDataRepository.save(personalDataRequestDto.toEntity());
+    }
+
+    @Override
+    public PersonalDataResponseDto findById(Long id) {
+        return new PersonalDataResponseDto(personalDataRepository.findById(id).get());
     }
 }

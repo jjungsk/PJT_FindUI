@@ -17,8 +17,8 @@ public class PersonalDataRequestDto {
     private Long userId;
     private User user;
     private String name;
-    private int birthDate;
-    private int gender;
+    private Integer birthDate;
+    private Integer gender;
     private Boolean isMissing;
     private Point missingLocation;
     private Timestamp missingTime;
@@ -28,7 +28,7 @@ public class PersonalDataRequestDto {
     private Timestamp createDate;
 
     @Builder
-    PersonalDataRequestDto(Long missingIdx, Long userId, String name, int birthDate, int gender, Boolean isMissing, Point missingLocation, Timestamp missingTime, Timestamp createDate, String frontImage, String otherImage1, String otherImage2) {
+    PersonalDataRequestDto(Long missingIdx, Long userId, String name, Integer birthDate, Integer gender, Boolean isMissing, Point missingLocation, Timestamp missingTime, Timestamp createDate, String frontImage, String otherImage1, String otherImage2) {
         this.missingIdx = missingIdx;
         this.userId = userId;
         this.name = name;
