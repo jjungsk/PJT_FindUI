@@ -20,6 +20,18 @@ spring:
       hibernate:
         format_sql: true
 
+# security log level 설정
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
+# hibernate log level 설정
+
+# 디버깅용 로그레벨 설정.
+
+
+
 #  devtools의 기본옵션이 true.
 #  devtools:
 #    livereload:
