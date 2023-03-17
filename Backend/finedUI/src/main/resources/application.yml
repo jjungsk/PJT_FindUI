@@ -4,6 +4,11 @@ spring:
     url: jdbc:mysql://localhost:3306/finedUI?allowPublicKeyRetrieval=true&useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
     username: ssafy
     password: ssafy
+    hikari:
+      idle-timeout: 10000
+      maximum-pool-size: 10
+      minimum-idle: 5
+      pool-name: fined&youHikariPool
   jpa:
     defer-datasource-initialization: true
     database: mysql
@@ -14,5 +19,10 @@ spring:
     properties:
       hibernate:
         format_sql: true
+
+#  devtools의 기본옵션이 true.
+#  devtools:
+#    livereload:
+#      enabled: true
 
 
