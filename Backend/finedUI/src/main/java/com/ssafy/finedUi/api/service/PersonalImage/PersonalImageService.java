@@ -5,6 +5,8 @@ import com.ssafy.finedUi.db.entity.PersonalImage;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.ArrayList;
+
 public interface PersonalImageService {
-    PersonalImageRequestDto save(MultipartFile file, Long userId);
+    String[] save(MultipartFile[] multipartFiles, Long userId);
 }

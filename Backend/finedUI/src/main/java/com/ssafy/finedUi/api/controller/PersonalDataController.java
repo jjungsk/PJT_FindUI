@@ -19,12 +19,16 @@ public class PersonalDataController {
     }
 
     @PostMapping(path = "")
-    public void create(@RequestBody PersonalDataRequestDto personalDataRequestDto){
+    // MultipartFile 을 받을 때 @RequestBody 로 받으면 오류 발생
+    // [해결책]
+    // 1. @RequestParam 사용 -> 받아야하는 Parameter 가 많을 시 코드 가독성이 떨어짐
+    // 2. @ModelAttribute 사용! -> 코드 가독성도 유지되고 간결성도 유지됨
+    public void create(@ModelAttribute PersonalDataRequestDto personalDataRequestDto){
         personalDataService.save(personalDataRequestDto);
     }
 
     @PutMapping(path = "")
-    public void update(@RequestBody PersonalDataRequestDto personalDataRequestDto) {
+    public void update(@ModelAttribute PersonalDataRequestDto personalDataRequestDto) {
         personalDataService.save(personalDataRequestDto);
     }
 }
