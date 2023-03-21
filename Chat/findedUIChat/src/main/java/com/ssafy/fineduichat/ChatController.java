@@ -20,6 +20,12 @@ public class ChatController {
                 .subscribeOn(Schedulers.boundedElastic());
     }
     @CrossOrigin
+    @GetMapping(value = "/chat/roomNum/{roomNum}",produces = MediaType.TEXT_EVENT_STREAM_VALUE)
+    public Flux<Chat> findByUsername(@PathVariable Integer roomNum){
+        return chatRepository.mFindByRoomNum(roomNum)
+                .subscribeOn(Schedulers.boundedElastic());
+    }
+    @CrossOrigin
     @PostMapping("/chat")
     public Mono<Chat> setMsg(@RequestBody Chat chat){
         chat.setCreatedAt(LocalDateTime.now());
