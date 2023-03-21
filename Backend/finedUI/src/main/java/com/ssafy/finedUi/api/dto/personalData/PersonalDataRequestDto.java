@@ -21,13 +21,11 @@ import java.time.LocalDateTime;
 @Getter
 @NoArgsConstructor
 public class PersonalDataRequestDto {
-    // 실종(사전) 등록 이미지 service
-    private PersonalImageServiceImpl personalImageService;
 
     @Value("${image.upload.path}")
     private String path;                // 환경변수로 저장된 업로드 경로
 
-    private Long missingIdx;            // 실종(사전 등록) 번호
+    private Long missingId;            // 실종(사전 등록) 번호
     private Long userId;                // 보호자 번호
     private User user;                  // 사용자 : 보호자 번호로 조회한 사용자
     private String name;                // 이름
@@ -46,7 +44,7 @@ public class PersonalDataRequestDto {
 
     public PersonalData toEntity() {
         return PersonalData.builder()
-                .missing_idx(missingIdx)
+                .missingIdx(missingId)
                 .name(name)
                 .birthDate(birthDate)
                 .gender(gender)

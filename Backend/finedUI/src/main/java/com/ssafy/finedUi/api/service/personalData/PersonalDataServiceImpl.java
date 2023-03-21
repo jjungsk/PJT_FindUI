@@ -7,6 +7,7 @@ import com.ssafy.finedUi.db.repository.PersonalDataRepository;
 import com.ssafy.finedUi.db.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.sql.Timestamp;
@@ -14,6 +15,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class PersonalDataServiceImpl implements PersonalDataService{
     // 실종(사전)정보 repository

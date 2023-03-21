@@ -1,23 +1,18 @@
 package com.ssafy.finedUi.api.service.PersonalImage;
 
-import com.ssafy.finedUi.api.dto.PersonalImage.PersonalImageRequestDto;
-import com.ssafy.finedUi.db.entity.PersonalImage;
-import com.ssafy.finedUi.db.repository.PersonalImageRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.File;
 import java.io.IOException;
-import java.lang.reflect.Array;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
 
 @Service
+@Transactional
 @RequiredArgsConstructor
 public class PersonalImageServiceImpl implements PersonalImageService {
 

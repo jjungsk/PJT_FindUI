@@ -14,6 +14,7 @@ import java.sql.Timestamp;
 @Table(name = "personal_data")
 @NoArgsConstructor              // 파라미터가 없는 생성자
 @AllArgsConstructor             // 모든 필드를 파라미터로 가지는 생성자
+@Builder                        // 생성자를 builder 패턴으로 생성
 @Getter                         // 모든 필드 Getter 생성
 public class PersonalData {
 
@@ -59,21 +60,4 @@ public class PersonalData {
     @UpdateTimestamp
     @Column(name = "update_date")
     private Timestamp updateDate;       // 수정 시간
-
-    @Builder
-    public PersonalData(Long missing_idx, String name, User user, Integer birthDate, Integer gender, String frontImage, String otherImage1, String otherImage2, Timestamp missingTime, Point missingLocation, Timestamp createDate, Timestamp updateDate, Boolean isMissing) {
-        this.missingIdx = missing_idx;
-        this.name = name;
-        this.user = user;
-        this.birthDate = birthDate;
-        this.gender = gender;
-        this.frontImage = frontImage;
-        this.otherImage1 = otherImage1;
-        this.otherImage2 = otherImage2;
-        this.missingLocation = missingLocation;
-        this.missingTime = missingTime;
-        this.createDate = createDate;
-        this.updateDate = updateDate;
-        this.isMissing = isMissing;
-    }
 }
