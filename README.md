@@ -38,3 +38,5 @@ git commit test
 rm -r \*
 
 direcotry 삭제
+
+SSH -> userName and AccessToken 으로 접속 정보 변경
