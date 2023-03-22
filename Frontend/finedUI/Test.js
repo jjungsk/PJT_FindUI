@@ -1,7 +1,7 @@
 import React from 'react';
-import LoginInput from './src/components/atoms/LoginInput'
+import LoginPage from './src/components/screens/LoginPage';
 
 const Test = () => {
-  return (<LoginInput />);
+  return (<LoginPage/>);
 };
 export default Test;

@@ -1,20 +1,36 @@
 import React from 'react';
-// import {Text, View} from 'react-native';
-import styled from 'styled-components/native';
+import {View, StyleSheet, TextInput} from 'react-native';
 
-const InputContainer = styled.TextInput`
-  width: 100%;
-  border: 1px solid;
-  border-color: #1977f3;
-  ${'' /* border-radius: 5px;
-  line-height: 2.5rem;
-  font-size: 1.2rem;
-  padding-left: 0.5rem;
-  padding-right: 0.5rem; */}
-`;
+const styles = StyleSheet.create({
+  inputView:{
+    width:"80%",
+    // 색상 변경하기
+    // backgroundColor:"#465881",
+    borderWidth: 2,
+    borderColor: "#2e90fa",
+    borderRadius:25,
+    height:50,
+    marginBottom:20,
+    justifyContent:"center",
+    padding:20
+  },
+  inputText:{
+    height:50,
+    color:"white"
+  },
+})
 
 
-const LoginInput = () => {
-  return (<InputContainer />);
+const LoginInput = ({placeholderItem}) => {
+  return (
+    <View style={styles.inputView}>
+      <TextInput
+        style={styles.inputText}
+        placeholder={placeholderItem}
+        placeholderTextColor="#003f5c"
+        >
+      </TextInput>
+    </View>
+  );
 };
 export default LoginInput;
