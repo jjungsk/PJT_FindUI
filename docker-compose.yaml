@@ -38,7 +38,7 @@ services:
     restart: always
     networks:
       - find_net
-networkd:
+networks:
   find_net:
     # 해당 이름의 새 네트워크 생성이 아닌 기존에 생성된 network 활용
     external: true
