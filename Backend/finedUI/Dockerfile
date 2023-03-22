@@ -8,4 +8,4 @@ ARG JAR_FILE=build/libs/\*.jar
 COPY ${JAR_FILE} app.jar
 
 # CMD와 비슷함 -> app.jar 파일은 java -jar로 실행
-ENTRYPOINT ["java","-jar","/app.jar"]
+ENTRYPOINT ["java","-jar","app.jar"]
