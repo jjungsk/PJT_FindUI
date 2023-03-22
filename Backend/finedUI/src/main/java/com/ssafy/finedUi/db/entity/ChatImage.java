@@ -8,7 +8,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 
 @Entity
-@Table(name = "search_image")
+@Table(name = "chat_image")
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -19,11 +19,11 @@ public class ChatImage {
     @Column(name = "id")
     private Long id;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "missing_idx")
     private PersonalData personalData;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "user_idx")
     private User user;
 

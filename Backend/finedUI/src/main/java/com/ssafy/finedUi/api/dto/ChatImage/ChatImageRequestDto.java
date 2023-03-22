@@ -27,7 +27,6 @@ public class ChatImageRequestDto {
 
 
     public ChatImage toEntity() {
-        System.out.println(personalDataId);
         return ChatImage.builder()
                 .id(id)
                 .personalData(personalData)
