@@ -1,20 +1,21 @@
 import React from 'react';
-import {SafeAreaView, View} from 'react-native';
-import {UserBtn} from '../atoms/buttons';
+import {SafeAreaView, View, TextInput, StyleSheet} from 'react-native';
+import PreRegistCard from '../organisms/PreRegistCard';
 
 const Test = () => {
   return (
-    <SafeAreaView style={{flex: 1}}>
-      <UserBtn style={{flex: 1}}></UserBtn>
-      <View
-        style={{
-          flex: 2,
-          backgroundColor: 'green',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}></View>
-    </SafeAreaView>
+    <View style={styles.testContainer}>
+      <PreRegistCard></PreRegistCard>
+    </View>
   );
 };
+
+const styles = StyleSheet.create({
+  testContainer: {
+    flex: 1,
+    margin: 20,
+    justifyContent: 'center',
+  },
+});
 
 export {Test};
