@@ -6,6 +6,7 @@ volumes:
     external: true
 services:
   database:
+    container_name: mysql_db
     image: mysql:8.0
     volumes:
       # container MySql과 docker volume 연결
@@ -25,6 +26,7 @@ services:
     networks:
       - find_net
   application:
+    container_name: spring_boot
     # container 실행 순서 보장 (db -> server)
     depends_on:
       - database
@@ -34,6 +36,10 @@ services:
       # docker 파일 이름이 다를 경우 dockerfile: ./Backend/finedUI
     ports:
       - 8081:8080
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql_db:3306/finedUI?useSSL=false&allowPublicKeyRetrieval=true&characterEncoding=UTF-8&serverTimezone=UT
+      SPRING_DATASOURCE_USERNAME: "ssafy"
+      SPRING_DATASOURCE_PASSWORD: "ssafy"
     # container에 문제가 생겨 종료됐을때 자동 재시작 true
     restart: always
     networks:
