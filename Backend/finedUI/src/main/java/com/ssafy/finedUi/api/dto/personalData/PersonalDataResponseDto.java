@@ -3,6 +3,7 @@ package com.ssafy.finedUi.api.dto.personalData;
 import com.ssafy.finedUi.db.entity.PersonalData;
 import com.ssafy.finedUi.db.entity.User;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Getter;
 
 import java.awt.*;
@@ -37,5 +38,21 @@ public class PersonalDataResponseDto {
         this.missingLocation = personalData.getMissingLocation();
         this.createDate = personalData.getCreateDate();
         this.isMissing = personalData.getIsMissing();
+    }
+
+    public PersonalData toEntity() {
+        return PersonalData.builder().missingIdx(missingIdx)
+                .user(user)
+                .name(name)
+                .birthDate(birthDate)
+                .gender(gender)
+                .frontImage(frontImage)
+                .otherImage1(otherImage1)
+                .otherImage2(otherImage2)
+                .missingTime(missingTime)
+                .missingLocation(missingLocation)
+                .createDate(createDate)
+                .isMissing(isMissing)
+                .build();
     }
 }

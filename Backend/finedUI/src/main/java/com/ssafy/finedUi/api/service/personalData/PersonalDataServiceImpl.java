@@ -48,6 +48,12 @@ public class PersonalDataServiceImpl implements PersonalDataService{
     }
 
     @Override
+    public void delete(Long id) {
+        PersonalDataResponseDto personalDataResponseDto = new PersonalDataResponseDto(personalDataRepository.findById(id).get());
+        personalDataRepository.delete(personalDataResponseDto.toEntity()); // 실종(사전) 데이터 db에서 삭제
+    }
+
+    @Override
     // id 기준으로 조회
     public PersonalDataResponseDto findById(Long id) {
         return new PersonalDataResponseDto(personalDataRepository.findById(id).get());

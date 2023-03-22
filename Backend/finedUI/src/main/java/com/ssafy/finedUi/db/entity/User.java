@@ -8,6 +8,8 @@ import org.hibernate.annotations.DynamicInsert;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "user")
@@ -20,6 +22,9 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_idx")
     private Long userIdx;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private List<PersonalData> personalDataList = new ArrayList<>();
 
     @Column(name = "name", length = 10)
     private String name;

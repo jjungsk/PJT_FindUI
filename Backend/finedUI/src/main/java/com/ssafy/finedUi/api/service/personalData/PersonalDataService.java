@@ -6,6 +6,8 @@ import com.ssafy.finedUi.api.dto.personalData.PersonalDataResponseDto;
 public interface PersonalDataService {
     void save(PersonalDataRequestDto personalDataRequestDto);
 
+    void delete(Long id);
+
     PersonalDataResponseDto findById(Long id);
 
 

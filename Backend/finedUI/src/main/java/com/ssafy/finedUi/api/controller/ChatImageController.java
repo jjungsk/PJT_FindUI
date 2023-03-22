@@ -24,7 +24,7 @@ public class ChatImageController {
     }
 
     @DeleteMapping
-    public void delete(Long userId, Long personalDataId) {
+    public void delete(@RequestParam Long userId, @RequestParam Long personalDataId) {
         chatImageService.delete(userId, personalDataId);
     }
 }

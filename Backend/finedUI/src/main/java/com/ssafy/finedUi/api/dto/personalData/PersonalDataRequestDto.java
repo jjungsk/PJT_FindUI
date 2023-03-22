@@ -1,19 +1,12 @@
 package com.ssafy.finedUi.api.dto.personalData;
 
-import com.ssafy.finedUi.api.dto.PersonalImage.PersonalImageRequestDto;
-import com.ssafy.finedUi.api.service.PersonalImage.PersonalImageServiceImpl;
 import com.ssafy.finedUi.db.entity.PersonalData;
 import com.ssafy.finedUi.db.entity.User;
-import com.ssafy.finedUi.db.repository.UserRepository;
 import lombok.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.awt.*;
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 

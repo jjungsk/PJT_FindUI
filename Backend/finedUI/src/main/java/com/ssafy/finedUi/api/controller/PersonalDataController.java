@@ -23,12 +23,17 @@ public class PersonalDataController {
     // [해결책]
     // 1. @RequestParam 사용 -> 받아야하는 Parameter 가 많을 시 코드 가독성이 떨어짐
     // 2. @ModelAttribute 사용! -> 코드 가독성도 유지되고 간결성도 유지됨
-    public void create(@ModelAttribute PersonalDataRequestDto personalDataRequestDto){
+    public void create(@ModelAttribute PersonalDataRequestDto personalDataRequestDto) {
         personalDataService.save(personalDataRequestDto);
     }
 
     @PutMapping(path = "")
     public void update(@ModelAttribute PersonalDataRequestDto personalDataRequestDto) {
         personalDataService.save(personalDataRequestDto);
+    }
+
+    @DeleteMapping
+    public void delete(@RequestParam Long id) {
+        personalDataService.delete(id);
     }
 }
