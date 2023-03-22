@@ -2,7 +2,7 @@
 
 echo $(which bash) # 현재 디렉토리 위치 출력
 
-IMAGE_NAME="findUI-main-back-img"
+IMAGE_NAME="find-main-back-img"
 CONTAINER_ID="$(docker container ls |grep ${IMAGE_NAME}|awk '{print $1}')"
 IMAGE_ID="$(docker images -q ${IMAGE_NAME})"
 EMPTY_STR=""
@@ -42,5 +42,5 @@ echo "image rm end"
 
 //컨테이너 올리는거
 echo "docker run start"
-docker run -dp 8081:8080 --name findUI-main-back-con --network findUI-main-net findUI-main-back-img
+docker run -dp 8081:8080 --name find-main-back-con --network findUI-main-net find-main-back-img
 echo "docker run end"
