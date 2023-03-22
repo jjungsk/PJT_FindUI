@@ -2,7 +2,7 @@
 FROM adoptopenjdk/openjdk11
 
 # 해당 build의 jar 파일들을 변수 선언
-ARG JAR_FILE=build/libs/
+ARG JAR_FILE=build/libs/\*.jar
 
 # 왼쪽 path에 있는 jar파일들을 app.jar로 복사
 COPY ${JAR_FILE} app.jar
