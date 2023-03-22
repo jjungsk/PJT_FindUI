@@ -3,9 +3,16 @@ import {SafeAreaView, View, TextInput, StyleSheet} from 'react-native';
 import PreRegistCard from '../organisms/PreRegistCard';
 
 const Test = () => {
+  const registUser = {
+    name: '샘스미스',
+    birthday: new Date(1997, 2, 18),
+    address: '서울시 역삼동 멀티캠퍼스',
+    phone: '010-6725-5590',
+  };
+
   return (
     <View style={styles.testContainer}>
-      <PreRegistCard></PreRegistCard>
+      <PreRegistCard registUser={registUser}></PreRegistCard>
     </View>
   );
 };
