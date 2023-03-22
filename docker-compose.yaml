@@ -22,14 +22,19 @@ services:
       - "--character-set-server=utf8mb4"
       - "--collation-server=utf8mb4_unicode_ci"
     restart: always
+    networks:
+      - findUI-main-net
   application:
     # container 실행 순서 보장 (db -> server)
     depends_on:
       - database
     build:
-      context: .
-      dockerfile: ./Backend/finedUI
+      # dockerfile 경로 설정
+      context: ./Backend/finedUI
+      # docker 파일 이름이 다를 경우 dockerfile: ./Backend/finedUI
     ports:
       - 8081:8080
     # container에 문제가 생겨 종료됐을때 자동 재시작 true
     restart: always
+    networks:
+      - findUI-main-net
