@@ -69,8 +69,9 @@ public class PersonalDataServiceImpl implements PersonalDataService{
     }
 
     @Override
-    // id 기준으로 조회
     public PersonalDataResponseDto findById(Long id) {
-        return new PersonalDataResponseDto(personalDataRepository.findById(id).get());
+        PersonalDataResponseDto personalDataResponseDto = new PersonalDataResponseDto(personalDataRepository.findById(id).get());
+        System.out.println(personalDataResponseDto);
+        return personalDataResponseDto;
     }
 }

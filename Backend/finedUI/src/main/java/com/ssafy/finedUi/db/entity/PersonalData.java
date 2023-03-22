@@ -1,5 +1,6 @@
 package com.ssafy.finedUi.db.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -25,6 +26,7 @@ public class PersonalData {
     private Long missingIdx;            // 실종 번호
 
     @ManyToOne
+    @JsonManagedReference
     @JoinColumn(name = "user_idx")
     private User user;                  // 사용자(FK)
 

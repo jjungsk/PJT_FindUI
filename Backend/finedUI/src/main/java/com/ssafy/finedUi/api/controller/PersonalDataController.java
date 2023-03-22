@@ -13,7 +13,7 @@ public class PersonalDataController {
 
     private final PersonalDataServiceImpl personalDataService;
 
-    @GetMapping(path = "")
+    @GetMapping(path="")
     public PersonalDataResponseDto get(@RequestParam Long id) {
         return personalDataService.findById(id);
     }

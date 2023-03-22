@@ -1,5 +1,6 @@
 package com.ssafy.finedUi.db.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -24,6 +25,7 @@ public class User {
     private Long userIdx;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @JsonBackReference
     private List<PersonalData> personalDataList = new ArrayList<>();
 
     @Column(name = "name", length = 10)
