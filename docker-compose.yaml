@@ -1,16 +1,15 @@
 version: "3"
 # 도커 volume 연결
 volumes:
-  findUI-main-vol:
+  find_vol:
     # external true로 성정해야 docker volume의 데이터가 삭제 안됨
     external: true
-    name: findUI-main-vol
 services:
-  db:
+  database:
     image: mysql:8.0
     volumes:
       # container MySql과 docker volume 연결
-      - findUI-main-vol:/var/lib/mysql
+      - find_vol:/var/lib/mysql
     ports:
       - 3306:3306
     environment:
@@ -23,13 +22,13 @@ services:
       - "--character-set-server=utf8mb4"
       - "--collation-server=utf8mb4_unicode_ci"
     restart: always
-  server:
+  application:
     # container 실행 순서 보장 (db -> server)
     depends_on:
-      - db
+      - database
     build:
       context: .
-      dockerfile: ./Backend/findUI
+      dockerfile: ./Backend/finedUI
     ports:
       - 8081:8080
     # container에 문제가 생겨 종료됐을때 자동 재시작 true
