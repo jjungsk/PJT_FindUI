@@ -23,7 +23,7 @@ services:
       - "--collation-server=utf8mb4_unicode_ci"
     restart: always
     networks:
-      - findUI-main-net
+      - find_net
   application:
     # container 실행 순서 보장 (db -> server)
     depends_on:
@@ -37,4 +37,4 @@ services:
     # container에 문제가 생겨 종료됐을때 자동 재시작 true
     restart: always
     networks:
-      - findUI-main-net
+      - find_net
