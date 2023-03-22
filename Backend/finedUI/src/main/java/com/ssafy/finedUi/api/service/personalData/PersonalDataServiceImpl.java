@@ -10,6 +10,10 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -50,6 +54,17 @@ public class PersonalDataServiceImpl implements PersonalDataService{
     @Override
     public void delete(Long id) {
         PersonalDataResponseDto personalDataResponseDto = new PersonalDataResponseDto(personalDataRepository.findById(id).get());
+        String[] imagePathList = {personalDataResponseDto.getFrontImage(), personalDataResponseDto.getOtherImage1(), personalDataResponseDto.getOtherImage2()};
+        System.out.println(imagePathList[0]);
+        for (String imagePath : imagePathList) {
+            if (imagePath == null) {continue;}
+            Path path = Paths.get(imagePath);
+            try {
+                Files.deleteIfExists(path);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        }
         personalDataRepository.delete(personalDataResponseDto.toEntity()); // 실종(사전) 데이터 db에서 삭제
     }
 
