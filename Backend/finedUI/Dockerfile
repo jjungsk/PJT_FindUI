@@ -1,4 +1,4 @@
-# # openjdk 11 버젼 Image pul
+# # openjdk 11 버젼 Image pull
 # FROM adoptopenjdk/openjdk11
 
 # # Work Directory 설정
