@@ -41,7 +41,7 @@ services:
       SPRING_DATASOURCE_USERNAME: "ssafy"
       SPRING_DATASOURCE_PASSWORD: "ssafy"
     # container에 문제가 생겨 종료됐을때 자동 재시작 true
-    restart: always
+    tty: true
     networks:
       - find_net
 networks:
