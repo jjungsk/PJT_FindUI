@@ -32,7 +32,8 @@ services:
       - database
     build:
       # dockerfile 경로 설정
-      context: ./Backend/finedUI .
+      context: ./Backend/finedUI
+      dockerfile: .
       # docker 파일 이름이 다를 경우 dockerfile: ./Backend/finedUI
     ports:
       - 8081:8080

@@ -11,7 +11,7 @@
 # CMD ["java", "-jar", "app.jar"]
 
 # # openjdk 11 버젼 Image pull
-FROM openjdk11
+FROM openjdk:11
 
 # # 해당 build의 jar 파일들을 변수 선언
 ARG JAR_FILE="build/libs/*.jar"
