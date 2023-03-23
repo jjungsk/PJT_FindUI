@@ -1,7 +1,7 @@
 import React from 'react';
-import LoginPage from './src/components/screens/LoginPage';
+import SignUpPage from './src/components/screens/SignUpPage';
 
 const Test = () => {
-  return (<LoginPage/>);
+  return (<SignUpPage/>);
 };
 export default Test;
