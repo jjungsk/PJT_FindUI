@@ -10,13 +10,14 @@ const styles = StyleSheet.create({
     borderColor: "#2e90fa",
     borderRadius:25,
     height:50,
-    marginBottom:20,
+    marginBottom:16,
     justifyContent:"center",
     padding:20
   },
   inputText:{
     height:50,
-    color:"white"
+    color: "#0A0A0A",
+    fontSize:18
   },
 })
 

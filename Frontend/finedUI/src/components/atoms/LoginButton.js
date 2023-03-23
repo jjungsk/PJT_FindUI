@@ -9,18 +9,20 @@ const styles = StyleSheet.create({
     height:50,
     alignItems:"center",
     justifyContent:"center",
-    marginTop:40,
+    marginTop:25,
     marginBottom:10
   },
   loginText:{
-    color:"white"
+    color:"white",
+    fontSize: 18,
+    fontWeight: "bold"
   }
 })
 
 const LoginButton = () => {
   return (
     <TouchableOpacity style={styles.loginBtn}>
-      <Text style={styles.loginText}>LOGIN</Text>
+      <Text style={styles.loginText}>로그인</Text>
     </TouchableOpacity>
   );
 };
