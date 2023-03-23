@@ -10,7 +10,7 @@
 # # 명령어 실행
 # CMD ["java", "-jar", "app.jar"]
 
-# # openjdk 11 버젼 Image pull
+# # openjdk:11 버젼 Image pull
 FROM openjdk:11
 
 # # 해당 build의 jar 파일들을 변수 선언
