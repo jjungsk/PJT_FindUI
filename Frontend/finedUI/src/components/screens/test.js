@@ -11,9 +11,9 @@ const Test = () => {
   };
 
   return (
-    <View style={styles.testContainer}>
+    <SafeAreaView style={styles.testContainer}>
       <PreRegistCard registUser={registUser}></PreRegistCard>
-    </View>
+    </SafeAreaView>
   );
 };
 
