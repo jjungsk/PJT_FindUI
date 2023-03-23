@@ -1,6 +1,7 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
+    # EC2 Server MySql url 주소 & port 설정 번호
     url: jdbc:mysql://j8a108.p.ssafy.io:3306/finedUI?allowPublicKeyRetrieval=true&useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
     username: ssafy
     password: ssafy

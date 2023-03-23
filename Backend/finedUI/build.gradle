@@ -33,6 +33,7 @@ dependencies {
 
 }
 
+// gradle build 시, simple.jar 파일 생성 skip 명령어 (파일 경로 : build/libs)
 jar {
 	enabled = false
 }
