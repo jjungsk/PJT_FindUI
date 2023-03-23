@@ -33,7 +33,7 @@ services:
     build:
       # dockerfile 경로 설정
       context: ./Backend/finedUI
-      dockerfile: .
+      dockerfile: Dockerfile
       # docker 파일 이름이 다를 경우 dockerfile: ./Backend/finedUI
     ports:
       - 8081:8080
