@@ -33,7 +33,7 @@ public class PersonalDataController {
     }
 
     @DeleteMapping
-    public void delete(@RequestParam Long id) {
+    public void deleteById(@RequestParam Long id) {
         personalDataService.delete(id);
     }
 }

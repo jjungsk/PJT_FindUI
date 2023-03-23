@@ -11,6 +11,8 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import java.awt.*;
 import java.sql.Timestamp;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "personal_data")
@@ -22,12 +24,12 @@ public class PersonalData {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "missing_idx")
-    private Long missingIdx;            // 실종 번호
+    @Column(name = "missing_id")
+    private Long missingId;            // 실종 번호
 
     @ManyToOne
     @JsonManagedReference
-    @JoinColumn(name = "user_idx")
+    @JoinColumn(name = "user_id")
     private User user;                  // 사용자(FK)
 
     @Column(name = "name", length = 10)

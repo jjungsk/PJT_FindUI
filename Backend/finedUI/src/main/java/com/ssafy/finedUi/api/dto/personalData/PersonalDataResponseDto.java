@@ -2,6 +2,7 @@ package com.ssafy.finedUi.api.dto.personalData;
 
 import com.ssafy.finedUi.db.entity.PersonalData;
 import com.ssafy.finedUi.db.entity.User;
+import com.ssafy.finedUi.db.repository.UserRepository;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -12,8 +13,10 @@ import java.sql.Timestamp;
 @Getter
 @AllArgsConstructor
 public class PersonalDataResponseDto {
-    private Long missingIdx;
-    private User user;
+    private UserRepository userRepository;
+
+    private Long missingId;
+    private Long userId;
     private String name;
     private Integer birthDate;
     private Integer gender;
@@ -26,8 +29,8 @@ public class PersonalDataResponseDto {
     private Boolean isMissing;
 
     public PersonalDataResponseDto(PersonalData personalData) {
-        this.missingIdx = personalData.getMissingIdx();
-        this.user = personalData.getUser();
+        this.missingId = personalData.getMissingId();
+        this.userId = personalData.getUser().getUserId();
         this.name = personalData.getName();
         this.birthDate = personalData.getBirthDate();
         this.gender = personalData.getGender();
@@ -41,8 +44,8 @@ public class PersonalDataResponseDto {
     }
 
     public PersonalData toEntity() {
-        return PersonalData.builder().missingIdx(missingIdx)
-                .user(user)
+        return PersonalData.builder().missingId(missingId)
+                .user(userRepository.findById(userId).get())
                 .name(name)
                 .birthDate(birthDate)
                 .gender(gender)

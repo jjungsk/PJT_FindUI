@@ -21,12 +21,8 @@ import java.util.List;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_idx")
-    private Long userIdx;
-
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
-    @JsonBackReference
-    private List<PersonalData> personalDataList = new ArrayList<>();
+    @Column(name = "user_id")
+    private Long userId;
 
     @Column(name = "name", length = 10)
     private String name;

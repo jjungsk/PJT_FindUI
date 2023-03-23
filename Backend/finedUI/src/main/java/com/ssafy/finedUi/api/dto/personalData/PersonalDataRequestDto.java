@@ -37,7 +37,7 @@ public class PersonalDataRequestDto {
 
     public PersonalData toEntity() {
         return PersonalData.builder()
-                .missingIdx(missingId)
+                .missingId(missingId)
                 .name(name)
                 .birthDate(birthDate)
                 .gender(gender)

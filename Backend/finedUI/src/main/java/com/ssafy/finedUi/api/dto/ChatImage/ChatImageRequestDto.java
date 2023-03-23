@@ -1,6 +1,7 @@
 package com.ssafy.finedUi.api.dto.ChatImage;
 
 import com.ssafy.finedUi.db.entity.ChatImage;
+import com.ssafy.finedUi.db.entity.ChatImageId;
 import com.ssafy.finedUi.db.entity.PersonalData;
 import com.ssafy.finedUi.db.entity.User;
 import com.ssafy.finedUi.db.repository.PersonalDataRepository;
@@ -27,10 +28,14 @@ public class ChatImageRequestDto {
 
 
     public ChatImage toEntity() {
+        ChatImageId chatImageId = new ChatImageId();
+        chatImageId.setUser(user);
+        chatImageId.setPersonalData(personalData);
         return ChatImage.builder()
-                .id(id)
-                .personalData(personalData)
-                .user(user)
+//                .id(id)
+//                .personalData(personalData)
+//                .user(user)
+                .chatImageId(chatImageId)
                 .imagePath(imagePath)
                 .build();
     }

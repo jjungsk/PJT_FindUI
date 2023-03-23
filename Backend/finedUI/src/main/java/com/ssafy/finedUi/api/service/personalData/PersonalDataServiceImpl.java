@@ -1,8 +1,11 @@
 package com.ssafy.finedUi.api.service.personalData;
 
+import com.ssafy.finedUi.api.dto.ChatImage.ChatImageResponseDto;
 import com.ssafy.finedUi.api.dto.personalData.PersonalDataRequestDto;
 import com.ssafy.finedUi.api.dto.personalData.PersonalDataResponseDto;
 import com.ssafy.finedUi.api.service.PersonalImage.PersonalImageServiceImpl;
+import com.ssafy.finedUi.api.service.S3Service;
+import com.ssafy.finedUi.db.repository.ChatImageRepository;
 import com.ssafy.finedUi.db.repository.PersonalDataRepository;
 import com.ssafy.finedUi.db.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -24,10 +27,14 @@ import java.util.ArrayList;
 public class PersonalDataServiceImpl implements PersonalDataService{
     // 실종(사전)정보 repository
     private final PersonalDataRepository personalDataRepository;
+    // 채팅 이미지 repository
+    private final ChatImageRepository chatImageRepository;
     // 실종(사전) 정보 service
     private final PersonalImageServiceImpl personalImageService;
     // 사용자 repository
     private final UserRepository userRepository;
+    // S3 service
+    private final S3Service s3Service;
 
     @Override
     public void save(PersonalDataRequestDto personalDataRequestDto) {
@@ -53,25 +60,32 @@ public class PersonalDataServiceImpl implements PersonalDataService{
 
     @Override
     public void delete(Long id) {
+        // 실종(등록) 정보 id로 조회
         PersonalDataResponseDto personalDataResponseDto = new PersonalDataResponseDto(personalDataRepository.findById(id).get());
+        // 등록된 이미지 리스트
         String[] imagePathList = {personalDataResponseDto.getFrontImage(), personalDataResponseDto.getOtherImage1(), personalDataResponseDto.getOtherImage2()};
-        System.out.println(imagePathList[0]);
+        // 이미지 모두 삭제
         for (String imagePath : imagePathList) {
-            if (imagePath == null) {continue;}
-            Path path = Paths.get(imagePath);
+            if (imagePath == null) {continue;}  // 비어있을 경우 다음 실행
+            Path path = Paths.get(imagePath);   // 경로
             try {
-                Files.deleteIfExists(path);
-            } catch (IOException e) {
+                Files.deleteIfExists(path);     // 파일이 존재할 경우 삭제, 파일이 존재하지 않을 경우 False를 반환
+            } catch (IOException e) {           // Exception이 발생하지 않음
                 throw new RuntimeException(e);
             }
         }
-        personalDataRepository.delete(personalDataResponseDto.toEntity()); // 실종(사전) 데이터 db에서 삭제
+        // S3에 저장된 실종(등록) id에 해당하는 채팅방 이미지 모두 삭제
+        for (ChatImageResponseDto chatImageResponseDto : chatImageRepository.findAllByChatImageId_PersonalData_MissingId(id)) {
+            Long userId = chatImageResponseDto.getUserId();
+            Long missingId = chatImageResponseDto.getMissingId();
+            s3Service.delete(userId, missingId);
+        }
+        chatImageRepository.deleteAllByChatImageId_PersonalData_MissingId(id);  // 연관관계에 의해 삭제가 거부될 수 있으므로 채팅 이미지부터 삭제
+        personalDataRepository.delete(personalDataResponseDto.toEntity());      // 실종(사전) 데이터 db에서 삭제
     }
 
     @Override
     public PersonalDataResponseDto findById(Long id) {
-        PersonalDataResponseDto personalDataResponseDto = new PersonalDataResponseDto(personalDataRepository.findById(id).get());
-        System.out.println(personalDataResponseDto);
-        return personalDataResponseDto;
+        return new PersonalDataResponseDto(personalDataRepository.findById(id).get());  // findById 조회 시 personalDataRepsonse로 변환해서 반환
     }
 }
