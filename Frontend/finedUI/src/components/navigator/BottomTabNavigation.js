@@ -7,6 +7,7 @@ import {View, Text} from 'react-native';
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {heightPercentage, widthPercentage} from '../../styles/ResponsiveSize';
+import {CustomHeader} from '../organisms/CustomHeader';
 
 const Tab = createBottomTabNavigator();
 
@@ -35,11 +36,7 @@ const TabNavigation = () => {
               const title = options.title;
               console.log(options.headerStyle);
 
-              return (
-                <View style={options.headerStyle}>
-                  <Text>{title}</Text>
-                </View>
-              );
+              return <CustomHeader title={title} />;
             },
           }}
         />
