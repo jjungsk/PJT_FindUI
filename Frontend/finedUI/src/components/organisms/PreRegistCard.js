@@ -1,6 +1,11 @@
 import React from 'react';
 import {View, Text, Image, Dimensions, StyleSheet} from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import {
+  fontPercentage,
+  heightPercentage,
+  widthPercentage,
+} from '../../styles/ResponsiveSize';
 
 const setTwoWord = word => {
   return word.length == 1 ? '0' + word : word;
@@ -18,12 +23,17 @@ const dateFormat = date => {
 };
 
 const PreRegistCard = ({registUser}) => {
-  registUser.birthday = dateFormat(registUser.birthday);
+  // registUser.birthday = dateFormat(registUser.birthday);
+  registUser.birthday = registUser.birthday.toString();
 
   return (
     <View style={styles.container}>
       <Image
-        source={require('../../assets/images/no_profile_image.png')}
+        source={
+          registUser.image != null
+            ? null
+            : require('../../assets/images/no_profile_image.png')
+        }
         style={styles.image}
       />
       <View style={styles.contents}>
@@ -63,15 +73,21 @@ const styles = StyleSheet.create({
     width: '100%',
     // height: '30%',
     borderRadius: 20,
-    padding: 12,
+    padding: widthPercentage(12),
     borderStyle: 'solid',
     borderWidth: 1,
     flexDirection: 'row',
+    backgroundColor: '#ffffff',
   },
-  image: {flex: 1, width: 110, height: 132, borderRadius: 20},
+  image: {
+    flex: 1,
+    width: widthPercentage(110),
+    height: heightPercentage(132),
+    borderRadius: 20,
+  },
   contents: {
     flex: 2,
-    height: 132,
+    height: heightPercentage(132),
     alignContent: 'space-between',
   },
   icons: {
@@ -81,18 +97,18 @@ const styles = StyleSheet.create({
   },
   info: {
     width: '100%',
-    height: 112,
+    height: heightPercentage(112),
     flexDirection: 'column',
     alignItems: 'flex-start',
     justifyContent: 'space-between',
     paddingBottom: 13,
   },
   text: {
-    fontSize: 16,
+    fontSize: fontPercentage(16),
     fontWeight: '600',
     color: 'black',
-    height: 20,
-    paddingLeft: 12,
+    height: heightPercentage(20),
+    paddingLeft: widthPercentage(12),
   },
 });
 

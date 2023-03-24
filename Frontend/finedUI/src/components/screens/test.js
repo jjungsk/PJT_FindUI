@@ -1,5 +1,5 @@
 import React from 'react';
-import {SafeAreaView, View, TextInput, StyleSheet} from 'react-native';
+import {SafeAreaView, TextInput, StyleSheet, View} from 'react-native';
 import PreRegistCard from '../organisms/PreRegistCard';
 
 const Test = () => {
