@@ -22,7 +22,6 @@ import java.util.List;
 @RequiredArgsConstructor    // 초기화 되지 않은 final 필드나 @NotNull 필드에 대해 생성자를 자동 생성해주는 annotation
 @Service                    // root 컨테이너에 빈(Bean)객체로 생성
 public class ChatImageService {
-    private final AmazonS3Client amazonS3Client;                        // 요청을 보낼 S3 클라이언트
     private final ChatImageRepository chatImageRepository;              // 채팅 이미지 저장소
     private final UserRepository userRepository;                        // 사용자 저장소
     private final PersonalDataRepository personalDataRepository;        // 실종(사전) 등록 저장소

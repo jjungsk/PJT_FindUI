@@ -1,0 +1,42 @@
+package com.ssafy.finedUi.registInfo.get.response;
+
+import com.ssafy.finedUi.db.entity.RegistInfo;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+import java.awt.*;
+import java.sql.Timestamp;
+
+@Getter
+@AllArgsConstructor
+public class RegistInfoGetResponse {
+    private Long registId;            // 실종 번호
+    private Long userId;                  // 사용자(FK)
+    private String name;                // 이름
+    private Integer birthDate;          // 생년월일(ex: 1996.06.25)
+    private Integer gender;             // 성별
+    private String frontImage;          // 정면 사진
+    private String otherImage1;         // 추가 사진 1
+    private String otherImage2;         // 추가 사진 2
+    private Timestamp missingTime;      // 실종 시간
+    private Point missingLocation;      // 실종 위치
+    private Timestamp createDate;       // 생성 시간
+    private Boolean isMissing;          // 실종 여부
+    private Timestamp updateDate;       // 수정 시간
+
+    public RegistInfoGetResponse(RegistInfo registInfo) {
+        this.registId = registInfo.getRegistId();
+        this.userId = registInfo.getUser().getUserId();
+        this.name = registInfo.getName();
+        this.birthDate = registInfo.getBirthDate();
+        this.gender = registInfo.getGender();
+        this.frontImage = registInfo.getFrontImage();
+        this.otherImage1 = registInfo.getOtherImage1();
+        this.otherImage2 = registInfo.getOtherImage2();
+        this.missingTime = registInfo.getMissingTime();
+        this.missingLocation = registInfo.getMissingLocation();
+        this.createDate = registInfo.getCreateDate();
+        this.isMissing = registInfo.getIsMissing();
+        this.updateDate = registInfo.getUpdateDate();
+    }
+}
