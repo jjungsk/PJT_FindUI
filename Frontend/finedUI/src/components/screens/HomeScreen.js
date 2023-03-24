@@ -1,5 +1,12 @@
 import React, {useState} from 'react';
-import {View, Text, SafeAreaView, StyleSheet, Dimensions} from 'react-native';
+import {
+  View,
+  Text,
+  SafeAreaView,
+  StyleSheet,
+  Dimensions,
+  ScrollView,
+} from 'react-native';
 import {NoticeCard} from '../organisms/NoticeCard';
 import PreRegistCard from '../organisms/PreRegistCard';
 import {Carousel} from 'react-native-basic-carousel';
@@ -54,36 +61,38 @@ const HomeScreen = () => {
 
   return (
     <SafeAreaView style={{flex: 1}}>
-      <View style={styles.registContainer}>
-        <View style={styles.registTitleContainer}>
-          <Text style={styles.registTitle}>등록 정보</Text>
+      <ScrollView>
+        <View style={styles.registContainer}>
+          <View style={styles.registTitleContainer}>
+            <Text style={styles.registTitle}>등록 정보</Text>
+          </View>
+          <Carousel
+            data={registUsers}
+            renderItem={({item}) => (
+              <View style={styles.carouselItem}>
+                <PreRegistCard registUser={item} />
+              </View>
+            )}
+            itemWidth={width}
+            pagination
+          />
         </View>
-        <Carousel
-          data={registUsers}
-          renderItem={({item}) => (
-            <View style={styles.carouselItem}>
-              <PreRegistCard registUser={item} />
-            </View>
-          )}
-          itemWidth={width}
-          pagination
-        />
-      </View>
-      <View>
-        <Carousel
-          data={notices}
-          renderItem={({item}) => (
-            <View style={styles.carouselItem}>
-              <NoticeCard notice={item} />
-            </View>
-          )}
-          itemWidth={width}
-          pagination
-        />
-      </View>
-      <View>
-        <MissingPersonCard missingPerson={missingPersons[0]} />
-      </View>
+        <View>
+          <Carousel
+            data={notices}
+            renderItem={({item}) => (
+              <View style={styles.carouselItem}>
+                <NoticeCard notice={item} />
+              </View>
+            )}
+            itemWidth={width}
+            pagination
+          />
+        </View>
+        <View>
+          <MissingPersonCard missingPerson={missingPersons[0]} />
+        </View>
+      </ScrollView>
     </SafeAreaView>
   );
 };

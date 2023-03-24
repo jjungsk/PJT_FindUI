@@ -1,5 +1,5 @@
 import React from 'react';
-import {ImageBackground, Text, StyleSheet} from 'react-native';
+import {ImageBackground, View, Text, StyleSheet} from 'react-native';
 import {
   fontPercentage,
   heightPercentage,
