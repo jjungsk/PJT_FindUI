@@ -4,13 +4,17 @@ import com.ssafy.db.entity.User;
 import com.ssafy.user.UserRepository;
 import com.ssafy.user.create.request.JoinRequest;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-@Service("UserCreateService")
+@Service
 public class UserCreateServiceImpl implements UserCreateService {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    PasswordEncoder passwordEncoder;
 
     @Override
     public boolean checkValid(JoinRequest joinRequest) {
@@ -22,12 +26,23 @@ public class UserCreateServiceImpl implements UserCreateService {
     public boolean createUser(JoinRequest joinRequest) {
 
         //유효성검사.
-        if (checkValid(joinRequest)) {
-            //비밀번호 암호화.
-            User user = new User();
-//            null값은 어떻게 처리?
-            return true;
-        }
-        return false;
+
+        if (!checkValid(joinRequest)) return false;
+
+        User user = new User();
+        user.setName(joinRequest.getName());
+        user.setAddress(joinRequest.getAddress());
+        user.setNickname(joinRequest.getNickName());
+        user.setPhoneNumber(joinRequest.getPhoneNumber());
+//               비밀번호 암호화
+        user.setPassword(passwordEncoder.encode(joinRequest.getPassword()));
+//       유일성 에러처리는 나중에 controllerAdivce로 일괄처리.
+//       UX 측면에서 사용자에게 중복된 아이디라는걸 알려주기 위해 유일성 검사.
+
+//       제약조건 위반 에러 처리는 controllerAdvice
+        User temp = userRepository.save(user);
+        if (temp == null) return false;
+        return true;
+
     }
 }

@@ -18,6 +18,7 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 @EnableJpaRepositories("com.ssafy.*")
 //springBootApplication이 읽지 못함. 명시적으로 entity 불러오기.
 @EntityScan("com.ssafy.*")
+//ConfigurationProperties
 public class FinedUiApplication {
 
     public static void main(String[] args) {

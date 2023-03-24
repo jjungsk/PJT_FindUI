@@ -1,4 +1,6 @@
 spring:
+  profiles:
+    include: oauth2dev
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/finedUI?allowPublicKeyRetrieval=true&useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
@@ -31,6 +33,13 @@ logging:
 # 디버깅용 로그레벨 설정.
 
 
+app:
+  auth:
+    token-secret: dyAeHubOOc8KaOfYB6XEQoEj1QzRlVgtjNL8PYs1A1tymZvvqkcEU7L1imkKHeDaDDFWdfwrSeDFetEEerErQe
+    #      2시간
+    access-token-expiration-time: 7200000
+    #      2주
+    refresh-token-expiration-time: 1209600000
 
 #  devtools의 기본옵션이 true.
 #  devtools:

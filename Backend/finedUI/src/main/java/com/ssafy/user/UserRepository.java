@@ -5,10 +5,12 @@ import org.springframework.data.repository.Repository;
 
 import java.util.Optional;
 
-public interface UserRepository extends Repository<User, Integer> {
-    Optional<User> findById(Integer Id);
+public interface UserRepository extends Repository<User, Long> {
+    Optional<User> findById(Long Id);
+    
+    Optional<User> findByName(String name);
 
     void delete(User entity);
 
-    void save(User entity);
+    User save(User entity);
 }
