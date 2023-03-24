@@ -19,7 +19,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
+import java.util.List;
 
 @Service
 @Transactional
@@ -85,7 +85,12 @@ public class PersonalDataServiceImpl implements PersonalDataService{
     }
 
     @Override
+    public List<PersonalDataResponseDto> findAllByUser_UserId(Long userId) {
+        return personalDataRepository.findAllByUser_UserId(userId);  // findById 조회 시 personalDataRepsonse로 변환해서 반환
+    }
+
+    @Override
     public PersonalDataResponseDto findById(Long id) {
-        return new PersonalDataResponseDto(personalDataRepository.findById(id).get());  // findById 조회 시 personalDataRepsonse로 변환해서 반환
+        return new PersonalDataResponseDto(personalDataRepository.findById(id).get());
     }
 }

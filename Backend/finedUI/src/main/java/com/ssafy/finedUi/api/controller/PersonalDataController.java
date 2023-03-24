@@ -6,6 +6,8 @@ import com.ssafy.finedUi.api.service.personalData.PersonalDataServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/missing_prevention")
@@ -13,8 +15,13 @@ public class PersonalDataController {
 
     private final PersonalDataServiceImpl personalDataService;
 
-    @GetMapping(path="")
-    public PersonalDataResponseDto get(@RequestParam Long id) {
+    @GetMapping(path="/{id}")
+    public List<PersonalDataResponseDto> get(@PathVariable("id") Long userId) {
+        return personalDataService.findAllByUser_UserId(userId);
+    }
+
+    @GetMapping(path="/{id}/detail")
+    public PersonalDataResponseDto getDetail(@PathVariable("id") Long id) {
         return personalDataService.findById(id);
     }
 

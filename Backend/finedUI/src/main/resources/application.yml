@@ -1,3 +1,4 @@
+# DB
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -19,9 +20,13 @@ spring:
       location: /Users/SSAFY/
       max-request-size: 30MB
       max-file-size: 10MB
+
+# Image
 image:
   upload:
     path: /Users/SSAFY/
+
+# AWS S3
 cloud:
   aws:
     region:
@@ -35,10 +40,10 @@ cloud:
     stack:
       auto: false
 
+# AWS Error
 logging:
   level:
     com:
       amazonaws:
         util:
           EC2MetadataUtils: ERROR
-

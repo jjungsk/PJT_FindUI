@@ -1,12 +1,12 @@
 package com.ssafy.finedUi.db.entity;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+
 
 @Entity
 @Table(name = "chat_image")
@@ -16,6 +16,11 @@ import javax.persistence.*;
 @Getter
 public class ChatImage {
 
+    @EmbeddedId
+    private ChatImageId chatImageId;
+
+    @Column(name = "image_path")
+    private String imagePath;
 //    @Id
 //    @GeneratedValue(strategy = GenerationType.IDENTITY)
 //    @Column(name = "chat_image_id")
@@ -34,10 +39,5 @@ public class ChatImage {
 //    @JoinColumn(name = "user_id")
 //    private User user;
 //
-    @EmbeddedId
-    private ChatImageId chatImageId;
-
-    @Column(name = "image_path")
-    private String imagePath;
 
 }
