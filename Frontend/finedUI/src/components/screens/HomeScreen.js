@@ -6,6 +6,7 @@ import {
   StyleSheet,
   Dimensions,
   ScrollView,
+  FlatList,
 } from 'react-native';
 import {NoticeCard} from '../organisms/NoticeCard';
 import PreRegistCard from '../organisms/PreRegistCard';
@@ -55,16 +56,36 @@ const HomeScreen = () => {
       location: '서울',
       image: null,
     },
+    {
+      name: '정세권',
+      identity: 930331,
+      location: '서울',
+      image: null,
+    },
+    {
+      name: '정세권',
+      identity: 930401,
+      location: '서울',
+      image: null,
+    },
   ]);
 
   const width = Dimensions.get('window').width;
+
+  const missingCardRender = ({item}) => {
+    return (
+      <View style={styles.missingCard}>
+        <MissingPersonCard missingPerson={item} />
+      </View>
+    );
+  };
 
   return (
     <SafeAreaView style={{flex: 1}}>
       <ScrollView>
         <View style={styles.registContainer}>
-          <View style={styles.registTitleContainer}>
-            <Text style={styles.registTitle}>등록 정보</Text>
+          <View style={styles.titleContainer}>
+            <Text style={styles.title}>등록 정보</Text>
           </View>
           <Carousel
             data={registUsers}
@@ -77,7 +98,7 @@ const HomeScreen = () => {
             pagination
           />
         </View>
-        <View>
+        <View style={styles.noticeContainer}>
           <Carousel
             data={notices}
             renderItem={({item}) => (
@@ -89,8 +110,29 @@ const HomeScreen = () => {
             pagination
           />
         </View>
-        <View>
-          <MissingPersonCard missingPerson={missingPersons[0]} />
+        <View style={styles.realtimeMissingContainer}>
+          <View style={styles.titleContainer}>
+            <Text style={styles.title}>실시간 실종자 정보</Text>
+          </View>
+          <FlatList
+            data={missingPersons}
+            renderItem={missingCardRender}
+            horizontal={true}
+            keyExtractor={item => String(item.identity)}
+          />
+        </View>
+        <View style={styles.realtimeMissingContainer}>
+          <View style={styles.titleContainer}>
+            <Text style={styles.title}>장기간 실종자 정보</Text>
+          </View>
+          <View style={styles.cardContainer}>
+            <FlatList
+              data={missingPersons}
+              renderItem={missingCardRender}
+              horizontal={true}
+              keyExtractor={item => String(item.identity)}
+            />
+          </View>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -102,18 +144,28 @@ const styles = StyleSheet.create({
     marginTop: heightPercentage(2),
     backgroundColor: '#ffffff',
   },
-  registTitleContainer: {
+  titleContainer: {
     padding: widthPercentage(8),
     justifyContent: 'center',
     alignItems: 'flex-start',
   },
-  registTitle: {
+  title: {
     fontSize: fontPercentage(18),
     fontWeight: 'bold',
     color: '#000000',
   },
   carouselItem: {
     paddingHorizontal: widthPercentage(9),
+  },
+  noticeContainer: {marginTop: heightPercentage(2), backgroundColor: '#ffffff'},
+  realtimeMissingContainer: {
+    marginTop: heightPercentage(2),
+    paddingVertical: heightPercentage(12),
+    backgroundColor: '#ffffff',
+  },
+  cardContainer: {},
+  missingCard: {
+    marginHorizontal: widthPercentage(12),
   },
 });
 
