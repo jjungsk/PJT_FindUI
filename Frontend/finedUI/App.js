@@ -7,9 +7,9 @@
  */
 
 import React from 'react';
-import Test from './Test';
+import Hannah from './Hannah';
 
 const App = () => {
-  return (<Test />);
+  return (<Hannah />);
 };
 export default App;

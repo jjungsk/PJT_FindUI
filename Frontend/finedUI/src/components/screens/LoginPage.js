@@ -1,6 +1,6 @@
 import React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity} from 'react-native';
-// import Hr from "react-native-hr"
+
 import LoginButton from '../atoms/LoginButton';
 import LoginInput from '../atoms/LoginInput';
 import GoogleButton from '../atoms/GoogleButton';
