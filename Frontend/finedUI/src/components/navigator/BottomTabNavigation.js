@@ -2,6 +2,7 @@ import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import HomeScreen from '../screens/HomeScreen';
 import {Test} from '../screens/test';
+import ChatScreen from '../screens/ChatScreen';
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {heightPercentage, widthPercentage} from '../../styles/ResponsiveSize';
@@ -52,6 +53,14 @@ const TabNavigation = ({navigation}) => {
         }}
       />
       <Tab.Screen name="Test" component={Test} />
+      <Tab.Screen
+        name="ChatList"
+        component={ChatScreen}
+        options={{
+          title: 'Find & You',
+          subTitle: '채팅목록',
+        }}
+      />
     </Tab.Navigator>
   );
 };
