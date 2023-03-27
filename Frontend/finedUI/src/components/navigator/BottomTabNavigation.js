@@ -1,11 +1,11 @@
 import React from 'react';
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
-import HomeScreen from '../screens/HomeScreen';
-import {Test} from '../screens/test';
-
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-import {heightPercentage, widthPercentage} from '../../styles/ResponsiveSize';
 import {TouchableOpacity} from 'react-native';
+import {heightPercentage, widthPercentage} from '../../styles/ResponsiveSize';
+
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+
+import HomeScreen from '../screens/HomeScreen';
 
 /**
  * 앱의 하단 네비게이션에 들어가는 화면 컴포넌트 등록
@@ -22,6 +22,7 @@ const Tab = createBottomTabNavigator();
 const TabNavigation = ({navigation}) => {
   return (
     <Tab.Navigator screenOptions={{tabBarHideOnKeyboard: true}}>
+      {/* homescreen */}
       <Tab.Screen
         name="Home"
         component={HomeScreen}
@@ -43,7 +44,7 @@ const TabNavigation = ({navigation}) => {
             return (
               <TouchableOpacity
                 onPress={() => {
-                  navigation.navigate('Testing');
+                  navigation.navigate('AlarmScreen');
                 }}>
                 <Icon name="bell-outline" size={widthPercentage(24)} />
               </TouchableOpacity>
@@ -51,7 +52,6 @@ const TabNavigation = ({navigation}) => {
           },
         }}
       />
-      <Tab.Screen name="Test" component={Test} />
     </Tab.Navigator>
   );
 };

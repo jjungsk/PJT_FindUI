@@ -3,6 +3,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import TabNavigation from './BottomTabNavigation';
 import {NavigationContainer} from '@react-navigation/native';
 import {Test} from '../screens/test';
+import AlarmScreen from '../screens/AlarmScreen';
 
 /**
  * 앱에 사용되는 모든 화면 컴포넌트 등록
@@ -25,7 +26,7 @@ const StackNavigation = () => {
           component={TabNavigation}
           options={{headerShown: false}}
         />
-        <Stack.Screen name="Testing" component={Test} />
+        <Stack.Screen name="AlarmScreen" component={AlarmScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

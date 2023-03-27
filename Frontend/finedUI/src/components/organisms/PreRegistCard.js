@@ -1,11 +1,12 @@
 import React from 'react';
 import {View, Text, Image, Dimensions, StyleSheet} from 'react-native';
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {
   fontPercentage,
   heightPercentage,
   widthPercentage,
 } from '../../styles/ResponsiveSize';
+
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const setTwoWord = word => {
   return word.length == 1 ? '0' + word : word;

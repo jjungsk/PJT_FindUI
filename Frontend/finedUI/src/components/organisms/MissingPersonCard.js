@@ -1,11 +1,12 @@
 import React from 'react';
 import {ImageBackground, View, Text, StyleSheet} from 'react-native';
-import LinearGradient from 'react-native-linear-gradient';
 import {
   fontPercentage,
   heightPercentage,
   widthPercentage,
 } from '../../styles/ResponsiveSize';
+
+import LinearGradient from 'react-native-linear-gradient';
 
 const MissingPersonCard = ({missingPerson}) => {
   // error
