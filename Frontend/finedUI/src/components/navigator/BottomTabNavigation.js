@@ -25,7 +25,7 @@ import {heightPercentage, widthPercentage} from '../../styles/ResponsiveSize';
 
 // components - NavBar
 import HomeScreen from '../screens/HomeScreen';
-import DetailScreen from '../screens/DetailScreen';
+import RegistStackNavigation from './RegistStackNavigation';
 
 const Tab = createBottomTabNavigator();
 
@@ -42,6 +42,35 @@ const TabNavigation = ({navigation}) => {
           tabBarIcon: ({color, size}) => (
             <Icon
               name="home-variant-outline"
+              color={color}
+              size={widthPercentage(size)}
+              style={{
+                width: widthPercentage(size),
+                height: heightPercentage(size),
+              }}
+            />
+          ),
+          headerRight: () => {
+            return (
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate('AlarmScreen');
+                }}>
+                <Icon name="bell-outline" size={widthPercentage(24)} />
+              </TouchableOpacity>
+            );
+          },
+        }}
+      />
+      <Tab.Screen
+        name="Regist"
+        component={RegistStackNavigation}
+        options={{
+          title: 'Find & You',
+          tabBarLabel: '등록',
+          tabBarIcon: ({color, size}) => (
+            <Icon
+              name="image-plus"
               color={color}
               size={widthPercentage(size)}
               style={{
