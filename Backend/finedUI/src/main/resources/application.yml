@@ -1,6 +1,7 @@
 spring:
   profiles:
-    include: oauth2dev
+    include:
+      - oauth2
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/finedUI?allowPublicKeyRetrieval=true&useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
@@ -20,19 +21,24 @@ spring:
     generate-ddl: false
     properties:
       hibernate:
+        #        SQL 로그를 예쁘게 줄바꿈해서 보여줌
         format_sql: true
+    #
+    show-sql: false
 
-# security log level 설정
+# log level 설정
 logging:
   level:
     org:
+      # security log level 설정
       springframework:
         security: DEBUG
-# hibernate log level 설정
+      # hibernate log level 설정
+      hibernate:
+        SQL: DEBUG
+      # 디버깅용 로그레벨 설정.
 
-# 디버깅용 로그레벨 설정.
-
-
+#token 관련정보. 다른 yml파일로 빼는게 좋음.
 app:
   auth:
     token-secret: dyAeHubOOc8KaOfYB6XEQoEj1QzRlVgtjNL8PYs1A1tymZvvqkcEU7L1imkKHeDaDDFWdfwrSeDFetEEerErQe
@@ -40,6 +46,10 @@ app:
     access-token-expiration-time: 7200000
     #      2주
     refresh-token-expiration-time: 1209600000
+  #  허용하는 프론트 redirect주소. 현재 사용안하는기능.
+  oauth2:
+    authorized-redirect-uris:
+      - http://localhost:8080/auth/token
 
 #  devtools의 기본옵션이 true.
 #  devtools:
