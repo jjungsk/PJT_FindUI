@@ -1,8 +1,8 @@
 import React from 'react';
-import {SafeAreaView, TouchableOpacity, StyleSheet} from 'react-native';
-import RegistSelect from '../organisms/RegistSelect';
+import {SafeAreaView, StyleSheet, Pressable} from 'react-native';
+import RegistSelectBtn from '../organisms/RegistSelect';
 
-const RegistSelectScreen = () => {
+const RegistSelectScreen = ({navigation}) => {
   const preRegistItem = {
     title: '사전 등록',
     content:
@@ -18,15 +18,15 @@ const RegistSelectScreen = () => {
   };
   return (
     <SafeAreaView style={styles.container}>
-      <TouchableOpacity activeOpacity={0.6}>
-        <RegistSelect selectItem={preRegistItem} />
-      </TouchableOpacity>
-      <TouchableOpacity activeOpacity={0.6}>
-        <RegistSelect selectItem={missingRegistItem} />
-      </TouchableOpacity>
-      <TouchableOpacity activeOpacity={0.6}>
-        <RegistSelect selectItem={familyRegistItem} />
-      </TouchableOpacity>
+      <Pressable onPress={() => navigation.navigate('registMain')}>
+        <RegistSelectBtn selectItem={preRegistItem} />
+      </Pressable>
+      <Pressable>
+        <RegistSelectBtn selectItem={missingRegistItem} />
+      </Pressable>
+      <Pressable>
+        <RegistSelectBtn selectItem={familyRegistItem} />
+      </Pressable>
     </SafeAreaView>
   );
 };

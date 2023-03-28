@@ -6,7 +6,7 @@ import {
   widthPercentage,
 } from '../../styles/ResponsiveSize';
 
-const RegistSelect = ({selectItem}) => {
+const RegistSelectBtn = ({selectItem}) => {
   return (
     <View style={styles.selectContainer}>
       <View style={styles.selectTitle}>
@@ -54,4 +54,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default RegistSelect;
+export default RegistSelectBtn;

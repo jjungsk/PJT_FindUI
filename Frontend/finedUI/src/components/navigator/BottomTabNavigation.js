@@ -44,10 +44,6 @@ const TabNavigation = ({navigation}) => {
               name="home-variant-outline"
               color={color}
               size={widthPercentage(size)}
-              style={{
-                width: widthPercentage(size),
-                height: heightPercentage(size),
-              }}
             />
           ),
           headerRight: () => {
@@ -73,12 +69,9 @@ const TabNavigation = ({navigation}) => {
               name="image-plus"
               color={color}
               size={widthPercentage(size)}
-              style={{
-                width: widthPercentage(size),
-                height: heightPercentage(size),
-              }}
             />
           ),
+          headerShown: false,
           headerRight: () => {
             return (
               <TouchableOpacity
