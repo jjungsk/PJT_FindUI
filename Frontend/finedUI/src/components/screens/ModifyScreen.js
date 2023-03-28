@@ -27,11 +27,11 @@ import {
 } from '../../styles/ResponsiveSize';
 
 // organisms
-import DetailContents from '../organisms/DetailContents';
+import ModifyContents from '../organisms/ModifyContents';
 import LinkButtons from '../organisms/LinkButtons';
 
 const ModifyScreen = () => {
-  const [detailUser, setDetailUser] = useState({
+  const [missingPerson, setMissingPerson] = useState({
     name: '샘스미스',
     birthday: new Date(1997, 2, 18),
     address: '서울시 역삼동 멀티캠퍼스',
@@ -47,6 +47,8 @@ const ModifyScreen = () => {
     longitude: 126.977011,
   });
 
+  const onChangeInfo = () => {};
+
   return (
     <SafeAreaView style={{flex: 1}}>
       <ScrollView>
@@ -57,7 +59,7 @@ const ModifyScreen = () => {
           <View style={styles.imageContainer}>
             <Image
               source={
-                detailUser.image != null
+                missingPerson.image != null
                   ? null
                   : require('../../assets/images/no_profile_image.png')
               }
@@ -65,7 +67,7 @@ const ModifyScreen = () => {
             />
           </View>
           <View style={styles.contentContainer}>
-            <DetailContents detail={detailUser} />
+            <ModifyContents onChangeInfo={onChangeInfo} />
           </View>
           <View style={styles.linkContainer}>
             <LinkButtons />

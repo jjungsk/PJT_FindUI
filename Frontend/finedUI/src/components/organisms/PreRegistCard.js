@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, Text, Image, Dimensions, StyleSheet} from 'react-native';
+import {View, Text, Image, TouchableOpacity, StyleSheet} from 'react-native';
 import {
   fontPercentage,
   heightPercentage,
@@ -23,7 +23,7 @@ const dateFormat = date => {
   return year + '.' + month + '.' + day;
 };
 
-const PreRegistCard = ({registUser}) => {
+const PreRegistCard = ({registUser, navigation}) => {
   // registUser.birthday = dateFormat(registUser.birthday);
   registUser.birthday = registUser.birthday.toString();
 
@@ -39,11 +39,16 @@ const PreRegistCard = ({registUser}) => {
       />
       <View style={styles.contents}>
         <View style={styles.icons}>
-          <Icon
-            name="square-edit-outline"
-            size={20}
-            style={{width: 20, height: 20}}
-          />
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate('ModifyScreen');
+            }}>
+            <Icon
+              name="square-edit-outline"
+              size={20}
+              style={{width: 20, height: 20}}
+            />
+          </TouchableOpacity>
           <Icon
             name="share-outline"
             size={20}

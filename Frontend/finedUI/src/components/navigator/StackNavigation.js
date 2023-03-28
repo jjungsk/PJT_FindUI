@@ -20,6 +20,7 @@ import TabNavigation from './BottomTabNavigation';
 import AlarmScreen from '../screens/AlarmScreen';
 import HomeScreen from '../screens/HomeScreen';
 import DetailScreen from '../screens/DetailScreen';
+import ModifyScreen from '../screens/ModifyScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -35,6 +36,7 @@ const StackNavigation = () => {
         <Stack.Screen name="AlarmScreen" component={AlarmScreen} />
         <Stack.Screen name="HomeScreen" component={HomeScreen} />
         <Stack.Screen name="DetailScreen" component={DetailScreen} />
+        <Stack.Screen name="ModifyScreen" component={ModifyScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );
