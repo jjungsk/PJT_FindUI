@@ -1,4 +1,12 @@
+/*
+  Home-Screen Main
+  by.황진태
+*/
+
+// react
 import React, {useState} from 'react';
+
+// react-native
 import {
   View,
   Text,
@@ -8,17 +16,21 @@ import {
   ScrollView,
   FlatList,
 } from 'react-native';
-import {NoticeCard} from '../organisms/NoticeCard';
-import PreRegistCard from '../organisms/PreRegistCard';
-import {Carousel} from 'react-native-basic-carousel';
+
+// sizes
 import {
   fontPercentage,
   heightPercentage,
   widthPercentage,
 } from '../../styles/ResponsiveSize';
+
+// components
+import {NoticeCard} from '../organisms/NoticeCard';
+import PreRegistCard from '../organisms/PreRegistCard';
+import {Carousel} from 'react-native-basic-carousel';
 import {MissingPersonCard} from '../organisms/MissingPersonCard';
 
-const HomeScreen = () => {
+const HomeScreen = ({navigation}) => {
   const [registUsers, setRegistUser] = useState([
     {
       name: '샘스미스',
@@ -75,7 +87,7 @@ const HomeScreen = () => {
   const missingCardRender = ({item}) => {
     return (
       <View style={styles.missingCard}>
-        <MissingPersonCard missingPerson={item} />
+        <MissingPersonCard missingPerson={item} navigation={navigation} />
       </View>
     );
   };

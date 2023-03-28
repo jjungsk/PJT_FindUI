@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'flex-start',
     justifyContent: 'space-between',
-    paddingBottom: 13,
+    paddingBottom: heightPercentage(13),
   },
   text: {
     fontSize: fontPercentage(16),
