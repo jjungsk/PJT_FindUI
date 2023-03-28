@@ -1,21 +1,31 @@
-import React from 'react';
-import {TouchableOpacity} from 'react-native';
-import {heightPercentage, widthPercentage} from '../../styles/ResponsiveSize';
+/*
+  앱의 하단 네비게이션에 들어가는 화면 컴포넌트 등록
+  사용방법
+  <Tab.Screen
+    name="화면이름"
+    component={화면컴포넌트}
+    options={{화면옵션(적용가능한 옵션은 https://reactnavigation.org/docs/bottom-tab-navigator#options 해당 링크 확인)}}>
+  </Tab.Screen>
+*/
 
+// react
+import React from 'react';
+
+// react-native
+import {TouchableOpacity} from 'react-native';
+
+// react-navigation
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+
+// icons
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import HomeScreen from '../screens/HomeScreen';
+// sizes
+import {heightPercentage, widthPercentage} from '../../styles/ResponsiveSize';
 
-/**
- * 앱의 하단 네비게이션에 들어가는 화면 컴포넌트 등록
- * 사용방법
- * <Tab.Screen
- *   name="화면이름"
- *   component={화면컴포넌트}
- *   options={{화면옵션(적용가능한 옵션은 https://reactnavigation.org/docs/bottom-tab-navigator#options 해당 링크 확인)}}>
- * </Tab.Screen>
- */
+// components - NavBar
+import HomeScreen from '../screens/HomeScreen';
+import DetailScreen from '../screens/DetailScreen';
 
 const Tab = createBottomTabNavigator();
 
