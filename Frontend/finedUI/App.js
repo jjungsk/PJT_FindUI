@@ -1,8 +1,8 @@
 import React from 'react';
-import StackNavigation from './src/components/navigator/StackNavigation';
+import Hannah from './Hannah';
 
 const App = () => {
-  return <StackNavigation />;
+  return <Hannah />;
 };
 
 export default App;

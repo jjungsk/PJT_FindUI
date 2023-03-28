@@ -1,26 +1,24 @@
 import React from 'react';
-import { StyleSheet, ScrollView } from 'react-native';
+import { StyleSheet, View } from 'react-native';
+import PrivacyPolicyModal from '../organisms/PrivacyPolicyModal';
 
-import SignUp from '../organisms/SignUp';
-import Logo from '../atoms/Logo';
-import SignUpButton from '../atoms/SignUpButton';
+import SignUp_1 from '../organisms/SignUp_1';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
+    // justifyContent: 'center',
     paddingTop: 55
   }
 })
 
 const SignUpPage = () => {
   return(
-    <ScrollView contentContainerStyle={styles.container}>
-      <Logo />
-      <SignUp />
-      <SignUpButton />
-    </ScrollView>
+    <View style={styles.container}>
+      <SignUp_1/>
+      <PrivacyPolicyModal />
+    </View>
   )
 }
 export default SignUpPage
