@@ -1,14 +1,24 @@
+// react
 import React from 'react';
-import {ImageBackground, View, Text, StyleSheet} from 'react-native';
+
+// react-native
+import {
+  ImageBackground,
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+} from 'react-native';
+import LinearGradient from 'react-native-linear-gradient';
+
+// sizes
 import {
   fontPercentage,
   heightPercentage,
   widthPercentage,
 } from '../../styles/ResponsiveSize';
 
-import LinearGradient from 'react-native-linear-gradient';
-
-const MissingPersonCard = ({missingPerson}) => {
+const MissingPersonCard = ({missingPerson, navigation}) => {
   // error
   //   const img =
   //     missingPerson.image !== null
@@ -16,24 +26,34 @@ const MissingPersonCard = ({missingPerson}) => {
   //       : require('../../assets/images/no_profile_image.png');
   const img = require('../../assets/images/no_profile_image.png');
   return (
-    <ImageBackground
-      source={img}
-      resizeMode="cover"
-      style={styles.image}
-      imageStyle={styles.imageStyle}>
-      <LinearGradient
-        style={styles.imageText}
-        colors={['rgba(0,0,0,0)', 'rgba(0,0,0,0)', 'rgba(0,0,0,0)', '#000000']}>
-        <View>
-          <Text style={styles.imageTextName}>{missingPerson.name}</Text>
-        </View>
-        <View>
-          <Text style={styles.imageTextContents}>
-            {missingPerson.identity} / {missingPerson.location}
-          </Text>
-        </View>
-      </LinearGradient>
-    </ImageBackground>
+    <TouchableOpacity
+      onPress={() => {
+        navigation.navigate('DetailScreen');
+      }}>
+      <ImageBackground
+        source={img}
+        resizeMode="cover"
+        style={styles.image}
+        imageStyle={styles.imageStyle}>
+        <LinearGradient
+          style={styles.imageText}
+          colors={[
+            'rgba(0,0,0,0)',
+            'rgba(0,0,0,0)',
+            'rgba(0,0,0,0)',
+            '#000000',
+          ]}>
+          <View>
+            <Text style={styles.imageTextName}>{missingPerson.name}</Text>
+          </View>
+          <View>
+            <Text style={styles.imageTextContents}>
+              {missingPerson.identity} / {missingPerson.location}
+            </Text>
+          </View>
+        </LinearGradient>
+      </ImageBackground>
+    </TouchableOpacity>
   );
 };
 

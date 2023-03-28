@@ -255,6 +255,9 @@ android {
 }
 
 dependencies {
+    // 네이버 지도 SDK by.정세권
+    implementation 'com.naver.maps:map-sdk:3.16.2'
+
     implementation fileTree(dir: "libs", include: ["*.jar"])
 
     //noinspection GradleDynamicVersion
