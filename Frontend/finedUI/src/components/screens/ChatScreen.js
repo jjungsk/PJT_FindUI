@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {TextInput, View} from 'react-native';
+import {TextInput, View, Text} from 'react-native';
 import SockJsClient from 'react-stomp';
 import LoginForm from '../organisms/LoginForm';
 import Messages from '../organisms/Messages';
@@ -42,6 +42,7 @@ const ChatScreen = () => {
       ) : (
         <LoginForm onSubmit={handleLoginSubmit} />
       )}
+      {/* <Text>Hi</Text> */}
     </View>
   );
 };

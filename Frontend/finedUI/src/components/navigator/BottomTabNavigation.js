@@ -2,11 +2,12 @@ import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import HomeScreen from '../screens/HomeScreen';
 import {Test} from '../screens/test';
-import ChatScreen from '../screens/ChatScreen';
+// import ChatScreen from '../screens/ChatScreen';
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {heightPercentage, widthPercentage} from '../../styles/ResponsiveSize';
 import {TouchableOpacity} from 'react-native';
+import ChatListScreen from '../screens/ChatListScreen';
 
 /**
  * 앱의 하단 네비게이션에 들어가는 화면 컴포넌트 등록
@@ -55,10 +56,11 @@ const TabNavigation = ({navigation}) => {
       <Tab.Screen name="Test" component={Test} />
       <Tab.Screen
         name="ChatList"
-        component={ChatScreen}
+        component={ChatListScreen}
         options={{
           title: 'Find & You',
           subTitle: '채팅목록',
+          tabBarLabel: '채팅목록',
         }}
       />
     </Tab.Navigator>

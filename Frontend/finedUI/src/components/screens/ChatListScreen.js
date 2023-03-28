@@ -1,11 +1,12 @@
 import React from 'react';
+import {SafeAreaView} from 'react-native';
 
-import ChatList from '../organisms/ChatRoomList';
+import ChatRoomList from '../organisms/ChatRoomList';
 
-const ChatListScreen = () => {
+const ChatListScreen = ({navigation}) => {
   return (
     <SafeAreaView style={{flex: 1}}>
-      <ChatList />
+      <ChatRoomList navigation={navigation} />
     </SafeAreaView>
   );
 };
