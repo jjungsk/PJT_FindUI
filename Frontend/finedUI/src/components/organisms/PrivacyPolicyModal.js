@@ -11,7 +11,7 @@ const PrivacyPolicyModal = () => {
 
   return (
     <View>
-      <Button color={ "#1570EF"} title="개인정보 처리방침" onPress={toggleModal} />
+      <Button color={ "#d3d3d3"} title="개인정보 처리방침 확인" onPress={toggleModal} />
       <Modal visible={isVisible} onRequestClose={toggleModal}>
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center'}}>
           <ScrollView style={{ backgroundColor: 'white', margin: 16, borderRadius: 8 }}>

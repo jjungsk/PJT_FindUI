@@ -5,6 +5,6 @@ import SignUpPage from './src/components/screens/SignUpPage';
 import PrivacyPolicyModal from './src/components/organisms/PrivacyPolicyModal';
 
 const Hannah = () => {
-  return (<PrivacyPolicyModal/>);
+  return (<SignUpPage/>);
 };
 export default Hannah;
