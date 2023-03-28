@@ -62,36 +62,6 @@ const TabNavigation = ({navigation}) => {
           },
         }}
       />
-      {/* detail-screen test..ing */}
-      <Tab.Screen
-        name="Detail"
-        component={DetailScreen}
-        options={{
-          title: 'Find & You',
-          tabBarLabel: '상세',
-          tabBarIcon: ({color, size}) => (
-            <Icon
-              name="card-account-details-star"
-              color={color}
-              size={widthPercentage(size)}
-              style={{
-                width: widthPercentage(size),
-                height: heightPercentage(size),
-              }}
-            />
-          ),
-          headerRight: () => {
-            return (
-              <TouchableOpacity
-                onPress={() => {
-                  navigation.navigate('AlarmScreen');
-                }}>
-                <Icon name="bell-outline" size={widthPercentage(24)} />
-              </TouchableOpacity>
-            );
-          },
-        }}
-      />
     </Tab.Navigator>
   );
 };
