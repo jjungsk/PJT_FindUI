@@ -17,6 +17,6 @@ public class ChatImageId implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "missing_id")
-    private PersonalData personalData;
+    private RegistInfo registInfo;
 
 }

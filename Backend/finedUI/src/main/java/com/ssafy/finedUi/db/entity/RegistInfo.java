@@ -38,14 +38,14 @@ public class RegistInfo {
     @Column(name = "gender")
     private Integer gender;             // 성별
 
-    @Column(name = "front_image")
-    private String frontImage;          // 정면 사진
+    @Column(name = "front_image_path")
+    private String frontImagePath;          // 정면 사진
 
-    @Column(name = "other_image_1")
-    private String otherImage1;         // 추가 사진 1
+    @Column(name = "other_image_1_path")
+    private String otherImage1Path;         // 추가 사진 1
 
-    @Column(name = "other_image_2")
-    private String otherImage2;         // 추가 사진 2
+    @Column(name = "other_image_2_path")
+    private String otherImage2Path;         // 추가 사진 2
 
     @Column(name = "missing_time")
     private Timestamp missingTime;      // 실종 시간

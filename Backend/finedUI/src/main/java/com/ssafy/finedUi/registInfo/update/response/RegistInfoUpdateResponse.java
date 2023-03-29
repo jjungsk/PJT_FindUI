@@ -38,9 +38,9 @@ public class RegistInfoUpdateResponse {
         this.isMissing = registInfo.getIsMissing();
         this.missingLocation = registInfo.getMissingLocation();
         this.missingTime = registInfo.getMissingTime();
-        this.frontImagePath = registInfo.getFrontImage();
-        this.otherImage1Path = registInfo.getOtherImage1();
-        this.otherImage2Path = registInfo.getOtherImage2();
+        this.frontImagePath = registInfo.getFrontImagePath();
+        this.otherImage1Path = registInfo.getOtherImage1Path();
+        this.otherImage2Path = registInfo.getOtherImage2Path();
         this.createDate = registInfo.getCreateDate();
         this.updateDate = registInfo.getUpdateDate();
     }

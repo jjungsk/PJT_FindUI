@@ -1,24 +1,15 @@
 package com.ssafy.finedUi.registInfo.create.service;
 
-import com.ssafy.finedUi.api.service.PersonalImage.PersonalImageServiceImpl;
-import com.ssafy.finedUi.api.service.S3Service;
-import com.ssafy.finedUi.db.repository.ChatImageRepository;
-import com.ssafy.finedUi.db.repository.PersonalDataRepository;
-import com.ssafy.finedUi.db.repository.UserRepository;
+import com.ssafy.finedUi.db.UserRepository;
 import com.ssafy.finedUi.registInfo.RegistInfoRepository;
 import com.ssafy.finedUi.registInfo.create.request.RegistInfoCreateRequest;
 import com.ssafy.finedUi.registInfo.create.response.RegistInfoCreateResponse;
 import com.ssafy.finedUi.registInfo.image.save.ImageSaveServiceImpl;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 

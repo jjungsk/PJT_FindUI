@@ -1,12 +1,9 @@
 package com.ssafy.finedUi.registInfo.create.request;
 
-import com.ssafy.finedUi.db.entity.PersonalData;
 import com.ssafy.finedUi.db.entity.RegistInfo;
 import com.ssafy.finedUi.db.entity.User;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.awt.*;
@@ -42,9 +39,9 @@ public class RegistInfoCreateRequest {
                 .isMissing(isMissing)
                 .missingLocation(missingLocation)
                 .missingTime(missingTime)
-                .frontImage(frontImagePath)
-                .otherImage1(otherImage1Path)
-                .otherImage2(otherImage2Path)
+                .frontImagePath(frontImagePath)
+                .otherImage1Path(otherImage1Path)
+                .otherImage2Path(otherImage2Path)
                 .user(user)
                 .createDate(createDate)
                 .updateDate(Timestamp.valueOf(LocalDateTime.now()))

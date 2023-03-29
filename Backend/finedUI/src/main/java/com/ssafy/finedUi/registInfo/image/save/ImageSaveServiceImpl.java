@@ -17,7 +17,7 @@ public class ImageSaveServiceImpl implements ImageSaveService{
     private String uploadPath;
 
     @Override
-    public String[] save(MultipartFile[] multipartFiles, Long userId) {
+    public String[] save(MultipartFile[] multipartFiles, Long registId) {
         String[] imagePaths = new String[3];
 
         // 이미지 파일 배열 순회
@@ -26,13 +26,14 @@ public class ImageSaveServiceImpl implements ImageSaveService{
             // 이미지 파일
             MultipartFile file = multipartFiles[value];
 
+            System.out.println(file.getContentType());
             // 이미지가 아닐 경우 종료
-            if (file == null || file.getContentType().startsWith("image") == false) {
+            if (file.getContentType() == null || file.getContentType().startsWith("image") == false) {
                 System.out.println("this is not image");
                 continue;
             }
             // 저장 경로와 파일 이름 설정
-            //        String saveName = userId + "." + file.getContentType().split("/")[1]; // 파일 이름
+            //        String saveName = registId + "." + file.getContentType().split("/")[1]; // 파일 이름
 
             // 파일 이름 조건에 맞게 할당
             String fileName;
@@ -41,7 +42,7 @@ public class ImageSaveServiceImpl implements ImageSaveService{
             else {fileName = "other2";}
 
             // 저장 경로
-            Path savePath = Paths.get(uploadPath + "Image" + File.separator + userId + '_' + fileName + "." + file.getContentType().split("/")[1]); // 저장 경로
+            Path savePath = Paths.get(uploadPath + "Image" + File.separator + registId + '_' + fileName + ".png"); // 저장 경로
 
             // 폴더가 존재하는지 확인하고 존재하지 않는다면 폴더 생성
             File uploadPathFolder = new File(uploadPath, "Image");
