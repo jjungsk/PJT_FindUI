@@ -14,7 +14,13 @@ import {
   View,
   Text,
   Image,
+  Alert,
 } from 'react-native';
+
+// recoil
+import {useRecoilState, useRecoilValue} from 'recoil';
+import {stringState} from '../../store/atoms/atoCount.js';
+import {selCountState} from '../../store/selectors/selCount.js';
 
 // Naver Map Library
 import NaverMapView, {Marker} from 'react-native-nmap';
@@ -29,8 +35,16 @@ import {
 // organisms
 import ModifyContents from '../organisms/ModifyContents';
 import LinkButtons from '../organisms/LinkButtons';
+import ModifyButtons from '../organisms/ModifyButtons';
 
 const ModifyScreen = () => {
+  // STATE
+  // Recoil state - test 용
+  const [text, setText] = useRecoilState(stringState);
+  const value = useRecoilValue(stringState);
+  const selResult = useRecoilValue(selCountState);
+
+  // Local state - 실종자 정보
   const [missingPerson, setMissingPerson] = useState({
     name: '샘스미스',
     birthday: new Date(1997, 2, 18),
@@ -42,20 +56,37 @@ const ModifyScreen = () => {
     image: null,
   });
 
+  // Local state - 실종자 실종 위치 for map
   const [position, setPosition] = useState({
     latitude: 37.564362,
     longitude: 126.977011,
   });
 
+  // FUNCTION
+  // function - 실종자 수정 정보
   const onChangeInfo = () => {};
+
+  // function - 수정 버튼
+  const actButton = state => {
+    if (state === 'cancel') {
+      // 취소
+      setText('SeKwun hello');
+      Alert.alert(text);
+    } else if (state === 'modify') {
+      // 수정
+      Alert.alert(value);
+    }
+  };
 
   return (
     <SafeAreaView style={{flex: 1}}>
       <ScrollView>
         <View style={styles.detailContainer}>
+          {/* 제목 */}
           <View style={styles.titleContainer}>
             <Text style={styles.title}>상세 정보</Text>
           </View>
+          {/* 이미지 */}
           <View style={styles.imageContainer}>
             <Image
               source={
@@ -66,12 +97,19 @@ const ModifyScreen = () => {
               style={styles.image}
             />
           </View>
+          {/* 실종자 정보 내용 */}
           <View style={styles.contentContainer}>
             <ModifyContents onChangeInfo={onChangeInfo} />
           </View>
+          {/* 링크 - 카카오톡, 인스타그램, 채팅 */}
           <View style={styles.linkContainer}>
             <LinkButtons />
           </View>
+          {/* 버튼 - 취소, 수정 */}
+          <View style={styles.buttonContainer}>
+            <ModifyButtons actButton={actButton} />
+          </View>
+          {/* 지도 */}
           <View style={styles.mapContainer}>
             <NaverMapView
               style={{width: '100%', height: '100%'}}
@@ -135,6 +173,9 @@ const styles = StyleSheet.create({
     width: widthPercentage(300),
     marginBottom: heightPercentage(12),
     justifyContent: 'flex-end',
+  },
+  buttonContainer: {
+    marginBottom: heightPercentage(12),
   },
   mapContainer: {
     width: widthPercentage(330),
