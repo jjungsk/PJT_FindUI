@@ -1,7 +1,7 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 import SignUpButton from '../atoms/SignUpButton';
-import SignUp from '../organisms/SignUp';
+import InfoCheck from '../organisms/InfoCheck';
 
 const styles = StyleSheet.create({
   container: {
@@ -12,14 +12,14 @@ const styles = StyleSheet.create({
   }
 })
 
-const SignUpPage = () => {
+const InfoPage = () => {
   return(
     <View style={styles.container}>
-      <SignUp/>
+      <InfoCheck/>
       <SignUpButton 
-        signUpText={'회원가입'}
+        signUpText={'다음'}
       />
     </View>
   )
 }
-export default SignUpPage
+export default InfoPage

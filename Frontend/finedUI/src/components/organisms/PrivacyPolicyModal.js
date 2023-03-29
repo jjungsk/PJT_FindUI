@@ -1,5 +1,24 @@
 import React, { useState } from 'react';
-import { View, Text, Button, Modal, ScrollView } from 'react-native';
+import { View, Text, TouchableOpacity, Modal, ScrollView, StyleSheet } from 'react-native';
+
+
+const styles = StyleSheet.create({
+  button:{
+    width:"100%",
+    backgroundColor:"#d3d3d3",
+    borderRadius:5,
+    alignItems:"center",
+    justifyContent:"center",
+    padding: 10,
+    marginTop: 5,
+    marginBottom: 5
+  },
+  buttonText:{
+    color:"white",
+    fontSize: 15,
+    fontWeight: "bold"
+  }
+})
 
 const PrivacyPolicyModal = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -11,7 +30,9 @@ const PrivacyPolicyModal = () => {
 
   return (
     <View>
-      <Button color={ "#1570EF"} title="개인정보 처리방침" onPress={toggleModal} />
+      <TouchableOpacity style={styles.button} onPress={toggleModal}>
+        <Text style={styles.buttonText}>개인정보 처리방침 상세</Text>
+      </TouchableOpacity>
       <Modal visible={isVisible} onRequestClose={toggleModal}>
         <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center'}}>
           <ScrollView style={{ backgroundColor: 'white', margin: 16, borderRadius: 8 }}>
@@ -339,7 +360,9 @@ const PrivacyPolicyModal = () => {
             </Text>
             </View>
             <View style={{ width:'100%', marginTop: 16, alignSelf: 'flex-end' }}>
-              <Button color={"#d3d3d3"} title="취소" onPress={toggleModal} />
+            <TouchableOpacity style={styles.button} onPress={toggleModal}>
+              <Text style={styles.buttonText}>닫기</Text>
+            </TouchableOpacity>
             </View>
           </ScrollView>
         </View>
