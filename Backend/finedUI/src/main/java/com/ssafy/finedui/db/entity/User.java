@@ -27,7 +27,7 @@ public class User {
     private String nickname;
 
     private String address;
-    @Column(name = "is_admin", columnDefinition = "TINYINT", length = 1)
+    @Column(name = "is_admin", columnDefinition = "TINYINT", length = 1, insertable = false, updatable = false)
     private int isAdmin;
 
 //    social table확장으로 사용안함.
@@ -39,7 +39,7 @@ public class User {
     @JoinColumn(name = "social_idx")
     private Social social;
 
-    @Column(name = "join_date")
+    @Column(name = "join_date", insertable = false, updatable = false)
     private LocalDateTime joinDate;
 
     private String password;

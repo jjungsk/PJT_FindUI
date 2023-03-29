@@ -29,8 +29,20 @@ public class UserPrincipal implements OAuth2User, UserDetails {
 
 
     public static UserPrincipal create(User user) {
-        List<GrantedAuthority> authorities = Collections.singletonList(new SimpleGrantedAuthority("ROLL_USER"));
+//        user 조건에따라 권한.
+        String role = user.getIsAdmin() == 1 ? "ROLL_ADMIN" : "ROLL_USER";
+        List<GrantedAuthority> authorities = Collections.singletonList(new SimpleGrantedAuthority(role));
+        return new UserPrincipal(
+                user.getUserIdx(),
+                user.getName(),
+                user.getPassword(),
+                authorities,
+                null
+        );
+    }
 
+    public static UserPrincipal create(User user, Collection<? extends GrantedAuthority> authorities) {
+//        access 토큰에서 UserPrincipal을 반환.
         return new UserPrincipal(
                 user.getUserIdx(),
                 user.getName(),

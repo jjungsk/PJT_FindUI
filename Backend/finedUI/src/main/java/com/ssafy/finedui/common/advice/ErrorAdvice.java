@@ -22,4 +22,6 @@ public class ErrorAdvice extends ResponseEntityExceptionHandler {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new BaseResponse("fail", e.getMessage()));
     }
 
+//    jpa예외처리
+
 }

@@ -22,7 +22,7 @@ public class HttpCookieOAuth2AuthorizationRequestRepository implements Authoriza
     @Override
     public OAuth2AuthorizationRequest loadAuthorizationRequest(HttpServletRequest request) {
 
-        log.info("loadAuthRequest : " + request.toString());
+//        log.info("loadAuthRequest : " + request.toString());
         //oAuth 서버에 응답에서 쿠키에 내가 설정한 값 가져오기.
         OAuth2AuthorizationRequest oAuth2AuthorizationRequest = CookieUtils.getCookie(request, OAUTH2_AUTHORIZATION_REQUEST_COOKIE_NAME)
                 .map(cookie -> CookieUtils.deserialize(cookie, OAuth2AuthorizationRequest.class))

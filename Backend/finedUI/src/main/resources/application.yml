@@ -2,6 +2,7 @@ spring:
   profiles:
     include:
       - oauth2
+      - redis
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/finedUI?allowPublicKeyRetrieval=true&useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
@@ -46,6 +47,10 @@ app:
     access-token-expiration-time: 7200000
     #      2주
     refresh-token-expiration-time: 1209600000
+  #    7ms
+  #    access-token-expiration-time: 7
+  #    20초
+  #    refresh-token-expiration-time: 20000
   #  허용하는 프론트 redirect주소. 현재 사용안하는기능.
   oauth2:
     authorized-redirect-uris:

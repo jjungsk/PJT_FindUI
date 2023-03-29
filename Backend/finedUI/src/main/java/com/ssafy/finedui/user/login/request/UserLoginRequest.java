@@ -5,7 +5,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 @Data
-public class LoginRequest {
+public class UserLoginRequest {
     @ApiModelProperty(value = "이름", required = true)
     String name;
 

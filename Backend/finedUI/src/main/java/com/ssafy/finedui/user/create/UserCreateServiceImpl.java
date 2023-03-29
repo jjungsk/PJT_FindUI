@@ -2,7 +2,7 @@ package com.ssafy.finedui.user.create;
 
 import com.ssafy.finedui.db.entity.User;
 import com.ssafy.finedui.user.UserRepository;
-import com.ssafy.finedui.user.create.request.JoinRequest;
+import com.ssafy.finedui.user.create.request.UserJoinRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -17,13 +17,13 @@ public class UserCreateServiceImpl implements UserCreateService {
     PasswordEncoder passwordEncoder;
 
     @Override
-    public boolean checkValid(JoinRequest joinRequest) {
+    public boolean checkValid(UserJoinRequest joinRequest) {
         //유효성 검사. 추후 구현
         return true;
     }
 
     @Override
-    public boolean createUser(JoinRequest joinRequest) {
+    public boolean createUser(UserJoinRequest joinRequest) {
 
         //유효성검사.
 

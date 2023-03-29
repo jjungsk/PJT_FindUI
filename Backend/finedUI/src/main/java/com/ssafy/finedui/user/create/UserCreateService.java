@@ -1,10 +1,10 @@
 package com.ssafy.finedui.user.create;
 
-import com.ssafy.finedui.user.create.request.JoinRequest;
+import com.ssafy.finedui.user.create.request.UserJoinRequest;
 
 public interface UserCreateService {
-    boolean checkValid(JoinRequest joinRequest);
+    boolean checkValid(UserJoinRequest joinRequest);
 
-    boolean createUser(JoinRequest joinRequest);
+    boolean createUser(UserJoinRequest joinRequest);
 
 }

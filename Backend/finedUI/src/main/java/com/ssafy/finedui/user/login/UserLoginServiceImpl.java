@@ -3,14 +3,13 @@ package com.ssafy.finedui.user.login;
 import com.ssafy.finedui.common.jwt.Token;
 import com.ssafy.finedui.common.jwt.TokenProvider;
 import com.ssafy.finedui.user.UserRepository;
-import com.ssafy.finedui.user.login.request.LoginRequest;
+import com.ssafy.finedui.user.login.request.UserLoginRequest;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -27,25 +26,20 @@ public class UserLoginServiceImpl implements UserLoginService {
     TokenProvider tokenProvider;
 
     @Override
-    public Token login(LoginRequest loginRequest) {
+    public Token login(UserLoginRequest loginRequest) {
         UsernamePasswordAuthenticationToken authenticationToken =
                 new UsernamePasswordAuthenticationToken(loginRequest.getName(), loginRequest.getPassword());
 
         log.info("login controller ----------");
-        //        // authenticationToken을 사용하여 Authentication 객체를 생성하기 위하여 authenticate 메소드가 실행될 때
-//          CustomUserDetailsService 에 loadUserByUsername 메소드가 실행됨
 
         try {
 
-
-            //        securityContext에 저장할 이유가없음.
-
-
-//        에러처리는 securiyConfig에서 설정.
-
+//          authenticationToken을 사용하여 Authentication 객체를 생성하기 위하여 authenticate 메소드가 실행될 때
+//          CustomUserDetailsService 에 loadUserByUsername 메소드가 실행되고 , authentication에 해당 정보 저장.
             Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
-            SecurityContextHolder.getContext().setAuthentication(authentication);
-            //        redis에 refreshToken 저장. Transactional 고려.
+
+            //spring context에 저장할 이유가없음. 주석처리
+//            SecurityContextHolder.getContext().setAuthentication(authentication);
 
             return tokenProvider.createToken(authentication);
         } catch (AuthenticationException e) {
