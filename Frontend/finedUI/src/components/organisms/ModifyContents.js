@@ -5,7 +5,7 @@
 */
 
 // react
-import React, {useState} from 'react';
+import React from 'react';
 
 // react-native
 import {View, Text, StyleSheet, TextInput} from 'react-native';
@@ -17,30 +17,7 @@ import {
   widthPercentage,
 } from '../../styles/ResponsiveSize';
 
-const ModifyContents = () => {
-  const [missingPerson, setMissingPerson] = useState({
-    name: '샘스미스',
-    birthday: new Date(1997, 2, 18),
-    address: '서울시 역삼동 멀티캠퍼스',
-    phone: '010-6725-5590',
-    lostday: '23. 01. 23. 금요일 13시',
-    location: '서울시 역삼역 11번 출구 앞',
-    description: '키가 크고 눈이 크며 어쩌구 저쩌구..',
-    image: null,
-  });
-
-  missingPerson.birthday = missingPerson.birthday.toString();
-
-  const handleData = (key, value) => {
-    console.log(key);
-    console.log(value);
-
-    setMissingPerson(missingPerson => ({
-      ...missingPerson,
-      [key]: value,
-    }));
-  };
-
+const ModifyContents = ({missingPerson, onChangeInfo}) => {
   return (
     <View style={styles.table}>
       <View style={styles.row}>
@@ -55,7 +32,7 @@ const ModifyContents = () => {
         <View style={styles.right}>
           <TextInput
             style={styles.textContent}
-            onChangeText={text => handleData('name', text)}
+            onChangeText={text => onChangeInfo('name', text)}
             value={missingPerson.name}
           />
         </View>
@@ -72,7 +49,7 @@ const ModifyContents = () => {
         <View style={styles.right}>
           <TextInput
             style={styles.textContent}
-            onChangeText={text => handleData('birthday', text)}
+            onChangeText={text => onChangeInfo('birthday', text)}
             value={missingPerson.birthday}
           />
         </View>
@@ -90,7 +67,7 @@ const ModifyContents = () => {
           <TextInput
             keyboardType={'number-pad'}
             style={styles.textContent}
-            onChangeText={text => handleData('phone', text)}
+            onChangeText={text => onChangeInfo('phone', text)}
             value={missingPerson.phone}
           />
         </View>
@@ -107,7 +84,7 @@ const ModifyContents = () => {
         <View style={styles.right}>
           <TextInput
             style={styles.textContent}
-            onChangeText={text => handleData('lostday', text)}
+            onChangeText={text => onChangeInfo('lostday', text)}
             value={missingPerson.lostday}
           />
         </View>
@@ -124,7 +101,7 @@ const ModifyContents = () => {
         <View style={styles.right}>
           <TextInput
             style={styles.textContent}
-            onChangeText={text => handleData('location', text)}
+            onChangeText={text => onChangeInfo('location', text)}
             value={missingPerson.location}
           />
         </View>
@@ -141,7 +118,7 @@ const ModifyContents = () => {
         <View style={styles.right}>
           <TextInput
             style={styles.textContent}
-            onChangeText={text => handleData('description', text)}
+            onChangeText={text => onChangeInfo('description', text)}
             value={missingPerson.description}
           />
         </View>

@@ -63,8 +63,13 @@ const ModifyScreen = () => {
   });
 
   // FUNCTION
-  // function - 실종자 수정 정보
-  const onChangeInfo = () => {};
+  // function - 실종자 정보 수정
+  const onChangeInfo = (key, value) => {
+    setMissingPerson(missingPerson => ({
+      ...missingPerson,
+      [key]: value,
+    }));
+  };
 
   // function - 수정 버튼
   const actButton = state => {
@@ -99,7 +104,10 @@ const ModifyScreen = () => {
           </View>
           {/* 실종자 정보 내용 */}
           <View style={styles.contentContainer}>
-            <ModifyContents onChangeInfo={onChangeInfo} />
+            <ModifyContents
+              missingPerson={missingPerson}
+              onChangeInfo={onChangeInfo}
+            />
           </View>
           {/* 링크 - 카카오톡, 인스타그램, 채팅 */}
           <View style={styles.linkContainer}>
