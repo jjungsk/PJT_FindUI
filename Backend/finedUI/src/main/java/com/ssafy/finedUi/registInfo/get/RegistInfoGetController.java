@@ -5,10 +5,7 @@ import com.ssafy.finedUi.registInfo.get.service.RegistInfoGetService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/regist")
@@ -17,8 +14,8 @@ public class RegistInfoGetController {
 
     private final RegistInfoGetService registInfoGetService;
 
-    @GetMapping("/{id}/detail")
-    public ResponseEntity<Object> getDetail(@PathVariable(name = "id") Long registId) {
+    @GetMapping("detail")
+    public ResponseEntity<Object> getDetail(@RequestParam Long registId) {
         try {
             return ResponseHandler.generateResponse(true, "OK", HttpStatus.OK, registInfoGetService.findById(registId));
         } catch (Exception e) {
@@ -26,8 +23,8 @@ public class RegistInfoGetController {
         }
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Object> getAll(@PathVariable(name = "id") Long userId) {
+    @GetMapping
+    public ResponseEntity<Object> getAll(@RequestParam Long userId) {
         return ResponseHandler.generateResponse(true, "OK", HttpStatus.OK, registInfoGetService.findAllByUser_UserId(userId));
     }
 }

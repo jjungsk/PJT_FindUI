@@ -19,4 +19,9 @@ public class RegistInfoUpdateController {
     public ResponseEntity<Object> update(@ModelAttribute RegistInfoUpdateRequest registInfoUpdateRequest) {
         return ResponseHandler.generateResponse(true, "UPDATE", HttpStatus.OK, registInfoUpdateService.update(registInfoUpdateRequest));
     }
+
+    @PatchMapping
+    public ResponseEntity<Object> isMissingChange(@RequestParam Long registId) {
+        return ResponseHandler.generateResponse(true, "CHANGE", HttpStatus.OK, registInfoUpdateService.isMissingChange(registId));
+    }
 }

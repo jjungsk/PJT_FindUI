@@ -15,14 +15,14 @@ public class ChatImageGetController {
     private final ChatImageGetService chatImageGetService;
 
     // userId : 사용자 번호
-    @GetMapping(path = "/user/{id}")
-    public ResponseEntity<Object> searchByUser(@PathVariable(name = "id") Long userId) {
+    @GetMapping(path = "/user")
+    public ResponseEntity<Object> searchByUser(@RequestParam Long userId) {
         return ResponseHandler.generateResponse(true, "OK", HttpStatus.OK, chatImageGetService.searchByUser(userId));
     }
 
     // missingId : 실종(등록) 번호
-    @GetMapping(path = "/chat/{id}")
-    public ResponseEntity<Object> searchByTarget(@PathVariable(name = "id") Long registId) {
+    @GetMapping(path = "/chat")
+    public ResponseEntity<Object> searchByTarget(@RequestParam Long registId) {
         return ResponseHandler.generateResponse(true, "OK", HttpStatus.OK, chatImageGetService.searchByTarget(registId));
     }
 }
