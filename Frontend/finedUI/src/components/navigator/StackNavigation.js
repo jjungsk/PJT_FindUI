@@ -21,6 +21,10 @@ import AlarmScreen from '../screens/AlarmScreen';
 import HomeScreen from '../screens/HomeScreen';
 import DetailScreen from '../screens/DetailScreen';
 import ModifyScreen from '../screens/ModifyScreen';
+import LoginPage from '../screens/LoginPage';
+import PhonePage from '../screens/PhonePage';
+import SignUpPage from '../screens/SignUpPage';
+import InfoPage from '../screens/InfoPage';
 
 const Stack = createNativeStackNavigator();
 
@@ -37,6 +41,10 @@ const StackNavigation = () => {
         <Stack.Screen name="HomeScreen" component={HomeScreen} />
         <Stack.Screen name="DetailScreen" component={DetailScreen} />
         <Stack.Screen name="ModifyScreen" component={ModifyScreen} />
+        <Stack.Screen name="LoginPage" component={LoginPage} />
+        <Stack.Screen name="PhonePage" component={PhonePage} />
+        <Stack.Screen name="SignUpPage" component={SignUpPage} />
+        <Stack.Screen name="InfoPage" component={InfoPage} />
       </Stack.Navigator>
     </NavigationContainer>
   );

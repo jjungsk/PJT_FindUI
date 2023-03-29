@@ -16,31 +16,29 @@ const styles = StyleSheet.create({
   }
 })
 
-const SignUp = () => {
+const InfoCheck = () => {
   return(
     <View style={styles.inputView}>
       <SignUpText text={'회원가입'}/>
       <TextField
       labelTextStyle={{padding: 3}}
-      inputContainerStyle={styles.inputContainer}
       autoCapitalize="none"
-      label="이메일"
+      inputContainerStyle={styles.inputContainer}
+      label="이름"
       />
       <TextField
       labelTextStyle={{padding: 3}}
-      inputContainerStyle={styles.inputContainer}
       autoCapitalize="none"
-      secureTextEntry={true}
-      label="비밀번호"
+      inputContainerStyle={styles.inputContainer}
+      label="닉네임"
       />
       <TextField
       labelTextStyle={{padding: 3}}
-      inputContainerStyle={styles.inputContainer}
-      secureTextEntry={true}
       autoCapitalize="none"
-      label="비밀번호 확인"
+      inputContainerStyle={styles.inputContainer}
+      label="주소"
       />
     </View>
   )
 }
-export default SignUp
+export default InfoCheck

@@ -2,28 +2,28 @@ import React from 'react';
 import {Text, TouchableOpacity, StyleSheet} from 'react-native';
 
 const styles = StyleSheet.create({
-  loginBtn:{
+  signBtn:{
     width:"80%",
     backgroundColor:"#1570EF",
-    borderRadius:10,
-    height:50,
+    borderRadius:5,
     alignItems:"center",
     justifyContent:"center",
-    marginTop:10,
-    marginBottom:10
+    padding: 10,
+    marginTop: 25,
+    marginBottom: 13
   },
-  loginText:{
+  signText:{
     color:"white",
     fontSize: 18,
     fontWeight: "bold"
   }
 })
 
-const LoginButton = ({signUpText}) => {
+const SignUpButton = ({signUpText}) => {
   return (
-    <TouchableOpacity style={styles.loginBtn}>
-      <Text style={styles.loginText}>{signUpText}</Text>
+    <TouchableOpacity style={styles.signBtn}>
+      <Text style={styles.signText}>{signUpText}</Text>
     </TouchableOpacity>
   );
 };
-export default LoginButton
+export default SignUpButton
