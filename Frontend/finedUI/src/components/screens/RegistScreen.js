@@ -60,7 +60,6 @@ const RegistScreen = ({mode = 0}) => {
                   style={styles.contentImage}
                 />
               </View>
-              <Divider />
               <View style={styles.contentTextContainer}>
                 <WrappedText
                   rowWrapperStyle={{
