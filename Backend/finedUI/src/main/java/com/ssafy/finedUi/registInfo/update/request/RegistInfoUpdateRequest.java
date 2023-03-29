@@ -30,6 +30,21 @@ public class RegistInfoUpdateRequest {
     private String otherImage2Path;     // 추가 사진 2 저장 경로
     private Timestamp createDate;       // 생성 시간
 
+    public RegistInfoUpdateRequest(RegistInfo registInfo) {
+        this.registId = registInfo.getRegistId();
+        this.userId = registInfo.getUser().getUserId();
+        this.name = registInfo.getName();                // 이름
+        this.birthDate = registInfo.getBirthDate();          // 생년월일 (ex: 1996.06.25)
+        this.gender = registInfo.getGender();             // 성별 (남자:1 여자:2)
+        this.isMissing = registInfo.getIsMissing();          // 실종 여부
+        this.missingLocation = registInfo.getMissingLocation();      // 실종 위치
+        this.missingTime = registInfo.getMissingTime();      // 실종 시간
+        this.frontImagePath = registInfo.getFrontImagePath();      // 정면 사진 저장 경로
+        this.otherImage1Path = registInfo.getOtherImage1Path();     // 추가 사진 1 저장 경로
+        this.otherImage2Path = registInfo.getOtherImage2Path();     // 추가 사진 2 저장 경로
+        this.createDate = registInfo.getCreateDate();       // 생성 시간
+    }
+
     public RegistInfo toEntity() {
         return RegistInfo.builder()
                 .registId(registId)

@@ -13,7 +13,6 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 public class RegistInfoCreateRequest {
-    private Long registId;            // 실종(사전 등록) 번호
     private Long userId;                // 보호자 번호
     private User user;                  // 사용자 : 보호자 번호로 조회한 사용자
     private String name;                // 이름
@@ -32,7 +31,7 @@ public class RegistInfoCreateRequest {
 
     public RegistInfo toEntity() {
         return RegistInfo.builder()
-                .registId(registId)
+                .registId(null)
                 .name(name)
                 .birthDate(birthDate)
                 .gender(gender)

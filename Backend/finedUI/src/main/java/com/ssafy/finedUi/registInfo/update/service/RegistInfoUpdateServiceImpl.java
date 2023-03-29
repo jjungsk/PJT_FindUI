@@ -27,4 +27,12 @@ public class RegistInfoUpdateServiceImpl implements RegistInfoUpdateService{
         registInfoUpdateRequest.setOtherImage2Path(imagePaths[2]);
         return new RegistInfoUpdateResponse(registInfoRepository.save(registInfoUpdateRequest.toEntity()));
     }
+
+    // 실종 변경
+    @Override
+    public RegistInfoUpdateResponse isMissingChange(Long registId) {
+        RegistInfoUpdateRequest registInfoUpdateRequest = new RegistInfoUpdateRequest(registInfoRepository.findById(registId).get());
+        registInfoUpdateRequest.setIsMissing(!registInfoUpdateRequest.getIsMissing());
+        return new RegistInfoUpdateResponse(registInfoRepository.save(registInfoUpdateRequest.toEntity()));
+    }
 }
