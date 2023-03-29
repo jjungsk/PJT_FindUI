@@ -8,6 +8,8 @@ import {
   SafeAreaView,
   StyleSheet,
   ScrollView,
+  NativeModules,
+  FlatList,
 } from 'react-native';
 import {
   fontPercentage,
@@ -22,10 +24,20 @@ import {Carousel} from 'react-native-basic-carousel';
 import ImagePicker from 'react-native-image-crop-picker';
 import ImagePickModal from '../organisms/ImagePickModal';
 
+var ImageCropPicker = NativeModules.ImageCropPicker;
+
 const modeDict = {
   0: '사전 등록',
   1: '실시간 실종자 등록',
   2: '이산가족 등록',
+};
+
+const EmptyImage = () => {
+  return (
+    <View style={styles.imageAddTextContainer}>
+      <Text style={styles.imageAddText}>사진을{'\n'}추가해주세요</Text>
+    </View>
+  );
 };
 
 const ImageAdd = ({imagePick, size = 25}) => {
@@ -43,23 +55,21 @@ const RegistScreen = ({mode = 0}) => {
 
   const pickImage = async () => {
     try {
-      const selectImage = await ImagePicker.openPicker({
+      await ImagePicker.openPicker({
         width: widthPercentage(150),
         height: heightPercentage(150),
         cropping: true,
         mediaType: 'photo',
       }).then(image => {
-        image = {
+        selectImage = {
           uri: image.path,
           width: image.width,
           height: image.height,
           mime: image.mime,
         };
         console.log(image);
-        setImageList([...imageList, image]);
+        setImageList([...imageList, selectImage]);
       });
-      // console.log(selectImage);
-      // setImageList([...imageList, selectImage]);
     } catch (e) {
       console.log(e);
     }
@@ -73,22 +83,18 @@ const RegistScreen = ({mode = 0}) => {
           <Text style={styles.title}>{modeDict[mode]}</Text>
         </View>
         <View style={styles.imageListContainer}>
-          {imageList.length < 1 ? (
-            <View style={styles.imageAddTextContainer}>
-              <Text style={styles.imageAddText}>사진을{'\n'}추가해주세요</Text>
-            </View>
-          ) : (
-            <Carousel
-              data={imageList}
-              itemWidth={imageWidth}
-              renderItem={({item}) => {
-                <View style={{width: 150, height: 150, borderWidth: 1}}>
-                  <Image source={{url: item.uri}} style={styles.imageSize} />
-                </View>;
-              }}
-              pagination
-            />
-          )}
+          <FlatList
+            data={imageList}
+            renderItem={({item}) => (
+              <View style={styles.imageContainer}>
+                <Image source={{uri: item.uri}} style={styles.imageSize} />
+              </View>
+            )}
+            ListEmptyComponent={EmptyImage}
+            keyExtractor={item => item.uri}
+            horizontal={true}
+            showsHorizontalScrollIndicator={false}
+          />
           {imageList.length < 3 ? <ImageAdd imagePick={pickImage} /> : null}
         </View>
         <View style={styles.registForm}></View>
@@ -116,9 +122,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  imageContainer: {marginHorizontal: widthPercentage(6)},
   imageSize: {
-    width: 150,
-    height: 150,
+    width: widthPercentage(100),
+    height: heightPercentage(100),
   },
   imageAddTextContainer: {
     width: widthPercentage(150),
