@@ -7,6 +7,7 @@ import {
   Modal,
   SafeAreaView,
   StyleSheet,
+  ScrollView,
 } from 'react-native';
 import {
   fontPercentage,
@@ -14,8 +15,12 @@ import {
   widthPercentage,
 } from '../../styles/ResponsiveSize';
 
-import WrappedText from 'react-native-wrapped-text';
-import Divider from '../atoms/Divider';
+// icons
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+
+import {Carousel} from 'react-native-basic-carousel';
+import ImagePicker from 'react-native-image-crop-picker';
+import ImagePickModal from '../organisms/ImagePickModal';
 
 const modeDict = {
   0: '사전 등록',
@@ -23,127 +28,127 @@ const modeDict = {
   2: '이산가족 등록',
 };
 
+const ImageAdd = ({imagePick, size = 25}) => {
+  return (
+    <Pressable onPress={imagePick} style={styles.imageAddBtn}>
+      <Icon name="image-plus" color={'#ffffff'} size={size} />
+      <Text style={styles.addImageText}>사진 추가</Text>
+    </Pressable>
+  );
+};
+
 const RegistScreen = ({mode = 0}) => {
-  const [modalVisible, setModalVisible] = useState(true);
+  const imageWidth = widthPercentage(150);
+  const [imageList, setImageList] = useState([]);
+
+  const pickImage = async () => {
+    try {
+      const selectImage = await ImagePicker.openPicker({
+        width: widthPercentage(150),
+        height: heightPercentage(150),
+        cropping: true,
+        mediaType: 'photo',
+      }).then(image => {
+        image = {
+          uri: image.path,
+          width: image.width,
+          height: image.height,
+          mime: image.mime,
+        };
+        console.log(image);
+        setImageList([...imageList, image]);
+      });
+      // console.log(selectImage);
+      // setImageList([...imageList, selectImage]);
+    } catch (e) {
+      console.log(e);
+    }
+  };
 
   return (
-    <SafeAreaView style={styles.mainContainer}>
-      <Modal
-        animationType="fade"
-        transparent={true}
-        visible={modalVisible}
-        onRequestClose={() => {
-          setModalVisible(!modalVisible);
-        }}>
-        <Pressable
-          style={{
-            flex: 1,
-            backgroundColor: 'rgba(0,0,0,0.4)',
-          }}
-          onPress={() => setModalVisible(!modalVisible)}
-        />
-        <View style={styles.modalContainer}>
-          <View style={styles.modalMainContents}>
-            <View style={styles.modalTitleContainer}>
-              <Text style={styles.modalTitle}>이미지 등록 방법</Text>
-            </View>
-            <View style={styles.modalContentsContainer}>
-              <View style={styles.contentImageContainer}>
-                <Image
-                  source={require('../../assets/images/no_profile_image.png')}
-                  resizeMode="contain"
-                  style={styles.contentImage}
-                />
-                <Image
-                  source={require('../../assets/images/no_profile_image.png')}
-                  resizeMode="contain"
-                  style={styles.contentImage}
-                />
-              </View>
-              <View style={styles.contentTextContainer}>
-                <WrappedText
-                  rowWrapperStyle={{
-                    justifyContent: 'center',
-                    paddingBottom: 15,
-                  }}
-                  textStyle={styles.contentText}>
-                  다음과 같이 인물의 정면 사진이 정확도를 높힙니다.
-                </WrappedText>
-                <WrappedText
-                  rowWrapperStyle={{justifyContent: 'center'}}
-                  textStyle={styles.contentText}>
-                  만약 정면 사진이 없다면 최대 5장 이내 가장 최근 사진을 업로드
-                  해주세요.
-                </WrappedText>
-              </View>
-            </View>
-            <Pressable
-              style={styles.modalCloseBtn}
-              onPress={() => setModalVisible(!modalVisible)}>
-              <Text style={{...styles.contentText, color: '#ffffff'}}>
-                닫기
-              </Text>
-            </Pressable>
-          </View>
+    <SafeAreaView>
+      <ImagePickModal />
+      <ScrollView style={styles.mainContainer}>
+        <View style={styles.titleContainer}>
+          <Text style={styles.title}>{modeDict[mode]}</Text>
         </View>
-      </Modal>
+        <View style={styles.imageListContainer}>
+          {imageList.length < 1 ? (
+            <View style={styles.imageAddTextContainer}>
+              <Text style={styles.imageAddText}>사진을{'\n'}추가해주세요</Text>
+            </View>
+          ) : (
+            <Carousel
+              data={imageList}
+              itemWidth={imageWidth}
+              renderItem={({item}) => {
+                <View style={{width: 150, height: 150, borderWidth: 1}}>
+                  <Image source={{url: item.uri}} style={styles.imageSize} />
+                </View>;
+              }}
+              pagination
+            />
+          )}
+          {imageList.length < 3 ? <ImageAdd imagePick={pickImage} /> : null}
+        </View>
+        <View style={styles.registForm}></View>
+      </ScrollView>
     </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
-  modalContainer: {
+  mainContainer: {
+    backgroundColor: '#ffffff',
+  },
+  titleContainer: {
     width: '100%',
-    height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-    position: 'absolute',
+    marginVertical: heightPercentage(12),
   },
-  modalMainContents: {
-    marginHorizontal: widthPercentage(20),
-    borderRadius: widthPercentage(20),
-    paddingHorizontal: widthPercentage(25),
-    paddingVertical: heightPercentage(15),
-    backgroundColor: 'white',
+  title: {
+    fontSize: fontPercentage(25),
+    fontWeight: 'bold',
+    color: '#000000',
+  },
+  imageListContainer: {
+    justifyContent: 'center',
     alignItems: 'center',
-    elevation: 5,
   },
-  modalTitleContainer: {
-    marginBottom: heightPercentage(10),
+  imageSize: {
+    width: 150,
+    height: 150,
   },
-  modalTitle: {
+  imageAddTextContainer: {
+    width: widthPercentage(150),
+    height: heightPercentage(150),
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 1,
+    borderRadius: 20,
+    backgroundColor: '#ffffff',
+    elevation: 3,
+  },
+  imageAddText: {
     fontSize: fontPercentage(20),
     fontWeight: 'bold',
     color: '#000000',
   },
-  modalContentsContainer: {
-    width: '100%',
-  },
-  contentImageContainer: {
-    width: '100%',
+  imageAddBtn: {
     justifyContent: 'center',
-    flexDirection: 'row',
-  },
-  contentImage: {
-    width: widthPercentage(120),
-    height: heightPercentage(150),
-    borderRadius: 20,
-    marginHorizontal: widthPercentage(5),
-  },
-  contentTextContainer: {
-    marginVertical: heightPercentage(15),
     alignItems: 'center',
+    flexDirection: 'row',
+    backgroundColor: '#3ca6ef',
+    paddingHorizontal: widthPercentage(16),
+    paddingVertical: heightPercentage(8),
+    borderRadius: 20,
+    marginVertical: heightPercentage(16),
   },
-  contentText: {
+  addImageText: {
     fontSize: fontPercentage(16),
     fontWeight: 'bold',
-    color: '#000000',
-  },
-  modalCloseBtn: {
-    paddingHorizontal: widthPercentage(20),
-    paddingVertical: heightPercentage(10),
-    backgroundColor: '#2196F3',
-    borderRadius: 20,
+    color: '#ffffff',
   },
 });
 
