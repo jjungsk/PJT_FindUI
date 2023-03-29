@@ -5,8 +5,10 @@ import SignUpPage from './src/components/screens/SignUpPage';
 import PrivacyPolicyModal from './src/components/organisms/PrivacyPolicyModal';
 import PhoneVerify from './src/components/organisms/PhoneVerify';
 import PhonePage from './src/components/screens/PhonePage';
+import InfoPage from './src/components/screens/InfoPage';
+import LoginPage from './src/components/screens/LoginPage';
 
 const Hannah = () => {
-  return (<PhonePage/>);
+  return (<SignUpPage/>);
 };
 export default Hannah;
