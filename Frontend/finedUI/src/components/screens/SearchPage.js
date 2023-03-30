@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import { FlatList, StyleSheet, TextInput, View, Text } from 'react-native';
+import FloatingButton from '../atoms/FloatingButton';
 import { MissingPersonCard } from '../organisms/MissingPersonCard';
 
 const styles = StyleSheet.create({
@@ -70,10 +71,10 @@ const SearchPage = ({navigation}) => {
 
   return(
     <View style={styles.container}>
+      <FloatingButton />
       <View style={{width: "80%"}}>
         <TextInput
           style={styles.input}
-          keyboardType="phone-pad"
           value={query}
           onChangeText={setQuery}
           placeholder="검색어를 입력하세요"
@@ -87,7 +88,7 @@ const SearchPage = ({navigation}) => {
         renderItem={missingCardRender}
         keyExtractor={(item) => String(item.identity)}
         ItemSeparatorComponent={() => (<View style={{marginBottom: 8}}/>)}
-        ListEmptyComponent={() => {<View><Text>등록된 사진이 없습니다.</Text></View>}}
+        ListEmptyComponent={() => (<View><Text style={{fontSize: 20, fontWeight: "bold", marginTop: 100}}>등록된 정보가 없습니다.</Text></View>)}
         />
     </View>
   )

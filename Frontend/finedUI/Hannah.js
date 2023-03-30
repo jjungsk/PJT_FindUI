@@ -12,6 +12,6 @@ import SignUpAll from './src/components/screens/SignUpAll';
 
 
 const Hannah = () => {
-  return (<SignUpAll/>);
+  return (<SearchPage/>);
 };
 export default Hannah;
