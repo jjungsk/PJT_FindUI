@@ -27,7 +27,11 @@ spring:
 # Image
 image:
   upload:
-    path: /Users/SSAFY/
+    path: /Users/SSAFY/Image/
+  resource:
+    path: file:///C:/Users/SSAFY/Image/
+  request:
+    path: /api/regist/**
 
 # AWS S3
 cloud:

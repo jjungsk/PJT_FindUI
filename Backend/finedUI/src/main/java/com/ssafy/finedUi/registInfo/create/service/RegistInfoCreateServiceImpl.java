@@ -37,7 +37,9 @@ public class RegistInfoCreateServiceImpl implements RegistInfoCreateService {
         Integer latitude = registInfoCreateRequest.getLatitude();
         if (longitude != null && latitude != null) {
             Point missingLocation = new Point(latitude, latitude);
-            registInfoCreateRequest.setMissingLocation(missingLocation);
+            registInfoCreateRequest.setIsMissing(true); // 실종 여부
+            registInfoCreateRequest.setMissingLocation(missingLocation); // 실종 위치
+            registInfoCreateRequest.setMissingTime(Timestamp.valueOf(LocalDateTime.now())); // 실종 시간
         }
 
         // 생성 날짜가 비어있을 경우 할당하기

@@ -35,14 +35,9 @@ public class ImageSaveServiceImpl implements ImageSaveService{
             // 저장 경로와 파일 이름 설정
             //        String saveName = registId + "." + file.getContentType().split("/")[1]; // 파일 이름
 
-            // 파일 이름 조건에 맞게 할당
-            String fileName;
-            if (value == 0) { fileName = "front";}
-            else if (value == 1) { fileName = "other1";}
-            else {fileName = "other2";}
-
             // 저장 경로
-            Path savePath = Paths.get(uploadPath + "Image" + File.separator + registId + '_' + fileName + ".png"); // 저장 경로
+            int imageId = value + 1;
+            Path savePath = Paths.get(uploadPath + registId + '_' + imageId + ".png"); // 저장 경로
 
             // 폴더가 존재하는지 확인하고 존재하지 않는다면 폴더 생성
             File uploadPathFolder = new File(uploadPath, "Image");
