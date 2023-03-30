@@ -1,5 +1,6 @@
 /*
-  Detail-Screen의 Contents organisms
+  Modify-Screen의 Contents organisms
+  등록자에 의해 실종자 정보 수정
   made by. 정세권
 */
 
@@ -7,7 +8,7 @@
 import React from 'react';
 
 // react-native
-import {View, Text, StyleSheet} from 'react-native';
+import {View, Text, StyleSheet, TextInput} from 'react-native';
 
 // styles
 import {
@@ -16,9 +17,7 @@ import {
   widthPercentage,
 } from '../../styles/ResponsiveSize';
 
-const DetailContents = ({missingPerson}) => {
-  missingPerson.birthday = missingPerson.birthday.toString();
-
+const ModifyContents = ({missingPerson, onChangeInfo}) => {
   return (
     <View style={styles.table}>
       <View style={styles.row}>
@@ -31,22 +30,28 @@ const DetailContents = ({missingPerson}) => {
           </View>
         </View>
         <View style={styles.right}>
-          <Text style={styles.textContent}>{missingPerson.name}</Text>
+          <TextInput
+            style={styles.textContent}
+            onChangeText={text => onChangeInfo('name', text)}
+            value={missingPerson.name}
+          />
         </View>
       </View>
       <View style={styles.row}>
         <View style={styles.left}>
           <View style={{width: widthPercentage(80)}}>
-            <Text style={styles.textTitle} numberOfLines={2}>
-              생년월일
-            </Text>
+            <Text style={styles.textTitle}>생년월일</Text>
           </View>
           <View>
             <Text style={styles.textTitle}>:</Text>
           </View>
         </View>
         <View style={styles.right}>
-          <Text style={styles.textContent}>{missingPerson.birthday}</Text>
+          <TextInput
+            style={styles.textContent}
+            onChangeText={text => onChangeInfo('birthday', text)}
+            value={missingPerson.birthday}
+          />
         </View>
       </View>
       <View style={styles.row}>
@@ -59,7 +64,12 @@ const DetailContents = ({missingPerson}) => {
           </View>
         </View>
         <View style={styles.right}>
-          <Text style={styles.textContent}>{missingPerson.phone}</Text>
+          <TextInput
+            keyboardType={'number-pad'}
+            style={styles.textContent}
+            onChangeText={text => onChangeInfo('phone', text)}
+            value={missingPerson.phone}
+          />
         </View>
       </View>
       <View style={styles.row}>
@@ -72,7 +82,11 @@ const DetailContents = ({missingPerson}) => {
           </View>
         </View>
         <View style={styles.right}>
-          <Text style={styles.textContent}>{missingPerson.lostday}</Text>
+          <TextInput
+            style={styles.textContent}
+            onChangeText={text => onChangeInfo('lostday', text)}
+            value={missingPerson.lostday}
+          />
         </View>
       </View>
       <View style={styles.row}>
@@ -85,7 +99,11 @@ const DetailContents = ({missingPerson}) => {
           </View>
         </View>
         <View style={styles.right}>
-          <Text style={styles.textContent}>{missingPerson.location}</Text>
+          <TextInput
+            style={styles.textContent}
+            onChangeText={text => onChangeInfo('location', text)}
+            value={missingPerson.location}
+          />
         </View>
       </View>
       <View style={styles.row}>
@@ -98,9 +116,11 @@ const DetailContents = ({missingPerson}) => {
           </View>
         </View>
         <View style={styles.right}>
-          <Text style={styles.textContent} numberOfLines={5}>
-            {missingPerson.description}
-          </Text>
+          <TextInput
+            style={styles.textContent}
+            onChangeText={text => onChangeInfo('description', text)}
+            value={missingPerson.description}
+          />
         </View>
       </View>
     </View>
@@ -114,12 +134,14 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
+    marginTop: heightPercentage(12),
   },
   row: {
     width: widthPercentage(280),
+    height: heightPercentage(42),
     marginBottom: heightPercentage(8),
     flexDirection: 'row',
-    alignItems: 'flex-start',
+    alignItems: 'center',
   },
   left: {
     width: widthPercentage(100),
@@ -142,9 +164,10 @@ const styles = StyleSheet.create({
   textContent: {
     fontSize: fontPercentage(12),
     display: 'flex',
+    justifyContent: 'flex-start',
     fontWeight: '400',
     color: 'black',
   },
 });
 
-export default DetailContents;
+export default ModifyContents;

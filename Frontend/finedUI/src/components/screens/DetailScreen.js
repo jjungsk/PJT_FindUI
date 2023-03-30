@@ -31,7 +31,7 @@ import DetailContents from '../organisms/DetailContents';
 import LinkButtons from '../organisms/LinkButtons';
 
 const DetailScreen = () => {
-  const [detailUser, setDetailUser] = useState({
+  const [missingPerson, setMissingPerson] = useState({
     name: '샘스미스',
     birthday: new Date(1997, 2, 18),
     address: '서울시 역삼동 멀티캠퍼스',
@@ -57,7 +57,7 @@ const DetailScreen = () => {
           <View style={styles.imageContainer}>
             <Image
               source={
-                detailUser.image != null
+                missingPerson.image != null
                   ? null
                   : require('../../assets/images/no_profile_image.png')
               }
@@ -65,7 +65,7 @@ const DetailScreen = () => {
             />
           </View>
           <View style={styles.contentContainer}>
-            <DetailContents detail={detailUser} />
+            <DetailContents missingPerson={missingPerson} />
           </View>
           <View style={styles.linkContainer}>
             <LinkButtons />

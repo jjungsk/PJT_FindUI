@@ -1,9 +1,18 @@
+// react
 import React from 'react';
-import Hannah from './Hannah';
+
+// recoil
+import {RecoilRoot} from 'recoil';
+
+// nav
 import StackNavigation from './src/components/navigator/StackNavigation';
 
 const App = () => {
-  return <Hannah />;
+  return (
+    <RecoilRoot>
+      <StackNavigation />
+    </RecoilRoot>
+  );
 };
 
 export default App;
