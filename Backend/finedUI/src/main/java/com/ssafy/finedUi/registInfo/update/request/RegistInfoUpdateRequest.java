@@ -1,8 +1,6 @@
 package com.ssafy.finedUi.registInfo.update.request;
 
 import com.ssafy.finedUi.db.entity.RegistInfo;
-import com.ssafy.finedUi.db.entity.User;
-import com.ssafy.finedUi.registInfo.update.response.RegistInfoUpdateResponse;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -11,7 +9,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.awt.*;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
 
 @Getter
 @Setter
@@ -20,7 +17,7 @@ import java.time.LocalDateTime;
 public class RegistInfoUpdateRequest {
     private Long registId;              // 실종(사전 등록) 번호
     private Long userId;                // 사용자 번호
-    private User user;                  // 사용자 : 보호자 번호로 조회한 사용자
+    private com.ssafy.finedui.db.entity.User user;                  // 사용자 : 보호자 번호로 조회한 사용자
     private String name;                // 이름
     private Integer birthDate;          // 생년월일 (ex: 1996.06.25)
     private Integer gender;             // 성별 (남자:1 여자:2)
@@ -39,7 +36,7 @@ public class RegistInfoUpdateRequest {
 
     public RegistInfoUpdateRequest(RegistInfo registInfo) {
         this.registId = registInfo.getRegistId();
-        this.userId = registInfo.getUser().getUserId();
+        this.userId = registInfo.getUser().getUserIdx();
         this.name = registInfo.getName();                // 이름
         this.birthDate = registInfo.getBirthDate();          // 생년월일 (ex: 1996.06.25)
         this.gender = registInfo.getGender();             // 성별 (남자:1 여자:2)

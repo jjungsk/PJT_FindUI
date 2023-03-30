@@ -28,7 +28,7 @@ public class RegistInfo {
     @ManyToOne
     @JsonManagedReference
     @JoinColumn(name = "user_id")
-    private User user;                  // 사용자(FK)
+    private com.ssafy.finedui.db.entity.User user;                  // 사용자(FK)
 
     @Column(name = "name", length = 10)
     private String name;                // 이름
