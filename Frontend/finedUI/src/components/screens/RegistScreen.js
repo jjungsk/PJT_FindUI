@@ -4,12 +4,12 @@ import {
   Text,
   Image,
   Pressable,
-  Modal,
   SafeAreaView,
   StyleSheet,
   ScrollView,
   NativeModules,
   FlatList,
+  KeyboardAvoidingView,
 } from 'react-native';
 import {
   fontPercentage,
@@ -20,9 +20,9 @@ import {
 // icons
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import {Carousel} from 'react-native-basic-carousel';
 import ImagePicker from 'react-native-image-crop-picker';
 import ImagePickModal from '../organisms/ImagePickModal';
+import RegistInputForm from '../organisms/RegistInputForm';
 
 var ImageCropPicker = NativeModules.ImageCropPicker;
 
@@ -76,7 +76,7 @@ const RegistScreen = ({mode = 0}) => {
   };
 
   return (
-    <SafeAreaView>
+    <SafeAreaView style={{flex: 1}}>
       <ImagePickModal />
       <ScrollView style={styles.mainContainer}>
         <View style={styles.titleContainer}>
@@ -97,7 +97,9 @@ const RegistScreen = ({mode = 0}) => {
           />
           {imageList.length < 3 ? <ImageAdd imagePick={pickImage} /> : null}
         </View>
-        <View style={styles.registForm}></View>
+        <View style={styles.registForm}>
+          <RegistInputForm />
+        </View>
       </ScrollView>
     </SafeAreaView>
   );
