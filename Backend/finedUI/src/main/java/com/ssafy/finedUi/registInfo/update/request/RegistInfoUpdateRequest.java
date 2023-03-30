@@ -2,7 +2,10 @@ package com.ssafy.finedUi.registInfo.update.request;
 
 import com.ssafy.finedUi.db.entity.RegistInfo;
 import com.ssafy.finedUi.db.entity.User;
+import com.ssafy.finedUi.registInfo.update.response.RegistInfoUpdateResponse;
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -12,6 +15,8 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class RegistInfoUpdateRequest {
     private Long registId;              // 실종(사전 등록) 번호
     private Long userId;                // 사용자 번호
@@ -22,6 +27,8 @@ public class RegistInfoUpdateRequest {
     private Boolean isMissing;          // 실종 여부
     private Point missingLocation;      // 실종 위치
     private Timestamp missingTime;      // 실종 시간
+    private Integer longitude;          // 경도
+    private Integer latitude;           // 위도
     private MultipartFile frontImage;   // 정면 사진
     private MultipartFile otherImage1;  // 추가 사진 1
     private MultipartFile otherImage2;  // 추가 사진 2
@@ -59,7 +66,6 @@ public class RegistInfoUpdateRequest {
                 .otherImage2Path(otherImage2Path)
                 .user(user)
                 .createDate(createDate)
-                .updateDate(Timestamp.valueOf(LocalDateTime.now()))
                 .build();
     }
 }

@@ -7,5 +7,5 @@ import com.ssafy.finedUi.registInfo.update.response.RegistInfoUpdateResponse;
 public interface RegistInfoUpdateService {
     RegistInfoUpdateResponse update(RegistInfoUpdateRequest registInfoUpdateRequest);
 
-    RegistInfoUpdateResponse isMissingChange(Long registId);
+    RegistInfoUpdateResponse isMissingChange(Long registId, Integer longitude, Integer latitude);
 }

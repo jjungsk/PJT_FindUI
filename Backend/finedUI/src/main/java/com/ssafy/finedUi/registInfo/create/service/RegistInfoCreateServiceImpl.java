@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.awt.*;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
@@ -31,10 +32,18 @@ public class RegistInfoCreateServiceImpl implements RegistInfoCreateService {
         Long userId = registInfoCreateRequest.getUserId();
         // userId로 user를 조회하여 dto에 user 할당
         registInfoCreateRequest.setUser(userRepository.findById(userId).get());
-        // 생성 날짜가 비어있을 경우 할당하기
-        if (registInfoCreateRequest.getCreateDate() == null) {
-            registInfoCreateRequest.setCreateDate(Timestamp.valueOf(LocalDateTime.now()));
+        // 좌표값 할당
+        Integer longitude = registInfoCreateRequest.getLongitude();
+        Integer latitude = registInfoCreateRequest.getLatitude();
+        if (longitude != null && latitude != null) {
+            Point missingLocation = new Point(latitude, latitude);
+            registInfoCreateRequest.setMissingLocation(missingLocation);
         }
+
+        // 생성 날짜가 비어있을 경우 할당하기
+//        if (registInfoCreateRequest.getCreateDate() == null) {
+//            registInfoCreateRequest.setCreateDate(Timestamp.valueOf(LocalDateTime.now()));
+//        }
         // 이미지 파일 배열 생성
         MultipartFile[] multipartFiles = {registInfoCreateRequest.getFrontImage(), registInfoCreateRequest.getOtherImage1(), registInfoCreateRequest.getOtherImage2()};
         // 이미지 저장 경로들 filePaths에 할당
