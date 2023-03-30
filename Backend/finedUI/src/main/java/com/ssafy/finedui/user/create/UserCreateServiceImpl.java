@@ -1,13 +1,39 @@
 package com.ssafy.finedui.user.create;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ssafy.finedui.common.properties.SMSProperties;
 import com.ssafy.finedui.db.entity.User;
 import com.ssafy.finedui.user.UserRepository;
+import com.ssafy.finedui.user.create.request.SMSRequest;
 import com.ssafy.finedui.user.create.request.UserJoinRequest;
+import com.ssafy.finedui.user.create.response.SMSResponse;
+import lombok.extern.slf4j.Slf4j;
+import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.MediaType;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
+
+import javax.crypto.Mac;
+import javax.crypto.spec.SecretKeySpec;
+import java.io.UnsupportedEncodingException;
+import java.net.URI;
+import java.net.URISyntaxException;
+import java.security.InvalidKeyException;
+import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
+import java.util.concurrent.TimeUnit;
 
 @Service
+@Slf4j
 public class UserCreateServiceImpl implements UserCreateService {
 
     @Autowired
@@ -15,6 +41,15 @@ public class UserCreateServiceImpl implements UserCreateService {
 
     @Autowired
     PasswordEncoder passwordEncoder;
+
+    @Autowired
+    SMSProperties smsProperties;
+    @Autowired
+    StringRedisTemplate stringRedisTemplate;
+
+    private final String SMSPREFIX = "SMS ";
+    private final String VERIFICATION_PRFIX = "VERIFY ";
+
 
     @Override
     public boolean checkValid(UserJoinRequest joinRequest) {
@@ -45,4 +80,77 @@ public class UserCreateServiceImpl implements UserCreateService {
         return true;
 
     }
+
+    @Override
+//    @Transactional
+    public SMSResponse sendSMS(String recipientPhoneNumber) throws JsonProcessingException,
+            UnsupportedEncodingException, NoSuchAlgorithmException, InvalidKeyException, URISyntaxException {
+        Long time = System.currentTimeMillis();
+//        redis에 저장할 랜덤 6자리 인증번호 코드 만들기.
+        Random generator = new Random();
+        generator.setSeed(time);
+        int code = generator.nextInt(1000000) % 1000000;
+
+//        content 6자리 인증번호로 저장.
+        String content = "인증번호는 " + Integer.toString(code) + "입니다";
+        List<SMSMessage> messages = new ArrayList<>();
+        messages.add(new SMSMessage(recipientPhoneNumber, content));
+
+        SMSRequest smsRequest = new SMSRequest("SMS", "COMM", "82", "발신자 전화번호", "내용", messages);
+        ObjectMapper objectMapper = new ObjectMapper();
+        String jsonBody = objectMapper.writeValueAsString(smsRequest);
+
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.APPLICATION_JSON);
+        headers.set("x-ncp-apigw-timestamp", time.toString());
+        headers.set("x-ncp-iam-access-key", smsProperties.getAccessKeyId());
+        String sig = makeSignature(time); //암호화
+        headers.set("x-ncp-apigw-signature-v2", sig);
+
+        log.info(jsonBody.toString());
+        HttpEntity<String> body = new HttpEntity<>(jsonBody, headers);
+
+        RestTemplate restTemplate = new RestTemplate();
+        restTemplate.setRequestFactory(new HttpComponentsClientHttpRequestFactory());
+        SMSResponse smsResponse = restTemplate.postForObject(new URI("https://sens.apigw.ntruss.com/sms/v2/services/" + smsProperties.getServiceId() + "/messages"),
+                body, SMSResponse.class);
+
+        log.info("redis 저장 :");
+//        redis에저장.
+        stringRedisTemplate.opsForValue().set(SMSPREFIX + recipientPhoneNumber, Integer.toString(code), smsProperties.getExpiration(), TimeUnit.MILLISECONDS);
+        return smsResponse;
+
+    }
+
+
+    public String makeSignature(Long time) throws UnsupportedEncodingException, NoSuchAlgorithmException, InvalidKeyException {
+
+        String space = " ";
+        String newLine = "\n";
+        String method = "POST";
+        String url = "/sms/v2/services/" + smsProperties.getServiceId() + "/messages";
+        String timestamp = time.toString();
+        String accessKey = smsProperties.getAccessKeyId();
+        String secretKey = smsProperties.getSecretKeyId();
+
+        String message = new StringBuilder()
+                .append(method)
+                .append(space)
+                .append(url)
+                .append(newLine)
+                .append(timestamp)
+                .append(newLine)
+                .append(accessKey)
+                .toString();
+
+        SecretKeySpec signingKey = new SecretKeySpec(secretKey.getBytes("UTF-8"), "HmacSHA256");
+        Mac mac = Mac.getInstance("HmacSHA256");
+        mac.init(signingKey);
+
+        byte[] rawHmac = mac.doFinal(message.getBytes("UTF-8"));
+        String encodeBase64String = Base64.encodeBase64String(rawHmac);
+
+        return encodeBase64String;
+    }
+
 }

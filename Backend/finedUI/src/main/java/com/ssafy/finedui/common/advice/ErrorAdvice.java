@@ -22,6 +22,12 @@ public class ErrorAdvice extends ResponseEntityExceptionHandler {
         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new BaseResponse("fail", e.getMessage()));
     }
 
-//    jpa예외처리
+    //    runtime 예외처리. jpa 예외도 받아줌.
+    @ExceptionHandler(RuntimeException.class)
+    protected ResponseEntity<?> handleRuntimeException(RuntimeException e) {
+        e.printStackTrace();
+        log.error(e.toString());
+        return ResponseEntity.status(200).body(new BaseResponse("fail", e.getMessage()));
+    }
 
 }

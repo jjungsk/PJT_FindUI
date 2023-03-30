@@ -6,6 +6,7 @@ import com.ssafy.finedui.user.UserRepository;
 import com.ssafy.finedui.user.mypage.request.UserUpdateRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -25,6 +26,7 @@ public class UserMypageServiceImpl implements UserMypageService {
     }
 
     @Override
+    @Transactional
     public User updateUser(UserUpdateRequest userUpdateRequest) {
         User user = userRepository.getReferenceById(SecurityUtils.getUserPricipal().getId());
         String name = userUpdateRequest.name;
@@ -37,12 +39,13 @@ public class UserMypageServiceImpl implements UserMypageService {
 //            소셜유저의 id는 변경하면안됨.
             if (name != null && user.getSocial() == null) user.setName(name);
 //            소셜유저의 nickname은 변경하면 안됨.
-            if (nickname != null && user.getNickname() == null) user.setName(nickname);
-            if (address != null) user.setName(address);
-//           시간남으면, redis를 활용해 휴대폰인증과 연결할것.
-            if (phoneNumber != null) user.setName(phoneNumber);
+            if (nickname != null && user.getSocial() == null) user.setNickname(nickname);
+            if (address != null) user.setAddress(address);
+////           시간남으면, redis를 활용해 휴대폰인증과 연결할것.
+            if (phoneNumber != null) user.setPhoneNumber(phoneNumber);
 
         }
+
         return user;
     }
 }

@@ -48,23 +48,24 @@ public class UserMypageController {
     @PatchMapping("/mypage")
     @ApiOperation(value = "회원 정보 업데이트", notes = "수정할 정보 입력, 유효성 검사 후 업데이트.")
     ResponseEntity<?> updateMypage(@RequestBody UserUpdateRequest userUpdateRequest) {
-//  효율적인 save?
-//  휴대폰번호 변경은 어떻게 처리?
+        log.info("회원정보 수정 :  ");
+        log.info(userUpdateRequest.addreess);
         User user = userMypageService.updateUser(userUpdateRequest);
-        log.info(user.getNickname());
-//        return user == null ?
-//                ResponseEntity.status(200).body(new BaseResponse("fail", "해당 유저가 없습니다.")) :
-//                ResponseEntity.status(200).body(
-//                        response
-//                );
-        return ResponseEntity.status(200).body(new BaseResponse("success", "jwt토큰 확인용!"));
+        log.info(user.getAddress());
+
+        if (user == null) {
+            //실패
+            return ResponseEntity.status(200).body(new BaseResponse("fail", "해당 유저가 없습니다."));
+        } else {
+            return ResponseEntity.status(200).body(new MypageGetResponse(user.getName(), user.getNickname(), user.getAddress(), user.getPhoneNumber(), user.getIsAdmin()));
+        }
     }
 
 
 //    비밀번호찾기 : 휴대폰번호르 임시비밀번호 발급. 나중에 바꿔주기.
 
 
-//    비밀번호 변경 :
+//    비밀번호 변경 : 나중에 만들기
 
 
 }

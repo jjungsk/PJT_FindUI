@@ -50,6 +50,7 @@ public class TokenProvider {
         //redis에 refresh토큰 저장.
 
 //        log.info(jwtProperties.getAuth().getRefreshTokenExpirationTime() + "");
+
         stringRedisTemplate.opsForValue().set(userPrincipal.getId().toString(), refreshToken,
                 jwtProperties.getAuth().getRefreshTokenExpirationTime(), TimeUnit.MILLISECONDS);
 
