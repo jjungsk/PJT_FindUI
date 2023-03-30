@@ -8,8 +8,10 @@ import React from 'react';
 // import InfoPage from './src/components/screens/InfoPage';
 // import LoginPage from './src/components/screens/LoginPage';
 import SearchPage from './src/components/screens/SearchPage';
+import SignUpAll from './src/components/screens/SignUpAll';
+
 
 const Hannah = () => {
-  return (<SearchPage/>);
+  return (<SignUpAll/>);
 };
 export default Hannah;

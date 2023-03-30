@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
   }
 })
 
-const PhonePage = () => {
+const PhonePage = ({nextPage}) => {
   const [isChecked, setIsChecked] = useState(false)
   return(
     <View style={styles.container}>
@@ -30,7 +30,7 @@ const PhonePage = () => {
         </View>
         <PrivacyPolicyModal />
       </View>
-      <SignUpButton signUpText={'다음'} />
+      <SignUpButton signUpText={'다음'} page={1} nextPage={nextPage}/>
     </View>
   )
 }
