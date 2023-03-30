@@ -37,6 +37,12 @@ import ModifyContents from '../organisms/ModifyContents';
 import LinkButtons from '../organisms/LinkButtons';
 import ModifyButtons from '../organisms/ModifyButtons';
 
+// api 호출
+import {
+  apiGetMissingPerson,
+  apiDeleteMissingPerson,
+} from '../../API/apiMissingPerson.js';
+
 const ModifyScreen = () => {
   // STATE
   // Recoil state - test 용
@@ -47,7 +53,7 @@ const ModifyScreen = () => {
   // Local state - 실종자 정보
   const [missingPerson, setMissingPerson] = useState({
     name: '샘스미스',
-    birthday: new Date(1997, 2, 18),
+    birthday: '2000. 01. 01',
     address: '서울시 역삼동 멀티캠퍼스',
     phone: '010-6725-5590',
     lostday: '23. 01. 23. 금요일 13시',
@@ -74,11 +80,21 @@ const ModifyScreen = () => {
   // function - 수정 버튼
   const actButton = state => {
     if (state === 'cancel') {
-      // 취소
-      setText('SeKwun hello');
-      Alert.alert(text);
+      // 취소 버튼
+      const registId = 10;
+      const auto = async () => {
+        await apiGetMissingPerson(registId)
+          .then(({data}) => {
+            console.log(data.data);
+          })
+          .catch(error => {
+            console.log('실패');
+            console.log(error);
+          });
+      };
+      auto();
     } else if (state === 'modify') {
-      // 수정
+      // 수정 버튼
       Alert.alert(value);
     }
   };

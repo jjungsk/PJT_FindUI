@@ -1,18 +1,33 @@
 /*
   실종자 정보 CRUD
+
+  component 사용 방법
+  import {api Method} from '../../~~/apiMissingPerson.js';
+
+  const auto = async () => {
+    await apiGetMissingPerson(registId)
+      .then(({data}) => {
+        console.log(data.data);
+      })
+      .catch(error => {
+        console.log('실패');
+        console.log(error);
+      });
+  };
+  auto();
+
   by.정세권
 */
 
-import instance from './instance.js';
+import apiInstance from './instance.js';
 
-// api instance 생성
-const api = instance();
+const api = apiInstance();
 
 // ================================= Test ================================================
 // 실종자 정보 생성
 const apiPostMissingPerson = async missingPersonInfo => {
   try {
-    const response = await api.post(``);
+    const response = await api.post(`/api/regist`, missingPersonInfo);
     return response;
   } catch (error) {
     return error;
@@ -20,12 +35,11 @@ const apiPostMissingPerson = async missingPersonInfo => {
 };
 
 // 실종자 정보 조회
-const apiGetMissingPerson = async () => {
+const apiGetMissingPerson = async registId => {
   try {
-    const response = await api.get(`/api/v1/feeds`);
+    const response = await api.get(`/api/regist/detail/${registId}`);
     return response;
   } catch (error) {
-    console.log(error);
     return error;
   }
 };
@@ -41,9 +55,9 @@ const apiPutMissingPerson = async missingPersonInfo => {
 };
 
 // 실종자 정보 삭제
-const apiDeleteMissingPerson = async missingId => {
+const apiDeleteMissingPerson = async registId => {
   try {
-    const response = await api.delete(`url`);
+    const response = await api.delete(`/api/regist?registId=${registId}`);
     return response;
   } catch (error) {
     return error;
