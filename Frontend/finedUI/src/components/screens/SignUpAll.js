@@ -5,7 +5,6 @@ import InfoPage from './InfoPage';
 import SignUpPage from './SignUpPage';
 
 const SignUpAll = () => {
-  
   const [page, setPage] = useState(1)
 
   if (page === 1) {
