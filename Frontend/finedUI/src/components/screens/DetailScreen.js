@@ -16,8 +16,10 @@ import {
   Image,
 } from 'react-native';
 
-// Naver Map Library
-import NaverMapView, {Marker} from 'react-native-nmap';
+import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
+
+// icons
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 // sizes
 import {
@@ -28,6 +30,7 @@ import {
 
 // organisms
 import DetailContents from '../organisms/DetailContents';
+import GoogleMap from '../organisms/GoogleMap';
 import LinkButtons from '../organisms/LinkButtons';
 
 const DetailScreen = () => {
@@ -71,14 +74,14 @@ const DetailScreen = () => {
             <LinkButtons />
           </View>
           <View style={styles.mapContainer}>
-            <NaverMapView
-              style={{width: '100%', height: '100%'}}
-              center={{...position, zoom: 12}}>
-              <Marker
-                coordinate={position}
-                onClick={() => console.warn('onClick! position')}
-              />
-            </NaverMapView>
+            <GoogleMap
+              latitude={position.latitude}
+              longitude={position.longitude}
+            />
+            <Image
+              source={require('../../assets/images/marker_img.png')}
+              style={styles.mapMarker}
+            />
           </View>
         </View>
       </ScrollView>
@@ -138,6 +141,14 @@ const styles = StyleSheet.create({
     width: widthPercentage(330),
     height: heightPercentage(330),
     paddingVertical: heightPercentage(24),
+  },
+  mapMarker: {
+    width: widthPercentage(40),
+    height: heightPercentage(40),
+    resizeMode: 'contain',
+    position: 'absolute',
+    top: '55%',
+    alignSelf: 'center',
   },
 });
 

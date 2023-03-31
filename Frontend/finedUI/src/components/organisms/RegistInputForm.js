@@ -21,6 +21,8 @@ import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import CustomInputField from '../atoms/CustomInputField';
 
 const RegistInputForm = ({mode = 0, setUser}) => {
+  const [userName, setUserName] = useState();
+  const [birthday, setBirthday] = useState();
   const [missingDate, setMissingDate] = useState(new Date());
   const [pickerMode, setPickerMode] = useState('date');
   const [visible, setVisible] = useState(false);
@@ -50,8 +52,12 @@ const RegistInputForm = ({mode = 0, setUser}) => {
 
   return (
     <View>
-      <CustomInputField label="이름" />
-      <CustomInputField label="생년월일" title="생년월일 6자리 입력해주세요" />
+      <CustomInputField label="이름" inputData={text => setUserName(text)} />
+      <CustomInputField
+        label="생년월일"
+        title="생년월일 6자리 입력해주세요"
+        inputData={text => setBirthday(text)}
+      />
       <View style={styles.selectDateContainer}>
         <TouchableOpacity
           activeOpacity={0.6}
@@ -85,6 +91,17 @@ const RegistInputForm = ({mode = 0, setUser}) => {
         onCancel={onCancel}
         date={missingDate}
       />
+      <TouchableOpacity activeOpacity={0.6} style={styles.selectLocate}>
+        <Text style={styles.selectLocateTitle}>실종 위치</Text>
+        <View style={styles.selectLocateInfoContainer}>
+          <Text style={styles.selectLocateInfo}>위치 선택</Text>
+          <Icon
+            name="chevron-right"
+            size={widthPercentage(20)}
+            color={'#667085'}
+          />
+        </View>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -110,6 +127,28 @@ const styles = StyleSheet.create({
     fontSize: fontPercentage(16),
     fontWeight: '700',
     color: '#000000',
+  },
+  selectLocate: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: widthPercentage(16),
+    marginVertical: heightPercentage(8),
+  },
+  selectLocateTitle: {
+    fontSize: fontPercentage(20),
+    fontWeight: '600',
+    color: '#000000',
+  },
+  selectLocateInfoContainer: {
+    flexDirection: 'row',
+    height: '100%',
+    alignItems: 'center',
+  },
+  selectLocateInfo: {
+    fontsize: fontPercentage(18),
+    fontWeight: '700',
+    color: '#667085',
   },
 });
 

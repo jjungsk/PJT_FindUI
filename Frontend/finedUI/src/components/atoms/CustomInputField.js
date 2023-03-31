@@ -10,7 +10,7 @@ import {
 export default CustomInputField = ({
   label = 'label',
   labelColor = 'rgba(0, 0, 0, .38)',
-  inputCallback = text => {
+  inputData = text => {
     console.log(text);
   },
   title = '',
@@ -29,7 +29,7 @@ export default CustomInputField = ({
       labelTextStyle={styles.inputLabel}
       titleTextStyle={styles.inputTitle}
       containerStyle={styles.inputFieldContainer}
-      onChangeText={inputCallback}
+      onChangeText={inputData}
     />
   );
 };
