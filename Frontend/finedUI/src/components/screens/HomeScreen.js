@@ -103,7 +103,7 @@ const HomeScreen = ({navigation}) => {
             data={registUsers}
             renderItem={({item}) => (
               <View style={styles.carouselItem}>
-                <PreRegistCard registUser={item} />
+                <PreRegistCard registUser={item} navigation={navigation} />
               </View>
             )}
             itemWidth={width}

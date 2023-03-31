@@ -25,7 +25,6 @@ import {heightPercentage, widthPercentage} from '../../styles/ResponsiveSize';
 
 // components - NavBar
 import HomeScreen from '../screens/HomeScreen';
-import DetailScreen from '../screens/DetailScreen';
 
 const Tab = createBottomTabNavigator();
 
