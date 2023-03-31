@@ -1,25 +1,51 @@
 import React, {useState, useCallback} from 'react';
-import {TextInput, View, Text, StyleSheet, Pressable} from 'react-native';
+import {
+  TextInput,
+  SafeAreaView,
+  StyleSheet,
+  Pressable,
+  View,
+  Text,
+  FlatList,
+} from 'react-native';
 import SockJS from 'sockjs-client';
 import Stomp from 'stompjs';
-import SockJsClient from 'react-stomp';
-import LoginForm from '../organisms/LoginForm';
-import Messages from '../organisms/Messages';
-import {useFocusEffect} from '@react-navigation/native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
+import {useFocusEffect} from '@react-navigation/native';
+import {widthPercentage, heightPercentage} from '../../styles/ResponsiveSize';
 const styles = StyleSheet.create({
   messageBox: {
-    borderWidth: 2,
+    position: 'absolute',
+    bottom: 0,
+    flexDirection: 'row',
+    backgroundColor: '#B2DDFF',
+    height: heightPercentage(42),
+    width: widthPercentage(360),
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  msgBtn: {
+    backgroundColor: '#2E90FA',
+    width: widthPercentage(40),
+    height: heightPercentage(42),
+  },
+  msgInput: {
+    width: widthPercentage(300),
+    height: heightPercentage(35),
+    backgroundColor: '#84CAFF',
+    borderRadius: 15,
+  },
+  btnTxt: {
+    textAlign: 'center',
   },
 });
 const SOCKET_URL = 'http://172.26.0.1:8080/ws';
-// const SOCKET_URL = 'http://localhost:8080/ws-chat';
-let sockJS = new SockJS('http://172.26.0.1:8080/ws');
+let sockJS = new SockJS(SOCKET_URL);
 let stompClient = Stomp.over(sockJS);
 const ChatScreen = () => {
   const [messages, setMessages] = useState('');
   const [user, setUser] = useState(null);
-  // var socket = new SockJS('/ws-chat');
 
   useFocusEffect(
     useCallback(() => {
@@ -34,6 +60,7 @@ const ChatScreen = () => {
     console.log(err);
   };
   let onConnected = () => {
+    //subscribe에서roomid로 하면 될 듯
     stompClient.subscribe('/topic/public', onMessageReceived);
 
     console.log('Connected');
@@ -63,11 +90,42 @@ const ChatScreen = () => {
     setUser({username: username, color: 'red'});
   };
   return (
-    <View style={styles.messageBox}>
-      <TextInput value={messages} onChangeText={onMessageReceived} />
-      <Pressable onPress={onSendMessage}>
-        <Text>Send</Text>
-      </Pressable>
+    <View
+      style={{
+        padding: 5,
+        flexGrow: 1,
+      }}>
+      <FlatList
+        renderItem={() => {
+          for (let i = 0; i < 30; i++) {
+            <Text>i</Text>;
+          }
+        }}
+      />
+
+      <SafeAreaView style={styles.messageBox}>
+        <Pressable onPress={onSendMessage}>
+          <Icon
+            name="plus"
+            size={30}
+            style={{width: 30, height: 30}}
+            color="black"
+          />
+        </Pressable>
+        <TextInput
+          style={styles.msgInput}
+          value={messages}
+          onChangeText={onMessageReceived}
+        />
+        <Pressable onPress={onSendMessage}>
+          <Icon
+            name="arrow-up"
+            size={30}
+            style={{width: 30, height: 30}}
+            color="black"
+          />
+        </Pressable>
+      </SafeAreaView>
     </View>
   );
 };
