@@ -5,13 +5,13 @@ import io.swagger.annotations.ApiModelProperty;
 
 public class UserUpdateRequest {
 
-    @ApiModelProperty(value = "address")
+    @ApiModelProperty(value = "주소")
     public String addreess;
-    @ApiModelProperty(value = "phoneNumber")
+    @ApiModelProperty(value = "휴대폰번호")
     public String phoneNumber;
-    @ApiModelProperty(value = "nickname")
+    @ApiModelProperty(value = "유저 이름")
     public String nickname;
 
-    @ApiModelProperty(value = "name")
+    @ApiModelProperty(value = "유저 이메일.")
     public String name;
 }
