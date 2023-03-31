@@ -30,12 +30,6 @@ const InfoCheck = () => {
       labelTextStyle={{padding: 3}}
       autoCapitalize="none"
       inputContainerStyle={styles.inputContainer}
-      label="닉네임"
-      />
-      <TextField
-      labelTextStyle={{padding: 3}}
-      autoCapitalize="none"
-      inputContainerStyle={styles.inputContainer}
       label="주소"
       />
     </View>

@@ -1,4 +1,5 @@
 import React from 'react';
+import MyPage from './src/components/screens/MyPage';
 // import SignUpText from './src/components/atoms/SignUpText';
 // import StartPage from './src/components/screens/StartPage';
 // import SignUpPage from './src/components/screens/SignUpPage';
@@ -9,9 +10,10 @@ import React from 'react';
 // import LoginPage from './src/components/screens/LoginPage';
 import SearchPage from './src/components/screens/SearchPage';
 import SignUpAll from './src/components/screens/SignUpAll';
+import HomeScreen from './src/components/screens/HomeScreen';
 
 
 const Hannah = () => {
-  return (<SignUpAll/>);
+  return (<MyPage/>);
 };
 export default Hannah;

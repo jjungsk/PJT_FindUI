@@ -1,8 +1,10 @@
-import instance from "./instance";
+import apiInstance from "./apiInstance";
+
+const api = apiInstance
 
 export const login = async (email, password) => {
   try {
-    const response = await instance.post(`/login`, {
+    const response = await api.post(`/login`, {
       email,
       password,
     });
@@ -24,7 +26,7 @@ export const login = async (email, password) => {
 
 export const validateAccessToken = async (accessToken) => {
   try {
-    const response = await instance.post(`/valid`, {
+    const response = await api.post(`/valid`, {
       accessToken
     });
     return {
