@@ -10,7 +10,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.net.ssl.HttpsURLConnection;
 import java.awt.*;
+import java.net.URL;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
