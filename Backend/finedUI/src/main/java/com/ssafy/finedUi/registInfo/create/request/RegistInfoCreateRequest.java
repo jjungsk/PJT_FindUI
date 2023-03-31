@@ -21,8 +21,8 @@ public class RegistInfoCreateRequest {
     private Boolean isMissing;          // 실종 여부
     private Point missingLocation;      // 실종 위치
     private Timestamp missingTime;      // 실종 시간
-    private Integer longitude;          // 경도
-    private Integer latitude;           // 위도
+    private Double longitude;          // 경도
+    private Double latitude;           // 위도
     private MultipartFile frontImage;   // 정면 사진
     private MultipartFile otherImage1;  // 추가 사진 1
     private MultipartFile otherImage2;  // 추가 사진 2
@@ -38,7 +38,8 @@ public class RegistInfoCreateRequest {
                 .birthDate(birthDate)
                 .gender(gender)
                 .isMissing(isMissing)
-                .missingLocation(missingLocation)
+                .longitude(longitude)
+                .latitude(latitude)
                 .missingTime(missingTime)
                 .frontImagePath(frontImagePath)
                 .otherImage1Path(otherImage1Path)

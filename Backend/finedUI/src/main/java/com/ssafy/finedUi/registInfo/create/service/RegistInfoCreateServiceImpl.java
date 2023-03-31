@@ -35,12 +35,10 @@ public class RegistInfoCreateServiceImpl implements RegistInfoCreateService {
         // userId로 user를 조회하여 dto에 user 할당
         registInfoCreateRequest.setUser(userRepository.findById(userId).get());
         // 좌표값 할당
-        Integer longitude = registInfoCreateRequest.getLongitude();
-        Integer latitude = registInfoCreateRequest.getLatitude();
+        Double longitude = registInfoCreateRequest.getLongitude();
+        Double latitude = registInfoCreateRequest.getLatitude();
         if (longitude != null && latitude != null) {
-            Point missingLocation = new Point(latitude, latitude);
             registInfoCreateRequest.setIsMissing(true); // 실종 여부
-            registInfoCreateRequest.setMissingLocation(missingLocation); // 실종 위치
             registInfoCreateRequest.setMissingTime(Timestamp.valueOf(LocalDateTime.now())); // 실종 시간
         }
 

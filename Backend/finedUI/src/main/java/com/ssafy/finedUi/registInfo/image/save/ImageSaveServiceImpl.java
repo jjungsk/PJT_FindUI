@@ -29,10 +29,9 @@ public class ImageSaveServiceImpl implements ImageSaveService{
             // 이미지 파일
             MultipartFile file = multipartFiles[value];
 
-            System.out.println(file.getContentType());
             // 이미지가 아닐 경우 종료
             if (file.getContentType() == null || file.getContentType().startsWith("image") == false) {
-                System.out.println("this is not image");
+//                System.out.println("this is not image");
                 continue;
             }
             // 저장 경로와 파일 이름 설정
