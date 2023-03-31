@@ -13,11 +13,12 @@ const styles = StyleSheet.create({
 })
 
 const InfoPage = ({nextPage}) => {
+  const page = 2
   return(
     <View style={styles.container}>
       <InfoCheck/>
       <SignUpButton 
-        page={2} nextPage={nextPage}
+        onPress={() => nextPage({page: page+1})}
         signUpText={'다음'}
       />
     </View>

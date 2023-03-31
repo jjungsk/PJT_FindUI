@@ -19,10 +19,9 @@ const styles = StyleSheet.create({
   }
 })
 
-const SignUpButton = ({signUpText, nextPage, page}) => {
-  console.log(page)
+const SignUpButton = ({signUpText, onPress}) => {
   return (
-    <TouchableOpacity style={styles.signBtn} onPress={() => nextPage({page: page+1})}>
+    <TouchableOpacity style={styles.signBtn} onPress={onPress}>
       <Text style={styles.signText}>{signUpText}</Text>
     </TouchableOpacity>
   );

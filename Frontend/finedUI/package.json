@@ -19,6 +19,7 @@
     "react": "18.1.0",
     "react-native": "0.70.5",
     "react-native-basic-carousel": "^1.0.9",
+    "react-native-keychain": "^8.1.1",
     "react-native-linear-gradient": "^2.6.2",
     "react-native-nmap": "^0.0.66",
     "react-native-responsive-dimensions": "^3.1.1",
