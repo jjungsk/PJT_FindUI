@@ -16,6 +16,9 @@ public class ImageSaveServiceImpl implements ImageSaveService{
     @Value("${image.upload.path}")
     private String uploadPath;
 
+    @Value("${image.response.path}")
+    private String responsePath;
+
     @Override
     public String[] save(MultipartFile[] multipartFiles, Long registId) {
         String[] imagePaths = new String[3];
@@ -36,8 +39,9 @@ public class ImageSaveServiceImpl implements ImageSaveService{
             //        String saveName = registId + "." + file.getContentType().split("/")[1]; // 파일 이름
 
             // 저장 경로
-            int imageId = value + 1;
-            Path savePath = Paths.get(uploadPath + registId + '_' + imageId + ".png"); // 저장 경로
+            Integer imageId = value + 1;
+            String fileName = registId.toString() + '_' + imageId.toString() + ".png";
+            Path savePath = Paths.get(uploadPath + fileName); // 저장 경로
 
             // 폴더가 존재하는지 확인하고 존재하지 않는다면 폴더 생성
             File uploadPathFolder = new File(uploadPath, "Image");
@@ -50,7 +54,7 @@ public class ImageSaveServiceImpl implements ImageSaveService{
             try {
                 // 이미지 저장
                 file.transferTo(savePath);
-                imagePaths[value] = savePath.toString();
+                imagePaths[value] = responsePath + fileName;
             } catch (IOException e) {
                 throw new RuntimeException(e);
             }

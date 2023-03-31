@@ -23,7 +23,7 @@ public class ChatImageCreateService {
 
     @Transactional                                                      // 트랜잭션 처리 로직과 비즈니스 로직의 공존을 피하기 위해 내부적으로 AOP를 통해 트랜잭션 코드 처리 전 후로 구분해주는 annotation
     public ChatImageCreateResponse save(ChatImageCreateRequest chatImageCreateRequest) throws IOException {
-        String storeFileUrl = s3SaveService.save(chatImageCreateRequest) + ".png";              // S3에 이미지 저장
+        String storeFileUrl = s3SaveService.save(chatImageCreateRequest);              // S3에 이미지 저장
         chatImageCreateRequest.setImagePath(storeFileUrl);                         // 이미지 경로 request dto에 설정
         ChatImageId chatImageId = new ChatImageId();
         chatImageId.setRegistInfo(registInfoRepository.findById(chatImageCreateRequest.getRegistId()).get()); // 실종자 request dto에 설정
