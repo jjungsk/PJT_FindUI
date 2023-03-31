@@ -20,6 +20,6 @@ public class SMSRequest {
     private String countryCode;
     private String from;
     private String content;
-    private List<SMSMessage> messageList;
+    private List<SMSMessage> messages;
 
 }

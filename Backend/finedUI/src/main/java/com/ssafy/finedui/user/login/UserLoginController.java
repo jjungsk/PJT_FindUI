@@ -1,5 +1,6 @@
 package com.ssafy.finedui.user.login;
 
+import com.ssafy.finedui.common.BaseResponse;
 import com.ssafy.finedui.common.jwt.Token;
 import com.ssafy.finedui.user.login.request.UserLoginRequest;
 import io.swagger.annotations.Api;
@@ -31,7 +32,13 @@ public class UserLoginController {
 
         return ResponseEntity.status(200).body(token);
 
+    }
 
+    @PostMapping("/token")
+    @ApiOperation(value = "토큰유효성 검증", notes = "access토큰 검증후 만료시 451에러. 이후 refresh 토큰 만료시 452에러. 만료안됐다면 access토큰 재발급.")
+    ResponseEntity<?> tokenValid(){
+
+        return ResponseEntity.status(200).body(new BaseResponse("sucess","유효한 토큰입니다."));
     }
 
 }

@@ -5,10 +5,7 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 @Data
-public class PhoneConfirmRequest {
-
+public class PhoneAuthRequest {
     @ApiModelProperty(value = "휴대폰 번호", required = true)
-    String phoneNumber;
-    @ApiModelProperty(value = "코드", required = true)
-    String code;
+    private String phoneNumber;
 }

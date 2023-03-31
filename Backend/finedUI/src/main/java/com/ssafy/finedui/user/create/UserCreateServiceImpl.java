@@ -2,9 +2,11 @@ package com.ssafy.finedui.user.create;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.nimbusds.openid.connect.sdk.federation.policy.operations.ValueOperation;
 import com.ssafy.finedui.common.properties.SMSProperties;
 import com.ssafy.finedui.db.entity.User;
 import com.ssafy.finedui.user.UserRepository;
+import com.ssafy.finedui.user.create.request.PhoneConfirmRequest;
 import com.ssafy.finedui.user.create.request.SMSRequest;
 import com.ssafy.finedui.user.create.request.UserJoinRequest;
 import com.ssafy.finedui.user.create.response.SMSResponse;
@@ -12,9 +14,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.tomcat.util.codec.binary.Base64;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.StringRedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -27,6 +31,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -83,74 +88,112 @@ public class UserCreateServiceImpl implements UserCreateService {
 
     @Override
 //    @Transactional
-    public SMSResponse sendSMS(String recipientPhoneNumber) throws JsonProcessingException,
+    public String sendSMS(String recipientPhoneNumber) throws JsonProcessingException,
             UnsupportedEncodingException, NoSuchAlgorithmException, InvalidKeyException, URISyntaxException {
-        Long time = System.currentTimeMillis();
-//        redis에 저장할 랜덤 6자리 인증번호 코드 만들기.
-        Random generator = new Random();
-        generator.setSeed(time);
-        int code = generator.nextInt(1000000) % 1000000;
+        String path = "/sms/v2/services/"+smsProperties.getServiceId()+"/messages";
+        URI uri = new URI("https://sens.apigw.ntruss.com" + path);
+        String code = makeAuthNumber(recipientPhoneNumber);
+        String message = "[finedyou] 인증번호는 " + code + "입니다.";
 
-//        content 6자리 인증번호로 저장.
-        String content = "인증번호는 " + Integer.toString(code) + "입니다";
+//        Request 요청 값 생성
+        SMSRequest smsRequest = new SMSRequest();
+        smsRequest.setType("SMS");
+        smsRequest.setContentType("COMM");
+        smsRequest.setCountryCode("82");
+        smsRequest.setFrom(recipientPhoneNumber);
+        smsRequest.setContent(message);
         List<SMSMessage> messages = new ArrayList<>();
-        messages.add(new SMSMessage(recipientPhoneNumber, content));
+        messages.add(new SMSMessage(recipientPhoneNumber));
+        smsRequest.setMessages(messages);
 
-        SMSRequest smsRequest = new SMSRequest("SMS", "COMM", "82", "발신자 전화번호", "내용", messages);
+        // 생성한 Request를 json형식으로 변경
         ObjectMapper objectMapper = new ObjectMapper();
         String jsonBody = objectMapper.writeValueAsString(smsRequest);
 
-        HttpHeaders headers = new HttpHeaders();
-        headers.setContentType(MediaType.APPLICATION_JSON);
-        headers.set("x-ncp-apigw-timestamp", time.toString());
-        headers.set("x-ncp-iam-access-key", smsProperties.getAccessKeyId());
-        String sig = makeSignature(time); //암호화
-        headers.set("x-ncp-apigw-signature-v2", sig);
+        //header생성
+        HttpHeaders header = makeHeader("POST", path);
+        // header와 request를 넣어 요청 body 생성
+        HttpEntity<String> body = new HttpEntity<>(jsonBody, header);
 
-        log.info(jsonBody.toString());
-        HttpEntity<String> body = new HttpEntity<>(jsonBody, headers);
-
+        // Api 요청 보내기
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.setRequestFactory(new HttpComponentsClientHttpRequestFactory());
-        SMSResponse smsResponse = restTemplate.postForObject(new URI("https://sens.apigw.ntruss.com/sms/v2/services/" + smsProperties.getServiceId() + "/messages"),
-                body, SMSResponse.class);
+        ResponseEntity<SMSResponse> response = restTemplate.postForEntity(uri, body, SMSResponse.class);
 
-        log.info("redis 저장 :");
-//        redis에저장.
-        stringRedisTemplate.opsForValue().set(SMSPREFIX + recipientPhoneNumber, Integer.toString(code), smsProperties.getExpiration(), TimeUnit.MILLISECONDS);
-        return smsResponse;
+        // 요청에 대한 응답 반환.
+        String result = response.getBody().getStatusName();
+
+        return result;
+    }
+
+    @Override
+    public boolean verifyCode(PhoneConfirmRequest phoneConfirmRequest) {
+        String phoneNumber = phoneConfirmRequest.getPhoneNumber();
+
+        String code = stringRedisTemplate.opsForValue().get(SMSPREFIX + phoneNumber);
+        if(code.equals(phoneConfirmRequest.getCode())){
+            return true;
+        }
+        return false;
+    }
+
+    private String makeAuthNumber(String userPhone) {
+
+        // 6자리 인증번호 생성
+        Random random = new Random();
+
+        // 6자리로 형식 맞추기
+        DecimalFormat df = new DecimalFormat("000000");
+        String authNumber = String.valueOf(df.format(random.nextInt(1000000)));
+
+        // Redis에 인증번호 저장, 4분이 지나면 없어진다.
+        ValueOperations<String, String> valueOperations = stringRedisTemplate.opsForValue();
+        valueOperations.set(SMSPREFIX+ userPhone, authNumber, 4, TimeUnit.MINUTES);
+
+        return authNumber;
+    }
+
+    public HttpHeaders makeHeader(String method, String url) throws InvalidKeyException, IllegalStateException, UnsupportedEncodingException, NoSuchAlgorithmException {
+
+        // 새로운 헤더 객체 생성
+        HttpHeaders headers = new HttpHeaders();
+
+        // 현재 밀리초, API Gateway 서버와 시간 차가 5분 이상 나는 경우 유효하지 않은 요청으로 간주
+        String timestamp = String.valueOf(System.currentTimeMillis());
+        headers.set("x-ncp-apigw-timestamp", timestamp);
+
+        // 네이버 클라우드 플랫폼 포털이나 Sub Account에서 발급받은 Access Key ID
+        headers.set("x-ncp-iam-access-key", smsProperties.getAccessKeyId());
+
+        // Body를 Access Key ID와 맵핑되는 Secret Key로 암호화한 서명값
+        headers.set("x-ncp-apigw-signature-v2", makeSignature(method, url, timestamp));
+
+        // 형식을 JSON으로 지정
+        headers.setContentType(MediaType.APPLICATION_JSON);
+
+        return headers;
 
     }
 
+    private String makeSignature(String method, String url, String timestamp) throws IllegalStateException, UnsupportedEncodingException, NoSuchAlgorithmException, InvalidKeyException {
 
-    public String makeSignature(Long time) throws UnsupportedEncodingException, NoSuchAlgorithmException, InvalidKeyException {
+        // 네이버 클라우드의 signatureKey 암호화 코드
+        String message = new StringBuilder().append(method).append(" ").append(url)
+                .append("\n").append(timestamp).append("\n")
+                .append(smsProperties.getAccessKeyId()).toString();
 
-        String space = " ";
-        String newLine = "\n";
-        String method = "POST";
-        String url = "/sms/v2/services/" + smsProperties.getServiceId() + "/messages";
-        String timestamp = time.toString();
-        String accessKey = smsProperties.getAccessKeyId();
-        String secretKey = smsProperties.getSecretKeyId();
-
-        String message = new StringBuilder()
-                .append(method)
-                .append(space)
-                .append(url)
-                .append(newLine)
-                .append(timestamp)
-                .append(newLine)
-                .append(accessKey)
-                .toString();
-
-        SecretKeySpec signingKey = new SecretKeySpec(secretKey.getBytes("UTF-8"), "HmacSHA256");
+        // StringToSign을 생성하고 SecretKey로 HmacSHA256 알고리즘으로 암호화
+        SecretKeySpec signingKey = new SecretKeySpec(smsProperties.getSecretKeyId().getBytes("UTF-8"), "HmacSHA256");
         Mac mac = Mac.getInstance("HmacSHA256");
         mac.init(signingKey);
-
         byte[] rawHmac = mac.doFinal(message.getBytes("UTF-8"));
+
+        // Base64로 인코딩
         String encodeBase64String = Base64.encodeBase64String(rawHmac);
 
         return encodeBase64String;
+
     }
+
 
 }

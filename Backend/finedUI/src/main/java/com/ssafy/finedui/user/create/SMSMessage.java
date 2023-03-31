@@ -14,4 +14,8 @@ public class SMSMessage {
     private String to;
     private String content;
 
+    public SMSMessage(String to){
+        this.to = to;
+    }
+
 }

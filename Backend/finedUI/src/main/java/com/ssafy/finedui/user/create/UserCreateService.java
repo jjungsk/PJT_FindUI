@@ -1,6 +1,7 @@
 package com.ssafy.finedui.user.create;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
+import com.ssafy.finedui.user.create.request.PhoneConfirmRequest;
 import com.ssafy.finedui.user.create.request.UserJoinRequest;
 import com.ssafy.finedui.user.create.response.SMSResponse;
 
@@ -14,6 +15,8 @@ public interface UserCreateService {
 
     boolean createUser(UserJoinRequest joinRequest);
 
-    SMSResponse sendSMS(String recipientPhoneNumber) throws JsonProcessingException,
+    String sendSMS(String recipientPhoneNumber) throws JsonProcessingException,
             UnsupportedEncodingException, NoSuchAlgorithmException, InvalidKeyException, URISyntaxException;
+
+    boolean verifyCode(PhoneConfirmRequest phoneConfirmRequest);
 }
