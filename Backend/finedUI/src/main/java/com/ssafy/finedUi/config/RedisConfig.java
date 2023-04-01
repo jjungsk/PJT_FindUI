@@ -12,7 +12,6 @@ import org.springframework.data.redis.core.StringRedisTemplate;
 
 @Configuration
 public class RedisConfig {
-
     @Autowired
     private RedisProperties redisProperties;
 

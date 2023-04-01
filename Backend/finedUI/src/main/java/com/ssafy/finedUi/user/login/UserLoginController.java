@@ -8,10 +8,7 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/user")
@@ -38,7 +35,15 @@ public class UserLoginController {
     @ApiOperation(value = "토큰유효성 검증", notes = "access토큰 검증후 만료시 451에러. 이후 refresh 토큰 만료시 452에러. 만료안됐다면 access토큰 재발급.")
     ResponseEntity<?> tokenValid() {
 
-        return ResponseEntity.status(200).body(new BaseResponse("sucess", "유효한 토큰입니다."));
+        return ResponseEntity.status(200).body(new BaseResponse("success", "유효한 토큰입니다."));
     }
+
+
+    @DeleteMapping("logout")
+    ResponseEntity<?> logout() {
+//        redis에 관련 Token 블랙리스트처리. 시간남으면 구현.
+        return ResponseEntity.status(200).body(new BaseResponse("success", "로그아웃성공."));
+    }
+
 
 }
