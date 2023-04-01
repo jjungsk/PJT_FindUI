@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 public class UserJoinRequest {
-    @ApiModelProperty(value = "이름", required = true)
+    @ApiModelProperty(value = "이름. 이메일(아이디역할)을 여기에 집어넣기.", required = true)
     String name;
 
     @ApiModelProperty(value = "휴대폰번호", required = true)

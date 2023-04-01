@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.ssafy.finedUi.common.BaseResponse;
 import com.ssafy.finedUi.user.create.request.PhoneConfirmRequest;
 import com.ssafy.finedUi.user.create.request.UserJoinRequest;
+import com.ssafy.finedui.user.create.request.PhoneAuthRequest;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -41,11 +42,17 @@ public class UserCreateController {
 //    휴대폰인증 : redis 이슈
 
     @ApiOperation(value = "휴대폰 인증번호 전송. ", notes = "랜덤한 6자리 인증번호를 SMS에 전달.")
-    @PostMapping("/phoneConfirm")
-    ResponseEntity<?> phoneConfirm(@RequestBody PhoneConfirmRequest phoneConfirmRequest) {
+    @PostMapping("/phoneauth")
+    ResponseEntity<?> phoneAuth(@RequestBody PhoneAuthRequest phoneConfirmRequest) {
 
         try {
-            userCreateService.sendSMS(phoneConfirmRequest.getPhoneNumber());
+            String result = userCreateService.sendSMS(phoneConfirmRequest.getPhoneNumber());
+            if (result.equals("success")) {
+                return ResponseEntity.status(200).body(new BaseResponse("success", "인증 번호를 전송"));
+            } else {
+                return ResponseEntity.status(200).body(new BaseResponse("fail", "인증번호 전송 실패"));
+            }
+
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         } catch (UnsupportedEncodingException e) {
@@ -57,7 +64,19 @@ public class UserCreateController {
         } catch (URISyntaxException e) {
             throw new RuntimeException(e);
         }
-        return null;
     }
+
+    @ApiOperation(value = "휴대폰 인증번호 확인. ", notes = "사용자가 입력한 인증번호가 옳은지 확인.")
+    @PostMapping("/phoneconfirm")
+    ResponseEntity<?> phoneConfirm(@RequestBody PhoneConfirmRequest phoneConfirmRequest) {
+
+        if (userCreateService.verifyCode(phoneConfirmRequest)) {
+            return ResponseEntity.status(200).body(new BaseResponse("success", "휴대폰 인증 성공"));
+        } else {
+            return ResponseEntity.status(200).body(new BaseResponse("fail", "휴대폰 인증 실패"));
+        }
+
+    }
+
 
 }
