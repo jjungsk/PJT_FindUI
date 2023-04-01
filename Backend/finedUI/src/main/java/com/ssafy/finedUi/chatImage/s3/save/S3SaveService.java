@@ -1,5 +1,7 @@
 package com.ssafy.finedUi.chatImage.s3.save;
 
+import com.amazonaws.auth.BasicAWSCredentials;
+import com.amazonaws.regions.Region;
 import com.amazonaws.services.s3.AmazonS3Client;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.ObjectMetadata;
@@ -32,7 +34,6 @@ public class S3SaveService {
         objectMetadata.setContentLength(multipartFile.getSize());       // S3에 업로드 할 객체 size 설정
 
         String key = base_path + registId.toString() + "_" + userId.toString() + ".png";                        // S3에 할당될 key(파일 이름)
-
         // S3 bucket에 이미지 업로드
         upload(key, objectMetadata, multipartFile);
         String storeFileUrl = amazonS3Client.getUrl(bucket, key).toString();    // S3에 업로드 된 이미지 링크

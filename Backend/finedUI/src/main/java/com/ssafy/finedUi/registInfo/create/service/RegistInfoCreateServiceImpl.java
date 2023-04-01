@@ -1,10 +1,10 @@
 package com.ssafy.finedUi.registInfo.create.service;
 
-import com.ssafy.finedUi.db.UserRepository;
 import com.ssafy.finedUi.registInfo.RegistInfoRepository;
 import com.ssafy.finedUi.registInfo.create.request.RegistInfoCreateRequest;
 import com.ssafy.finedUi.registInfo.create.response.RegistInfoCreateResponse;
 import com.ssafy.finedUi.registInfo.image.save.ImageSaveServiceImpl;
+import com.ssafy.finedUi.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

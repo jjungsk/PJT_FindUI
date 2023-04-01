@@ -4,7 +4,6 @@ import com.ssafy.finedUi.db.entity.RegistInfo;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.awt.*;
 import java.sql.Timestamp;

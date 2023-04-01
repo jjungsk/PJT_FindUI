@@ -1,10 +1,10 @@
 package com.ssafy.finedUi.registInfo.update.service;
 
-import com.ssafy.finedUi.db.UserRepository;
 import com.ssafy.finedUi.registInfo.RegistInfoRepository;
 import com.ssafy.finedUi.registInfo.image.save.ImageSaveServiceImpl;
 import com.ssafy.finedUi.registInfo.update.request.RegistInfoUpdateRequest;
 import com.ssafy.finedUi.registInfo.update.response.RegistInfoUpdateResponse;
+import com.ssafy.finedUi.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -15,7 +15,7 @@ import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor
-public class RegistInfoUpdateServiceImpl implements RegistInfoUpdateService{
+public class RegistInfoUpdateServiceImpl implements RegistInfoUpdateService {
 
     private final RegistInfoRepository registInfoRepository;
     private final UserRepository userRepository;

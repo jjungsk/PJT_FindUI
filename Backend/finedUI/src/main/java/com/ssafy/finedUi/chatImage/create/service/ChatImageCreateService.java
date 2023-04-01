@@ -4,9 +4,9 @@ import com.ssafy.finedUi.chatImage.ChatImageRepository;
 import com.ssafy.finedUi.chatImage.create.request.ChatImageCreateRequest;
 import com.ssafy.finedUi.chatImage.create.response.ChatImageCreateResponse;
 import com.ssafy.finedUi.chatImage.s3.save.S3SaveService;
-import com.ssafy.finedUi.db.UserRepository;
 import com.ssafy.finedUi.db.entity.ChatImageId;
 import com.ssafy.finedUi.registInfo.RegistInfoRepository;
+import com.ssafy.finedUi.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,7 +21,8 @@ public class ChatImageCreateService {
     private final RegistInfoRepository registInfoRepository;        // 실종(사전) 등록 저장소
     private final S3SaveService s3SaveService;
 
-    @Transactional                                                      // 트랜잭션 처리 로직과 비즈니스 로직의 공존을 피하기 위해 내부적으로 AOP를 통해 트랜잭션 코드 처리 전 후로 구분해주는 annotation
+    @Transactional
+    // 트랜잭션 처리 로직과 비즈니스 로직의 공존을 피하기 위해 내부적으로 AOP를 통해 트랜잭션 코드 처리 전 후로 구분해주는 annotation
     public ChatImageCreateResponse save(ChatImageCreateRequest chatImageCreateRequest) throws IOException {
         String storeFileUrl = s3SaveService.save(chatImageCreateRequest);              // S3에 이미지 저장
         chatImageCreateRequest.setImagePath(storeFileUrl);                         // 이미지 경로 request dto에 설정
