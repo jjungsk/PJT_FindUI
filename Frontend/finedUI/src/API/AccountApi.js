@@ -4,7 +4,7 @@ const api = apiInstance();
 
 export const signup = async (name, address, email, password, phoneNumber) => {
   try {
-    const response = await api.post(`/user/create`, {
+    const response = await api.post(`/api/user/create`, {
       name,
       address,
       email,
@@ -17,9 +17,7 @@ export const signup = async (name, address, email, password, phoneNumber) => {
   } catch (error) {
     console.error(error);
     return {
-      accessToken: null,
-      refreshToken: null,
-      status: null
+      response
     };
   }
 };

@@ -23,7 +23,7 @@ const PhonePage = ({nextPage}) => {
       <View style={{width:"80%", justifyContent:"center"}}>
         <SignUpText text={'본인인증'} />
       </View>
-      <PhoneVerify />
+      <PhoneVerify/>
       <View style={{width:"80%", justifyContent:"center"}}>
         <View style={{flexDirection: 'row', alignItems: 'center'}}>
           <CheckBox disabled={false} value={isChecked} onValueChange={(val)=>setIsChecked(val)}/>

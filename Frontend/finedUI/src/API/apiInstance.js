@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {TEST_URL} from '@env';
+import {TEST_URL, MAIN_URL} from '@env';
 
 const apiInstance = () => {
   const instance = axios.create({
