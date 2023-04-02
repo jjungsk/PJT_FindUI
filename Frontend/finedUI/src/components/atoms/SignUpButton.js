@@ -19,9 +19,9 @@ const styles = StyleSheet.create({
   }
 })
 
-const SignUpButton = ({signUpText}) => {
+const SignUpButton = ({signUpText, onPress}) => {
   return (
-    <TouchableOpacity style={styles.signBtn}>
+    <TouchableOpacity style={styles.signBtn} onPress={onPress}>
       <Text style={styles.signText}>{signUpText}</Text>
     </TouchableOpacity>
   );

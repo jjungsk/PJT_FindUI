@@ -12,11 +12,12 @@ const styles = StyleSheet.create({
   }
 })
 
-const SignUpPage = () => {
+const SignUpPage = ({signUp}) => {
   return(
     <View style={styles.container}>
       <SignUp/>
       <SignUpButton 
+        onPress={signUp}
         signUpText={'회원가입'}
       />
     </View>

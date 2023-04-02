@@ -22,13 +22,15 @@ const styles = StyleSheet.create({
 })
 
 
-const LoginInput = ({placeholderItem}) => {
+const LoginInput = ({placeholderItem, value, onChangeText}) => {
   return (
     <View style={styles.inputView}>
       <TextInput
         style={styles.inputText}
         placeholder={placeholderItem}
         placeholderTextColor="#003f5c"
+        value={value}
+        onChangeText={onChangeText}
         >
       </TextInput>
     </View>

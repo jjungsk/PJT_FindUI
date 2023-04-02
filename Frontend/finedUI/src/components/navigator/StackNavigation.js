@@ -25,6 +25,7 @@ import LoginPage from '../screens/LoginPage';
 import PhonePage from '../screens/PhonePage';
 import SignUpPage from '../screens/SignUpPage';
 import InfoPage from '../screens/InfoPage';
+import SearchPage from '../screens/SearchPage';
 
 const Stack = createNativeStackNavigator();
 
@@ -45,6 +46,7 @@ const StackNavigation = () => {
         <Stack.Screen name="PhonePage" component={PhonePage} />
         <Stack.Screen name="SignUpPage" component={SignUpPage} />
         <Stack.Screen name="InfoPage" component={InfoPage} />
+        <Stack.Screen name="SearchPage" component={SearchPage} />
       </Stack.Navigator>
     </NavigationContainer>
   );

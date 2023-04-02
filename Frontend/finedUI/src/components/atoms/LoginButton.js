@@ -19,9 +19,9 @@ const styles = StyleSheet.create({
   }
 })
 
-const LoginButton = () => {
+const LoginButton = ({onPress}) => {
   return (
-    <TouchableOpacity style={styles.loginBtn}>
+    <TouchableOpacity style={styles.loginBtn} onPress={onPress}>
       <Text style={styles.loginText}>로그인</Text>
     </TouchableOpacity>
   );

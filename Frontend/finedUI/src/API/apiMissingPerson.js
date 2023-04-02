@@ -19,7 +19,7 @@
   by.정세권
 */
 
-import apiInstance from './instance.js';
+import apiInstance from './apiInstance.js';
 
 const api = apiInstance();
 
