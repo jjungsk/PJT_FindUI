@@ -4,7 +4,7 @@
 */
 
 // react
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
 // react-native
 import {
@@ -16,9 +16,6 @@ import {
   Image,
 } from 'react-native';
 
-// Naver Map Library
-import NaverMapView, {Marker} from 'react-native-nmap';
-
 // sizes
 import {
   fontPercentage,
@@ -29,23 +26,39 @@ import {
 // organisms
 import DetailContents from '../organisms/DetailContents';
 import LinkButtons from '../organisms/LinkButtons';
+import GoogleMap from '../organisms/GoogleMap';
 
-const DetailScreen = () => {
-  const [missingPerson, setMissingPerson] = useState({
-    name: '샘스미스',
-    birthday: new Date(1997, 2, 18),
-    address: '서울시 역삼동 멀티캠퍼스',
-    phone: '010-6725-5590',
-    lostday: '23. 01. 23. 금요일 13시',
-    location: '서울시 역삼역 11번 출구 앞',
-    description: '키가 크고 눈이 크며 어쩌구 저쩌구..',
-    image: null,
-  });
+// apis
+import {apiGetMissingPerson} from '../../API/apiMissingPerson';
+
+const DetailScreen = ({route}) => {
+  // STATE
+  // state - 실종자 정보
+  const [missingPerson, setMissingPerson] = useState({});
 
   const [position, setPosition] = useState({
     latitude: 37.564362,
     longitude: 126.977011,
   });
+
+  // FUNCTION
+  // useEffect
+  useEffect(() => {
+    // route로 넘어온 등록된 ID
+    const registId = route.params.registId;
+
+    const auto = async () => {
+      await apiGetMissingPerson(registId)
+        .then(({data}) => {
+          setMissingPerson(data.data);
+          console.log(data.data);
+        })
+        .catch(error => {
+          Alert.alert(error);
+        });
+    };
+    auto();
+  }, []);
 
   return (
     <SafeAreaView style={{flex: 1}}>
@@ -71,14 +84,10 @@ const DetailScreen = () => {
             <LinkButtons />
           </View>
           <View style={styles.mapContainer}>
-            <NaverMapView
-              style={{width: '100%', height: '100%'}}
-              center={{...position, zoom: 12}}>
-              <Marker
-                coordinate={position}
-                onClick={() => console.warn('onClick! position')}
-              />
-            </NaverMapView>
+            <GoogleMap
+              latitude={position.latitude}
+              longitude={position.longitude}
+            />
           </View>
         </View>
       </ScrollView>

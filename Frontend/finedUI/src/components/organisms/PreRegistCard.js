@@ -1,37 +1,25 @@
+// react
 import React from 'react';
+
+// react-native
 import {View, Text, Image, TouchableOpacity, StyleSheet} from 'react-native';
+
+// styles
 import {
   fontPercentage,
   heightPercentage,
   widthPercentage,
 } from '../../styles/ResponsiveSize';
 
+// icons
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const setTwoWord = word => {
-  return word.length == 1 ? '0' + word : word;
-};
-
-const dateFormat = date => {
-  let year = String(date.getFullYear());
-  let month = String(date.getMonth() + 1);
-  let day = String(date.getDate());
-  year = year.substring(2, 4);
-  month = setTwoWord(month);
-  day = setTwoWord(day);
-
-  return year + '.' + month + '.' + day;
-};
-
 const PreRegistCard = ({registUser, navigation}) => {
-  // registUser.birthday = dateFormat(registUser.birthday);
-  registUser.birthday = registUser.birthday.toString();
-
   return (
     <View style={styles.container}>
       <Image
         source={
-          registUser.image != null
+          registUser.frontImagePath != null
             ? null
             : require('../../assets/images/no_profile_image.png')
         }
@@ -41,7 +29,9 @@ const PreRegistCard = ({registUser, navigation}) => {
         <View style={styles.icons}>
           <TouchableOpacity
             onPress={() => {
-              navigation.navigate('ModifyScreen');
+              navigation.navigate('ModifyScreen', {
+                registId: registUser.registId,
+              });
             }}>
             <Icon
               name="square-edit-outline"
@@ -60,13 +50,13 @@ const PreRegistCard = ({registUser, navigation}) => {
             이름 : {registUser.name}
           </Text>
           <Text numberOfLines={1} style={styles.text}>
-            생년 월일 : {registUser.birthday}
+            생년 월일 : {registUser.birthDate}
           </Text>
           <Text numberOfLines={1} style={styles.text}>
             보호자 주소 : {registUser.address}
           </Text>
           <Text numberOfLines={1} style={styles.text}>
-            보호자 연락처 : {registUser.phone}
+            보호자 연락처 : {registUser.phonenumber}
           </Text>
         </View>
       </View>

@@ -17,8 +17,6 @@ import {
 } from '../../styles/ResponsiveSize';
 
 const DetailContents = ({missingPerson}) => {
-  missingPerson.birthday = missingPerson.birthday.toString();
-
   return (
     <View style={styles.table}>
       <View style={styles.row}>
@@ -46,20 +44,20 @@ const DetailContents = ({missingPerson}) => {
           </View>
         </View>
         <View style={styles.right}>
-          <Text style={styles.textContent}>{missingPerson.birthday}</Text>
+          <Text style={styles.textContent}>{missingPerson.birthDate}</Text>
         </View>
       </View>
       <View style={styles.row}>
         <View style={styles.left}>
           <View style={{width: widthPercentage(80)}}>
-            <Text style={styles.textTitle}>보호자 연락처</Text>
+            <Text style={styles.textTitle}>성별</Text>
           </View>
           <View>
             <Text style={styles.textTitle}>:</Text>
           </View>
         </View>
         <View style={styles.right}>
-          <Text style={styles.textContent}>{missingPerson.phone}</Text>
+          <Text style={styles.textContent}>{missingPerson.gender}</Text>
         </View>
       </View>
       <View style={styles.row}>
@@ -72,7 +70,7 @@ const DetailContents = ({missingPerson}) => {
           </View>
         </View>
         <View style={styles.right}>
-          <Text style={styles.textContent}>{missingPerson.lostday}</Text>
+          <Text style={styles.textContent}>{missingPerson.missingTime}</Text>
         </View>
       </View>
       <View style={styles.row}>
@@ -85,7 +83,9 @@ const DetailContents = ({missingPerson}) => {
           </View>
         </View>
         <View style={styles.right}>
-          <Text style={styles.textContent}>{missingPerson.location}</Text>
+          <Text style={styles.textContent}>
+            {missingPerson.missingLocation}
+          </Text>
         </View>
       </View>
       <View style={styles.row}>
@@ -99,7 +99,7 @@ const DetailContents = ({missingPerson}) => {
         </View>
         <View style={styles.right}>
           <Text style={styles.textContent} numberOfLines={5}>
-            {missingPerson.description}
+            {missingPerson.createDate}
           </Text>
         </View>
       </View>

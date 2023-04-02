@@ -19,16 +19,11 @@ import {
 } from '../../styles/ResponsiveSize';
 
 const MissingPersonCard = ({missingPerson, navigation}) => {
-  // error
-  //   const img =
-  //     missingPerson.image !== null
-  //       ? require(missingPerson.image)
-  //       : require('../../assets/images/no_profile_image.png');
   const img = require('../../assets/images/no_profile_image.png');
   return (
     <TouchableOpacity
       onPress={() => {
-        navigation.navigate('DetailScreen');
+        navigation.navigate('DetailScreen', {registId: missingPerson.registId});
       }}>
       <ImageBackground
         source={img}

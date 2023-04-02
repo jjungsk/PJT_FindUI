@@ -19,7 +19,7 @@
   by.정세권
 */
 
-import apiInstance from './instance.js';
+import apiInstance from './apiInstance.js';
 
 const api = apiInstance();
 
@@ -34,7 +34,7 @@ const apiPostMissingPerson = async missingPersonInfo => {
   }
 };
 
-// 실종자 정보 조회
+// 실종자 정보 조회 (detail)
 const apiGetMissingPerson = async registId => {
   try {
     const response = await api.get(`/api/regist/detail/${registId}`);
