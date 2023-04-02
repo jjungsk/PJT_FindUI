@@ -1,0 +1,5 @@
+sms:
+  serviceId: ncp:sms:kr:305211333417:finedandyou
+  accessKeyId: g8H2Yu3MiDXhuVuWnpvK
+  secretKeyId: I4uA2QTY0jSx1vN1Lkf2bmUcdFcsFw8R9rVDmFnu
+  expiration: 180000

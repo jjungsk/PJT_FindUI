@@ -1,10 +1,21 @@
+# DB
 spring:
+  profiles:
+    include:
+      - oauth2
+      - redis
+      - sms
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     # EC2 Server MySql url 주소 & port 설정 번호
     url: jdbc:mysql://j8a108.p.ssafy.io:3306/finedUI?allowPublicKeyRetrieval=true&useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
     username: ssafy
     password: ssafy
+    hikari:
+      idle-timeout: 10000
+      maximum-pool-size: 10
+      minimum-idle: 5
+      pool-name: fined&youHikariPool
   jpa:
     defer-datasource-initialization: true
     database: mysql
@@ -13,22 +24,81 @@ spring:
     generate-ddl: false
     properties:
       hibernate:
+        #        SQL 로그를 예쁘게 줄바꿈해서 보여줌
         format_sql: true
+    #
+    show-sql: false
+
+# log level 설정
+logging:
+  level:
+    org:
+      # security log level 설정
+      springframework:
+        security: DEBUG
+      # hibernate log level 설정
+      hibernate:
+        SQL: DEBUG
+      # 디버깅용 로그레벨 설정.
+      # AWS
+    com:
+      amazonaws:
+        util:
+          EC2MetadataUtils: ERROR
+#token 관련정보. 다른 yml파일로 빼는게 좋음.
+app:
+  auth:
+    token-secret: dyAeHubOOc8KaOfYB6XEQoEj1QzRlVgtjNL8PYs1A1tymZvvqkcEU7L1imkKHeDaDDFWdfwrSeDFetEEerErQe
+    #    #      2시간
+    access-token-expiration-time: 7200000
+    #    #      2주
+    refresh-token-expiration-time: 1209600000
+    #    7ms
+    #    access-token-expiration-time: 7
+    #    20초
+  #    refresh-token-expiration-time: 20000
+  #  허용하는 프론트 redirect주소. 현재 사용안하는기능.
+  oauth2:
+    authorized-redirect-uris:
+      - http://localhost:8080/auth/token
+
+  #  devtools의 기본옵션이 true.
+  #  devtools:
+  #    livereload:
+  #      enabled: true
   servlet:
     multipart:
       enabled: true
       location: /Users/SSAFY/
       max-request-size: 30MB
       max-file-size: 10MB
+
+# Image
 image:
+  # 이미지 저장 경로
   upload:
-    path: /Users/SSAFY/
+    path: /Users/SSAFY/Image/
+  # 이미지 불러오기 경로
+  resource:
+    path: file:///C:/Users/SSAFY/Image/
+  # 이미지 요청 url
+  request:
+    path: /api/regist/**
+  # 이미지 응답 url
+  response:
+    # localhost 이미지 url
+    path: localhost:8080/api/regist/
+    # aws ec2 이미지 url
+#    path: j8a108.p.ssafy.io/api/regist/
+
+# AWS S3
 cloud:
   aws:
     region:
       static: ap-northeast-2
     s3:
       bucket: finedui-ajh
+      base-path: chat_image/
     credentials:
       access-key: AKIA3WSTMVY35UWKIAXY
       secret-key: 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
