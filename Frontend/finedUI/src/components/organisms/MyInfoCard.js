@@ -8,17 +8,14 @@ import {
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const MyInfoCard = ({myInfo, navigation}) => {
+const MyInfoCard = ({myInfo, onPress, navigation}) => {
 
   return (
     <View style={styles.container}>
       <View style={styles.contents}>
         <View style={styles.icons}>
           <TouchableOpacity
-            onPress={() => {
-              // TODO: Modify 만들고 연결하기
-              // navigation.navigate('ModifyScreen');
-            }}>
+            onPress={onPress}>
             <Icon
               name="square-edit-outline"
               size={20}

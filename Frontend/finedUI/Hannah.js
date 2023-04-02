@@ -11,9 +11,9 @@ import MyPage from './src/components/screens/MyPage';
 import SearchPage from './src/components/screens/SearchPage';
 import SignUpAll from './src/components/screens/SignUpAll';
 import HomeScreen from './src/components/screens/HomeScreen';
-
+import InfoModal from './src/components/organisms/InfoModal';
 
 const Hannah = () => {
-  return (<MyPage/>);
+  return (<SearchPage/>);
 };
 export default Hannah;
