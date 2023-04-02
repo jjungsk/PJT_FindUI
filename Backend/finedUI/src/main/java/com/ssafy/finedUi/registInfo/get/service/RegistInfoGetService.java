@@ -14,10 +14,10 @@ public interface RegistInfoGetService {
     /*
     모든 실종 아동 조회(본인 등록 정보 포함)
      */
-//    List<RegistInfoGetResponse> findAll();
+    List<RegistInfoGetResponse> findAllByIsMissing();
 
     /*
     모든 실종 아동 조회(본인 등록 정보 제외)
      */
-    List<RegistInfoGetResponse> findAllByIsMissing(Long userId);
+//    List<RegistInfoGetResponse> findAllByIsMissing(Long userId);
 }

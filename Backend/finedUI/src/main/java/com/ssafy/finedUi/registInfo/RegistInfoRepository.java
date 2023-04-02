@@ -15,8 +15,8 @@ public interface RegistInfoRepository extends JpaRepository<RegistInfo, Long> {
     /*
     모든 실종 아동 조회(본인이 등록한 정보 제외)
      */
-    @Query(value = "SELECT r FROM RegistInfo r WHERE r.isMissing = True AND r.user.userId != :userId")
-    List<RegistInfoGetResponse> findAllByIsMissing(Long userId);
+//    @Query(value = "SELECT r FROM RegistInfo r WHERE r.isMissing = True AND r.user.userId != :userId")
+//    List<RegistInfoGetResponse> findAllByIsMissing(Long userId);
 
     /*
     모든 실종 아동 조회(본인이 등록한 정보 포함

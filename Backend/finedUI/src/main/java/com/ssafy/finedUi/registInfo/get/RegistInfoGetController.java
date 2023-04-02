@@ -40,18 +40,18 @@ public class RegistInfoGetController {
     /*
     모든 실종 아동 조회(본인 등록 정보 포함)
      */
-//    @GetMapping()
-//    public ResponseEntity<Object> getAll() {
-//        return ResponseHandler.generateResponse(true, "OK", HttpStatus.OK, registInfoGetService.findAllByIsMissing());
-//    }
+    @GetMapping()
+    public ResponseEntity<Object> getAll() {
+        return ResponseHandler.generateResponse(true, "OK", HttpStatus.OK, registInfoGetService.findAllByIsMissing());
+    }
 
     /*
     모든 실종 아동 조회(본인 등록 정보 제외)
      */
-    @GetMapping
-    public ResponseEntity<Object> getAll(@RequestParam Long userId) {
-        return ResponseHandler.generateResponse(true, "OK", HttpStatus.OK, registInfoGetService.findAllByIsMissing(userId));
-    }
+//    @GetMapping
+//    public ResponseEntity<Object> getAll(@RequestParam Long userId) {
+//        return ResponseHandler.generateResponse(true, "OK", HttpStatus.OK, registInfoGetService.findAllByIsMissing(userId));
+//    }
 
 //    @GetMapping("/dl")
 //    public void get(@RequestParam Long id) throws IOException {

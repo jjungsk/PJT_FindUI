@@ -36,16 +36,16 @@ public class RegistInfoGetServiceImpl implements RegistInfoGetService{
     /*
     모든 실종 아동 조회(본인 등록 정보 포함)
      */
-//    @Override
-//    public List<RegistInfoGetResponse> findAllByisMissing() {
-//        return registInfoRepository.findAllByIsMissing();
-//    }
+    @Override
+    public List<RegistInfoGetResponse> findAllByIsMissing() {
+        return registInfoRepository.findAllByIsMissing();
+    }
 
     /*
     모든 실종 아동 조회(본인 등록 정보 제외)
      */
-    @Override
-    public List<RegistInfoGetResponse> findAllByIsMissing(Long userId) {
-        return registInfoRepository.findAllByIsMissing(userId);
-    }
+//    @Override
+//    public List<RegistInfoGetResponse> findAllByIsMissing(Long userId) {
+//        return registInfoRepository.findAllByIsMissing(userId);
+//    }
 }
