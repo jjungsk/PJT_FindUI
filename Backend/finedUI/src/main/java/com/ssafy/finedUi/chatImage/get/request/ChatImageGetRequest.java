@@ -4,6 +4,6 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 public class ChatImageGetRequest {
-    private Long userId;
-    private Long registId;
+    // private Long userId;
+    // private Long registId;
 }
