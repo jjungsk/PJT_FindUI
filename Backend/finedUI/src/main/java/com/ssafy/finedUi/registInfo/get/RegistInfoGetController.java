@@ -17,8 +17,8 @@ public class RegistInfoGetController {
 
     private final RegistInfoGetService registInfoGetService;
 
-    @GetMapping("/{id}/detail")
-    public ResponseEntity<Object> getDetail(@PathVariable(name = "id") Long registId) {
+    @GetMapping("/detail/{registId}")
+    public ResponseEntity<Object> getDetail(@PathVariable(name = "registId") Long registId) {
         try {
             return ResponseHandler.generateResponse(true, "OK", HttpStatus.OK, registInfoGetService.findById(registId));
         } catch (Exception e) {
@@ -26,8 +26,8 @@ public class RegistInfoGetController {
         }
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<Object> getAll(@PathVariable(name = "id") Long userId) {
+    @GetMapping("/{userId}")
+    public ResponseEntity<Object> getAll(@PathVariable(name = "userId") Long userId) {
         return ResponseHandler.generateResponse(true, "OK", HttpStatus.OK, registInfoGetService.findAllByUser_UserId(userId));
     }
 }

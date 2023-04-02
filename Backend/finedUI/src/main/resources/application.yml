@@ -2,7 +2,7 @@
 spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/finedUI?allowPublicKeyRetrieval=true&useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
+    url: jdbc:mysql://j8a108.p.ssafy.io:3300/finedui?allowPublicKeyRetrieval=true&useSSL=false&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
     username: ssafy
     password: ssafy
   jpa:
@@ -20,7 +20,10 @@ spring:
       location: /Users/SSAFY/
       max-request-size: 30MB
       max-file-size: 10MB
-
+#  mvc:
+#    hiddenmethod:
+#      filter:
+#        enabled: true
 # Image
 image:
   upload:

@@ -5,21 +5,22 @@ import com.ssafy.finedUi.registInfo.create.service.RegistInfoCreateServiceImpl;
 import com.ssafy.finedUi.registInfo.delete.service.RegistInfoDeleteService;
 import com.ssafy.finedUi.registInfo.delete.service.RegistInfoDeleteServiceImpl;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+
+@Slf4j
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/regist")
 public class RegistInfoDeleteController {
     private final RegistInfoDeleteServiceImpl registInfoDeleteService;
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<Object> delete(@PathVariable(name = "id") Long id) {
+    @DeleteMapping
+    public ResponseEntity<Object> delete(@RequestParam(name = "registId") long id) {
         try {
             registInfoDeleteService.delete(id);
         } catch (Exception e) {
