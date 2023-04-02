@@ -2,6 +2,7 @@ package com.ssafy.finedUi.registInfo.get;
 
 import com.ssafy.finedUi.handler.ResponseHandler;
 import com.ssafy.finedUi.registInfo.get.service.RegistInfoGetService;
+import com.ssafy.finedUi.registInfo.get.service.RegistInfoGetServiceImpl;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,9 +21,9 @@ import java.net.URLConnection;
 @RequiredArgsConstructor
 public class RegistInfoGetController {
 
-    private final RegistInfoGetService registInfoGetService;
+    private final RegistInfoGetServiceImpl registInfoGetService;
 
-    @GetMapping("detail")
+    @GetMapping("/detail")
     public ResponseEntity<Object> getDetail(@RequestParam Long registId) {
         try {
             return ResponseHandler.generateResponse(true, "OK", HttpStatus.OK, registInfoGetService.findById(registId));
@@ -31,22 +32,39 @@ public class RegistInfoGetController {
         }
     }
 
-    @GetMapping
-    public ResponseEntity<Object> getAll(@RequestParam Long userId) {
+    @GetMapping("/user")
+    public ResponseEntity<Object> getAllByUser(@RequestParam Long userId) {
         return ResponseHandler.generateResponse(true, "OK", HttpStatus.OK, registInfoGetService.findAllByUser_UserId(userId));
     }
 
-    @GetMapping("/dl")
-    public void get(@RequestParam Long id) throws IOException {
-        URL url = new URL("https://127.0.0.1:8000/items/" + id.toString());
-        URLConnection connection = url.openConnection();
-        try (BufferedReader in = new BufferedReader(
-                new InputStreamReader(connection.getInputStream())))
-        {
-            String line;
-            while ((line = in.readLine()) != null) {
-                System.out.println(line);
-            }
-        }
+    /*
+    모든 실종 아동 조회(본인 등록 정보 포함)
+     */
+//    @GetMapping()
+//    public ResponseEntity<Object> getAll() {
+//        return ResponseHandler.generateResponse(true, "OK", HttpStatus.OK, registInfoGetService.findAllByIsMissing());
+//    }
+
+    /*
+    모든 실종 아동 조회(본인 등록 정보 제외)
+     */
+    @GetMapping
+    public ResponseEntity<Object> getAll(@RequestParam Long userId) {
+        return ResponseHandler.generateResponse(true, "OK", HttpStatus.OK, registInfoGetService.findAllByIsMissing(userId));
     }
+
+//    @GetMapping("/dl")
+//    public void get(@RequestParam Long id) throws IOException {
+//        URL url = new URL("https://127.0.0.1:8000/items/" + id.toString());
+//        URLConnection connection = url.openConnection();
+//        try (BufferedReader in = new BufferedReader(
+//                new InputStreamReader(connection.getInputStream())))
+//        {
+//            String line;
+//            while ((line = in.readLine()) != null) {
+//                System.out.println(line);
+//            }
+//        }
+//    }
+
 }
