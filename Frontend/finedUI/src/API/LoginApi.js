@@ -1,6 +1,6 @@
 import apiInstance from "./apiInstance";
 
-const api = apiInstance
+const api = apiInstance();
 
 export const login = async (email, password) => {
   try {

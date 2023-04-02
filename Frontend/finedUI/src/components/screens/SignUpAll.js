@@ -3,9 +3,15 @@ import React, {useState} from 'react';
 import PhonePage from './PhonePage';
 import InfoPage from './InfoPage';
 import SignUpPage from './SignUpPage';
+import { signup } from '../../API/AccountApi';
 
 const SignUpAll = () => {
   const [page, setPage] = useState(1)
+  
+  const signUp = async () => {
+    const response = await signup(name, address, email, password, phoneNumber)
+    console.log(response)
+  }
 
   if (page === 1) {
     return(
@@ -21,9 +27,7 @@ const SignUpAll = () => {
     )
   } else {
     return(
-      <SignUpPage nextPage={({page})=>{
-        setPage(page)
-      }}/>
+      <SignUpPage signUp={signUp}/>
     )
 
   }
