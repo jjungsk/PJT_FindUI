@@ -14,12 +14,8 @@ import {
   View,
   Text,
   Image,
+  TouchableOpacity,
 } from 'react-native';
-
-import MapView, {PROVIDER_GOOGLE} from 'react-native-maps';
-
-// icons
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 // sizes
 import {
@@ -28,12 +24,16 @@ import {
   widthPercentage,
 } from '../../styles/ResponsiveSize';
 
+// icons
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+
 // organisms
 import DetailContents from '../organisms/DetailContents';
-import GoogleMap from '../organisms/GoogleMap';
+import GoogleMapDetail from '../organisms/GoogleMapDetail';
+import GoogleMapNotTouch from '../organisms/GoogleMapNotTouch';
 import LinkButtons from '../organisms/LinkButtons';
 
-const DetailScreen = () => {
+const DetailScreen = ({navigation}) => {
   const [detailUser, setDetailUser] = useState({
     name: '샘스미스',
     birthday: new Date(1997, 2, 18),
@@ -73,10 +73,28 @@ const DetailScreen = () => {
           <View style={styles.linkContainer}>
             <LinkButtons />
           </View>
-          <View style={styles.mapContainer}>
-            <GoogleMap
-              latitude={position.latitude}
-              longitude={position.longitude}
+          <TouchableOpacity
+            style={styles.mapDetail}
+            onPress={() =>
+              navigation.navigate('MapDetail', {
+                lat: position.latitude,
+                lng: position.longitude,
+                mode: false,
+              })
+            }>
+            <View style={styles.mapDetailTitleContainer}>
+              <Text style={styles.mapDetailTitle}>실종위치</Text>
+              <Icon
+                name="chevron-right"
+                size={widthPercentage(20)}
+                color={'#667085'}
+              />
+            </View>
+          </TouchableOpacity>
+          <View style={styles.mapContainer} pointerEvents="none">
+            <GoogleMapNotTouch
+              lat={position.latitude}
+              lng={position.longitude}
             />
             <Image
               source={require('../../assets/images/marker_img.png')}
@@ -137,17 +155,36 @@ const styles = StyleSheet.create({
     marginBottom: heightPercentage(12),
     justifyContent: 'flex-end',
   },
+  mapDetail: {
+    width: '100%',
+  },
+  mapDetailTitleContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: widthPercentage(16),
+    marginVertical: heightPercentage(8),
+  },
+  mapDetailTitle: {
+    fontSize: fontPercentage(16),
+    fontWeight: '600',
+    color: '#000000',
+  },
   mapContainer: {
     width: widthPercentage(330),
-    height: heightPercentage(330),
-    paddingVertical: heightPercentage(24),
+    height: heightPercentage(230),
+    marginBottom: heightPercentage(12),
+    borderWidth: 1.5,
+    borderRadius: 20,
+    borderColor: '#D0D5DD',
+    overflow: 'hidden',
   },
   mapMarker: {
     width: widthPercentage(40),
     height: heightPercentage(40),
     resizeMode: 'contain',
     position: 'absolute',
-    top: '55%',
+    top: '40%',
     alignSelf: 'center',
   },
 });

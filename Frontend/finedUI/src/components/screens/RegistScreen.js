@@ -1,15 +1,14 @@
-import React, {useState} from 'react';
+import React, {useEffect, useCallback} from 'react';
 import {
   View,
   Text,
   Image,
-  Pressable,
   SafeAreaView,
   StyleSheet,
   ScrollView,
-  NativeModules,
   FlatList,
-  KeyboardAvoidingView,
+  TouchableOpacity,
+  Alert,
 } from 'react-native';
 import {
   fontPercentage,
@@ -17,14 +16,31 @@ import {
   widthPercentage,
 } from '../../styles/ResponsiveSize';
 
+import {useFocusEffect} from '@react-navigation/native';
+
 // icons
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+
+// recoil
+import {useRecoilValue, useRecoilState, useSetRecoilState} from 'recoil';
+import {
+  registBirth,
+  registGender,
+  registImageList,
+  registMissingDate,
+  registMode,
+  registName,
+  registPos,
+} from '../store_regist/registStore';
+
+// position
+import Geolocation from 'react-native-geolocation-service';
 
 import ImagePicker from 'react-native-image-crop-picker';
 import ImagePickModal from '../organisms/ImagePickModal';
 import RegistInputForm from '../organisms/RegistInputForm';
-
-var ImageCropPicker = NativeModules.ImageCropPicker;
+import GoogleMapNotTouch from '../organisms/GoogleMapNotTouch';
+import Divider from '../atoms/Divider';
 
 const modeDict = {
   0: '사전 등록',
@@ -32,26 +48,49 @@ const modeDict = {
   2: '이산가족 등록',
 };
 
-const EmptyImage = () => {
-  return (
-    <View style={styles.imageAddTextContainer}>
-      <Text style={styles.imageAddText}>사진을{'\n'}추가해주세요</Text>
-    </View>
-  );
-};
+const RegistScreen = ({mode = 0, navigation}) => {
+  const [imageList, setImageList] = useRecoilState(registImageList);
+  const [position, setPosition] = useRecoilState(registPos);
+  const setMode = useSetRecoilState(registMode);
 
-const ImageAdd = ({imagePick, size = 25}) => {
-  return (
-    <Pressable onPress={imagePick} style={styles.imageAddBtn}>
-      <Icon name="image-plus" color={'#ffffff'} size={size} />
-      <Text style={styles.addImageText}>사진 추가</Text>
-    </Pressable>
+  useFocusEffect(
+    useCallback(() => {
+      setMode(mode);
+      Geolocation.getCurrentPosition(
+        position => {
+          const {latitude, longitude} = position.coords;
+          setPosition({lat: latitude, lng: longitude});
+          console.log('position change');
+        },
+        error => {
+          console.log(error);
+        },
+        {enableHighAccuracy: true, timeout: 5000, maximumAge: 5000},
+      );
+      navigation.addListener('beforeRemove', e => {
+        e.preventDefault();
+        Alert.alert(
+          'Discard changes?',
+          'You have unsaved changes. Are you sure to discard them and leave the screen?',
+          [
+            {text: "Don't leave", style: 'cancel', onPress: () => {}},
+            {
+              text: 'Discard',
+              style: 'destruct',
+              // If the user confirmed, then we dispatch the action we blocked earlier
+              // This will continue the action that had triggered the removal of the screen
+              onPress: () => navigation.dispatch(e.data.action),
+            },
+          ],
+        );
+      });
+    }, []),
   );
-};
 
-const RegistScreen = ({mode = 0}) => {
-  const imageWidth = widthPercentage(150);
-  const [imageList, setImageList] = useState([]);
+  const removeImage = item => {
+    const newImageList = imageList.filter(element => element !== item);
+    setImageList(newImageList);
+  };
 
   const pickImage = async () => {
     try {
@@ -86,19 +125,85 @@ const RegistScreen = ({mode = 0}) => {
           <FlatList
             data={imageList}
             renderItem={({item}) => (
-              <View style={styles.imageContainer}>
-                <Image source={{uri: item.uri}} style={styles.imageSize} />
-              </View>
+              <>
+                <View style={styles.imageContainer}>
+                  <Image source={{uri: item.uri}} style={styles.imageSize} />
+                </View>
+                <TouchableOpacity
+                  activeOpacity={0.6}
+                  onPress={() => {
+                    removeImage(item);
+                  }}
+                  style={styles.closeBtn}>
+                  <Icon
+                    name="close-circle"
+                    size={25}
+                    style={styles.closeBtnIcon}
+                  />
+                </TouchableOpacity>
+              </>
             )}
-            ListEmptyComponent={EmptyImage}
+            ListFooterComponent={() => {
+              if (imageList.length < 3) {
+                return (
+                  <TouchableOpacity
+                    activeOpacity={0.6}
+                    onPress={pickImage}
+                    style={styles.addImageBtn}>
+                    <Icon name="image-plus" color={'#000000'} size={25} />
+                    <Text style={styles.addImageText}>
+                      {imageList.length} / 3
+                    </Text>
+                  </TouchableOpacity>
+                );
+              } else {
+                return null;
+              }
+            }}
             keyExtractor={item => item.uri}
             horizontal={true}
             showsHorizontalScrollIndicator={false}
           />
-          {imageList.length < 3 ? <ImageAdd imagePick={pickImage} /> : null}
         </View>
         <View style={styles.registForm}>
+          <Divider />
           <RegistInputForm />
+          {/* 맵 설정 */}
+          {mode !== 0 ? (
+            <TouchableOpacity
+              activeOpacity={0.6}
+              style={styles.selectPos}
+              onPress={() =>
+                navigation.navigate('MapDetail', {
+                  lat: position.lat,
+                  lng: position.lng,
+                  mode: true,
+                  getPos: coords => {
+                    setPosition(coords);
+                  },
+                })
+              }>
+              <View style={styles.selectPosInfoContainer}>
+                <Text style={styles.selectTitle}>실종 위치</Text>
+                <Text style={styles.selectPosInfo}>{position.lat}</Text>
+                <View style={styles.selectPosSubTitle}>
+                  <Text style={styles.selectPosInfo}>위치 선택</Text>
+                  <Icon
+                    name="chevron-right"
+                    size={widthPercentage(20)}
+                    color={'#667085'}
+                  />
+                </View>
+              </View>
+              <View style={styles.mapContainer} pointerEvents="none">
+                <GoogleMapNotTouch lat={position.lat} lng={position.lng} />
+                <Image
+                  source={require('../../assets/images/marker_img.png')}
+                  style={styles.mapMarker}
+                />
+              </View>
+            </TouchableOpacity>
+          ) : null}
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -128,36 +233,76 @@ const styles = StyleSheet.create({
   imageSize: {
     width: widthPercentage(100),
     height: heightPercentage(100),
+    borderRadius: 12,
   },
-  imageAddTextContainer: {
-    width: widthPercentage(150),
-    height: heightPercentage(150),
+  closeBtn: {
+    position: 'absolute',
+    top: heightPercentage(5),
+    right: widthPercentage(10),
+  },
+  closeBtnIcon: {
+    backgroundColor: '#ffffff',
+    color: '#000000',
+    borderRadius: 20,
+  },
+  addImageBtn: {
+    width: widthPercentage(100),
+    height: heightPercentage(100),
     justifyContent: 'center',
     alignItems: 'center',
     borderWidth: 1,
-    borderRadius: 20,
+    borderRadius: 12,
     backgroundColor: '#ffffff',
     elevation: 3,
-  },
-  imageAddText: {
-    fontSize: fontPercentage(20),
-    fontWeight: 'bold',
-    color: '#000000',
-  },
-  imageAddBtn: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexDirection: 'row',
-    backgroundColor: '#3ca6ef',
-    paddingHorizontal: widthPercentage(16),
-    paddingVertical: heightPercentage(8),
-    borderRadius: 20,
-    marginVertical: heightPercentage(16),
   },
   addImageText: {
     fontSize: fontPercentage(16),
     fontWeight: 'bold',
-    color: '#ffffff',
+    color: '#000000',
+  },
+  selectTitle: {
+    fontSize: fontPercentage(18),
+    fontWeight: '600',
+    color: '#000000',
+  },
+  selectPos: {
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  selectPosInfoContainer: {
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: widthPercentage(16),
+    marginVertical: heightPercentage(8),
+  },
+  selectPosSubTitle: {
+    flexDirection: 'row',
+    height: '100%',
+    alignItems: 'center',
+  },
+  selectPosInfo: {
+    fontSize: fontPercentage(16),
+    fontWeight: '700',
+    color: '#667085',
+  },
+  mapContainer: {
+    width: widthPercentage(330),
+    height: heightPercentage(230),
+    marginVertical: heightPercentage(8),
+    borderWidth: 1.5,
+    borderRadius: 20,
+    borderColor: '#D0D5DD',
+    overflow: 'hidden',
+  },
+  mapMarker: {
+    width: widthPercentage(40),
+    height: heightPercentage(40),
+    resizeMode: 'contain',
+    position: 'absolute',
+    top: '32%',
+    alignSelf: 'center',
   },
 });
 

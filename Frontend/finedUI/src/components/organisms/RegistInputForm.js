@@ -1,31 +1,37 @@
 import React, {useState} from 'react';
-import {
-  View,
-  Text,
-  StyleSheet,
-  Pressable,
-  TouchableOpacity,
-} from 'react-native';
+import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
 import {
   fontPercentage,
   heightPercentage,
   widthPercentage,
 } from '../../styles/ResponsiveSize';
 
-// icons
-import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+// recoil
+import {useRecoilState, useRecoilValue, useSetRecoilState} from 'recoil';
+import {
+  registName,
+  registBirth,
+  registMissingDate,
+  registNote,
+  registMode,
+} from '../store_regist/registStore';
 
 import {format} from 'date-fns';
 import ko from 'date-fns/esm/locale/ko/index.js';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
 import CustomInputField from '../atoms/CustomInputField';
 
-const RegistInputForm = ({mode = 0, setUser}) => {
-  const [userName, setUserName] = useState();
-  const [birthday, setBirthday] = useState();
-  const [missingDate, setMissingDate] = useState(new Date());
+import SelectGender from './SelectGender';
+import Divider from '../atoms/Divider';
+
+const RegistInputForm = () => {
+  const setUserName = useSetRecoilState(registName);
+  const setBirthday = useSetRecoilState(registBirth);
+  const setNote = useSetRecoilState(registNote);
+  const [missingDate, setMissingDate] = useRecoilState(registMissingDate);
   const [pickerMode, setPickerMode] = useState('date');
   const [visible, setVisible] = useState(false);
+  const mode = useRecoilValue(registMode);
 
   const onPressDate = () => {
     // 날짜 클릭 시
@@ -51,57 +57,65 @@ const RegistInputForm = ({mode = 0, setUser}) => {
   };
 
   return (
-    <View>
-      <CustomInputField label="이름" inputData={text => setUserName(text)} />
+    <View style={styles.mainContainer}>
       <CustomInputField
-        label="생년월일"
-        title="생년월일 6자리 입력해주세요"
+        placeholder="이름"
+        inputData={text => setUserName(text)}
+      />
+      <Divider />
+
+      <CustomInputField
+        placeholder="생년월일 8자리를 입력해주세요"
         inputData={text => setBirthday(text)}
+        maxLength={8}
+        keyboardType="number-pad"
       />
-      <View style={styles.selectDateContainer}>
-        <TouchableOpacity
-          activeOpacity={0.6}
-          onPress={onPressDate}
-          style={styles.selectDateBtn}>
-          <Text style={styles.selectBtnText}>
-            {format(new Date(missingDate), 'PPP', {locale: ko})}
-          </Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          activeOpacity={0.6}
-          onPress={onPressTime}
-          style={styles.selectDateBtn}>
-          <Text style={styles.selectBtnText}>
-            {format(new Date(missingDate), 'p aaa', {locale: ko})}
-          </Text>
-        </TouchableOpacity>
-      </View>
-      <View
-        style={{
-          marginHorizontal: widthPercentage(16),
-          paddingTop: heightPercentage(10),
-          borderBottomColor: 'rgba(0, 0, 0, .38)',
-          borderBottomWidth: 2,
-        }}
+      <Divider />
+
+      <CustomInputField
+        placeholder="특이사항 (50자이내)"
+        multiline={true}
+        maxLength={50}
+        inputData={text => setNote(text)}
       />
-      <DateTimePickerModal
-        isVisible={visible}
-        mode={pickerMode}
-        onConfirm={onConfirm}
-        onCancel={onCancel}
-        date={missingDate}
-      />
-      <TouchableOpacity activeOpacity={0.6} style={styles.selectLocate}>
-        <Text style={styles.selectLocateTitle}>실종 위치</Text>
-        <View style={styles.selectLocateInfoContainer}>
-          <Text style={styles.selectLocateInfo}>위치 선택</Text>
-          <Icon
-            name="chevron-right"
-            size={widthPercentage(20)}
-            color={'#667085'}
+      <Divider />
+
+      <SelectGender />
+      <Divider />
+
+      {/* 실종 날짜 선택 */}
+      {mode !== 0 ? (
+        <>
+          <View style={styles.selectDateContainer}>
+            <Text style={styles.selectTitle}>실종 날짜</Text>
+            <TouchableOpacity
+              activeOpacity={0.6}
+              onPress={onPressDate}
+              style={styles.selectDateBtn}>
+              <Text style={styles.selectBtnText}>
+                {format(new Date(missingDate), 'PPP', {locale: ko})}
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              activeOpacity={0.6}
+              onPress={onPressTime}
+              style={styles.selectDateBtn}>
+              <Text style={styles.selectBtnText}>
+                {format(new Date(missingDate), 'p aaa', {locale: ko})}
+              </Text>
+            </TouchableOpacity>
+          </View>
+          {/* 실종 날짜 선택 모달 */}
+          <DateTimePickerModal
+            isVisible={visible}
+            mode={pickerMode}
+            onConfirm={onConfirm}
+            onCancel={onCancel}
+            date={missingDate}
           />
-        </View>
-      </TouchableOpacity>
+          <Divider />
+        </>
+      ) : null}
     </View>
   );
 };
@@ -111,8 +125,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-evenly',
     alignItems: 'center',
-    paddingHorizontal: widthPercentage(16),
-    marginVertical: heightPercentage(4),
+    paddingHorizontal: widthPercentage(8),
+    marginVertical: heightPercentage(8),
   },
   selectDateBtn: {
     flexDirection: 'row',
@@ -128,27 +142,10 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     color: '#000000',
   },
-  selectLocate: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    paddingHorizontal: widthPercentage(16),
-    marginVertical: heightPercentage(8),
-  },
-  selectLocateTitle: {
-    fontSize: fontPercentage(20),
+  selectTitle: {
+    fontSize: fontPercentage(18),
     fontWeight: '600',
     color: '#000000',
-  },
-  selectLocateInfoContainer: {
-    flexDirection: 'row',
-    height: '100%',
-    alignItems: 'center',
-  },
-  selectLocateInfo: {
-    fontsize: fontPercentage(18),
-    fontWeight: '700',
-    color: '#667085',
   },
 });
 
