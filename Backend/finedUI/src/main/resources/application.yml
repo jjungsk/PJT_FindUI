@@ -8,7 +8,7 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     # EC2 Server MySql url 주소 & port 설정 번호
-    url: jdbc:mysql://j8a108.p.ssafy.io:3306/finedUI?allowPublicKeyRetrieval=true&useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
+    url: jdbc:mysql://j8a108.p.ssafy.io:3306/finedui?allowPublicKeyRetrieval=true&useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
     username: ssafy
     password: ssafy
     hikari:
@@ -60,7 +60,7 @@ app:
   #  허용하는 프론트 redirect주소. 현재 사용안하는기능.
   oauth2:
     authorized-redirect-uris:
-      - http://localhost:8080/auth/token
+      - http://j8a108.p.ssafy.io:8081/auth/token
 
   #  devtools의 기본옵션이 true.
   #  devtools:
@@ -104,10 +104,3 @@ cloud:
       secret-key: lw2yhXHC9IPWg+MZBJUZYjVq6BTqmnYP7gipo5RC
     stack:
       auto: false
-
-logging:
-  level:
-    com:
-      amazonaws:
-        util:
-          EC2MetadataUtils: ERROR
