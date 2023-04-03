@@ -10,19 +10,19 @@ export const sendVerifyCode = async (phoneNumber) => {
     return response
   } catch (error) {
     console.error(error);
-    return response
+    return error
   }
 };
 
 export const verifyPhoneNumber = async (phoneNumber, code) => {
   try {
-    const response = await api.post(`/api/user/phonecofirm`, {
+    const response = await api.post(`/api/user/phoneconfirm`, {
       phoneNumber,
       code,
     });
     return response
   } catch (error) {
     console.error(error);
-    return response
+    return error
   }
 };

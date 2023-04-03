@@ -8,7 +8,7 @@ import { nameState, addressState, emailState, phoneState, passwordState, pwConfi
 import { Alert } from 'react-native';
 
 const SignUpAll = () => {
-  const [page, setPage] = useState(2)
+  const [page, setPage] = useState(1)
   const name = useRecoilValue(nameState);
   const address = useRecoilValue(addressState);
   const email = useRecoilValue(emailState);
@@ -20,7 +20,6 @@ const SignUpAll = () => {
       Alert.alert("비밀번호를 다시 확인해주세요.")
       return ;
     }
-    console.log(name, address, email, password, phoneNumber)
     const response = await signup(name, address, email, password, phoneNumber)
     console.log(response)
   }
