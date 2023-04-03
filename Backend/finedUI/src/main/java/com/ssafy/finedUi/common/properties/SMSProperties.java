@@ -14,5 +14,6 @@ public class SMSProperties {
     String accessKeyId;
     String secretKeyId;
     int expiration;
+    String recipientPhoneNumber;
 
 }

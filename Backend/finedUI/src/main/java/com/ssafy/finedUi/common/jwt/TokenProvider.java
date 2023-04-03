@@ -108,7 +108,7 @@ public class TokenProvider {
         user.setUserId(Long.parseLong(claims.get(USER_ID).toString()));
         user.setName(claims.getSubject());
 
-        log.info("token에서 email 갖고오기 : " + user.getEmail());
+        log.info("token에서 id 갖고오기 : " + user.getUserId());
 //      여기가 좀 이상함. authorities..
         UserPrincipal userPrincipal = UserPrincipal.create(user, authorities);
         return new UsernamePasswordAuthenticationToken(userPrincipal, "", authorities);
