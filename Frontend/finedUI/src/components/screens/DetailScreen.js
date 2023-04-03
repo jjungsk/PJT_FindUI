@@ -35,10 +35,10 @@ import LinkButtons from '../organisms/LinkButtons';
 const DetailScreen = ({navigation}) => {
   const [detailUser, setDetailUser] = useState({
     name: '샘스미스',
-    birthday: new Date(1997, 2, 18),
+    birthday: 970218,
     address: '서울시 역삼동 멀티캠퍼스',
     phone: '010-6725-5590',
-    lostday: '23. 01. 23. 금요일 13시',
+    lostday: new Date(1999, 2, 20),
     location: '서울시 역삼역 11번 출구 앞',
     description: '키가 크고 눈이 크며 어쩌구 저쩌구..',
     image: null,

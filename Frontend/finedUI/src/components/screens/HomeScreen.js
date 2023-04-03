@@ -42,14 +42,14 @@ const HomeScreen = ({navigation}) => {
   const [registUsers, setRegistUser] = useState([
     {
       name: '샘스미스',
-      birthday: new Date(1997, 2, 18),
+      birthday: 970218,
       address: '서울시 역삼동 멀티캠퍼스',
       phone: '010-6725-5590',
       image: null,
     },
     {
       name: '정둘권',
-      birthday: new Date(1997, 2, 18),
+      birthday: 970218,
       address: '서울시 역삼동 멀티캠퍼스',
       phone: '010-6725-5590',
       image: null,

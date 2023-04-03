@@ -16,9 +16,10 @@ import {
   widthPercentage,
 } from '../../styles/ResponsiveSize';
 
-const DetailContents = ({detail}) => {
-  detail.birthday = detail.birthday.toString();
+import {format} from 'date-fns';
+import ko from 'date-fns/esm/locale/ko/index.js';
 
+const DetailContents = ({detail}) => {
   return (
     <View style={styles.table}>
       <View style={styles.row}>
@@ -72,7 +73,9 @@ const DetailContents = ({detail}) => {
           </View>
         </View>
         <View style={styles.right}>
-          <Text style={styles.textContent}>{detail.lostday}</Text>
+          <Text style={styles.textContent}>
+            {format(detail.lostday, 'PPP aaa', {locale: ko})}
+          </Text>
         </View>
       </View>
       <View style={styles.row}>
