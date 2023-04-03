@@ -8,25 +8,10 @@ import {
 
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const setTwoWord = word => {
-  return word.length == 1 ? '0' + word : word;
-};
-
-const dateFormat = date => {
-  let year = String(date.getFullYear());
-  let month = String(date.getMonth() + 1);
-  let day = String(date.getDate());
-  year = year.substring(2, 4);
-  month = setTwoWord(month);
-  day = setTwoWord(day);
-
-  return year + '.' + month + '.' + day;
-};
+import {format} from 'date-fns';
+import ko from 'date-fns/esm/locale/ko/index.js';
 
 const PreRegistCard = ({registUser, navigation}) => {
-  // registUser.birthday = dateFormat(registUser.birthday);
-  registUser.birthday = registUser.birthday.toString();
-
   return (
     <View style={styles.container}>
       <Image
