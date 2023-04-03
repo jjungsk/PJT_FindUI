@@ -21,7 +21,7 @@ public class UserDeleteController {
     @Autowired
     UserDeleteService userDeleteService;
 
-    @DeleteMapping("/api/withdrwal")
+    @DeleteMapping("/api/user/withdrwal")
     @ApiOperation(value = "회원탈퇴", notes = "access 토큰에 담긴 유저 id를 삭제.")
     ResponseEntity<?> userDelete() {
         UserPrincipal userPrincipal = SecurityUtils.getUserPricipal();
