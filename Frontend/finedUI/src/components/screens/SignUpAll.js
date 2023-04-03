@@ -14,7 +14,6 @@ const SignUpAll = () => {
   const email = useRecoilValue(emailState);
   const password = useRecoilValue(passwordState);
   const phoneNumber = useRecoilValue(phoneState);
-
   const signUp = async () => {
     console.log(name, address, email, password, phoneNumber)
     const response = await signup(name, address, email, password, phoneNumber)
@@ -23,27 +22,27 @@ const SignUpAll = () => {
 
   if (page === 1) {
     return(
-      <RecoilRoot key={'sign'}>
-        <PhonePage nextPage={({page})=>{
-          setPage(page)
-        }}/>
-      </RecoilRoot>
+      <PhonePage nextPage={({page})=>{
+        setPage(page)
+      }}/>
     )
   } else if (page === 2) {
     return(
-      <RecoilRoot key={'sign'}>
-        <InfoPage nextPage={({page})=>{
-          setPage(page)
-        }}/>
-      </RecoilRoot>
+      <InfoPage nextPage={({page})=>{
+        setPage(page)
+      }}/>
     )
   } else {
     return(
-      <RecoilRoot key={'sign'}>
-        <SignUpPage signUp={signUp}/>
-      </RecoilRoot>
+      <SignUpPage signUp={signUp}/>
     )
 
   }
 }
-export default SignUpAll
+export default function WrappedSignUpAll() {
+  return (
+    <RecoilRoot key={'sign'}>
+      <SignUpAll />
+    </RecoilRoot>
+  )
+}
