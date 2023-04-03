@@ -1,13 +1,13 @@
 // react
 import React, {useEffect} from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, Platform, PermissionsAndroid} from 'react-native';
+import Geolocation from 'react-native-geolocation-service';
 import {RecoilRoot, useRecoilValue} from 'recoil';
-import {Platform, PermissionsAndroid} from 'react-native';
 
+// stack
 import StackNavigation from './src/components/navigator/StackNavigation';
 
-import Geolocation from 'react-native-geolocation-service';
-
+// components
 import Loading from './src/components/atoms/Loading';
 import IsLoadingState from './src/store/atoms/IsLoadingState';
 

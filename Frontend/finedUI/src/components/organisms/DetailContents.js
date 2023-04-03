@@ -53,7 +53,7 @@ const DetailContents = ({detail}) => {
       <View style={styles.row}>
         <View style={styles.left}>
           <View style={{width: widthPercentage(80)}}>
-            <Text style={styles.textTitle}>보호자 연락처</Text>
+            <Text style={styles.textTitle}>성별</Text>
           </View>
           <View>
             <Text style={styles.textTitle}>:</Text>

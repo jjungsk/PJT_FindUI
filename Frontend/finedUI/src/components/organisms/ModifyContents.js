@@ -49,8 +49,8 @@ const ModifyContents = ({missingPerson, onChangeInfo}) => {
         <View style={styles.right}>
           <TextInput
             style={styles.textContent}
-            onChangeText={text => onChangeInfo('birthday', text)}
-            value={missingPerson.birthday}
+            onChangeText={text => onChangeInfo('birthDate', text)}
+            value={missingPerson.birthDate}
           />
         </View>
       </View>
@@ -68,7 +68,7 @@ const ModifyContents = ({missingPerson, onChangeInfo}) => {
             keyboardType={'number-pad'}
             style={styles.textContent}
             onChangeText={text => onChangeInfo('phone', text)}
-            value={missingPerson.phone}
+            value={missingPerson.user}
           />
         </View>
       </View>
@@ -84,8 +84,8 @@ const ModifyContents = ({missingPerson, onChangeInfo}) => {
         <View style={styles.right}>
           <TextInput
             style={styles.textContent}
-            onChangeText={text => onChangeInfo('lostday', text)}
-            value={missingPerson.lostday}
+            onChangeText={text => onChangeInfo('missingTime', text)}
+            value={missingPerson.missingTime}
           />
         </View>
       </View>
@@ -101,8 +101,8 @@ const ModifyContents = ({missingPerson, onChangeInfo}) => {
         <View style={styles.right}>
           <TextInput
             style={styles.textContent}
-            onChangeText={text => onChangeInfo('location', text)}
-            value={missingPerson.location}
+            onChangeText={text => onChangeInfo('missingLocation', text)}
+            value={missingPerson.missingLocation}
           />
         </View>
       </View>
