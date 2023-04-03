@@ -48,6 +48,7 @@ import ImagePickModal from '../organisms/ImagePickModal';
 import RegistInputForm from '../organisms/RegistInputForm';
 import GoogleMapNotTouch from '../organisms/GoogleMapNotTouch';
 import Divider from '../atoms/Divider';
+import apiGetAddress from '../../API/apiMap';
 
 const modeDict = {
   0: '사전 등록',
@@ -187,7 +188,11 @@ const RegistScreen = ({route, navigation}) => {
               onPress={() => navigation.navigate('MapDetail', {mode: mode})}>
               <View style={styles.selectPosInfoContainer}>
                 <Text style={styles.selectTitle}>실종 위치</Text>
-                <Text style={styles.selectPosInfo}>{position.lat}</Text>
+                <Text style={styles.selectPosInfo}>
+                  {pos
+                    ? console.log(apiGetAddress({lat: pos.lat, lng: pos.lng}))
+                    : null}
+                </Text>
                 <View style={styles.selectPosSubTitle}>
                   <Text style={styles.selectPosInfo}>위치 선택</Text>
                   <Icon
