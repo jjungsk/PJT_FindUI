@@ -24,4 +24,9 @@ public class RegistInfoGetServiceImpl implements RegistInfoGetService{
     public RegistInfoGetResponse findById(Long registId) {
         return new RegistInfoGetResponse(registInfoRepository.findById(registId).get());
     }
+
+    @Override
+    public List<RegistInfoGetResponse> findAllByMissingIdAndDistance(Boolean isMissing, Double X, Double Y) {
+        return null;
+    }
 }

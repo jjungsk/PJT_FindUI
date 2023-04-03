@@ -1,6 +1,5 @@
 package com.ssafy.finedUi.chatImage.delete.service;
 
-import com.amazonaws.services.s3.AmazonS3Client;
 import com.ssafy.finedUi.chatImage.ChatImageRepository;
 import com.ssafy.finedUi.chatImage.s3.delete.S3DeleteService;
 import com.ssafy.finedUi.db.entity.ChatImage;
@@ -19,7 +18,6 @@ public class ChatImageDeleteService {
     private String base_path;
     @Value("${cloud.aws.s3.bucket}")
     private String bucket;
-    private final AmazonS3Client amazonS3Client;
 
     private final UserRepository userRepository;
     private final RegistInfoRepository registInfoRepository;

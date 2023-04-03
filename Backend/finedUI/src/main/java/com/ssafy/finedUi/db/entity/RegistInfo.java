@@ -5,6 +5,7 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
@@ -50,14 +51,21 @@ public class RegistInfo {
     @Column(name = "missing_time")
     private Timestamp missingTime;      // 실종 시간
 
-    @Column(name = "missing_location")
-    private Point missingLocation;      // 실종 위치
+//    @Column(name = "missing_location")
+//    private Point missingLocation;      // 실종 위치
 
-    @Column(name = "create_date")
-    private Timestamp createDate;       // 생성 시간
+    @Column
+    private Double longitude;
+
+    @Column
+    private Double latitude;
 
     @Column(name = "is_missing")
     private Boolean isMissing;          // 실종 여부
+
+    @CreationTimestamp
+    @Column(name = "create_date")
+    private Timestamp createDate;       // 생성 시간
 
     @UpdateTimestamp
     @Column(name = "update_date")

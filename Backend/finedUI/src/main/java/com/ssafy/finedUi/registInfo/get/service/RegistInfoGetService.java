@@ -8,4 +8,6 @@ public interface RegistInfoGetService {
     List<RegistInfoGetResponse> findAllByUser_UserId(Long userId);
 
     RegistInfoGetResponse findById(Long registId);
+
+    List<RegistInfoGetResponse> findAllByMissingIdAndDistance(Boolean isMissing, Double X, Double Y);
 }

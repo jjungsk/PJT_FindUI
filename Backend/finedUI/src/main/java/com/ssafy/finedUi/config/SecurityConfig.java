@@ -70,9 +70,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin().disable()
                 .authorizeRequests()
 //                //일단 모든 url 인증필요없이 허용
-//                .antMatchers("/**").permitAll()
+                .antMatchers("/**").permitAll()
                 //login, oauth url만 모두 허용.
-                .antMatchers("/api/user/login", "/api/user/create", "/api/user/phoneconfirm", "/api/user/phoneauth", "/oauth2/**").permitAll() //authenticated 테스트 403 에러 반환 확인.
+//                .antMatchers("/api/user/login", "/api/user/create", "/api/user/phoneconfirm", "/api/user/phoneauth", "/oauth2/**").permitAll() //authenticated 테스트 403 에러 반환 확인.
                 .anyRequest().authenticated()
                 .and()
                 .exceptionHandling().authenticationEntryPoint(new RestAuthenticationEntryPoint())

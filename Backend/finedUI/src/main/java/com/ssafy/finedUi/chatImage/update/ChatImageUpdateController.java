@@ -1,7 +1,6 @@
 package com.ssafy.finedUi.chatImage.update;
 
 import com.ssafy.finedUi.chatImage.update.request.ChatImageUpdateRequest;
-import com.ssafy.finedUi.chatImage.update.response.ChatImageUpdateResponse;
 import com.ssafy.finedUi.chatImage.update.service.ChatImageUpdateService;
 import com.ssafy.finedUi.handler.ResponseHandler;
 import lombok.RequiredArgsConstructor;
