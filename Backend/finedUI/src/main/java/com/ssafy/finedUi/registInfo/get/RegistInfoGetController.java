@@ -44,7 +44,7 @@ public class RegistInfoGetController {
     isMissing : True(실종 등록), False(사전 등록)
      */
     @GetMapping("/isMissing")
-    public ResponseEntity<Object> getAllRegistrationByUser(@RequestParam Long userId, @RequestParam Boolean isMissing) {
+    public ResponseEntity<Object> getAllRegistrationByUser(@RequestParam Long userId, @RequestParam Long isMissing) {
         return ResponseHandler.generateResponse(true, "OK", HttpStatus.OK, registInfoGetService.findAllByUserIdAndIsMissing(userId, isMissing));
     }
 

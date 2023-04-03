@@ -24,8 +24,12 @@ public class RegistInfoGetServiceImpl implements RegistInfoGetService{
     }
 
     @Override
-    public List<RegistInfoGetResponse> findAllByUserIdAndIsMissing(Long userId, Boolean isMissing) {
-        return registInfoRepository.findAllByUserIdAndIsMissing(userId, isMissing);
+    public List<RegistInfoGetResponse> findAllByUserIdAndIsMissing(Long userId, Long isMissing) {
+        Boolean long2Bool = false;
+        if (isMissing == 1) {
+            long2Bool = true;
+        }
+        return registInfoRepository.findAllByUserIdAndIsMissing(userId, long2Bool);
     }
 
     @Override

@@ -11,7 +11,7 @@ public interface RegistInfoGetService {
 
     List<RegistInfoGetResponse> findAllByDistance(Double lnt, Double lat) throws Exception;
 
-    List<RegistInfoGetResponse> findAllByUserIdAndIsMissing(Long userId, Boolean isMissing);
+    List<RegistInfoGetResponse> findAllByUserIdAndIsMissing(Long userId, Long isMissing);
 
     /*
     모든 실종 아동 조회(본인 등록 정보 포함)
