@@ -24,11 +24,14 @@ public class UserLoginController {
     @ApiOperation(value = "로그인", notes = "아이디,비밀번호가 일치한다면 access, refresh token 반환. 일치하지 않으면 에러.")
     ResponseEntity<?> login(@RequestBody UserLoginRequest loginRequest) {
 
+        try {
+            Token token = userLoginService.login(loginRequest);
 
-        Token token = userLoginService.login(loginRequest);
-
-        return ResponseEntity.status(200).body(token);
-
+            return ResponseEntity.status(200).body(token);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ResponseEntity.status(400).body("잘못된 유저 정보입니다.");
+        }
     }
 
     @PostMapping("/token")
