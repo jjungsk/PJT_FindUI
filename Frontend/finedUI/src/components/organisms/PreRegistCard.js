@@ -14,6 +14,9 @@ import {
 // icons
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
+import {format} from 'date-fns';
+import ko from 'date-fns/esm/locale/ko/index.js';
+
 const PreRegistCard = ({registUser, navigation}) => {
   return (
     <View style={styles.container}>

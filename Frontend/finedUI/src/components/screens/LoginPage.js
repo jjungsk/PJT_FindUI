@@ -1,13 +1,17 @@
-import React from 'react';
-import { StyleSheet, Text, View, TouchableOpacity} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 
 import LoginButton from '../atoms/LoginButton';
 import LoginInput from '../atoms/LoginInput';
 import GoogleButton from '../atoms/GoogleButton';
 import KakaoButton from '../atoms/KakaoButton';
 import Logo from '../atoms/Logo';
-import {login, validateAccessToken}from '../../API/LoginApi';
-import { saveTokensToKeychain, getAccessTokenFromKeychain, deleteTokensFromKeychain } from '../../store/keychain/loginToken'
+import {login, validateAccessToken} from '../../API/LoginApi';
+import {
+  saveTokensToKeychain,
+  getAccessTokenFromKeychain,
+  deleteTokensFromKeychain,
+} from '../../store/keychain/loginToken';
 
 const styles = StyleSheet.create({
   container: {
@@ -16,26 +20,26 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  forgot:{
+  forgot: {
     // color:"white",
-    fontSize:11,
-    marginTop: 20
+    fontSize: 11,
+    marginTop: 20,
   },
-  signText:{
+  signText: {
     marginBottom: 20,
     fontSize: 18,
   },
   line: {
     borderWidth: 0.5,
-    borderColor: "#575757",
+    borderColor: '#575757',
     margin: 10,
     height: 1,
-    width:"80%",
-    marginBottom: 20
+    width: '80%',
+    marginBottom: 20,
   },
   font: {
-    fontWeight: "600"
-  }
+    fontWeight: '600',
+  },
 });
 
 const LoginPage = () => {
@@ -45,7 +49,7 @@ const LoginPage = () => {
   // 로그인 시도
   const handleLogin = async () => {
     // 서버에 로그인 요청을 보내고, Access Token과 Refresh Token을 받아온다.
-    const { accessToken, refreshToken, status } = await login(email, password);
+    const {accessToken, refreshToken, status} = await login(email, password);
     // TODO: response 반응이 200이면 로그인 되도록
     if (status == 200) {
       // Access Token과 Refresh Token을 Keychain에 저장한다.
@@ -74,11 +78,17 @@ const LoginPage = () => {
     tryAutoLogin();
   }, []);
 
-    return (
-      <View style={styles.container}>
+  return (
+    <View style={styles.container}>
       <Logo />
-      <LoginInput placeholderItem="이메일" value={email} onChangeText={setEmail}></LoginInput>
-      <LoginInput placeholderItem="비밀번호" value={password} onChangeText={setPassword}></LoginInput>
+      <LoginInput
+        placeholderItem="이메일"
+        value={email}
+        onChangeText={setEmail}></LoginInput>
+      <LoginInput
+        placeholderItem="비밀번호"
+        value={password}
+        onChangeText={setPassword}></LoginInput>
       <LoginButton onPress={handleLogin} />
       <TouchableOpacity style={styles.signText}>
         <Text style={styles.font}>회원가입</Text>
@@ -86,11 +96,11 @@ const LoginPage = () => {
       <TouchableOpacity style={styles.forgot}>
         <Text style={styles.font}>비밀번호 찾기</Text>
       </TouchableOpacity>
-      <View style={styles.line}/>
+      <View style={styles.line} />
       <GoogleButton />
       <KakaoButton />
-      </View>
-    );
-}
+    </View>
+  );
+};
 
-export default LoginPage
+export default LoginPage;

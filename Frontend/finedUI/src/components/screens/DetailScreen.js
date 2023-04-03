@@ -14,6 +14,7 @@ import {
   View,
   Text,
   Image,
+  TouchableOpacity,
 } from 'react-native';
 
 // sizes
@@ -23,18 +24,30 @@ import {
   widthPercentage,
 } from '../../styles/ResponsiveSize';
 
+// icons
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+
 // organisms
 import DetailContents from '../organisms/DetailContents';
+import GoogleMapNotTouch from '../organisms/GoogleMapNotTouch';
 import LinkButtons from '../organisms/LinkButtons';
-import GoogleMap from '../organisms/GoogleMap';
+// import GoogleMap from '../organisms/GoogleMap';
 
 // apis
 import {apiGetMissingPerson} from '../../API/apiMissingPerson';
 
-const DetailScreen = ({route}) => {
-  // STATE
-  // state - 실종자 정보
+const DetailScreen = ({navigation, route}) => {
   const [missingPerson, setMissingPerson] = useState({});
+  const [detailUser, setDetailUser] = useState({
+    name: '샘스미스',
+    birthday: 970218,
+    address: '서울시 역삼동 멀티캠퍼스',
+    phone: '010-6725-5590',
+    lostday: new Date(1999, 2, 20),
+    location: '서울시 역삼역 11번 출구 앞',
+    description: '키가 크고 눈이 크며 어쩌구 저쩌구..',
+    image: null,
+  });
 
   const [position, setPosition] = useState({
     latitude: 37.564362,
@@ -70,7 +83,7 @@ const DetailScreen = ({route}) => {
           <View style={styles.imageContainer}>
             <Image
               source={
-                missingPerson.image != null
+                detailUser.image != null
                   ? null
                   : require('../../assets/images/no_profile_image.png')
               }
@@ -78,15 +91,37 @@ const DetailScreen = ({route}) => {
             />
           </View>
           <View style={styles.contentContainer}>
-            <DetailContents missingPerson={missingPerson} />
+            <DetailContents detail={detailUser} />
           </View>
           <View style={styles.linkContainer}>
             <LinkButtons />
           </View>
-          <View style={styles.mapContainer}>
-            <GoogleMap
-              latitude={position.latitude}
-              longitude={position.longitude}
+          <TouchableOpacity
+            style={styles.mapDetail}
+            onPress={() =>
+              navigation.navigate('MapDetail', {
+                lat: position.latitude,
+                lng: position.longitude,
+                mode: false,
+              })
+            }>
+            <View style={styles.mapDetailTitleContainer}>
+              <Text style={styles.mapDetailTitle}>실종위치</Text>
+              <Icon
+                name="chevron-right"
+                size={widthPercentage(20)}
+                color={'#667085'}
+              />
+            </View>
+          </TouchableOpacity>
+          <View style={styles.mapContainer} pointerEvents="none">
+            <GoogleMapNotTouch
+              lat={position.latitude}
+              lng={position.longitude}
+            />
+            <Image
+              source={require('../../assets/images/marker_img.png')}
+              style={styles.mapMarker}
             />
           </View>
         </View>
@@ -143,10 +178,37 @@ const styles = StyleSheet.create({
     marginBottom: heightPercentage(12),
     justifyContent: 'flex-end',
   },
+  mapDetail: {
+    width: '100%',
+  },
+  mapDetailTitleContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: widthPercentage(16),
+    marginVertical: heightPercentage(8),
+  },
+  mapDetailTitle: {
+    fontSize: fontPercentage(16),
+    fontWeight: '600',
+    color: '#000000',
+  },
   mapContainer: {
     width: widthPercentage(330),
-    height: heightPercentage(330),
-    paddingVertical: heightPercentage(24),
+    height: heightPercentage(230),
+    marginBottom: heightPercentage(12),
+    borderWidth: 1.5,
+    borderRadius: 20,
+    borderColor: '#D0D5DD',
+    overflow: 'hidden',
+  },
+  mapMarker: {
+    width: widthPercentage(40),
+    height: heightPercentage(40),
+    resizeMode: 'contain',
+    position: 'absolute',
+    top: '40%',
+    alignSelf: 'center',
   },
 });
 

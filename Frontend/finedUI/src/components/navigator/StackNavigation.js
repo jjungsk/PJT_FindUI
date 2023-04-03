@@ -20,7 +20,8 @@ import TabNavigation from './BottomTabNavigation';
 import AlarmScreen from '../screens/AlarmScreen';
 import HomeScreen from '../screens/HomeScreen';
 import DetailScreen from '../screens/DetailScreen';
-import ModifyScreen from '../screens/ModifyScreen';
+import MapViewDetail from '../screens/MapViewDetail';
+// import ModifyScreen from '../screens/ModifyScreen';
 import LoginPage from '../screens/LoginPage';
 import PhonePage from '../screens/PhonePage';
 import SignUpPage from '../screens/SignUpPage';
@@ -32,7 +33,6 @@ const Stack = createNativeStackNavigator();
 const StackNavigation = () => {
   return (
     <NavigationContainer>
-      {/* <Stack.Navigator initialRouteName="LoginPage"> */}
       <Stack.Navigator initialRouteName="TabNavigation">
         <Stack.Screen
           name="TabNavigation"
@@ -42,7 +42,8 @@ const StackNavigation = () => {
         <Stack.Screen name="AlarmScreen" component={AlarmScreen} />
         <Stack.Screen name="HomeScreen" component={HomeScreen} />
         <Stack.Screen name="DetailScreen" component={DetailScreen} />
-        <Stack.Screen name="ModifyScreen" component={ModifyScreen} />
+        <Stack.Screen name="MapDetail" component={MapViewDetail} />
+        {/* <Stack.Screen name="ModifyScreen" component={ModifyScreen} /> */}
         <Stack.Screen name="LoginPage" component={LoginPage} />
         <Stack.Screen name="PhonePage" component={PhonePage} />
         <Stack.Screen name="SignUpPage" component={SignUpPage} />
