@@ -8,7 +8,8 @@ import KakaoButton from '../atoms/KakaoButton';
 import Logo from '../atoms/Logo';
 import {login, validateAccessToken} from '../../API/LoginApi';
 import {
-  saveTokensToKeychain,
+  saveAccessToKeychain,
+  saveRefreshToKeychain,
   getAccessTokenFromKeychain,
   deleteTokensFromKeychain,
 } from '../../store/keychain/loginToken';
@@ -66,9 +67,12 @@ const LoginPage = ({navigation}) => {
     if (status == 200) {
       console.log('로그인 성공', status)
       // Access Token과 Refresh Token을 Keychain에 저장한다.
-      await saveTokensToKeychain(accessToken, refreshToken);
+      await saveAccessToKeychain(accessToken);
+      await saveRefreshToKeychain(refreshToken);
       setIsLogin(true)
       navigation.navigate('TabNavigation')
+    } else {
+      Alert.alert('로그인 실패', '이메일이나 비밀번호가 틀렸습니다.')
     }
   };
 
