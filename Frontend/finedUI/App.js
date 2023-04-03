@@ -1,7 +1,7 @@
 // react
 import React, {useEffect} from 'react';
-import { View, StyleSheet } from 'react-native';
-import { RecoilRoot, useRecoilValue } from 'recoil';
+import {View, StyleSheet} from 'react-native';
+import {RecoilRoot, useRecoilValue} from 'recoil';
 import {Platform, PermissionsAndroid} from 'react-native';
 
 import StackNavigation from './src/components/navigator/StackNavigation';
@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-  }
+  },
 });
 
 const App = () => {
@@ -43,20 +43,20 @@ const App = () => {
   const isLoading = useRecoilValue(IsLoadingState);
 
   if (isLoading) {
-    return(
+    return (
       <View style={styles.container}>
         <Loading visible={isLoading} />
       </View>
-    )
+    );
   } else {
-    return (<Hannah/>)
+    return <StackNavigation />;
   }
 };
 
 export default function WrappedApp() {
   return (
     <RecoilRoot>
-      <App/>
+      <App />
     </RecoilRoot>
-  )
-};
+  );
+}
