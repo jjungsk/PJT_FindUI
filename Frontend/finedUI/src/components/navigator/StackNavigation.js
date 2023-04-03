@@ -23,32 +23,39 @@ import DetailScreen from '../screens/DetailScreen';
 import MapViewDetail from '../screens/MapViewDetail';
 // import ModifyScreen from '../screens/ModifyScreen';
 import LoginPage from '../screens/LoginPage';
-import PhonePage from '../screens/PhonePage';
-import SignUpPage from '../screens/SignUpPage';
-import InfoPage from '../screens/InfoPage';
 import SearchPage from '../screens/SearchPage';
+import { useRecoilValue } from 'recoil';
+import { isLoginState } from '../../store/atoms/userState';
+import WrappedSignUpAll from '../screens/SignUpAll'
 
 const Stack = createNativeStackNavigator();
 
 const StackNavigation = () => {
+  const isLogin = useRecoilValue(isLoginState)
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="TabNavigation">
-        <Stack.Screen
-          name="TabNavigation"
-          component={TabNavigation}
-          options={{headerShown: false}}
-        />
-        <Stack.Screen name="AlarmScreen" component={AlarmScreen} />
-        <Stack.Screen name="HomeScreen" component={HomeScreen} />
-        <Stack.Screen name="DetailScreen" component={DetailScreen} />
-        <Stack.Screen name="MapDetail" component={MapViewDetail} />
-        {/* <Stack.Screen name="ModifyScreen" component={ModifyScreen} /> */}
-        <Stack.Screen name="LoginPage" component={LoginPage} />
-        <Stack.Screen name="PhonePage" component={PhonePage} />
-        <Stack.Screen name="SignUpPage" component={SignUpPage} />
-        <Stack.Screen name="InfoPage" component={InfoPage} />
-        <Stack.Screen name="SearchPage" component={SearchPage} />
+      <Stack.Navigator initialRouteName={isLogin? "TapNavigation" : "LoginPage"}>
+        {isLogin ? (<>
+          <Stack.Screen
+            name="TabNavigation"
+            component={TabNavigation}
+            options={{headerShown: false}}
+          />
+          <Stack.Screen name="SearchPage" component={SearchPage} />
+          <Stack.Screen name="AlarmScreen" component={AlarmScreen} />
+          <Stack.Screen name="HomeScreen" component={HomeScreen} />
+          <Stack.Screen name="DetailScreen" component={DetailScreen} />
+          <Stack.Screen name="MapDetail" component={MapViewDetail} />
+          {/* <Stack.Screen name="ModifyScreen" component={ModifyScreen} /> */}
+        </> 
+        ) :
+        (
+          <>
+          <Stack.Screen name="LoginPage" component={LoginPage} />
+          <Stack.Screen name="SignUpAll" component={WrappedSignUpAll} />
+          </>
+        )}
+        
       </Stack.Navigator>
     </NavigationContainer>
   );

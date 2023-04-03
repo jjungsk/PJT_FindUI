@@ -11,13 +11,24 @@ export const signup = async (name, address, email, password, phoneNumber) => {
       password,
       phoneNumber
     });
-    return {
-      response
-    };
+    return response
   } catch (error) {
     console.error(error);
-    return {
-      response
-    };
+    return error
+  }
+};
+
+export const modifyInfo = async (name, address, email, phoneNumber) => {
+  try {
+    const response = await api.patch(`/api/user/mypage`, {
+      name,
+      address,
+      email,
+      phoneNumber
+    });
+    return response
+  } catch (error) {
+    console.error(error);
+    return error
   }
 };

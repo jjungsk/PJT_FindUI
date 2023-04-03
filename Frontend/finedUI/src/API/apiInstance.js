@@ -3,7 +3,7 @@ import {TEST_URL, MAIN_URL} from '@env';
 
 const apiInstance = () => {
   const instance = axios.create({
-    baseURL: 'http://10.0.2.2:8080',
+    baseURL: TEST_URL,
     headers: {
       'Content-type': 'application/json;charset=UTF-8',
     },

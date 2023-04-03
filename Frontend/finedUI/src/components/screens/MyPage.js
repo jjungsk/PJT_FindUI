@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { StyleSheet, View, Text, Modal,TouchableOpacity, Dimensions } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, Dimensions, Alert } from 'react-native';
 import MyPageModal from '../atoms/MyPageModal';
 import MyInfoCard from '../organisms/MyInfoCard';
 import PreRegistCard from '../organisms/PreRegistCard';
@@ -7,6 +7,8 @@ import {Carousel} from 'react-native-basic-carousel';
 import {widthPercentage} from '../../styles/ResponsiveSize';
 import PwModal from '../organisms/PwModal';
 import InfoModal from '../organisms/InfoModal';
+import { modifyInfo } from '../../API/AccountApi';
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -46,15 +48,14 @@ const MyPage = () => {
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [address, setAddress] = useState(''); // 주소
-  const [email, setEmail] = useState(''); // 이메일
-
   const myInfo = {
     name: '이한나',
     email: 'dlgkssk@ssafy.com',
     phone: '01022222222',
     address: '서울시 성북구 종암동'
   }
+  const [address, setAddress] = useState(myInfo.address); // 주소
+  const [phone, setPhone] = useState(myInfo.phone); // 이메일
 
   const [registUsers, setRegistUser] = useState([
     {
@@ -111,8 +112,14 @@ const MyPage = () => {
     // 실제 회원탈퇴 작업을 수행하는 코드
   };
 
-  const handleInfo = () => {
+  const handleInfo = async () => {
     // 정보 변경 코드
+    const response = await modifyInfo(myInfo.name, address, myInfo.email, phone)
+    console.log(response)
+    if (response.status === 200) {
+      Alert.alert('정보가 변경되었습니다.');
+      toggleInfoModal(false)
+    }
   };
 
   return(
@@ -147,7 +154,7 @@ const MyPage = () => {
         <PwModal visible={isPwVisible} value1={currentPassword} value2={newPassword} value3={confirmPassword} onPress1={handleChangePassword} onPress2={togglePwModal}
           setCurrentPassword={setCurrentPassword} setNewPassword={setNewPassword} setConfirmPassword={setConfirmPassword}
         />
-        <InfoModal visible={isInfoVisible} myInfo={myInfo} onPress1={handleInfo} onPress2={toggleInfoModal} setAddress={setAddress} setEmail={setEmail}/>
+        <InfoModal visible={isInfoVisible} myInfo={myInfo} address={address} phone={phone} onPress1={handleInfo} onPress2={toggleInfoModal} setAddress={setAddress} setPhone={setPhone}/>
       </View>
     </View>
     </View>

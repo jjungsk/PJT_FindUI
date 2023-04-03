@@ -4,14 +4,14 @@ const api = apiInstance();
 
 export const login = async (email, password) => {
   try {
-    const response = await api.post(`/login`, {
+    const response = await api.post(`/api/user/login`, {
       email,
       password,
     });
     return {
       accessToken: response.data.accessToken,
       refreshToken: response.data.refreshToken,
-      status: response.data.status
+      status: response.status
     };
   } catch (error) {
     console.error(error);
