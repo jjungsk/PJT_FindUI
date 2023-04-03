@@ -97,7 +97,7 @@ public class UserCreateServiceImpl implements UserCreateService {
         smsRequest.setType("SMS");
         smsRequest.setContentType("COMM");
         smsRequest.setCountryCode("82");
-        smsRequest.setFrom(recipientPhoneNumber);
+        smsRequest.setFrom(smsProperties.getRecipientPhoneNumber());
         smsRequest.setContent(message);
         List<SMSMessage> messages = new ArrayList<>();
         messages.add(new SMSMessage(recipientPhoneNumber));

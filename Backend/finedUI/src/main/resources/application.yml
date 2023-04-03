@@ -7,10 +7,10 @@ spring:
       - sms
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    # Local
-    #    url: jdbc:mysql://localhost:3306/finedUI?allowPublicKeyRetrieval=true&useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
-    # Dummy
-    url: jdbc:mysql://localhost:3306/finedui?allowPublicKeyRetrieval=true&useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
+    # server
+    url: jdbc:mysql://j8a108.p.ssafy.io:3300/finedui?allowPublicKeyRetrieval=true&useSSL=false&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+    # local
+    #    url: jdbc:mysql://localhost:3306/finedui?allowPublicKeyRetrieval=true&useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
     username: ssafy
     password: ssafy
     hikari:
@@ -47,6 +47,8 @@ logging:
       amazonaws:
         util:
           EC2MetadataUtils: ERROR
+  file:
+    path: logs
 #token 관련정보. 다른 yml파일로 빼는게 좋음.
 app:
   auth:
