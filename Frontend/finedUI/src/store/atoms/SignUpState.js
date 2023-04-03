@@ -26,3 +26,13 @@ export const passwordState = atom({
   key: `${signRoot}/passwordState`,
   default: '',
 });
+
+export const pwConfirmState = atom({
+  key: `${signRoot}/pwConfirmState`,
+  default: '',
+});
+
+export const phoneCheckState = atom({
+  key: `${signRoot}/phoneCheckState`,
+  default: false,
+});

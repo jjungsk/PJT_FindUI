@@ -16,12 +16,22 @@ const styles = StyleSheet.create({
     color:"white",
     fontSize: 18,
     fontWeight: "bold"
-  }
+  },
+  checkbutton:{
+    width:"80%",
+    backgroundColor:"#d3d3d3",
+    borderRadius:5,
+    alignItems:"center",
+    justifyContent:"center",
+    padding: 10,
+    marginTop: 25,
+    marginBottom: 13
+  },
 })
 
-const SignUpButton = ({signUpText, onPress}) => {
+const SignUpButton = ({signUpText, onPress, disabled}) => {
   return (
-    <TouchableOpacity style={styles.signBtn} onPress={onPress}>
+    <TouchableOpacity style={[styles.signBtn, disabled&&styles.checkbutton]} onPress={onPress} disabled={disabled}>
       <Text style={styles.signText}>{signUpText}</Text>
     </TouchableOpacity>
   );

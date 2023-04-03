@@ -2,7 +2,7 @@ import React from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity} from 'react-native';
 import {TextField } from 'rn-material-ui-textfield';
 import SignUpText from '../atoms/SignUpText';
-import { useRecoilState } from 'recoil'
+import { useRecoilState, useSetRecoilState } from 'recoil'
 import { nameState, addressState } from '../../store/atoms/SignUpState'
 
 
@@ -20,8 +20,8 @@ const styles = StyleSheet.create({
 })
 
 const InfoCheck = () => {
-  const [ name, setName ] = useRecoilState(nameState)
-  const [ address, setAddress ] = useRecoilState(addressState)
+  const setName = useSetRecoilState(nameState)
+  const setAddress= useSetRecoilState(addressState)
   return(
     <View style={styles.inputView}>
       <SignUpText text={'회원가입'}/>
