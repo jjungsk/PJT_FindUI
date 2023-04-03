@@ -1,5 +1,5 @@
 spring:
   redis:
-    host: localhost
+    host: j8a108.p.ssafy.io
     port: 6379
     password: ssueb2301256a
