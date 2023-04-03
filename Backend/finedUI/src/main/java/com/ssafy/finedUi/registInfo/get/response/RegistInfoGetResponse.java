@@ -27,6 +27,7 @@ public class RegistInfoGetResponse {
     private Boolean isMissing;          // 실종 여부
     private Timestamp updateDate;       // 수정 시간
     private User user;
+    private String description;         // 설명
 
     public RegistInfoGetResponse(RegistInfo registInfo) {
         this.registId = registInfo.getRegistId();
@@ -44,5 +45,6 @@ public class RegistInfoGetResponse {
         this.isMissing = registInfo.getIsMissing();
         this.updateDate = registInfo.getUpdateDate();
         this.user = registInfo.getUser();
+        this.description = registInfo.getDescription();
     }
 }

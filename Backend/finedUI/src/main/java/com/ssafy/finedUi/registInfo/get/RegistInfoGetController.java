@@ -23,6 +23,7 @@ public class RegistInfoGetController {
 
     private final RegistInfoGetServiceImpl registInfoGetService;
 
+    // 단일 조회
     @GetMapping("/detail")
     public ResponseEntity<Object> getDetail(@RequestParam Long registId) {
         try {
@@ -32,16 +33,34 @@ public class RegistInfoGetController {
         }
     }
 
+    // 사용자가 등록한 모든 실종 + 사전 등록 조회 - 마이 페이지
     @GetMapping("/user")
     public ResponseEntity<Object> getAllByUser(@RequestParam Long userId) {
         return ResponseHandler.generateResponse(true, "OK", HttpStatus.OK, registInfoGetService.findAllByUser_UserId(userId));
     }
 
     /*
-    모든 실종 아동 조회(본인 등록 정보 포함)
+    본인이 등록한 사전 등록 or 실종 등록 조회
+    isMissing : True(실종 등록), False(사전 등록)
+     */
+    @GetMapping("/isMissing")
+    public ResponseEntity<Object> getAllRegistrationByUser(@RequestParam Long userId, @RequestParam Boolean isMissing) {
+        return ResponseHandler.generateResponse(true, "OK", HttpStatus.OK, registInfoGetService.findAllByUserIdAndIsMissing(userId, isMissing));
+    }
+
+    /*
+    거리 기반 필터링
+     */
+    @GetMapping("/distance")
+    public ResponseEntity<Object> getAllMissingFilter(@RequestParam Double lnt, @RequestParam Double lat) throws Exception {
+        return ResponseHandler.generateResponse(true, "OK", HttpStatus.OK, registInfoGetService.findAllByDistance(lnt, lat));
+    }
+
+    /*
+    모든 실종 아동 조회(본인 등록 정보 포함) - 메인 페이지
      */
     @GetMapping()
-    public ResponseEntity<Object> getAll() {
+    public ResponseEntity<Object> getAllMissing() {
         return ResponseHandler.generateResponse(true, "OK", HttpStatus.OK, registInfoGetService.findAllByIsMissing());
     }
 
