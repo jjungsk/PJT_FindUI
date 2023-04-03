@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { View, TextInput, TouchableOpacity, Alert, Text, StyleSheet } from 'react-native';
-import axios from 'axios';
+import { useRecoilState } from 'recoil'
+import { phoneState } from '../../store/atoms/SignUpState'
+import { sendVerifyCode, verifyPhoneNumber } from '../../API/PhoneApi';
+import { phoneCheckState } from '../../store/atoms/SignUpState';
 
 const styles = StyleSheet.create({
   phoneView:{
@@ -35,24 +38,12 @@ const styles = StyleSheet.create({
 const phoneRegex = /^\d{10,11}$/;
 
 const PhoneVerify = () => {
-  const [phone, setPhone] = useState('');
+  const [phone, setPhone] = useRecoilState(phoneState);
   const [verifyCode, setVerifyCode] = useState('');
   const [verifyCodeSent, setVerifyCodeSent] = useState(false);
-  const [verifyCodeMail, setVerifyCodeMail] = useState(false);
+  const [verifyCodeMail, setVerifyCodeMail] = useRecoilState(phoneCheckState);
   const [remainingTime, setRemainingTime] = useState(0);
   const [selectedCarrier, setSelectedCarrier] = useState('');
-
-  const sendVerifyCode = async (phone) => {
-    // const response = await axios.post('https://example.com/api/sendVerifyCode', { phone });
-    const response = {data: true}
-    return response.data;
-  };
-
-  const verifyPhoneNumber = async (phone, verifyCode) => {
-    // const response = await axios.post('https://example.com/api/verifyPhoneNumber', { phone, verifyCode });
-    const response = {data: true}
-    return response.data;
-  };
 
   const phoneNumCheck = async () => {
     if (!phoneRegex.test(phone)) {
@@ -65,30 +56,28 @@ const PhoneVerify = () => {
     }
 
     const response = await sendVerifyCode(phone);
-    // if (response.success) {
-    //   Alert.alert('인증 코드가 전송되었습니다.');
-    //   setVerifyCodeSent(true); // 인증 코드 전송 완료 상태로 변경
-    //   setRemainingTime(300); // 5분 타이머 시작
-    // } else {
-    //   Alert.alert('인증 코드 전송에 실패했습니다.');
-    // }
-    setVerifyCodeSent(true);
-    setRemainingTime(300);
+    if (response.success) {
+      Alert.alert('인증 코드가 전송되었습니다.');
+      setVerifyCodeSent(true); // 인증 코드 전송 완료 상태로 변경
+      setRemainingTime(300); // 5분 타이머 시작
+    } else {
+      Alert.alert('인증 코드 전송에 실패했습니다.');
+    }
   };
 
   const verifySecretNumber = async () => {
-    setVerifyCodeMail(true)
-    // if (!phoneRegex.test(phone)) {
-    //   Alert.alert('인증번호를 올바르게 입력하세요.');
-    //   return;
-    // }
+    if (verifyCode.trim() === '') {
+      Alert.alert('인증번호를 올바르게 입력하세요.');
+      return;
+    }
 
-    // const response = await verifyPhoneNumber(phone, verifyCode);
-    // if (response.success) {
-    //   Alert.alert('전화번호 인증에 성공했습니다.');
-    // } else {
-    //   Alert.alert('전화번호 인증에 실패했습니다.');
-    // }
+    const response = await verifyPhoneNumber(phone, verifyCode);
+    if (response.success) {
+      setVerifyCodeMail(true)
+      Alert.alert('전화번호 인증에 성공했습니다.');
+    } else {
+      Alert.alert('전화번호 인증에 실패했습니다.');
+    }
   };
   useEffect(() => {
     let interval;

@@ -2,6 +2,8 @@ import React from 'react';
 import { StyleSheet, Text, View, ScrollView, TouchableOpacity} from 'react-native';
 import {TextField } from 'rn-material-ui-textfield';
 import SignUpText from '../atoms/SignUpText';
+import { useSetRecoilState } from 'recoil'
+import { emailState, passwordState, pwConfirmState } from '../../store/atoms/SignUpState'
 
 const styles = StyleSheet.create({
   inputView:{
@@ -17,6 +19,9 @@ const styles = StyleSheet.create({
 })
 
 const SignUp = () => {
+  const setEmail = useSetRecoilState(emailState)
+  const setPassword = useSetRecoilState(passwordState)
+  const setPasswordConfirm = useSetRecoilState(pwConfirmState)
   return(
     <View style={styles.inputView}>
       <SignUpText text={'회원가입'}/>
@@ -25,6 +30,7 @@ const SignUp = () => {
       inputContainerStyle={styles.inputContainer}
       autoCapitalize="none"
       label="이메일"
+      onChangeText={setEmail}
       />
       <TextField
       labelTextStyle={{padding: 3}}
@@ -32,6 +38,7 @@ const SignUp = () => {
       autoCapitalize="none"
       secureTextEntry={true}
       label="비밀번호"
+      onChangeText={setPassword}
       />
       <TextField
       labelTextStyle={{padding: 3}}
@@ -39,6 +46,7 @@ const SignUp = () => {
       secureTextEntry={true}
       autoCapitalize="none"
       label="비밀번호 확인"
+      onChangeText={setPasswordConfirm}
       />
     </View>
   )
