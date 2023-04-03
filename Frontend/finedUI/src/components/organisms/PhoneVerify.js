@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { View, TextInput, TouchableOpacity, Alert, Text, StyleSheet } from 'react-native';
-import axios from 'axios';
+import { useRecoilState } from 'recoil'
+import { phoneState } from '../../store/atoms/SignUpState'
+
 
 const styles = StyleSheet.create({
   phoneView:{
@@ -35,7 +37,7 @@ const styles = StyleSheet.create({
 const phoneRegex = /^\d{10,11}$/;
 
 const PhoneVerify = () => {
-  const [phone, setPhone] = useState('');
+  const [phone, setPhone] = useRecoilState(phoneState);
   const [verifyCode, setVerifyCode] = useState('');
   const [verifyCodeSent, setVerifyCodeSent] = useState(false);
   const [verifyCodeMail, setVerifyCodeMail] = useState(false);

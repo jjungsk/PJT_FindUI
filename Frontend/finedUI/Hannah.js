@@ -14,6 +14,6 @@ import HomeScreen from './src/components/screens/HomeScreen';
 import InfoModal from './src/components/organisms/InfoModal';
 
 const Hannah = () => {
-  return (<SearchPage/>);
+  return (<SignUpAll/>);
 };
 export default Hannah;
