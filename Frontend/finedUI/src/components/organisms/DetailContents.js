@@ -16,9 +16,10 @@ import {
   widthPercentage,
 } from '../../styles/ResponsiveSize';
 
-const DetailContents = ({missingPerson}) => {
-  missingPerson.birthday = missingPerson.birthday.toString();
+import {format} from 'date-fns';
+import ko from 'date-fns/esm/locale/ko/index.js';
 
+const DetailContents = ({detail}) => {
   return (
     <View style={styles.table}>
       <View style={styles.row}>
@@ -31,7 +32,7 @@ const DetailContents = ({missingPerson}) => {
           </View>
         </View>
         <View style={styles.right}>
-          <Text style={styles.textContent}>{missingPerson.name}</Text>
+          <Text style={styles.textContent}>{detail.name}</Text>
         </View>
       </View>
       <View style={styles.row}>
@@ -46,7 +47,7 @@ const DetailContents = ({missingPerson}) => {
           </View>
         </View>
         <View style={styles.right}>
-          <Text style={styles.textContent}>{missingPerson.birthday}</Text>
+          <Text style={styles.textContent}>{detail.birthday}</Text>
         </View>
       </View>
       <View style={styles.row}>
@@ -59,7 +60,7 @@ const DetailContents = ({missingPerson}) => {
           </View>
         </View>
         <View style={styles.right}>
-          <Text style={styles.textContent}>{missingPerson.phone}</Text>
+          <Text style={styles.textContent}>{detail.phone}</Text>
         </View>
       </View>
       <View style={styles.row}>
@@ -72,7 +73,9 @@ const DetailContents = ({missingPerson}) => {
           </View>
         </View>
         <View style={styles.right}>
-          <Text style={styles.textContent}>{missingPerson.lostday}</Text>
+          <Text style={styles.textContent}>
+            {format(detail.lostday, 'PPP aaa', {locale: ko})}
+          </Text>
         </View>
       </View>
       <View style={styles.row}>
@@ -85,7 +88,7 @@ const DetailContents = ({missingPerson}) => {
           </View>
         </View>
         <View style={styles.right}>
-          <Text style={styles.textContent}>{missingPerson.location}</Text>
+          <Text style={styles.textContent}>{detail.location}</Text>
         </View>
       </View>
       <View style={styles.row}>
@@ -99,7 +102,7 @@ const DetailContents = ({missingPerson}) => {
         </View>
         <View style={styles.right}>
           <Text style={styles.textContent} numberOfLines={5}>
-            {missingPerson.description}
+            {detail.description}
           </Text>
         </View>
       </View>

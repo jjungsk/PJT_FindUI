@@ -90,6 +90,11 @@ apply from: "../../node_modules/react-native/react.gradle"
 // ]
 apply from: "../../node_modules/react-native-vector-icons/fonts.gradle"
 
+// local.properties 가져오기
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+def googleMapApiKey = properties.getProperty('google_map_api_key')
+
 /**
  * Set this to true to create two separate APKs instead of one:
  *   - An APK that only works on ARM devices
@@ -148,6 +153,9 @@ android {
         versionName "1.0"
         buildConfigField "boolean", "IS_NEW_ARCHITECTURE_ENABLED", isNewArchitectureEnabled().toString()
 
+        // image-crop-picker
+        vectorDrawables.useSupportLibrary = true
+
         if (isNewArchitectureEnabled()) {
             // We configure the CMake build only if you decide to opt-in for the New Architecture.
             externalNativeBuild {
@@ -165,6 +173,9 @@ android {
                 }
             }
         }
+
+        // google_maps_api_key
+        manifestPlaceholders = [googleMapApiKey:googleMapApiKey]
     }
 
     if (isNewArchitectureEnabled()) {

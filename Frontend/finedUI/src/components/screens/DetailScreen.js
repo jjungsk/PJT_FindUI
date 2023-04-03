@@ -14,10 +14,8 @@ import {
   View,
   Text,
   Image,
+  TouchableOpacity,
 } from 'react-native';
-
-// Naver Map Library
-import NaverMapView, {Marker} from 'react-native-nmap';
 
 // sizes
 import {
@@ -26,17 +24,21 @@ import {
   widthPercentage,
 } from '../../styles/ResponsiveSize';
 
+// icons
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+
 // organisms
 import DetailContents from '../organisms/DetailContents';
+import GoogleMapNotTouch from '../organisms/GoogleMapNotTouch';
 import LinkButtons from '../organisms/LinkButtons';
 
-const DetailScreen = () => {
-  const [missingPerson, setMissingPerson] = useState({
+const DetailScreen = ({navigation}) => {
+  const [detailUser, setDetailUser] = useState({
     name: '샘스미스',
-    birthday: new Date(1997, 2, 18),
+    birthday: 970218,
     address: '서울시 역삼동 멀티캠퍼스',
     phone: '010-6725-5590',
-    lostday: '23. 01. 23. 금요일 13시',
+    lostday: new Date(1999, 2, 20),
     location: '서울시 역삼역 11번 출구 앞',
     description: '키가 크고 눈이 크며 어쩌구 저쩌구..',
     image: null,
@@ -57,7 +59,7 @@ const DetailScreen = () => {
           <View style={styles.imageContainer}>
             <Image
               source={
-                missingPerson.image != null
+                detailUser.image != null
                   ? null
                   : require('../../assets/images/no_profile_image.png')
               }
@@ -65,20 +67,38 @@ const DetailScreen = () => {
             />
           </View>
           <View style={styles.contentContainer}>
-            <DetailContents missingPerson={missingPerson} />
+            <DetailContents detail={detailUser} />
           </View>
           <View style={styles.linkContainer}>
             <LinkButtons />
           </View>
-          <View style={styles.mapContainer}>
-            <NaverMapView
-              style={{width: '100%', height: '100%'}}
-              center={{...position, zoom: 12}}>
-              <Marker
-                coordinate={position}
-                onClick={() => console.warn('onClick! position')}
+          <TouchableOpacity
+            style={styles.mapDetail}
+            onPress={() =>
+              navigation.navigate('MapDetail', {
+                lat: position.latitude,
+                lng: position.longitude,
+                mode: false,
+              })
+            }>
+            <View style={styles.mapDetailTitleContainer}>
+              <Text style={styles.mapDetailTitle}>실종위치</Text>
+              <Icon
+                name="chevron-right"
+                size={widthPercentage(20)}
+                color={'#667085'}
               />
-            </NaverMapView>
+            </View>
+          </TouchableOpacity>
+          <View style={styles.mapContainer} pointerEvents="none">
+            <GoogleMapNotTouch
+              lat={position.latitude}
+              lng={position.longitude}
+            />
+            <Image
+              source={require('../../assets/images/marker_img.png')}
+              style={styles.mapMarker}
+            />
           </View>
         </View>
       </ScrollView>
@@ -134,10 +154,37 @@ const styles = StyleSheet.create({
     marginBottom: heightPercentage(12),
     justifyContent: 'flex-end',
   },
+  mapDetail: {
+    width: '100%',
+  },
+  mapDetailTitleContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: widthPercentage(16),
+    marginVertical: heightPercentage(8),
+  },
+  mapDetailTitle: {
+    fontSize: fontPercentage(16),
+    fontWeight: '600',
+    color: '#000000',
+  },
   mapContainer: {
     width: widthPercentage(330),
-    height: heightPercentage(330),
-    paddingVertical: heightPercentage(24),
+    height: heightPercentage(230),
+    marginBottom: heightPercentage(12),
+    borderWidth: 1.5,
+    borderRadius: 20,
+    borderColor: '#D0D5DD',
+    overflow: 'hidden',
+  },
+  mapMarker: {
+    width: widthPercentage(40),
+    height: heightPercentage(40),
+    resizeMode: 'contain',
+    position: 'absolute',
+    top: '40%',
+    alignSelf: 'center',
   },
 });
 

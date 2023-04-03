@@ -4,7 +4,7 @@
 */
 
 // react
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
 // react-native
 import {
@@ -24,6 +24,13 @@ import {
   widthPercentage,
 } from '../../styles/ResponsiveSize';
 
+// recoil
+import {useRecoilState} from 'recoil';
+import {userPosition} from '../store_regist/homeStore';
+
+// position
+import Geolocation from 'react-native-geolocation-service';
+
 // components
 import {NoticeCard} from '../organisms/NoticeCard';
 import PreRegistCard from '../organisms/PreRegistCard';
@@ -31,17 +38,18 @@ import {Carousel} from 'react-native-basic-carousel';
 import {MissingPersonCard} from '../organisms/MissingPersonCard';
 
 const HomeScreen = ({navigation}) => {
+  const [position, setPosition] = useRecoilState(userPosition);
   const [registUsers, setRegistUser] = useState([
     {
       name: '샘스미스',
-      birthday: new Date(1997, 2, 18),
+      birthday: 970218,
       address: '서울시 역삼동 멀티캠퍼스',
       phone: '010-6725-5590',
       image: null,
     },
     {
       name: '정둘권',
-      birthday: new Date(1997, 2, 18),
+      birthday: 970218,
       address: '서울시 역삼동 멀티캠퍼스',
       phone: '010-6725-5590',
       image: null,
@@ -81,6 +89,19 @@ const HomeScreen = ({navigation}) => {
       image: null,
     },
   ]);
+
+  useEffect(() => {
+    Geolocation.getCurrentPosition(position => {
+      const {latitude, longitude} = position.coords;
+      setPosition(
+        {lat: latitude, lng: longitude},
+        error => {
+          console.log(error);
+        },
+        {enableHighAccuracy: true, timeout: 5000, maximumAge: 5000},
+      );
+    });
+  }, []);
 
   const width = Dimensions.get('window').width;
 
