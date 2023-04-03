@@ -26,68 +26,65 @@ import {heightPercentage, widthPercentage} from '../../styles/ResponsiveSize';
 // components - NavBar
 import HomeScreen from '../screens/HomeScreen';
 import RegistStackNavigation from './RegistStackNavigation';
-import {RecoilRoot} from 'recoil';
 
 const Tab = createBottomTabNavigator();
 
 const TabNavigation = ({navigation}) => {
   return (
-    <RecoilRoot>
-      <Tab.Navigator screenOptions={{tabBarHideOnKeyboard: true}}>
-        {/* homescreen */}
-        <Tab.Screen
-          name="Home"
-          component={HomeScreen}
-          options={{
-            title: 'Find & You',
-            tabBarLabel: '홈',
-            tabBarIcon: ({color, size}) => (
-              <Icon
-                name="home-variant-outline"
-                color={color}
-                size={widthPercentage(size)}
-              />
-            ),
-            headerRight: () => {
-              return (
-                <TouchableOpacity
-                  onPress={() => {
-                    navigation.navigate('AlarmScreen');
-                  }}>
-                  <Icon name="bell-outline" size={widthPercentage(24)} />
-                </TouchableOpacity>
-              );
-            },
-          }}
-        />
-        <Tab.Screen
-          name="Regist"
-          component={RegistStackNavigation}
-          options={{
-            title: 'Find & You',
-            tabBarLabel: '등록',
-            tabBarIcon: ({color, size}) => (
-              <Icon
-                name="image-plus"
-                color={color}
-                size={widthPercentage(size)}
-              />
-            ),
-            headerShown: false,
-            headerRight: () => {
-              return (
-                <TouchableOpacity
-                  onPress={() => {
-                    navigation.navigate('AlarmScreen');
-                  }}>
-                  <Icon name="bell-outline" size={widthPercentage(24)} />
-                </TouchableOpacity>
-              );
-            },
-          }}
-        />
-      </Tab.Navigator>
-    </RecoilRoot>
+    <Tab.Navigator screenOptions={{tabBarHideOnKeyboard: true}}>
+      {/* homescreen */}
+      <Tab.Screen
+        name="Home"
+        component={HomeScreen}
+        options={{
+          title: 'Find & You',
+          tabBarLabel: '홈',
+          tabBarIcon: ({color, size}) => (
+            <Icon
+              name="home-variant-outline"
+              color={color}
+              size={widthPercentage(size)}
+            />
+          ),
+          headerRight: () => {
+            return (
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate('AlarmScreen');
+                }}>
+                <Icon name="bell-outline" size={widthPercentage(24)} />
+              </TouchableOpacity>
+            );
+          },
+        }}
+      />
+      <Tab.Screen
+        name="Regist"
+        component={RegistStackNavigation}
+        options={{
+          title: 'Find & You',
+          tabBarLabel: '등록',
+          tabBarIcon: ({color, size}) => (
+            <Icon
+              name="image-plus"
+              color={color}
+              size={widthPercentage(size)}
+            />
+          ),
+          headerShown: false,
+          headerRight: () => {
+            return (
+              <TouchableOpacity
+                onPress={() => {
+                  navigation.navigate('AlarmScreen');
+                }}>
+                <Icon name="bell-outline" size={widthPercentage(24)} />
+              </TouchableOpacity>
+            );
+          },
+        }}
+      />
+    </Tab.Navigator>
   );
 };
 

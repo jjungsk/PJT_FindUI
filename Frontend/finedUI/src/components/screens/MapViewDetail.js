@@ -8,6 +8,9 @@ import {
 } from '../../styles/ResponsiveSize';
 
 import GoogleMapDetail from '../organisms/GoogleMapDetail';
+import {useRecoilState, useRecoilValue, useSetRecoilState} from 'recoil';
+import {userPosition} from '../store_regist/homeStore';
+import {registPos} from '../store_regist/registStore';
 
 const styles = StyleSheet.create({
   mainContainer: {
@@ -41,23 +44,17 @@ const styles = StyleSheet.create({
 });
 
 const MapViewDetail = ({navigation, route}) => {
-  const [pos, setPos] = useState({
-    lat: route.params.lat,
-    lng: route.params.lng,
-  });
+  let position = useRecoilValue(userPosition);
+  const [pos, setPos] = useRecoilState(registPos);
 
   const registMode = route.params.mode ? true : false;
-  console.log(pos);
+  if (!registMode) {
+    position = {lat: route.params.lat, lng: route.params.lng};
+  }
   return (
     <View style={styles.mainContainer}>
       <View style={styles.infoContainer}></View>
-      <GoogleMapDetail
-        pos={pos}
-        setMarker={!registMode}
-        getPosition={coords => {
-          registMode ? setPos(coords) : null;
-        }}
-      />
+      <GoogleMapDetail position={position} setMarker={!registMode} />
       {registMode ? (
         <>
           <Image
@@ -67,8 +64,10 @@ const MapViewDetail = ({navigation, route}) => {
           <TouchableOpacity
             style={styles.setPosBtn}
             onPress={() => {
-              route.params.getPos(pos);
-              navigation.goBack();
+              setPos(position);
+              if (pos !== null) {
+                navigation.goBack();
+              }
             }}>
             <Text style={styles.setPosBtnTitle}>선택 완료</Text>
           </TouchableOpacity>

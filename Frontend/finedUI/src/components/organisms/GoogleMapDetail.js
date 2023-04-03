@@ -16,18 +16,17 @@ import {widthPercentage, heightPercentage} from '../../styles/ResponsiveSize';
 // google map
 import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 
-// position
-import Geolocation from 'react-native-geolocation-service';
+// recoil
+import {useSetRecoilState} from 'recoil';
+import {registPos} from '../store_regist/registStore';
+import {userPosition} from '../store_regist/homeStore';
 
-const GoogleMapDetail = ({
-  pos,
-  zoom = 0.005,
-  setMarker = false,
-  getPosition = null,
-}) => {
+const GoogleMapDetail = ({position, zoom = 0.005, setMarker = false}) => {
   const {width, height} = Dimensions.get('window');
   const LATITUDE_DELTA = zoom;
   const LONGITUDE_DELTA = LATITUDE_DELTA * (width / height);
+
+  const setPosition = useSetRecoilState(userPosition);
 
   return (
     <MapView
@@ -36,17 +35,19 @@ const GoogleMapDetail = ({
       showsUserLocation={true}
       showsMyLocationButton={true}
       initialRegion={{
-        latitude: pos.lat,
-        longitude: pos.lng,
+        latitude: position.lat,
+        longitude: position.lng,
         latitudeDelta: LATITUDE_DELTA,
         longitudeDelta: LONGITUDE_DELTA,
       }}
       onRegionChangeComplete={region => {
         const {latitude, longitude} = region;
-        getPosition({lat: latitude, lng: longitude});
+        if (!setMarker) {
+          setPosition({lat: latitude, lng: longitude});
+        }
       }}>
       {setMarker ? (
-        <Marker coordinate={{latitude: pos.lat, longitude: pos.lng}}>
+        <Marker coordinate={{latitude: position.lat, longitude: position.lng}}>
           <Image
             source={require('../../assets/images/marker_img.png')}
             style={styles.mapMarker}

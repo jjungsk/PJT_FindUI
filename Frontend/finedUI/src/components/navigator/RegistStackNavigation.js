@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
   },
 });
 
-const RegistStackNavigation = () => {
+const RegistStackNavigation = ({navigation}) => {
   const name = useRecoilValue(registName);
   const birth = useRecoilValue(registBirth);
   const gender = useRecoilValue(registGender);
@@ -39,15 +39,6 @@ const RegistStackNavigation = () => {
   const pos = useRecoilValue(registPos);
   const note = useRecoilValue(registNote);
   const mode = useRecoilValue(registMode);
-
-  const resetImageList = useResetRecoilState(registImageList);
-  const resetName = useResetRecoilState(registName);
-  const resetBirth = useResetRecoilState(registBirth);
-  const resetGender = useResetRecoilState(registGender);
-  const resetMissingDate = useResetRecoilState(registMissingDate);
-  const resetPos = useResetRecoilState(registPos);
-  const resetNote = useResetRecoilState(registNote);
-  const resetMode = useResetRecoilState(registMode);
 
   return (
     <Stack.Navigator initialRouteName="registRoot">
@@ -67,14 +58,8 @@ const RegistStackNavigation = () => {
             return (
               <TouchableOpacity
                 onPress={() => {
-                  resetImageList();
-                  resetName();
-                  resetBirth();
-                  resetGender();
-                  resetMissingDate();
-                  resetPos();
-                  resetNote();
-                  resetMode();
+                  // 서버에 실종자 정보 등록
+                  navigation.reset({routes: [{name: 'Home'}]});
                 }}>
                 <Text style={styles.completeBtnTitle}>완료</Text>
               </TouchableOpacity>

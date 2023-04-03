@@ -1,5 +1,5 @@
 import React from 'react';
-import {SafeAreaView, StyleSheet, Pressable} from 'react-native';
+import {SafeAreaView, StyleSheet, TouchableOpacity} from 'react-native';
 import RegistSelectBtn from '../organisms/RegistSelect';
 
 const RegistSelectScreen = ({navigation}) => {
@@ -18,15 +18,19 @@ const RegistSelectScreen = ({navigation}) => {
   };
   return (
     <SafeAreaView style={styles.container}>
-      <Pressable onPress={() => navigation.navigate('registMain')}>
+      <TouchableOpacity
+        activeOpacity={0.6}
+        onPress={() => navigation.navigate('registMain', {mode: 0})}>
         <RegistSelectBtn selectItem={preRegistItem} />
-      </Pressable>
-      <Pressable>
+      </TouchableOpacity>
+      <TouchableOpacity
+        activeOpacity={0.6}
+        onPress={() => navigation.navigate('registMain', {mode: 1})}>
         <RegistSelectBtn selectItem={missingRegistItem} />
-      </Pressable>
-      <Pressable>
+      </TouchableOpacity>
+      <TouchableOpacity activeOpacity={0.6}>
         <RegistSelectBtn selectItem={familyRegistItem} />
-      </Pressable>
+      </TouchableOpacity>
     </SafeAreaView>
   );
 };

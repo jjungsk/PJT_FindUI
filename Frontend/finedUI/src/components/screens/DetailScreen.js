@@ -29,7 +29,6 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 // organisms
 import DetailContents from '../organisms/DetailContents';
-import GoogleMapDetail from '../organisms/GoogleMapDetail';
 import GoogleMapNotTouch from '../organisms/GoogleMapNotTouch';
 import LinkButtons from '../organisms/LinkButtons';
 

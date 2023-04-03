@@ -8,7 +8,7 @@ const GoogleMapNotTouch = ({lat = 0, lng = 0, zoom = 0.005}) => {
   const {width, height} = Dimensions.get('window');
   const LATITUDE_DELTA = zoom;
   const LONGITUDE_DELTA = LATITUDE_DELTA * (width / height);
-  //   console.log(width, height);
+  console.log(lat, lng);
 
   return (
     <MapView

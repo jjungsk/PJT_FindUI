@@ -27,7 +27,7 @@ const registMissingDate = atom({
 
 const registPos = atom({
   key: 'registPos',
-  default: {latitude: 0, longitude: 0},
+  default: null,
 });
 
 const registNote = atom({

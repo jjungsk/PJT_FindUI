@@ -22,7 +22,12 @@ import {useFocusEffect} from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 // recoil
-import {useRecoilValue, useRecoilState, useSetRecoilState} from 'recoil';
+import {
+  useResetRecoilState,
+  useRecoilState,
+  useSetRecoilState,
+  useRecoilValue,
+} from 'recoil';
 import {
   registBirth,
   registGender,
@@ -31,7 +36,9 @@ import {
   registMode,
   registName,
   registPos,
+  registNote,
 } from '../store_regist/registStore';
+import {userPosition} from '../store_regist/homeStore';
 
 // position
 import Geolocation from 'react-native-geolocation-service';
@@ -48,44 +55,48 @@ const modeDict = {
   2: '이산가족 등록',
 };
 
-const RegistScreen = ({mode = 0, navigation}) => {
+const RegistScreen = ({route, navigation}) => {
+  const mode = route.params.mode;
   const [imageList, setImageList] = useRecoilState(registImageList);
-  const [position, setPosition] = useRecoilState(registPos);
-  const setMode = useSetRecoilState(registMode);
+  const [position, setPosition] = useRecoilState(userPosition);
+  const pos = useRecoilValue(registPos);
 
-  useFocusEffect(
-    useCallback(() => {
-      setMode(mode);
-      Geolocation.getCurrentPosition(
-        position => {
-          const {latitude, longitude} = position.coords;
-          setPosition({lat: latitude, lng: longitude});
-          console.log('position change');
-        },
-        error => {
-          console.log(error);
-        },
-        {enableHighAccuracy: true, timeout: 5000, maximumAge: 5000},
-      );
-      navigation.addListener('beforeRemove', e => {
-        e.preventDefault();
-        Alert.alert(
-          'Discard changes?',
-          'You have unsaved changes. Are you sure to discard them and leave the screen?',
-          [
-            {text: "Don't leave", style: 'cancel', onPress: () => {}},
-            {
-              text: 'Discard',
-              style: 'destruct',
-              // If the user confirmed, then we dispatch the action we blocked earlier
-              // This will continue the action that had triggered the removal of the screen
-              onPress: () => navigation.dispatch(e.data.action),
-            },
-          ],
-        );
-      });
-    }, []),
-  );
+  const setMode = useSetRecoilState(registMode);
+  const resetImageList = useResetRecoilState(registImageList);
+  const resetName = useResetRecoilState(registName);
+  const resetBirth = useResetRecoilState(registBirth);
+  const resetGender = useResetRecoilState(registGender);
+  const resetMissingDate = useResetRecoilState(registMissingDate);
+  const resetPos = useResetRecoilState(registPos);
+  const resetNote = useResetRecoilState(registNote);
+  const resetMode = useResetRecoilState(registMode);
+
+  useEffect(() => {
+    setMode(mode);
+    Geolocation.getCurrentPosition(
+      position => {
+        const {latitude, longitude} = position.coords;
+        setPosition({lat: latitude, lng: longitude});
+        console.log('position change');
+      },
+      error => {
+        console.log(error);
+      },
+      {enableHighAccuracy: true, timeout: 5000, maximumAge: 5000},
+    );
+    navigation.addListener('beforeRemove', e => {
+      e.preventDefault();
+      resetImageList();
+      resetName();
+      resetBirth();
+      resetGender();
+      resetMissingDate();
+      resetPos();
+      resetNote();
+      resetMode();
+      navigation.dispatch(e.data.action);
+    });
+  }, []);
 
   const removeImage = item => {
     const newImageList = imageList.filter(element => element !== item);
@@ -173,16 +184,7 @@ const RegistScreen = ({mode = 0, navigation}) => {
             <TouchableOpacity
               activeOpacity={0.6}
               style={styles.selectPos}
-              onPress={() =>
-                navigation.navigate('MapDetail', {
-                  lat: position.lat,
-                  lng: position.lng,
-                  mode: true,
-                  getPos: coords => {
-                    setPosition(coords);
-                  },
-                })
-              }>
+              onPress={() => navigation.navigate('MapDetail', {mode: mode})}>
               <View style={styles.selectPosInfoContainer}>
                 <Text style={styles.selectTitle}>실종 위치</Text>
                 <Text style={styles.selectPosInfo}>{position.lat}</Text>

@@ -4,6 +4,7 @@ import {Platform, PermissionsAndroid} from 'react-native';
 import StackNavigation from './src/components/navigator/StackNavigation';
 
 import Geolocation from 'react-native-geolocation-service';
+import {RecoilRoot} from 'recoil';
 
 async function requestPermission() {
   try {
@@ -25,7 +26,11 @@ const App = () => {
   useEffect(() => {
     requestPermission();
   }, []);
-  return <StackNavigation />;
+  return (
+    <RecoilRoot>
+      <StackNavigation />
+    </RecoilRoot>
+  );
 };
 
 export default App;
