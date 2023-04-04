@@ -27,13 +27,14 @@ import SearchPage from '../screens/SearchPage';
 import { useRecoilValue } from 'recoil';
 import { isLoginState } from '../../store/atoms/userState';
 import WrappedSignUpAll from '../screens/SignUpAll'
+import { navigationRef } from './NavigationService';
 
 const Stack = createNativeStackNavigator();
 
 const StackNavigation = () => {
   const isLogin = useRecoilValue(isLoginState)
   return (
-    <NavigationContainer>
+    <NavigationContainer ref={navigationRef}>
       <Stack.Navigator initialRouteName={isLogin? "TapNavigation" : "LoginPage"}>
         {isLogin ? (<>
           <Stack.Screen
