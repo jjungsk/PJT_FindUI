@@ -54,7 +54,7 @@ export const checkAcess = async () => {
       }  
     });  
     if (response.status === 200 ) {
-      return 'access token 검사 완료'
+      return true
     }
     
     if (response.status === 451) {
