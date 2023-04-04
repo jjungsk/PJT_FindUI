@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
 import {heightPercentage, widthPercentage} from '../../styles/ResponsiveSize';
 import {apiGetChatRooms} from '../../API/apiChat';
@@ -76,6 +76,10 @@ const ChatRoom = ({sender, navigation}) => {
       setRoomName(data.roomName);
     });
   };
+  useEffect(() => {
+    roomList();
+    console.log('실행됨');
+  }, []);
   return (
     <TouchableOpacity onPress={() => navigation.navigate('Chat')}>
       <View style={styles.container}>
