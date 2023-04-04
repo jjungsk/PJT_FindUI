@@ -39,6 +39,7 @@ import {MissingPersonCard} from '../organisms/MissingPersonCard';
 
 // apis
 import {apiGetUserRegistMissingPersons} from '../../API/apiHome';
+import {apiGetAddress, apiGetLngLat} from '../../API/apiKakao';
 
 const HomeScreen = ({navigation}) => {
   const [position, setPosition] = useRecoilState(userPosition);
