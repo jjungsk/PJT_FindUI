@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import { StyleSheet, View, Text, Modal,TouchableOpacity, Dimensions } from 'react-native';
+import React, {useState, useEffect} from 'react';
+import { StyleSheet, View, Text, TouchableOpacity, Dimensions, Alert } from 'react-native';
 import MyPageModal from '../atoms/MyPageModal';
 import MyInfoCard from '../organisms/MyInfoCard';
 import PreRegistCard from '../organisms/PreRegistCard';
@@ -7,6 +7,11 @@ import {Carousel} from 'react-native-basic-carousel';
 import {widthPercentage} from '../../styles/ResponsiveSize';
 import PwModal from '../organisms/PwModal';
 import InfoModal from '../organisms/InfoModal';
+import { getUserInfo, modifyInfo, deleteUser } from '../../API/UserApi';
+import { useSetRecoilState } from 'recoil';
+import { isLoginState } from '../../store/atoms/userState';
+import { deleteTokensFromKeychain } from '../../store/keychain/loginToken';
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -46,16 +51,17 @@ const MyPage = () => {
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [address, setAddress] = useState(''); // 주소
-  const [email, setEmail] = useState(''); // 이메일
-
-  const myInfo = {
-    name: '이한나',
-    email: 'dlgkssk@ssafy.com',
-    phone: '01022222222',
-    address: '서울시 성북구 종암동'
-  }
-
+  const [myInfo, setMyInfo] = useState(
+    {
+      name: '이한나',
+      email: 'dlgkssk@ssafy.com',
+      phone: '01022222222',
+      address: '서울시 성북구 종암동'
+    }
+  ) 
+  const [address, setAddress] = useState(myInfo.address); // 주소
+  const [phoneNumber, setPhoneNumber] = useState(myInfo.phone); // 이메일
+  const setIsLogin = useSetRecoilState(isLoginState)
   const [registUsers, setRegistUser] = useState([
     {
       name: '샘스미스',
@@ -90,7 +96,7 @@ const MyPage = () => {
   };
 
   const handleChangePassword = () => {
-    //TODO: 비밀번호 유효성 확인 로직 작성하기!
+    //TODO: 비밀번호 변경 axios 작성하기!
     // 비밀번호 변경 로직
     if (newPassword === confirmPassword) {
       Alert.alert('비밀번호 변경 완료', '새로운 비밀번호가 저장되었습니다.');
@@ -105,15 +111,39 @@ const MyPage = () => {
 
   const handleLogout = () => {
     // 실제 로그아웃 작업을 수행하는 코드
+    setIsLogin(false);
+    deleteTokensFromKeychain();
   };
   
-  const handleWithdrawal = () => {
+  const handleWithdrawal = async () => {
     // 실제 회원탈퇴 작업을 수행하는 코드
+    const response = await deleteUser();
+    console.log(response)
+    Alert.alert('회원 탈퇴', '회원 탈퇴되었습니다.')
+    setIsLogin(false);
+    deleteTokensFromKeychain();
   };
 
-  const handleInfo = () => {
+  const handleInfo = async () => {
     // 정보 변경 코드
+    console.log(address, phoneNumber)
+    const response = await modifyInfo(address, phoneNumber)
+    console.log(response.data)
+    if (response.status === 200) {
+      Alert.alert('정보가 변경되었습니다.');
+      setMyInfo(response.data)
+      toggleInfoModal(false)
+    }
   };
+  useEffect(() => {
+    const getMyInfo = async () => {
+      const info = await getUserInfo()
+      setMyInfo(info)
+      setAddress(info.address)
+      setPhoneNumber(info.phoneNumber)
+    }
+    getMyInfo();
+    }, []);
 
   return(
     <View style={styles.container}>
@@ -147,7 +177,7 @@ const MyPage = () => {
         <PwModal visible={isPwVisible} value1={currentPassword} value2={newPassword} value3={confirmPassword} onPress1={handleChangePassword} onPress2={togglePwModal}
           setCurrentPassword={setCurrentPassword} setNewPassword={setNewPassword} setConfirmPassword={setConfirmPassword}
         />
-        <InfoModal visible={isInfoVisible} myInfo={myInfo} onPress1={handleInfo} onPress2={toggleInfoModal} setAddress={setAddress} setEmail={setEmail}/>
+        <InfoModal visible={isInfoVisible} myInfo={myInfo} address={address} phoneNumber={phoneNumber} onPress1={handleInfo} onPress2={toggleInfoModal} setAddress={setAddress} setPhoneNumber={setPhoneNumber}/>
       </View>
     </View>
     </View>

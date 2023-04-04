@@ -26,6 +26,7 @@ import {heightPercentage, widthPercentage} from '../../styles/ResponsiveSize';
 // components - NavBar
 import HomeScreen from '../screens/HomeScreen';
 import RegistStackNavigation from './RegistStackNavigation';
+import MyPage from '../screens/MyPage';
 
 const Tab = createBottomTabNavigator();
 
@@ -46,16 +47,6 @@ const TabNavigation = ({navigation}) => {
               size={widthPercentage(size)}
             />
           ),
-          headerRight: () => {
-            return (
-              <TouchableOpacity
-                onPress={() => {
-                  navigation.navigate('AlarmScreen');
-                }}>
-                <Icon name="bell-outline" size={widthPercentage(24)} />
-              </TouchableOpacity>
-            );
-          },
         }}
       />
       <Tab.Screen
@@ -72,16 +63,22 @@ const TabNavigation = ({navigation}) => {
             />
           ),
           headerShown: false,
-          headerRight: () => {
-            return (
-              <TouchableOpacity
-                onPress={() => {
-                  navigation.navigate('AlarmScreen');
-                }}>
-                <Icon name="bell-outline" size={widthPercentage(24)} />
-              </TouchableOpacity>
-            );
-          },
+        }}
+      />
+      <Tab.Screen 
+        name = 'MyPage'
+        component={MyPage}
+        options={{
+          title: 'Find & You',
+          tabBarLabel: '마이페이지',
+          tabBarIcon: ({color, size}) => (
+            <Icon
+              name="account-outline"
+              color={color}
+              size={widthPercentage(size)}
+            />
+          )
+          
         }}
       />
     </Tab.Navigator>

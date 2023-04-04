@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
 });
 
 
-const InfoModal = ({ visible, myInfo, onPress1, onPress2, setAddress, setEmail }) => {
+const InfoModal = ({ visible, address, phoneNumber, myInfo, onPress1, onPress2, setAddress, setPhoneNumber }) => {
   return (
     <Modal visible={visible} animationType="slide">
       <View style={styles.modalContainer}>
@@ -62,21 +62,21 @@ const InfoModal = ({ visible, myInfo, onPress1, onPress2, setAddress, setEmail }
         />
         <TextInput
           style={styles.input}
-          value={myInfo.address}
+          value={address}
           placeholder="주소"
-          onChangeText={(text) => setAddress(text)}
+          onChangeText={setAddress}
         />
         <TextInput
           style={styles.input}
           value={myInfo.email}
           placeholder="이메일"
-          onChangeText={(text) => setEmail(text)}
+          editable={false}
         />
         <TextInput
           style={styles.input}
-          value={myInfo.phone}
+          value={phoneNumber}
           placeholder="전화번호"
-          editable={false}
+          onChangeText={setPhoneNumber}
         />
         <View style={styles.buttonContainer}>
           <TouchableOpacity style={styles.button} onPress={onPress1}>
