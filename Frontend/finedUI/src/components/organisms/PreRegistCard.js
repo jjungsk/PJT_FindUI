@@ -1,38 +1,47 @@
+// react
 import React from 'react';
-import {View, Text, Image, Dimensions, StyleSheet} from 'react-native';
+
+// react-native
+import {View, Text, Image, TouchableOpacity, StyleSheet} from 'react-native';
+
+// styles
+import {
+  fontPercentage,
+  heightPercentage,
+  widthPercentage,
+} from '../../styles/ResponsiveSize';
+
+// icons
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const setTwoWord = word => {
-  return word.length == 1 ? '0' + word : word;
-};
+import {format} from 'date-fns';
+import ko from 'date-fns/esm/locale/ko/index.js';
 
-const dateFormat = date => {
-  let year = String(date.getFullYear());
-  let month = String(date.getMonth() + 1);
-  let day = String(date.getDate());
-  year = year.substring(2, 4);
-  month = setTwoWord(month);
-  day = setTwoWord(day);
-
-  return year + '.' + month + '.' + day;
-};
-
-const PreRegistCard = ({registUser}) => {
-  registUser.birthday = dateFormat(registUser.birthday);
-
+const PreRegistCard = ({registUser, navigation}) => {
   return (
     <View style={styles.container}>
       <Image
-        source={require('../../assets/images/no_profile_image.png')}
+        source={
+          registUser.frontImagePath != null
+            ? null
+            : require('../../assets/images/no_profile_image.png')
+        }
         style={styles.image}
       />
       <View style={styles.contents}>
         <View style={styles.icons}>
-          <Icon
-            name="square-edit-outline"
-            size={20}
-            style={{width: 20, height: 20}}
-          />
+          <TouchableOpacity
+            onPress={() => {
+              navigation.navigate('ModifyScreen', {
+                registId: registUser.registId,
+              });
+            }}>
+            <Icon
+              name="square-edit-outline"
+              size={20}
+              style={{width: 20, height: 20}}
+            />
+          </TouchableOpacity>
           <Icon
             name="share-outline"
             size={20}
@@ -44,13 +53,13 @@ const PreRegistCard = ({registUser}) => {
             이름 : {registUser.name}
           </Text>
           <Text numberOfLines={1} style={styles.text}>
-            생년 월일 : {registUser.birthday}
+            생년 월일 : {registUser.birthDate}
           </Text>
           <Text numberOfLines={1} style={styles.text}>
             보호자 주소 : {registUser.address}
           </Text>
           <Text numberOfLines={1} style={styles.text}>
-            보호자 연락처 : {registUser.phone}
+            보호자 연락처 : {registUser.phonenumber}
           </Text>
         </View>
       </View>
@@ -63,15 +72,21 @@ const styles = StyleSheet.create({
     width: '100%',
     // height: '30%',
     borderRadius: 20,
-    padding: 12,
+    padding: widthPercentage(12),
     borderStyle: 'solid',
     borderWidth: 1,
     flexDirection: 'row',
+    backgroundColor: '#ffffff',
   },
-  image: {flex: 1, width: 110, height: 132, borderRadius: 20},
+  image: {
+    flex: 1,
+    width: widthPercentage(110),
+    height: heightPercentage(132),
+    borderRadius: 20,
+  },
   contents: {
     flex: 2,
-    height: 132,
+    height: heightPercentage(132),
     alignContent: 'space-between',
   },
   icons: {
@@ -81,18 +96,18 @@ const styles = StyleSheet.create({
   },
   info: {
     width: '100%',
-    height: 112,
+    height: heightPercentage(112),
     flexDirection: 'column',
     alignItems: 'flex-start',
     justifyContent: 'space-between',
-    paddingBottom: 13,
+    paddingBottom: heightPercentage(13),
   },
   text: {
-    fontSize: 16,
+    fontSize: fontPercentage(16),
     fontWeight: '600',
     color: 'black',
-    height: 20,
-    paddingLeft: 12,
+    height: heightPercentage(20),
+    paddingLeft: widthPercentage(12),
   },
 });
 

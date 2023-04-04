@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
 import {heightPercentage, widthPercentage} from '../../styles/ResponsiveSize';
+import {apiGetChatRooms} from '../../API/apiChat';
 
 const styles = StyleSheet.create({
   profile: {
@@ -63,6 +64,18 @@ const styles = StyleSheet.create({
 });
 
 const ChatRoom = ({sender, navigation}) => {
+  const [lastMsg, setLastMsg] = useState('');
+  const [roomName, setRoomName] = useState('');
+
+  const userId = 1;
+  const roomList = async () => {
+    await apiGetChatRooms(userId).then(({data}) => {
+      // TODO 마지막 메시지 저장하게 바꿔야됨
+      // setLastMsg(data.last);
+      setLastMsg(data.roomName);
+      setRoomName(data.roomName);
+    });
+  };
   return (
     <TouchableOpacity onPress={() => navigation.navigate('Chat')}>
       <View style={styles.container}>
@@ -70,8 +83,8 @@ const ChatRoom = ({sender, navigation}) => {
           <Image style={styles.profileContent} />
         </View>
         <View style={styles.content}>
-          <Text style={styles.sender}>{sender}</Text>
-          <Text>지금 어디 신가요?</Text>
+          <Text style={styles.sender}>{`실종자 ${roomName}의 방`}</Text>
+          <Text>{lastMsg}</Text>
         </View>
         <View style={styles.info}>
           <View style={styles.infoUp}>
