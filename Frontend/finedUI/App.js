@@ -1,5 +1,5 @@
 // react
-import React, {useEffect, useTransition} from 'react';
+import React, {useEffect} from 'react';
 import {View, StyleSheet, Platform, PermissionsAndroid} from 'react-native';
 import Geolocation from 'react-native-geolocation-service';
 import {RecoilRoot, useRecoilState, useRecoilValue, useSetRecoilState} from 'recoil';
@@ -37,16 +37,11 @@ const styles = StyleSheet.create({
   },
 });
 
-function delay(ms = 1000) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
 const App = () => {
   useEffect(() => {
     requestPermission();
   }, []);
 
-  const [ispending, setTransition] = useTransition()
   const isLoading = useRecoilValue(isLoadingState)
   const setIsLoading = useSetRecoilState(isLoadingState)
   const setIsLogin = useSetRecoilState(isLoginState);
@@ -54,9 +49,7 @@ const App = () => {
   useEffect(() => {
     const checkLogin = async () => {
       const response = await checkAcess();
-      setTransition(()=>{
-        setIsLoading(false)
-      })
+      setIsLoading(false)
       if (response === true) {
         console.log('동작')
         setIsLogin(true)
