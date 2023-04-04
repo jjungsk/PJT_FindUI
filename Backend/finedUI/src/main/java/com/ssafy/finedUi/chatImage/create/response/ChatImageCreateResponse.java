@@ -10,6 +10,7 @@ public class ChatImageCreateResponse {
     private Long userId;
     private Long registId;
     private String imagePath;
+//    벡터결과반환
 
     public ChatImageCreateResponse(ChatImage chatImage) {
         this.userId = chatImage.getChatImageId().getUser().getUserId();

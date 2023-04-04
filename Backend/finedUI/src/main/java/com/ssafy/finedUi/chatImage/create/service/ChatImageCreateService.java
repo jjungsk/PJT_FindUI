@@ -4,6 +4,7 @@ import com.ssafy.finedUi.chatImage.ChatImageRepository;
 import com.ssafy.finedUi.chatImage.create.request.ChatImageCreateRequest;
 import com.ssafy.finedUi.chatImage.create.response.ChatImageCreateResponse;
 import com.ssafy.finedUi.chatImage.s3.save.S3SaveService;
+import com.ssafy.finedUi.db.entity.ChatImage;
 import com.ssafy.finedUi.db.entity.ChatImageId;
 import com.ssafy.finedUi.registInfo.RegistInfoRepository;
 import com.ssafy.finedUi.user.UserRepository;
@@ -30,6 +31,15 @@ public class ChatImageCreateService {
         chatImageId.setRegistInfo(registInfoRepository.findById(chatImageCreateRequest.getRegistId()).get()); // 실종자 request dto에 설정
         chatImageId.setUser(userRepository.findById(chatImageCreateRequest.getUserId()).get()); // 보호자 request dto에 설정
         chatImageCreateRequest.setChatImageid(chatImageId);
-        return new ChatImageCreateResponse(chatImageRepository.save(chatImageCreateRequest.toEntity()));               // request dto를 entity로 변환
+
+        ChatImage chatImage = chatImageRepository.save(chatImageCreateRequest.toEntity());
+
+        searchVector(chatImageCreateRequest);
+
+        return new ChatImageCreateResponse(chatImage);               // request dto를 entity로 변환
+    }
+
+    public void searchVector(ChatImageCreateRequest chatImageCreateRequest) {
+
     }
 }

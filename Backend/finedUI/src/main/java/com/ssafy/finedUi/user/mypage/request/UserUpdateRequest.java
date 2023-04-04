@@ -6,7 +6,7 @@ import io.swagger.annotations.ApiModelProperty;
 public class UserUpdateRequest {
 
     @ApiModelProperty(value = "주소")
-    public String addreess;
+    public String address;
     @ApiModelProperty(value = "휴대폰번호")
     public String phoneNumber;
     @ApiModelProperty(value = "name")
