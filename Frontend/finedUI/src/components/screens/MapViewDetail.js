@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
 
 import {
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
 
 const MapViewDetail = ({navigation, route}) => {
   let position = useRecoilValue(userPosition);
-  const [pos, setPos] = useRecoilState(registPos);
+  const setPos = useSetRecoilState(registPos);
 
   const registMode = route.params.mode ? true : false;
   if (!registMode) {
@@ -65,9 +65,7 @@ const MapViewDetail = ({navigation, route}) => {
             style={styles.setPosBtn}
             onPress={() => {
               setPos(position);
-              if (pos !== null) {
-                navigation.goBack();
-              }
+              navigation.goBack();
             }}>
             <Text style={styles.setPosBtnTitle}>선택 완료</Text>
           </TouchableOpacity>

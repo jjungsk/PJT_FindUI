@@ -37,6 +37,7 @@ import {
   registName,
   registPos,
   registNote,
+  registAddress,
 } from '../store_regist/registStore';
 import {userPosition} from '../store_regist/homeStore';
 
@@ -48,7 +49,7 @@ import ImagePickModal from '../organisms/ImagePickModal';
 import RegistInputForm from '../organisms/RegistInputForm';
 import GoogleMapNotTouch from '../organisms/GoogleMapNotTouch';
 import Divider from '../atoms/Divider';
-import apiGetAddress from '../../API/apiMap';
+import {apiGetAddress} from '../../API/apiKakao';
 
 const modeDict = {
   0: '사전 등록',
@@ -60,6 +61,7 @@ const RegistScreen = ({route, navigation}) => {
   const mode = route.params.mode;
   const [imageList, setImageList] = useRecoilState(registImageList);
   const [position, setPosition] = useRecoilState(userPosition);
+  const [address, setAddress] = useRecoilState(registAddress);
   const pos = useRecoilValue(registPos);
 
   const setMode = useSetRecoilState(registMode);
@@ -97,6 +99,11 @@ const RegistScreen = ({route, navigation}) => {
       resetMode();
       navigation.dispatch(e.data.action);
     });
+
+    if (pos) {
+      res = apiGetAddress({lat: pos.lat, lng: pos.lng});
+      setAddress(res);
+    }
   }, []);
 
   const removeImage = item => {
@@ -118,7 +125,6 @@ const RegistScreen = ({route, navigation}) => {
           height: image.height,
           mime: image.mime,
         };
-        console.log(image);
         setImageList([...imageList, selectImage]);
       });
     } catch (e) {
@@ -188,11 +194,7 @@ const RegistScreen = ({route, navigation}) => {
               onPress={() => navigation.navigate('MapDetail', {mode: mode})}>
               <View style={styles.selectPosInfoContainer}>
                 <Text style={styles.selectTitle}>실종 위치</Text>
-                <Text style={styles.selectPosInfo}>
-                  {pos
-                    ? console.log(apiGetAddress({lat: pos.lat, lng: pos.lng}))
-                    : null}
-                </Text>
+                <Text style={styles.selectPosInfo}>{pos ? address : null}</Text>
                 <View style={styles.selectPosSubTitle}>
                   <Text style={styles.selectPosInfo}>위치 선택</Text>
                   <Icon

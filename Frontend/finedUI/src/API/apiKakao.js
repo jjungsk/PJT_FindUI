@@ -8,18 +8,18 @@ import {
 
 // (1) 경도 위도 값을 통해 주소 값 리턴
 // x와 y좌표를 통해 address_name, region_1depth_name, region_2depth_name, region_3depth_name 리턴
-const apiGetAddress = async (x, y) => {
+const apiGetAddress = async ({lng, lat}) => {
   try {
     await axios
-      .get(`${KAKAO_URL_GET_ADDRESS}?x=${x}&y=${y}`, {
+      .get(`${KAKAO_URL_GET_ADDRESS}?x=${lng}&y=${lat}`, {
         headers: {
           Authorization: `KakaoAK ${KAKAO_MAP_API_KEY}`,
         },
       })
       .then(response => {
         const result = response.data.documents[0];
-        console.log('주소 리턴', result);
-        return result;
+        console.log('주소 리턴', result['address_name']);
+        return result['address_name'];
       });
   } catch (error) {
     console.log(error);

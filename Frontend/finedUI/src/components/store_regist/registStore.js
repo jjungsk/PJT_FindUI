@@ -40,6 +40,11 @@ const registMode = atom({
   default: 0,
 });
 
+const registAddress = atom({
+  key: 'registAddress',
+  default: null,
+});
+
 export {
   registImageList,
   registName,
@@ -49,4 +54,5 @@ export {
   registPos,
   registNote,
   registMode,
+  registAddress,
 };
