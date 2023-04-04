@@ -37,6 +37,9 @@ import PreRegistCard from '../organisms/PreRegistCard';
 import {Carousel} from 'react-native-basic-carousel';
 import {MissingPersonCard} from '../organisms/MissingPersonCard';
 
+// apis
+import {apiGetUserRegistMissingPersons} from '../../API/apiHome';
+
 const HomeScreen = ({navigation}) => {
   const [position, setPosition] = useRecoilState(userPosition);
   const [registUsers, setRegistUser] = useState([
@@ -71,22 +74,25 @@ const HomeScreen = ({navigation}) => {
 
   const [missingPersons, setMissingPerson] = useState([
     {
-      name: '정세권',
-      identity: 930330,
+      name: 'Name1',
+      identity: 'birthDate1',
       location: '서울',
       image: null,
+      registId: 1,
     },
     {
-      name: '정세권',
-      identity: 930331,
+      name: 'Name2',
+      identity: 'birthDate2',
       location: '서울',
       image: null,
+      registId: 2,
     },
     {
-      name: '정세권',
-      identity: 930401,
+      name: 'Name3',
+      identity: 'birthDate3',
       location: '서울',
       image: null,
+      registId: 3,
     },
   ]);
 
@@ -105,6 +111,27 @@ const HomeScreen = ({navigation}) => {
 
   const width = Dimensions.get('window').width;
 
+  // FUNCTION
+
+  // function - render
+  useEffect(() => {
+    // (1) User가 등록한 실종자 등록 정보
+    const userId = 1;
+    const auto1 = async () => {
+      await apiGetUserRegistMissingPersons(userId)
+        .then(({data}) => {
+          setRegistUser(data.data);
+        })
+        .catch(error => console.log(error));
+    };
+    auto1();
+
+    // (2) notices list 반환
+
+    // (3) 전체 실종자 list 반환
+  }, []);
+
+  // component
   const missingCardRender = ({item}) => {
     return (
       <View style={styles.missingCard}>

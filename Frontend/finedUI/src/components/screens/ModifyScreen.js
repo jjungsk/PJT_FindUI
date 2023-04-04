@@ -4,7 +4,7 @@
 */
 
 // react
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
 // react-native
 import {
@@ -22,9 +22,6 @@ import {useRecoilState, useRecoilValue} from 'recoil';
 import {stringState} from '../../store/atoms/atoCount.js';
 import {selCountState} from '../../store/selectors/selCount.js';
 
-// Naver Map Library
-import NaverMapView, {Marker} from 'react-native-nmap';
-
 // sizes
 import {
   fontPercentage,
@@ -38,12 +35,9 @@ import LinkButtons from '../organisms/LinkButtons';
 import ModifyButtons from '../organisms/ModifyButtons';
 
 // api 호출
-import {
-  apiGetMissingPerson,
-  apiDeleteMissingPerson,
-} from '../../API/apiMissingPerson.js';
+import {apiGetMissingPerson} from '../../API/apiMissingPerson.js';
 
-const ModifyScreen = () => {
+const ModifyScreen = ({navigation, route}) => {
   // STATE
   // Recoil state - test 용
   const [text, setText] = useRecoilState(stringState);
@@ -51,22 +45,7 @@ const ModifyScreen = () => {
   const selResult = useRecoilValue(selCountState);
 
   // Local state - 실종자 정보
-  const [missingPerson, setMissingPerson] = useState({
-    name: '샘스미스',
-    birthday: '2000. 01. 01',
-    address: '서울시 역삼동 멀티캠퍼스',
-    phone: '010-6725-5590',
-    lostday: '23. 01. 23. 금요일 13시',
-    location: '서울시 역삼역 11번 출구 앞',
-    description: '키가 크고 눈이 크며 어쩌구 저쩌구..',
-    image: null,
-  });
-
-  // Local state - 실종자 실종 위치 for map
-  const [position, setPosition] = useState({
-    latitude: 37.564362,
-    longitude: 126.977011,
-  });
+  const [missingPerson, setMissingPerson] = useState({});
 
   // FUNCTION
   // function - 실종자 정보 수정
@@ -81,23 +60,32 @@ const ModifyScreen = () => {
   const actButton = state => {
     if (state === 'cancel') {
       // 취소 버튼
-      const registId = 10;
-      const auto = async () => {
-        await apiGetMissingPerson(registId)
-          .then(({data}) => {
-            console.log(data.data);
-          })
-          .catch(error => {
-            console.log('실패');
-            console.log(error);
-          });
-      };
-      auto();
+      navigation.navigate('HomeScreen');
     } else if (state === 'modify') {
       // 수정 버튼
-      Alert.alert(value);
+      console.log(missingPerson);
+      Alert.alert('수정 완료');
+      // navigation.navigate('HomeScreen');
     }
   };
+
+  // function - useEffect
+  useEffect(() => {
+    // route로 넘어온 등록된 ID
+    const registId = route.params.registId;
+
+    const auto = async () => {
+      await apiGetMissingPerson(registId)
+        .then(({data}) => {
+          setMissingPerson(data.data);
+          console.log(data.data);
+        })
+        .catch(error => {
+          Alert.alert(error);
+        });
+    };
+    auto();
+  }, []);
 
   return (
     <SafeAreaView style={{flex: 1}}>
@@ -111,7 +99,7 @@ const ModifyScreen = () => {
           <View style={styles.imageContainer}>
             <Image
               source={
-                missingPerson.image != null
+                missingPerson.frontImagePath != null
                   ? null
                   : require('../../assets/images/no_profile_image.png')
               }
@@ -134,16 +122,7 @@ const ModifyScreen = () => {
             <ModifyButtons actButton={actButton} />
           </View>
           {/* 지도 */}
-          <View style={styles.mapContainer}>
-            <NaverMapView
-              style={{width: '100%', height: '100%'}}
-              center={{...position, zoom: 12}}>
-              <Marker
-                coordinate={position}
-                onClick={() => console.warn('onClick! position')}
-              />
-            </NaverMapView>
-          </View>
+          <View style={styles.mapContainer}></View>
         </View>
       </ScrollView>
     </SafeAreaView>

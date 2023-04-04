@@ -55,10 +55,6 @@ allprojects {
         }
         google()
         jcenter()
-        // 네이버 지도 저장소 by. 정세권
-        maven {
-            url 'https://naver.jfrog.io/artifactory/maven/'
-        }
-        // maven { url 'https://www.jitpack.io' }
+        maven { url 'https://www.jitpack.io' }
     }
 }

@@ -4,7 +4,7 @@
 */
 
 // react
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
 // react-native
 import {
@@ -15,6 +15,7 @@ import {
   Text,
   Image,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 
 // sizes
@@ -31,8 +32,13 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import DetailContents from '../organisms/DetailContents';
 import GoogleMapNotTouch from '../organisms/GoogleMapNotTouch';
 import LinkButtons from '../organisms/LinkButtons';
+// import GoogleMap from '../organisms/GoogleMap';
 
-const DetailScreen = ({navigation}) => {
+// apis
+import {apiGetMissingPerson} from '../../API/apiMissingPerson';
+
+const DetailScreen = ({navigation, route}) => {
+  const [missingPerson, setMissingPerson] = useState({});
   const [detailUser, setDetailUser] = useState({
     name: '샘스미스',
     birthday: 970218,
@@ -48,6 +54,25 @@ const DetailScreen = ({navigation}) => {
     latitude: 37.564362,
     longitude: 126.977011,
   });
+
+  // FUNCTION
+  // useEffect
+  useEffect(() => {
+    // route로 넘어온 등록된 ID
+    const registId = route.params.registId;
+
+    const auto = async () => {
+      await apiGetMissingPerson(registId)
+        .then(({data}) => {
+          setMissingPerson(data.data);
+          console.log(data.data);
+        })
+        .catch(error => {
+          Alert.alert(error);
+        });
+    };
+    auto();
+  }, []);
 
   return (
     <SafeAreaView style={{flex: 1}}>
