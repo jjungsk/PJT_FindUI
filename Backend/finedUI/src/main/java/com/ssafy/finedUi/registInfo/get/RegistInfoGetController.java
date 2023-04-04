@@ -1,8 +1,10 @@
 package com.ssafy.finedUi.registInfo.get;
 
+import com.ssafy.finedUi.common.security.SecurityUtils;
 import com.ssafy.finedUi.handler.ResponseHandler;
 import com.ssafy.finedUi.registInfo.get.service.RegistInfoGetService;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +20,7 @@ import java.net.URLConnection;
 @RestController
 @RequestMapping("/api/regist")
 @RequiredArgsConstructor
+@Slf4j
 public class RegistInfoGetController {
 
     private final RegistInfoGetService registInfoGetService;
@@ -33,7 +36,13 @@ public class RegistInfoGetController {
 
     @GetMapping
     public ResponseEntity<Object> getAll(@RequestParam Long userId) {
-        return ResponseHandler.generateResponse(true, "OK", HttpStatus.OK, registInfoGetService.findAllByUser_UserId(userId));
+
+        log.info(userId+"");
+        log.info(SecurityUtils.getUserPricipal().getId() + "");
+
+        return ResponseHandler.generateResponse(true, "OK", HttpStatus.OK, registInfoGetService.findAllByUser_UserId(
+                SecurityUtils.getUserPricipal().getId()
+        ));
     }
 
     @GetMapping("/dl")

@@ -1,5 +1,6 @@
 package com.ssafy.finedUi.registInfo.create;
 
+import com.ssafy.finedUi.common.security.SecurityUtils;
 import com.ssafy.finedUi.handler.ResponseHandler;
 import com.ssafy.finedUi.registInfo.create.request.RegistInfoCreateRequest;
 import com.ssafy.finedUi.registInfo.create.service.RegistInfoCreateServiceImpl;
@@ -23,6 +24,8 @@ public class RegistInfoCreateController {
     // 1. @RequestParam 사용 -> 받아야하는 Parameter 가 많을 시 코드 가독성이 떨어짐
     // 2. @ModelAttribute 사용! -> 코드 가독성도 유지되고 간결성도 유지됨
     public ResponseEntity<Object> create(@ModelAttribute RegistInfoCreateRequest registInfoCreateRequest) {
+        registInfoCreateRequest.setUserId(SecurityUtils.getUserPricipal().getId());
+//        registInfoCreateRequest.setName(SecurityUtils.getUserPricipal().getName());
         return ResponseHandler.generateResponse(true, "CREATED", HttpStatus.CREATED, registInfoCreateService.save(registInfoCreateRequest));
     }
 }

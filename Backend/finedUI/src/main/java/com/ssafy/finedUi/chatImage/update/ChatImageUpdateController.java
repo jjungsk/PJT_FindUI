@@ -2,6 +2,7 @@ package com.ssafy.finedUi.chatImage.update;
 
 import com.ssafy.finedUi.chatImage.update.request.ChatImageUpdateRequest;
 import com.ssafy.finedUi.chatImage.update.service.ChatImageUpdateService;
+import com.ssafy.finedUi.common.security.SecurityUtils;
 import com.ssafy.finedUi.handler.ResponseHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,6 +21,7 @@ public class ChatImageUpdateController {
 
     @PutMapping
     public ResponseEntity<Object> update(@ModelAttribute ChatImageUpdateRequest chatImageUpdateRequest) {
+        chatImageUpdateRequest.setUserId(SecurityUtils.getUserPricipal().getId());
         return ResponseHandler.generateResponse(true, "UPDATE", HttpStatus.OK, chatImageUpdateService.update(chatImageUpdateRequest));
 
     }

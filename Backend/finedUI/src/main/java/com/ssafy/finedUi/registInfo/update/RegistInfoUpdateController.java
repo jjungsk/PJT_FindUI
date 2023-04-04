@@ -1,5 +1,6 @@
 package com.ssafy.finedUi.registInfo.update;
 
+import com.ssafy.finedUi.common.security.SecurityUtils;
 import com.ssafy.finedUi.handler.ResponseHandler;
 import com.ssafy.finedUi.registInfo.update.request.RegistInfoUpdateRequest;
 import com.ssafy.finedUi.registInfo.update.service.RegistInfoUpdateServiceImpl;
@@ -17,6 +18,8 @@ public class RegistInfoUpdateController {
 
     @PutMapping
     public ResponseEntity<Object> update(@ModelAttribute RegistInfoUpdateRequest registInfoUpdateRequest) {
+        registInfoUpdateRequest.setUserId(SecurityUtils.getUserPricipal().getId());
+//        registInfoUpdateRequest.setName(SecurityUtils.getUserPricipal().getName());
         return ResponseHandler.generateResponse(true, "UPDATE", HttpStatus.OK, registInfoUpdateService.update(registInfoUpdateRequest));
     }
 
