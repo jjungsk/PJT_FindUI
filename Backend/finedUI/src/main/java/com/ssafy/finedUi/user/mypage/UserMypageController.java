@@ -36,7 +36,7 @@ public class UserMypageController {
 
         if (user == null) {
             //실패
-            return ResponseEntity.status(200).body(new BaseResponse("fail", "해당 유저가 없습니다."));
+            return ResponseEntity.status(400).body(new BaseResponse("fail", "해당 유저가 없습니다."));
         } else {
             //성공
             return ResponseEntity.status(200).body(
@@ -51,11 +51,11 @@ public class UserMypageController {
         log.info("회원정보 수정 :  ");
 //        log.info(userUpdateRequest.addreess);
         User user = userMypageService.updateUser(userUpdateRequest);
-        log.info(user.getAddress());
+//        log.info(user.getAddress());
 
         if (user == null) {
             //실패
-            return ResponseEntity.status(200).body(new BaseResponse("fail", "해당 유저가 없습니다."));
+            return ResponseEntity.status(400).body(new BaseResponse("fail", "해당 유저가 없습니다."));
         } else {
             return ResponseEntity.status(200).body(new MypageGetResponse(user.getName(), user.getEmail(), user.getAddress(), user.getPhoneNumber(), user.getIsAdmin()));
         }

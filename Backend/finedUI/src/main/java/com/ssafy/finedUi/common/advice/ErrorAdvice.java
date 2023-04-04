@@ -27,7 +27,7 @@ public class ErrorAdvice extends ResponseEntityExceptionHandler {
     protected ResponseEntity<?> handleRuntimeException(RuntimeException e) {
         e.printStackTrace();
         log.error(e.toString());
-        return ResponseEntity.status(200).body(new BaseResponse("fail", e.getMessage()));
+        return ResponseEntity.status(400).body(new BaseResponse("fail", e.getMessage()));
     }
 
 }

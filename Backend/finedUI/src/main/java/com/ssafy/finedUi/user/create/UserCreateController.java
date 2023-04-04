@@ -50,7 +50,7 @@ public class UserCreateController {
             if (result.equals("success")) {
                 return ResponseEntity.status(200).body(new BaseResponse("success", "인증 번호를 전송"));
             } else {
-                return ResponseEntity.status(200).body(new BaseResponse("fail", "인증번호 전송 실패"));
+                return ResponseEntity.status(400).body(new BaseResponse("fail", "인증번호 전송 실패"));
             }
 
         } catch (JsonProcessingException e) {
@@ -73,7 +73,7 @@ public class UserCreateController {
         if (userCreateService.verifyCode(phoneConfirmRequest)) {
             return ResponseEntity.status(200).body(new BaseResponse("success", "휴대폰 인증 성공"));
         } else {
-            return ResponseEntity.status(200).body(new BaseResponse("fail", "휴대폰 인증 실패"));
+            return ResponseEntity.status(400).body(new BaseResponse("fail", "휴대폰 인증 실패"));
         }
 
     }

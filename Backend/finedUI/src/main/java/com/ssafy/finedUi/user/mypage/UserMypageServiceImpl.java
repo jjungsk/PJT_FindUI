@@ -32,7 +32,7 @@ public class UserMypageServiceImpl implements UserMypageService {
         User user = userRepository.getReferenceById(SecurityUtils.getUserPricipal().getId());
         String name = userUpdateRequest.name;
         String email = userUpdateRequest.email;
-        String address = userUpdateRequest.addreess;
+        String address = userUpdateRequest.address;
         String phoneNumber = userUpdateRequest.phoneNumber;
 
 //         유효성검증도 시간남으면 추가할것.
