@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
 })
 
 
-const LoginInput = ({placeholderItem, value, onChangeText}) => {
+const LoginInput = ({placeholderItem, value, onChangeText, secureTextEntry}) => {
   return (
     <View style={styles.inputView}>
       <TextInput
@@ -31,6 +31,7 @@ const LoginInput = ({placeholderItem, value, onChangeText}) => {
         placeholderTextColor="#003f5c"
         value={value}
         onChangeText={onChangeText}
+        secureTextEntry={secureTextEntry}
         >
       </TextInput>
     </View>

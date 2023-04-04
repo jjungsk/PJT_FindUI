@@ -34,7 +34,7 @@ const MyInfoCard = ({myInfo, onPress, navigation}) => {
             이메일 : {myInfo.email}
           </Text>
           <Text numberOfLines={1} style={styles.text}>
-            전화번호 : {myInfo.phone}
+            전화번호 : {myInfo.phoneNumber}
           </Text>
         </View>
       </View>

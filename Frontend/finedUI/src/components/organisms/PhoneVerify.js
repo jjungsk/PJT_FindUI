@@ -56,7 +56,8 @@ const PhoneVerify = () => {
     }
 
     const response = await sendVerifyCode(phone);
-    if (response.success) {
+
+    if (response.status === 200) {
       Alert.alert('인증 코드가 전송되었습니다.');
       setVerifyCodeSent(true); // 인증 코드 전송 완료 상태로 변경
       setRemainingTime(300); // 5분 타이머 시작
@@ -72,7 +73,7 @@ const PhoneVerify = () => {
     }
 
     const response = await verifyPhoneNumber(phone, verifyCode);
-    if (response.success) {
+    if (response.status === 200) {
       setVerifyCodeMail(true)
       Alert.alert('전화번호 인증에 성공했습니다.');
     } else {
@@ -119,6 +120,7 @@ const PhoneVerify = () => {
       <TouchableOpacity
         style={[styles.button, verifyCodeSent&&styles.checkbutton]}
         onPress={phoneNumCheck}
+        disabled={verifyCodeSent}
       >
         <Text style={styles.buttonText}>인증 번호 받기</Text>
       </TouchableOpacity>
@@ -134,6 +136,7 @@ const PhoneVerify = () => {
           <TouchableOpacity
             style={[styles.button, verifyCodeMail&&styles.checkbutton]}
             onPress={verifySecretNumber}
+            disabled={verifyCodeMail}
           >
             <Text style={styles.buttonText}>인증 번호 확인</Text>
           </TouchableOpacity>
