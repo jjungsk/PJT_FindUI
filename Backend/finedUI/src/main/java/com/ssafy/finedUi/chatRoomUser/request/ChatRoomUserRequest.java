@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 public class ChatRoomUserRequest {
     private Long userId;
     public ChatRoomUserRequest(ChatRoomUser chatRoomUser){
-        this.userId = chatRoomUser.getUser().getId();
+        this.userId = chatRoomUser.getUser().getUserId();
     }
 
 }

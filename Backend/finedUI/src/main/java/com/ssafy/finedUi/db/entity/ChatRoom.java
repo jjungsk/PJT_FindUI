@@ -14,7 +14,7 @@ import java.util.List;
 public class ChatRoom {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "room_id")
     private Long id;
     @Column(name = "room_name")
     private String roomName; //실종자 이름+'제보방'

@@ -29,7 +29,7 @@ dependencies {
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
     testImplementation 'org.springframework.security:spring-security-test'
     implementation 'com.mysql:mysql-connector-j:8.0.32'
-
+    implementation 'org.springframework.boot:spring-boot-starter-websocket'
     //실행시 종료안하고 어플리케이션 유지 등 web 관련 기능.
     implementation 'org.springframework.boot:spring-boot-starter-web'
 
@@ -65,14 +65,7 @@ dependencies {
 
 // gradle build 시, simple.jar 파일 생성 skip 명령어 (파일 경로 : build/libs)
 jar {
-	enabled = false
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
-	compileOnly 'org.projectlombok:lombok'
-	annotationProcessor 'org.projectlombok:lombok'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
-	testImplementation 'org.springframework.security:spring-security-test'
-	implementation 'com.mysql:mysql-connector-j:8.0.32'
-	implementation 'org.springframework.boot:spring-boot-starter-websocket'
+    enabled = false
 }
 
 tasks.named('test') {

@@ -1,6 +1,5 @@
 package com.ssafy.finedUi.db.entity;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -12,7 +11,7 @@ import javax.persistence.*;
 public class ChatRoomUser {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
+    @Column(name="participant_id")
     private Long id;
 
     @ManyToOne

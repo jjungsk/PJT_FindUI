@@ -1,5 +1,8 @@
 # DB
 spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
   profiles:
     include:
       - oauth2
@@ -22,7 +25,7 @@ spring:
     defer-datasource-initialization: true
     database: mysql
     hibernate:
-      ddl-auto: update
+      ddl-auto: create
     generate-ddl: false
     properties:
       hibernate:
@@ -76,17 +79,8 @@ app:
       location: /Users/SSAFY/
       max-request-size: 30MB
       max-file-size: 10MB
-# log level 설정
-logging:
-  level:
-    org:
-      # security log level 설정
-      springframework:
-        security: DEBUG
-      # hibernate log level 설정
-      hibernate:
-        SQL: DEBUG
-      # 디버깅용 로그레벨 설정.# Image
+
+# Image
 image:
   # 이미지 저장 경로
   upload:
