@@ -1,4 +1,4 @@
-package com.ssafy.finedUi.chat.controller;
+package com.ssafy.finedUi.chatRoom.controller;
 
 
 import com.ssafy.finedUi.db.entity.ChatMessage;

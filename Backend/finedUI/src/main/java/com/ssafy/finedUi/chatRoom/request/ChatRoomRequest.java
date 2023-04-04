@@ -1,17 +1,19 @@
-package com.ssafy.finedUi.chat.request;
+package com.ssafy.finedUi.chatRoom.request;
 
 import com.ssafy.finedUi.db.entity.ChatRoom;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @Getter
+@Setter
 @NoArgsConstructor
 public class ChatRoomRequest {
     private String roomName;
 
     @Builder
-    public ChatRoomRequest(String roomName){
+    public ChatRoomRequest(String roomName,Long userId){
         this.roomName = roomName;
     }
     public ChatRoom toEntity(){

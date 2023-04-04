@@ -10,13 +10,13 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class ChatMessageController {
 
-    @MessageMapping("/chat.sendMessage/{roomId}")
+    @MessageMapping("/chatRoom.sendMessage/{roomId}")
     @SendTo("/topic/public/{roomId}")
     public ChatMessage sendMessage(@Payload ChatMessage chatMessage) {
         return chatMessage;
     }
 
-    @MessageMapping("/chat.addUser")
+    @MessageMapping("/chatRoom.addUser")
     @SendTo("/topic/public")
     public ChatMessage addUser(@Payload ChatMessage chatMessage,
                                SimpMessageHeaderAccessor headerAccessor) {

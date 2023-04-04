@@ -1,5 +1,6 @@
 package com.ssafy.finedUi.db.entity;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -21,6 +22,11 @@ public class ChatRoomUser {
     @ManyToOne
     @JoinColumn(name="user_id")
     private User user;
+    @Builder
+    public ChatRoomUser(User user,ChatRoom chatRoom) {
+        this.user = user;
+        this.chatRoom = chatRoom;
+    }
 
 
 
