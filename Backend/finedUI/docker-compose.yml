@@ -1,0 +1,47 @@
+version: "3"
+# 도커 volume 연결
+volumes:
+  find_vol:
+    # external true로 성정해야 docker volume의 데이터가 삭제 안됨
+    external: true
+services:
+  # database:
+  #   container_name: mysql_db
+  #   image: mysql:8.0
+  #   volumes:
+  #     # container MySql과 docker volume 연결
+  #     - find_vol:/var/lib/mysql
+  #   ports:
+  #     - 3306:3306
+  #   environment:
+  #     MYSQL_ROOT_PASSWORD: ssafy
+  #     MYSQL_DATABASE: finedui
+  #     MYSQL_USER: ssafy
+  #     MYSQL_PASSWORD: ssafy
+  #     TZ: Asia/Seoul
+  #   command:
+  #     - "--character-set-server=utf8mb4"
+  #     - "--collation-server=utf8mb4_unicode_ci"
+  #   restart: always
+  #   networks:
+  #     - find_net
+  application:
+    container_name: spring_boot
+    # container 실행 순서 보장 (db -> server)
+    # depends_on:
+    #   - database
+    build: .
+    ports:
+      - 8080:8080
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://j8a108.p.ssafy.io:3306/finedui?allowPublicKeyRetrieval=true&useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
+      SPRING_DATASOURCE_USERNAME: ssafy
+      SPRING_DATASOURCE_PASSWORD: ssafy
+    # container에 문제가 생겨 종료됐을때 자동 재시작 true
+    tty: true
+    networks:
+      - find_net
+networks:
+  find_net:
+    # 해당 이름의 새 네트워크 생성이 아닌 기존에 생성된 network 활용
+    external: true

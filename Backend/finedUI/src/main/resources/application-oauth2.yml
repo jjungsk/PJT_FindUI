@@ -1,0 +1,51 @@
+##local 개발용 oAuth2 설정.
+## 2.7 yml에서 multi 설정할때 include 사용이 안되는듯?
+#spring:
+#  config:
+#    activate:
+#      on-profile: kakao
+#
+spring:
+  #  profiles: google
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-name: google
+            client-id: 146079425763-03qngv3dan1bj9aqcnsdh0gvdtg05ph3.apps.googleusercontent.com
+            client-secret: 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
+            redirect-uri: "{baseUrl}/oauth2/callback/{registrationId}"
+            authorization-grant-type: authorization_code
+            scope:
+              - email
+              - profile
+---
+spring:
+  #  profiles: kakao
+  security:
+    oauth2:
+      client:
+        registration:
+          kakao:
+            client-name: kakao
+            #            앱 설정 -> 앱 키 -> REST API
+            client-id: 18c131a35d3601947a0126df21950092
+            #            제품 설정 -> 카카오 로그인 -> 보안 -> Client Secret
+            client-secret: tAoEh7UYLAKA1OXmOreysrA3rY3WQXKL
+            redirect-uri: "{baseUrl}/oauth2/callback/{registrationId}"
+            authorization-grant-type: authorization_code
+            scope:
+              - account_email
+              - profile_nickname
+            #              - profile_image
+            client-authentication-method: POST
+        provider:
+          kakao:
+            #            kakao authorize 서버 주소
+            authorization-uri: https://kauth.kakao.com/oauth/authorize
+            #            kakao resource 서버 주소
+            user-info-uri: https://kapi.kakao.com/v2/user/me
+            #            kakao access token 발급 서버 주소
+            token-uri: https://kauth.kakao.com/oauth/token
+            user-name-attribute: id
