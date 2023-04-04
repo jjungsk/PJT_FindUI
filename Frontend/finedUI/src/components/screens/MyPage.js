@@ -93,6 +93,8 @@ const MyPage = () => {
 
   const toggleInfoModal = () => {
     setIsInfoVisible(!isInfoVisible);
+    setAddress(myInfo.address)
+    setPhoneNumber(myInfo.phoneNumber)
   };
 
   const handleChangePassword = () => {
