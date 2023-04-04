@@ -41,7 +41,7 @@ public class UserLoginController {
         return ResponseEntity.status(200).body(new BaseResponse("success", "유효한 토큰입니다."));
     }
 
-    @PostMapping("/token/refersh")
+    @PostMapping("/token/refresh")
     @ApiOperation(value = "refresh 토큰유효성 검증", notes = "만료된 access와 refresh 토큰 모두 헤더로 전송. refresh 토큰 만료시 452에러. 만료안됐다면 access토큰 재발급.")
     ResponseEntity<?> refreshTokenValid() {
 
