@@ -127,7 +127,7 @@ const MyPage = () => {
   const handleInfo = async () => {
     // 정보 변경 코드
     console.log(address, phoneNumber)
-    const response = await modifyInfo(myInfo.name, address, myInfo.email, phoneNumber)
+    const response = await modifyInfo(address, phoneNumber)
     console.log(response.data)
     if (response.status === 200) {
       Alert.alert('정보가 변경되었습니다.');

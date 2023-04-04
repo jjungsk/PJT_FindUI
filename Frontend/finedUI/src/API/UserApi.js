@@ -4,13 +4,12 @@ import { getAccessTokenFromKeychain, getRefreshTokenFromKeychain, saveAccessToKe
 const api = apiInstance();
 
 // 마이페이지 정보 변경
-export const modifyInfo = async (name, address, email, phoneNumber) => {
+export const modifyInfo = async (address, phoneNumber) => {
   try {
+    console.log('정보변경', address, phoneNumber)
     const token = await getAccessTokenFromKeychain();
     const response = await api.patch(`/api/user/mypage`, {
-      name,
       address,
-      email,
       phoneNumber
     }, {
       headers: {
