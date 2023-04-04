@@ -1,15 +1,17 @@
 // react
-import React, {useEffect} from 'react';
+import React, {useEffect, useTransition} from 'react';
 import {View, StyleSheet, Platform, PermissionsAndroid} from 'react-native';
 import Geolocation from 'react-native-geolocation-service';
-import {RecoilRoot, useRecoilValue} from 'recoil';
+import {RecoilRoot, useRecoilState, useRecoilValue, useSetRecoilState} from 'recoil';
 
 // stack
 import StackNavigation from './src/components/navigator/StackNavigation';
 
 // components
 import Loading from './src/components/atoms/Loading';
-import IsLoadingState from './src/store/atoms/IsLoadingState';
+import {isLoadingState} from './src/store/atoms/IsLoadingState';
+import { checkAcess } from './src/API/AccountApi';
+import { isLoginState } from './src/store/atoms/userState';
 
 async function requestPermission() {
   try {
@@ -35,12 +37,39 @@ const styles = StyleSheet.create({
   },
 });
 
+function delay(ms = 1000) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
 const App = () => {
   useEffect(() => {
     requestPermission();
   }, []);
 
-  const isLoading = useRecoilValue(IsLoadingState);
+  const [ispending, setTransition] = useTransition()
+  const isLoading = useRecoilValue(isLoadingState)
+  const setIsLoading = useSetRecoilState(isLoadingState)
+  const setIsLogin = useSetRecoilState(isLoginState);
+
+  useEffect(() => {
+    const checkLogin = async () => {
+      const response = await checkAcess();
+      setTransition(()=>{
+        setIsLoading(false)
+      })
+      if (response === true) {
+        console.log('동작')
+        setIsLogin(true)
+      } else {
+        console.log('실패')
+        setIsLogin(false)
+      }
+    }
+    if(isLoading){
+      checkLogin();
+    }
+  }
+  , []);
 
   if (isLoading) {
     return (

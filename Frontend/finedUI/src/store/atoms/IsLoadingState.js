@@ -1,8 +1,8 @@
 import { atom } from 'recoil';
 
-const IsLoadingState = atom({
-  key: 'isLoading',
-  default: false,
+export const isLoadingState = atom({
+  key: 'isLoadingState',
+  default: true,
 });
 
-export default IsLoadingState;
+// export default IsLoadingState;
