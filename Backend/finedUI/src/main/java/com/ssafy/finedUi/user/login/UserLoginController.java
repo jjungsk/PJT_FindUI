@@ -35,8 +35,15 @@ public class UserLoginController {
     }
 
     @PostMapping("/token")
-    @ApiOperation(value = "토큰유효성 검증", notes = "access토큰 검증후 만료시 451에러. 이후 refresh 토큰 만료시 452에러. 만료안됐다면 access토큰 재발급.")
+    @ApiOperation(value = "access 토큰유효성 검증", notes = "access토큰 검증후 만료시 451에러. 이후 refresh 토큰 만료시 452에러. 만료안됐다면 access토큰 재발급.")
     ResponseEntity<?> tokenValid() {
+
+        return ResponseEntity.status(200).body(new BaseResponse("success", "유효한 토큰입니다."));
+    }
+
+    @PostMapping("/token/refersh")
+    @ApiOperation(value = "refresh 토큰유효성 검증", notes = "만료된 access와 refresh 토큰 모두 헤더로 전송. refresh 토큰 만료시 452에러. 만료안됐다면 access토큰 재발급.")
+    ResponseEntity<?> refreshTokenValid() {
 
         return ResponseEntity.status(200).body(new BaseResponse("success", "유효한 토큰입니다."));
     }
