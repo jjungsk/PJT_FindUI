@@ -19,7 +19,7 @@ const apiGetAddress = async ({lng, lat}) => {
       .then(response => {
         const result = response.data.documents[0];
         console.log('주소 리턴', result['address_name']);
-        return result['address_name'];
+        return response;
       });
   } catch (error) {
     console.log(error);

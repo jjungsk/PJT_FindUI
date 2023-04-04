@@ -9,8 +9,8 @@ import {
 
 import GoogleMapDetail from '../organisms/GoogleMapDetail';
 import {useRecoilState, useRecoilValue, useSetRecoilState} from 'recoil';
-import {userPosition} from '../store_regist/homeStore';
-import {registPos} from '../store_regist/registStore';
+import {registMode, registPos, userPosition} from '../store_regist/registStore';
+import {apiGetAddress} from '../../API/apiKakao';
 
 const styles = StyleSheet.create({
   mainContainer: {
@@ -44,18 +44,15 @@ const styles = StyleSheet.create({
 });
 
 const MapViewDetail = ({navigation, route}) => {
-  let position = useRecoilValue(userPosition);
+  const position = useRecoilValue(userPosition);
   const setPos = useSetRecoilState(registPos);
+  const mode = useRecoilValue(registMode);
 
-  const registMode = route.params.mode ? true : false;
-  if (!registMode) {
-    position = {lat: route.params.lat, lng: route.params.lng};
-  }
   return (
     <View style={styles.mainContainer}>
       <View style={styles.infoContainer}></View>
-      <GoogleMapDetail position={position} setMarker={!registMode} />
-      {registMode ? (
+      <GoogleMapDetail position={position} setMarker={!mode} />
+      {mode ? (
         <>
           <Image
             source={require('../../assets/images/marker_img.png')}
@@ -65,6 +62,8 @@ const MapViewDetail = ({navigation, route}) => {
             style={styles.setPosBtn}
             onPress={() => {
               setPos(position);
+              apiGetAddress(((lat = position.lat), (lng = position.lng)));
+              // console.log('res', res);
               navigation.goBack();
             }}>
             <Text style={styles.setPosBtnTitle}>선택 완료</Text>
