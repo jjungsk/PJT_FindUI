@@ -11,6 +11,7 @@ import { getUserInfo, modifyInfo, deleteUser } from '../../API/UserApi';
 import { useSetRecoilState } from 'recoil';
 import { isLoginState } from '../../store/atoms/userState';
 import { deleteTokensFromKeychain } from '../../store/keychain/loginToken';
+import { reset } from '../navigator/NavigationService';
 
 const styles = StyleSheet.create({
   container: {
