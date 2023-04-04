@@ -79,11 +79,16 @@ const ChatScreen = () => {
     // console.log(message);
     setMessages(messages.concat(msg));
   };
-
+  let onChangeInput = msg => {
+    setMessages(msg);
+  };
   let onSendMessage = payload => {
     console.log(payload.body);
-
-    console.log('Click' + messages);
+    console.log('메시지 보낸다' + messages);
+    setMessages('');
+  };
+  let sendImg = () => {
+    console.log('이미지 로직');
   };
   let handleLoginSubmit = username => {
     console.log('LOGIN', username);
@@ -104,7 +109,7 @@ const ChatScreen = () => {
       />
 
       <SafeAreaView style={styles.messageBox}>
-        <Pressable onPress={onSendMessage}>
+        <Pressable onPress={sendImg}>
           <Icon
             name="plus"
             size={30}
@@ -115,7 +120,7 @@ const ChatScreen = () => {
         <TextInput
           style={styles.msgInput}
           value={messages}
-          onChangeText={onMessageReceived}
+          onChangeText={onChangeInput}
         />
         <Pressable onPress={onSendMessage}>
           <Icon

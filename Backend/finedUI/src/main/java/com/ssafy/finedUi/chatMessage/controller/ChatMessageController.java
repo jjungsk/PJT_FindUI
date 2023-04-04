@@ -1,6 +1,6 @@
 package com.ssafy.finedui.chat.controller;
 
-import com.ssafy.finedui.chat.model.ChatMessage;
+import com.ssafy.finedui.db.entity.ChatMessage;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;

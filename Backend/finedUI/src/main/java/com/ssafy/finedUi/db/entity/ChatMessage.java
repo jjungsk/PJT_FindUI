@@ -1,9 +1,15 @@
-package com.ssafy.finedui.chat.model;
+package com.ssafy.finedui.chat.db.entity;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class ChatMessage {
     private MessageType type;
     private String content;
     private String sender;
+    private String roomId;
 
     public enum MessageType {
         CHAT,
