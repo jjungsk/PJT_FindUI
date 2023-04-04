@@ -1,6 +1,6 @@
 package com.ssafy.finedUi.chatMessage.service;
 
-import com.ssafy.finedUi.chat.ChatRoomRepository;
+import com.ssafy.finedUi.chatRoom.ChatRoomRepository;
 import com.ssafy.finedUi.chatMessage.ChatMessageRepository;
 import com.ssafy.finedUi.chatMessage.request.ChatMessageRequest;
 import com.ssafy.finedUi.chatMessage.response.ChatMessageResponse;

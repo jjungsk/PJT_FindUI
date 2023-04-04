@@ -1,4 +1,4 @@
-package com.ssafy.finedUi.chat.response;
+package com.ssafy.finedUi.chatRoom.response;
 
 import com.ssafy.finedUi.db.entity.ChatRoom;
 import lombok.Getter;

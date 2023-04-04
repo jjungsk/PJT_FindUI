@@ -11,4 +11,6 @@ import java.util.List;
 public interface ChatRoomUserRepository extends JpaRepository<ChatRoomUser,Long> {
     //userId에 따라 채팅방 목록 가져오기
 //    List<ChatRoom> findAllByUser(Long userId);
+
+
 }
