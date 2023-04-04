@@ -14,7 +14,7 @@ import React from 'react';
 // react-navigation
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {NavigationContainer} from '@react-navigation/native';
-import {Test} from '../screens/test';
+// import {Test} from '../screens/test';
 import ChatScreen from '../screens/ChatScreen';
 import ChatListScreen from '../screens/ChatListScreen';
 
@@ -43,7 +43,7 @@ const StackNavigation = () => {
           component={TabNavigation}
           options={{headerShown: false}}
         />
-        <Stack.Screen name="Testing" component={Test} />
+        {/* <Stack.Screen name="Testing" component={Test} /> */}
         <Stack.Screen
           name="ChatList"
           component={ChatListScreen}
