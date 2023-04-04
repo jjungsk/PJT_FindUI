@@ -1,17 +1,17 @@
-package com.ssafy.finedui.chat.request;
+package com.ssafy.finedUi.chat.request;
 
-import com.ssafy.finedui.db.entity.ChatRoom;
+import com.ssafy.finedUi.db.entity.ChatRoom;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
-public class ChatRoomCreateRequest {
+public class ChatRoomRequest {
     private String roomName;
 
     @Builder
-    public ChatRoomCreateRequest(String roomName){
+    public ChatRoomRequest(String roomName){
         this.roomName = roomName;
     }
     public ChatRoom toEntity(){

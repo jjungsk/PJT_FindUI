@@ -1,13 +1,15 @@
-package com.ssafy.finedui.chat.response;
+package com.ssafy.finedUi.chat.response;
 
-import com.ssafy.finedui.db.entity.ChatRoom;
+import com.ssafy.finedUi.db.entity.ChatRoom;
+import lombok.Getter;
 
-public class ChatRoomCreateResponse {
+@Getter
+public class ChatRoomResponse {
     private Long roomId;
     private String roomName;
 
-    public ChatRoomCreateResponse(ChatRoom entity){
-        this.roomId = entity.getRoomId();
+    public ChatRoomResponse(ChatRoom entity){
+        this.roomId = entity.getId();
         this.roomName = entity.getRoomName();
     }
 }

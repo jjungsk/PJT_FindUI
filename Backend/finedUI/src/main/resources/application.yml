@@ -1,0 +1,39 @@
+# DB
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    # server
+#    url: jdbc:mysql://j8a108.p.ssafy.io:3306/finedui?allowPublicKeyRetrieval=true&useSSL=false&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+    # local
+    url: jdbc:mysql://localhost:3306/finedui?allowPublicKeyRetrieval=true&useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
+    username: ssafy
+    password: ssafy
+    hikari:
+      idle-timeout: 10000
+      maximum-pool-size: 10
+      minimum-idle: 5
+      pool-name: fined&youHikariPool
+  jpa:
+    defer-datasource-initialization: true
+    database: mysql
+    hibernate:
+      ddl-auto: create
+    generate-ddl: false
+    properties:
+      hibernate:
+        #        SQL 로그를 예쁘게 줄바꿈해서 보여줌
+        format_sql: true
+    #
+    show-sql: false
+
+# log level 설정
+logging:
+  level:
+    org:
+      # security log level 설정
+      springframework:
+        security: DEBUG
+      # hibernate log level 설정
+      hibernate:
+        SQL: DEBUG
+      # 디버깅용 로그레벨 설정.

@@ -1,6 +1,6 @@
-package com.ssafy.finedui.chat.controller;
+package com.ssafy.finedUi.chatMessage.controller;
 
-import com.ssafy.finedui.db.entity.ChatMessage;
+import com.ssafy.finedUi.db.entity.ChatMessage;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.messaging.handler.annotation.SendTo;
@@ -8,7 +8,7 @@ import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.stereotype.Controller;
 
 @Controller
-public class ChatController {
+public class ChatMessageController {
 
     @MessageMapping("/chat.sendMessage/{roomId}")
     @SendTo("/topic/public/{roomId}")

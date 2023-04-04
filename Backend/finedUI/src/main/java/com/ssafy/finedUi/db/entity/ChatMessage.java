@@ -1,43 +1,43 @@
-package com.ssafy.finedui.chat.db.entity;
+package com.ssafy.finedUi.db.entity;
 
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
+
+import javax.persistence.*;
+@NoArgsConstructor
 @Getter
 @Setter
+@Table(name="chat_message")
+@Entity
 public class ChatMessage {
-    private MessageType type;
-    private String content;
+
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    @Id
+    private Long id;
+    @Column(name = "message_type")
+    private MessageType messageType;
+    @Column(name = "message")
+
+    private String message;
+    @Column(name = "sender")
+
     private String sender;
-    private String roomId;
+    @ManyToOne
+    @JoinColumn(name = "room_id")
+    private ChatRoom chatRoom;
+
 
     public enum MessageType {
         CHAT,
         JOIN,
         LEAVE
     }
-
-    public MessageType getType() {
-        return type;
-    }
-
-    public void setType(MessageType type) {
-        this.type = type;
-    }
-
-    public String getContent() {
-        return content;
-    }
-
-    public void setContent(String content) {
-        this.content = content;
-    }
-
-    public String getSender() {
-        return sender;
-    }
-
-    public void setSender(String sender) {
+    @Builder
+    public ChatMessage(String sender, String message, ChatRoom chatRoom) {
         this.sender = sender;
+        this.messageType = messageType;
+        this.message = message;
+        this.chatRoom = chatRoom;
     }
 }

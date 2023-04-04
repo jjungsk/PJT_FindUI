@@ -1,26 +1,32 @@
-package com.ssafy.finedui.chat.db.entity;
+package com.ssafy.finedUi.db.entity;
 
+import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import java.util.UUID;
+import javax.persistence.*;
+import java.util.List;
+@NoArgsConstructor
+@Getter
 @Entity
-@Data
+@Table(name="chat_room")
 public class ChatRoom {
-
-
     @Id
-    @GeneratedValue
-    private String roomId;
-    private String name; //실종자 이름+'제보방'
-    
-    public static ChatRoom create(String name){
-        ChatRoom chatRoom = new ChatRoom();
-        chatRoom.roomId = UUID.randomUUID().toString();
-        chatRoom.name = name;
-        return chatRoom;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Long id;
+    @Column(name = "room_name")
+    private String roomName; //실종자 이름+'제보방'
+
+    @OneToMany(mappedBy = "chatRoom")
+    private List<ChatRoomUser> chatRoomUser;
+    @OneToMany(mappedBy = "chatRoom", cascade = CascadeType.REMOVE)
+    private List<ChatMessage> chatMessageList;
+
+    @Builder
+    public ChatRoom(String roomName) {
+        this.roomName = roomName;
     }
     
 }
