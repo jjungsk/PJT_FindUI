@@ -1,5 +1,5 @@
 ai:
-  host: "http://j8a108.p.ssafy.io:8000"
+  host: "http://aiserver"
   search: "/api/search"
   create: "/api/regist"
   update: "/api/update"
