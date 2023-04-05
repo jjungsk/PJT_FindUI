@@ -38,3 +38,4 @@ out/
 
 ### logs ###
 ./Backend/finedUI/logs/*
+Backend/finedUI/logs/spring.log

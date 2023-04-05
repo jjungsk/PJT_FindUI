@@ -16,7 +16,7 @@ public class ChatMessage {
     @Id
     private Long id;
     @Column(name = "message_type")
-    private MessageType messageType;
+    private MessageType type;
     @Column(name = "message")
 
     private String message;
@@ -36,7 +36,7 @@ public class ChatMessage {
     @Builder
     public ChatMessage(String sender, String message, ChatRoom chatRoom) {
         this.sender = sender;
-        this.messageType = messageType;
+        this.type = type;
         this.message = message;
         this.chatRoom = chatRoom;
     }

@@ -15,15 +15,23 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {useFocusEffect} from '@react-navigation/native';
 import {widthPercentage, heightPercentage} from '../../styles/ResponsiveSize';
 const styles = StyleSheet.create({
+  // messageBox: {
+  //   position: 'absolute',
+  //   bottom: 0,
+  //   flexDirection: 'row',
+  //   backgroundColor: '#B2DDFF',
+  //   height: heightPercentage(42),
+  //   width: widthPercentage(360),
+  //   justifyContent: 'center',
+  //   alignItems: 'center',
+  // },
   messageBox: {
-    position: 'absolute',
-    bottom: 0,
+    marginHorizontal: 10,
     flexDirection: 'row',
-    backgroundColor: '#B2DDFF',
-    height: heightPercentage(42),
-    width: widthPercentage(360),
-    justifyContent: 'center',
-    alignItems: 'center',
+    marginBottom: 80,
+  },
+  list: {
+    height: '80%',
   },
   msgBtn: {
     backgroundColor: '#2E90FA',
@@ -39,13 +47,34 @@ const styles = StyleSheet.create({
   btnTxt: {
     textAlign: 'center',
   },
+  myChat: {
+    alignSelf: 'flex-end',
+    padding: 10,
+    color: 'white',
+    backgroundColor: 'blue',
+    fontSize: 16,
+    borderRadius: 20,
+    marginVertical: 10,
+  },
+  otherChat: {
+    alignSelf: 'flex-start',
+    padding: 10,
+    color: 'white',
+    backgroundColor: 'gray',
+    fontSize: 16,
+    borderRadius: 20,
+    marginVertical: 10,
+  },
 });
-const SOCKET_URL = 'http://172.26.0.1:8080/ws';
+const SOCKET_URL = 'http://10.0.2.2:8080/ws';
 let sockJS = new SockJS(SOCKET_URL);
 let stompClient = Stomp.over(sockJS);
+let serverMessagesList = [];
 const ChatScreen = () => {
   const [messages, setMessages] = useState('');
   const [user, setUser] = useState(null);
+  //보낸 메시지 리스트
+  const [serverMessages, setServerMessages] = useState([]);
 
   useFocusEffect(
     useCallback(() => {
@@ -85,6 +114,27 @@ const ChatScreen = () => {
   let onSendMessage = payload => {
     console.log(payload.body);
     console.log('메시지 보낸다' + messages);
+    var chatMessage = {
+      sender: 'z',
+      message: messages,
+      type: 'CHAT',
+    };
+    var chat = {
+      id: serverMessagesList.length,
+      sender: 'zz',
+      message: messages,
+      type: 'CHAT',
+      roomId: 1,
+    };
+    serverMessagesList.push(chat);
+    console.log('push후', serverMessagesList);
+    setServerMessages([...serverMessagesList]);
+    console.log('msgList', serverMessagesList, serverMessages);
+    stompClient.send(
+      '/app/chat.sendMessage/1',
+      {},
+      JSON.stringify(chatMessage),
+    );
     setMessages('');
   };
   let sendImg = () => {
@@ -95,20 +145,27 @@ const ChatScreen = () => {
     setUser({username: username, color: 'red'});
   };
   return (
-    <View
-      style={{
-        padding: 5,
-        flexGrow: 1,
-      }}>
-      <FlatList
-        renderItem={() => {
-          for (let i = 0; i < 30; i++) {
-            <Text>i</Text>;
+    <View>
+      <View
+        style={{
+          padding: 5,
+          flexGrow: 1,
+        }}>
+        <FlatList
+          style={styles.list}
+          contentContainerStyle={{paddingBottom: 50}}
+          data={serverMessages}
+          keyExtractor={item => item.id}
+          renderItem={({item}) =>
+            item.sender == 'minji' ? (
+              <Text style={styles.myChat}>{item.message}</Text>
+            ) : (
+              <Text style={styles.otherChat}>{item.message}</Text>
+            )
           }
-        }}
-      />
-
-      <SafeAreaView style={styles.messageBox}>
+        />
+      </View>
+      <View style={styles.messageBox}>
         <Pressable onPress={sendImg}>
           <Icon
             name="plus"
@@ -130,7 +187,7 @@ const ChatScreen = () => {
             color="black"
           />
         </Pressable>
-      </SafeAreaView>
+      </View>
     </View>
   );
 };

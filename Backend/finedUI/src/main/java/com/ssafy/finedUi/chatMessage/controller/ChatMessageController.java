@@ -10,9 +10,10 @@ import org.springframework.stereotype.Controller;
 @Controller
 public class ChatMessageController {
 
-    @MessageMapping("/chatRoom.sendMessage/{roomId}")
+    @MessageMapping("/chat.sendMessage/{roomId}")
     @SendTo("/topic/public/{roomId}")
     public ChatMessage sendMessage(@Payload ChatMessage chatMessage) {
+        System.out.println("채팅메시지"+chatMessage);
         return chatMessage;
     }
 
