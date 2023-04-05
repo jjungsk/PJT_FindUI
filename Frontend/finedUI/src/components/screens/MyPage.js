@@ -16,10 +16,11 @@ import {widthPercentage} from '../../styles/ResponsiveSize';
 import PwModal from '../organisms/PwModal';
 import InfoModal from '../organisms/InfoModal';
 import {getUserInfo, modifyInfo, deleteUser} from '../../API/UserApi';
-import {useSetRecoilState} from 'recoil';
+import {useRecoilValue, useSetRecoilState} from 'recoil';
 import {isLoginState} from '../../store/atoms/userState';
 import {deleteTokensFromKeychain} from '../../store/keychain/loginToken';
 import {reset} from '../navigator/NavigationService';
+import { preInfoState } from '../../store/atoms/InfoState';
 
 const styles = StyleSheet.create({
   container: {
@@ -76,23 +77,7 @@ const MyPage = () => {
   const [address, setAddress] = useState(myInfo.address); // 주소
   const [phoneNumber, setPhoneNumber] = useState(myInfo.phone); // 이메일
   const setIsLogin = useSetRecoilState(isLoginState);
-  const [registUsers, setRegistUser] = useState([
-    {
-      name: '샘스미스',
-      birthday: new Date(1997, 2, 18),
-      address: '서울시 역삼동 멀티캠퍼스',
-      phone: '010-6725-5590',
-      image: null,
-    },
-    {
-      name: '정둘권',
-      birthday: new Date(1997, 2, 18),
-      address: '서울시 역삼동 멀티캠퍼스',
-      phone: '010-6725-5590',
-      image: null,
-    },
-  ]);
-
+  const registUsers = useRecoilValue(preInfoState)
   const toggleLogoutModal = () => {
     setIsLogoutModalVisible(!isLogoutModalVisible);
   };
@@ -147,7 +132,6 @@ const MyPage = () => {
     // 정보 변경 코드
     console.log(address, phoneNumber);
     const response = await modifyInfo(address, phoneNumber);
-    console.log(response.data);
     if (response.status === 200) {
       Alert.alert('정보가 변경되었습니다.');
       setMyInfo(response.data);
@@ -172,7 +156,7 @@ const MyPage = () => {
             마이페이지
           </Text>
           <MyInfoCard myInfo={myInfo} onPress={toggleInfoModal} />
-          <Text style={[styles.text, {marginBottom: 10, marginTop: 20, paddingHorizontal: widthPercentage(10),}]}>
+          <Text style={[styles.text, {marginBottom: 10, marginTop: 20, }]}>
             사전 등록
           </Text>
           <View style={styles.line} />
