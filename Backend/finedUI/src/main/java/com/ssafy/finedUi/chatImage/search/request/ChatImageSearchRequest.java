@@ -12,5 +12,7 @@ import org.springframework.web.multipart.MultipartFile;
 @NoArgsConstructor
 public class ChatImageSearchRequest {
 
-    private MultipartFile image;
+    private MultipartFile img;
+    int limit;
+    int offset;
 }
