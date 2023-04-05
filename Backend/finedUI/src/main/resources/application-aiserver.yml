@@ -1,5 +1,5 @@
 ai:
-  host: "http://find_net:8000"
+  host: "http://172.21.0.7:8000"
   search: "/api/search"
   create: "/api/regist"
   update: "/api/update"
