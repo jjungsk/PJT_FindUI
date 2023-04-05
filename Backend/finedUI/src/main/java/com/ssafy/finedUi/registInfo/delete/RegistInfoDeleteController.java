@@ -16,9 +16,9 @@ public class RegistInfoDeleteController {
     private final RegistInfoDeleteServiceImpl registInfoDeleteService;
 
     @DeleteMapping
-    public ResponseEntity<Object> delete(@RequestParam Long id) {
+    public ResponseEntity<Object> delete(@RequestParam Long registId) {
         try {
-            registInfoDeleteService.delete(id);
+            registInfoDeleteService.delete(registId);
         } catch (Exception e) {
             return ResponseHandler.generateResponse(false, e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
         }

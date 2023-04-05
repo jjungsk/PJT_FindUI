@@ -47,7 +47,7 @@ public class RegistInfoGetController {
 
     /*
     본인이 등록한 사전 등록 or 실종 등록 조회
-    isMissing : True(실종 등록), False(사전 등록)
+    isMissing : 1(실종 등록), 0(사전 등록)
      */
     @GetMapping("/isMissing")
     public ResponseEntity<Object> getAllRegistrationByUser(@RequestParam Long isMissing) {
@@ -60,7 +60,7 @@ public class RegistInfoGetController {
     거리 기반 필터링
      */
     @GetMapping("/distance")
-    public ResponseEntity<Object> getAllMissingFilter(@RequestParam Double lnt, @RequestParam Double lat) throws Exception {
+    public ResponseEntity<Object> getAllMissingFilter(@RequestParam Double lnt, @RequestParam Double lat) {
         return ResponseHandler.generateResponse(true, "OK", HttpStatus.OK, registInfoGetService.findAllByDistance(lnt, lat));
     }
 
