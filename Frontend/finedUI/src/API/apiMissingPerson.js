@@ -19,6 +19,7 @@
   by.정세권
 */
 
+import {getAccessTokenFromKeychain} from '../store/keychain/loginToken.js';
 import apiInstance from './apiInstance.js';
 
 const api = apiInstance();
@@ -26,22 +27,26 @@ const api = apiInstance();
 // ================================= Test ================================================
 // 사전 등록 정보 생성
 const preRegist = async ({data}) => {
+  console.log(data);
+  const token = await getAccessTokenFromKeychain();
   const imageList = data.imageList;
+  const dataFormat = new FormData();
+  dataFormat.append('frontImage', null);
+  dataFormat.append('otherImage1', imageList >= 2 ? imageList[1] : null);
+  dataFormat.append('otherImage2', imageList >= 3 ? imageList[2] : null);
+  dataFormat.append('name', data.name);
+  dataFormat.append('birthDate', data.birth);
+  dataFormat.append('gender', data.gender);
   try {
-    const response = api.post(
-      '/api/regist',
-      (data = {
-        userId: data.userId,
-        frontImage: imageList[0],
-        otherImage1: imageList >= 2 ? imageList[1] : null,
-        otherImage2: imageList >= 3 ? imageList[2] : null,
-        name: data.name,
-        birthDate: data.birth,
-        gender: data.gender,
-        isMissing: false,
-      }),
-    );
-    return response;
+    const response = api.post('/api/regist/', dataFormat, {
+      headers: {
+        Authorization: 'Bearer ' + token,
+        'Content-Type': 'multipart/form-data',
+      },
+      transformRequest: dataFormat => dataFormat,
+    });
+    const status = response.status;
+    return status;
   } catch (e) {
     console.log(e);
   }
@@ -49,24 +54,27 @@ const preRegist = async ({data}) => {
 
 // 실종자 정보 생성
 const missingRegist = async ({data}) => {
+  const token = await getAccessTokenFromKeychain();
   const imageList = data.imageList;
+  const dataFormat = new FormData();
+  console.log('pos : ', data.pos.lat, data.pos.lng);
+  dataFormat.append('frontImage', imageList[0]);
+  dataFormat.append('otherImage1', imageList >= 2 ? imageList[1] : null);
+  dataFormat.append('otherImage2', imageList >= 3 ? imageList[2] : null);
+  dataFormat.append('name', data.name);
+  dataFormat.append('birthDate', data.birth);
+  dataFormat.append('gender', data.gender);
+  dataFormat.append('longitude', data.pos.lat);
+  dataFormat.append('latitude', data.pos.lng);
   try {
-    const response = api.post(
-      '/api/regist',
-      (data = {
-        userId: data.userId,
-        frontImage: imageList[0],
-        otherImage1: imageList >= 2 ? imageList[1] : null,
-        otherImage2: imageList >= 3 ? imageList[2] : null,
-        name: data.name,
-        birthDate: data.birth,
-        gender: data.gender,
-        isMissing: true,
-        longitude: data.pos.lat,
-        latitude: data.pos.lng,
-      }),
-    );
-    return response;
+    const response = api.post('/api/regist/', dataFormat, {
+      headers: {
+        Authorization: 'Bearer ' + token,
+        'Content-Type': 'multipart/form-data',
+      },
+    });
+    const status = response.status;
+    return status;
   } catch (e) {
     console.log(e);
   }
@@ -74,8 +82,17 @@ const missingRegist = async ({data}) => {
 
 // 실종자 정보 조회 (detail)
 const apiGetMissingPerson = async registId => {
+  const token = await getAccessTokenFromKeychain();
   try {
+<<<<<<< HEAD
     const response = await api.get(`/api/regist/detail?registId=${registId}`);
+=======
+    const response = await api.get(`/api/regist/detail/${registId}`, {
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
+    });
+>>>>>>> dev-front
     return response;
   } catch (error) {
     return error;

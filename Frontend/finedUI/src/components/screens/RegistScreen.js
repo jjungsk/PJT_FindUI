@@ -24,12 +24,7 @@ import Geolocation from 'react-native-geolocation-service';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 // recoil
-import {
-  useResetRecoilState,
-  useRecoilState,
-  useSetRecoilState,
-  useRecoilValue,
-} from 'recoil';
+import {useRecoilState, useRecoilValue} from 'recoil';
 import {
   registAddress,
   registImageList,
@@ -55,8 +50,7 @@ const RegistScreen = ({route, navigation}) => {
   const mode = useRecoilValue(registMode);
   const [imageList, setImageList] = useRecoilState(registImageList);
   const [position, setPosition] = useRecoilState(userPosition);
-  const [toggleMap, setToggleMap] = useState(false);
-  const [address, setAddress] = useState('');
+  const [address, setAddress] = useRecoilState(registAddress);
   const pos = useRecoilValue(registPos);
 
   useEffect(() => {
@@ -65,7 +59,6 @@ const RegistScreen = ({route, navigation}) => {
       position => {
         const {latitude, longitude} = position.coords;
         setPosition({lat: latitude, lng: longitude});
-        console.log('position change');
         return {lat: latitude, lng: longitude};
       },
       error => {
@@ -77,11 +70,8 @@ const RegistScreen = ({route, navigation}) => {
 
   useEffect(() => {
     const getAddress = () => {
-      console.log('pos : ', pos.lng, pos.lat);
       const auto = async () => {
         const result = await apiGetAddress(pos.lng, pos.lat);
-
-        console.log('주소 response : ', result);
 
         setAddress(result['address_name']);
       };
@@ -186,7 +176,14 @@ const RegistScreen = ({route, navigation}) => {
                 onPress={() => navigation.navigate('MapDetail', {mode: mode})}>
                 <View style={styles.selectPosInfoContainer}>
                   <Text style={styles.selectTitle}>실종 위치</Text>
-                  <Text style={styles.selectPosInfo}>{address}</Text>
+                  <Text
+                    style={{
+                      ...styles.selectPosInfo,
+                      color: '#000000',
+                      fontSize: fontPercentage(14),
+                    }}>
+                    {address}
+                  </Text>
                   <View style={styles.selectPosSubTitle}>
                     <Text style={styles.selectPosInfo}>위치 선택</Text>
                     <Icon
