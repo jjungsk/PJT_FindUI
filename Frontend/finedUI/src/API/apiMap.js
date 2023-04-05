@@ -8,9 +8,10 @@ import apiInstance from './apiInstance';
 
 const api = apiInstance();
 
-const apiGetAddress = async (lng, lat) => {
+const apiGetAddress = async ({lng, lat}) => {
   try {
-    const response = api.get(`/api/map?lng=${lng}&lat=${lat}`);
+    const response = await api.get(`/api/map?lng=${lng}&lat=${lat}`);
+    console.log('map : ', response.status);
     return response;
   } catch (error) {
     console.log(error);

@@ -1,4 +1,12 @@
-import {atom, useResetRecoilState} from 'recoil';
+import {atom, selector} from 'recoil';
+import axios from 'axios';
+
+import {KAKAO_URL_GET_ADDRESS, KAKAO_MAP_API_KEY} from '@env';
+
+const userPosition = atom({
+  key: 'userPosition',
+  default: {lat: 0, lng: 0},
+});
 
 const registImageList = atom({
   key: 'registImageList',
@@ -40,6 +48,27 @@ const registMode = atom({
   default: 0,
 });
 
+const registAddress = atom({
+  key: 'registAddress',
+  default: null,
+});
+
+const resetRegistAtoms = selector({
+  key: 'resetRegistAtoms',
+  get: ({get}) => {},
+  set: ({set}, mode) => {
+    set(registImageList, []);
+    set(registName, '');
+    set(registBirth, null);
+    set(registGender, null);
+    set(registMissingDate, new Date());
+    set(registPos, null);
+    set(registNote, '');
+    set(registMode, mode);
+    set(userPosition, {lat: 0, lng: 0});
+  },
+});
+
 export {
   registImageList,
   registName,
@@ -49,4 +78,7 @@ export {
   registPos,
   registNote,
   registMode,
+  userPosition,
+  resetRegistAtoms,
+  registAddress,
 };

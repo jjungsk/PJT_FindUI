@@ -19,7 +19,7 @@ import MapView, {Marker, PROVIDER_GOOGLE} from 'react-native-maps';
 // recoil
 import {useSetRecoilState} from 'recoil';
 import {registPos} from '../store_regist/registStore';
-import {userPosition} from '../store_regist/homeStore';
+import {userPosition} from '../store_regist/registStore';
 
 const GoogleMapDetail = ({position, zoom = 0.005, setMarker = false}) => {
   const {width, height} = Dimensions.get('window');

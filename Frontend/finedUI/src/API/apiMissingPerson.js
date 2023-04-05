@@ -24,13 +24,51 @@ import apiInstance from './apiInstance.js';
 const api = apiInstance();
 
 // ================================= Test ================================================
-// 실종자 정보 생성
-const apiPostMissingPerson = async missingPersonInfo => {
+// 사전 등록 정보 생성
+const preRegist = async ({data}) => {
+  const imageList = data.imageList;
   try {
-    const response = await api.post(`/api/regist`, missingPersonInfo);
+    const response = api.post(
+      '/api/regist',
+      (data = {
+        userId: data.userId,
+        frontImage: imageList[0],
+        otherImage1: imageList >= 2 ? imageList[1] : null,
+        otherImage2: imageList >= 3 ? imageList[2] : null,
+        name: data.name,
+        birthDate: data.birth,
+        gender: data.gender,
+        isMissing: false,
+      }),
+    );
     return response;
-  } catch (error) {
-    return error;
+  } catch (e) {
+    console.log(e);
+  }
+};
+
+// 실종자 정보 생성
+const missingRegist = async ({data}) => {
+  const imageList = data.imageList;
+  try {
+    const response = api.post(
+      '/api/regist',
+      (data = {
+        userId: data.userId,
+        frontImage: imageList[0],
+        otherImage1: imageList >= 2 ? imageList[1] : null,
+        otherImage2: imageList >= 3 ? imageList[2] : null,
+        name: data.name,
+        birthDate: data.birth,
+        gender: data.gender,
+        isMissing: true,
+        longitude: data.pos.lat,
+        latitude: data.pos.lng,
+      }),
+    );
+    return response;
+  } catch (e) {
+    console.log(e);
   }
 };
 
@@ -65,7 +103,8 @@ const apiDeleteMissingPerson = async registId => {
 };
 
 export {
-  apiPostMissingPerson,
+  preRegist,
+  missingRegist,
   apiGetMissingPerson,
   apiPutMissingPerson,
   apiDeleteMissingPerson,
