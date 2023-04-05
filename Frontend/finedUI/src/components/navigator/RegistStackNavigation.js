@@ -1,24 +1,17 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
-import RegistSelectScreen from '../screens/RegistSelectScreen';
-import RegistScreen from '../screens/RegistScreen';
-import {useRecoilValue, useResetRecoilState} from 'recoil';
-import {Text, TouchableOpacity, StyleSheet} from 'react-native';
+import {Text, Alert, TouchableOpacity, StyleSheet} from 'react-native';
 import {
   fontPercentage,
   heightPercentage,
   widthPercentage,
 } from '../../styles/ResponsiveSize';
-import {
-  registName,
-  registBirth,
-  registGender,
-  registImageList,
-  registMissingDate,
-  registPos,
-  registMode,
-  registNote,
-} from '../store_regist/registStore';
+
+import {useRecoilValue, useResetRecoilState} from 'recoil';
+import {registProps} from '../store_regist/registStore';
+
+import RegistSelectScreen from '../screens/RegistSelectScreen';
+import RegistScreen from '../screens/RegistScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -31,15 +24,7 @@ const styles = StyleSheet.create({
 });
 
 const RegistStackNavigation = ({navigation}) => {
-  const name = useRecoilValue(registName);
-  const birth = useRecoilValue(registBirth);
-  const gender = useRecoilValue(registGender);
-  const imageList = useRecoilValue(registImageList);
-  const date = useRecoilValue(registMissingDate);
-  const pos = useRecoilValue(registPos);
-  const note = useRecoilValue(registNote);
-  const mode = useRecoilValue(registMode);
-
+  const registPropsState = useRecoilValue(registProps);
   return (
     <Stack.Navigator initialRouteName="registRoot">
       <Stack.Screen
@@ -59,6 +44,18 @@ const RegistStackNavigation = ({navigation}) => {
               <TouchableOpacity
                 onPress={() => {
                   // 서버에 실종자 정보 등록
+                  const {prop, state} = registPropsState;
+                  if (state) {
+                    Alert.alert('', prop + '을 추가해주세요', [
+                      {
+                        text: '확인',
+                        onPress: () => {
+                          return;
+                        },
+                      },
+                    ]);
+                  } else {
+                  }
                   navigation.reset({routes: [{name: 'Home'}]});
                 }}>
                 <Text style={styles.completeBtnTitle}>완료</Text>

@@ -8,14 +8,8 @@ import {
 } from '../../styles/ResponsiveSize';
 
 import GoogleMapDetail from '../organisms/GoogleMapDetail';
-import {useRecoilState, useRecoilValue, useSetRecoilState} from 'recoil';
-import {
-  registAddress,
-  registMode,
-  registPos,
-  userPosition,
-} from '../store_regist/registStore';
-import {apiGetAddress} from '../../API/apiKakao';
+import {useRecoilValue, useSetRecoilState} from 'recoil';
+import {registMode, registPos, userPosition} from '../store_regist/registStore';
 
 const styles = StyleSheet.create({
   mainContainer: {
@@ -51,7 +45,6 @@ const styles = StyleSheet.create({
 const MapViewDetail = ({navigation, route}) => {
   const position = useRecoilValue(userPosition);
   const setPos = useSetRecoilState(registPos);
-  const setAddress = useSetRecoilState(registAddress);
   const mode = useRecoilValue(registMode);
 
   return (
@@ -68,8 +61,6 @@ const MapViewDetail = ({navigation, route}) => {
             style={styles.setPosBtn}
             onPress={async () => {
               setPos(position);
-              // const address = await apiGetAddress(position.lng, position.lat);
-              // setAddress(address);
               navigation.goBack();
             }}>
             <Text style={styles.setPosBtnTitle}>선택 완료</Text>
