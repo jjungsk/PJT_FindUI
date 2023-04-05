@@ -12,7 +12,6 @@ import {
   registName,
   registBirth,
   registMissingDate,
-  registNote,
   registMode,
 } from '../store_regist/registStore';
 
@@ -27,7 +26,6 @@ import Divider from '../atoms/Divider';
 const RegistInputForm = () => {
   const setUserName = useSetRecoilState(registName);
   const setBirthday = useSetRecoilState(registBirth);
-  const setNote = useSetRecoilState(registNote);
   const [missingDate, setMissingDate] = useRecoilState(registMissingDate);
   const [pickerMode, setPickerMode] = useState('date');
   const [visible, setVisible] = useState(false);
@@ -69,14 +67,6 @@ const RegistInputForm = () => {
         inputData={text => setBirthday(text)}
         maxLength={8}
         keyboardType="number-pad"
-      />
-      <Divider />
-
-      <CustomInputField
-        placeholder="특이사항 (50자이내)"
-        multiline={true}
-        maxLength={50}
-        inputData={text => setNote(text)}
       />
       <Divider />
 

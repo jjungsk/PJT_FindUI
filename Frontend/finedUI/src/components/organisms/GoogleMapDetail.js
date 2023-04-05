@@ -6,10 +6,10 @@
 */
 
 // react
-import React, {useState, useEffect} from 'react';
+import React from 'react';
 
 // react-native
-import {View, Image, StyleSheet, Dimensions} from 'react-native';
+import {Image, StyleSheet, Dimensions} from 'react-native';
 
 import {widthPercentage, heightPercentage} from '../../styles/ResponsiveSize';
 

@@ -1,7 +1,4 @@
 import {atom, selector} from 'recoil';
-import axios from 'axios';
-
-import {KAKAO_URL_GET_ADDRESS, KAKAO_MAP_API_KEY} from '@env';
 
 const userPosition = atom({
   key: 'userPosition',
@@ -38,11 +35,6 @@ const registPos = atom({
   default: null,
 });
 
-const registNote = atom({
-  key: 'registNote',
-  default: '',
-});
-
 const registMode = atom({
   key: 'registMode',
   default: 0,
@@ -53,9 +45,41 @@ const registAddress = atom({
   default: null,
 });
 
+const registProps = selector({
+  key: 'registProps',
+  get: ({get}) => {
+    const imageList = get(registImageList);
+    const name = get(registName);
+    const birth = get(registBirth);
+    const gender = get(registGender);
+    const date = get(registMissingDate);
+    const pos = get(registPos);
+
+    if (imageList.length < 1) {
+      return {porp: '사진', state: false};
+    }
+    if (name === '') {
+      return {porp: '이름', state: false};
+    }
+    if (birth === null) {
+      return {porp: '생년월일', state: false};
+    }
+    if (gender === null) {
+      return {porp: '성별', state: false};
+    }
+    // if (date !=){
+    //   return {porp:"사진", state:false}
+    // }
+    if (pos === null) {
+      return {porp: '실종 장소', state: false};
+    }
+
+    return {prop: null, state: true};
+  },
+});
+
 const resetRegistAtoms = selector({
   key: 'resetRegistAtoms',
-  get: ({get}) => {},
   set: ({set}, mode) => {
     set(registImageList, []);
     set(registName, '');
@@ -63,9 +87,9 @@ const resetRegistAtoms = selector({
     set(registGender, null);
     set(registMissingDate, new Date());
     set(registPos, null);
-    set(registNote, '');
     set(registMode, mode);
     set(userPosition, {lat: 0, lng: 0});
+    set(registAddress, '');
   },
 });
 
@@ -76,9 +100,9 @@ export {
   registGender,
   registMissingDate,
   registPos,
-  registNote,
   registMode,
   userPosition,
   resetRegistAtoms,
   registAddress,
+  registProps,
 };

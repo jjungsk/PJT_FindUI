@@ -51,23 +51,22 @@ const App = () => {
   const setIsLoading = useSetRecoilState(isLoadingState);
   const setIsLogin = useSetRecoilState(isLoginState);
 
-  // useEffect(() => {
-  //   const checkLogin = async () => {
-  //     const response = await checkAcess();
-  //     setIsLoading(false)
-  //     if (response === true) {
-  //       console.log('동작')
-  //       setIsLogin(true)
-  //     } else {
-  //       console.log('실패')
-  //       setIsLogin(false)
-  //     }
-  //   }
-  //   if(isLoading){
-  //     checkLogin();
-  //   }
-  // }
-  // , []);
+  useEffect(() => {
+    const checkLogin = async () => {
+      const response = await checkAcess();
+      setIsLoading(false);
+      if (response === true) {
+        console.log('동작');
+        setIsLogin(true);
+      } else {
+        console.log('실패');
+        setIsLogin(false);
+      }
+    };
+    if (isLoading) {
+      checkLogin();
+    }
+  }, []);
 
   if (isLoading) {
     return (
