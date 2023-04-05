@@ -50,8 +50,8 @@ const SelectGender = () => {
   const [gender, setGender] = useRecoilState(registGender);
 
   const genderData = [
-    {des: '남자', val: 0},
-    {des: '여자', val: 1},
+    {des: '남자', val: 1},
+    {des: '여자', val: 2},
   ];
 
   return (

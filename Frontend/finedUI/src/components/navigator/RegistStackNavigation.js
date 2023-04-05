@@ -8,10 +8,23 @@ import {
 } from '../../styles/ResponsiveSize';
 
 import {useRecoilValue, useResetRecoilState} from 'recoil';
-import {registProps} from '../store_regist/registStore';
+import {
+  registBirth,
+  registGender,
+  registImageList,
+  registMissingDate,
+  registMode,
+  registName,
+  registPos,
+  registProps,
+} from '../store_regist/registStore';
 
 import RegistSelectScreen from '../screens/RegistSelectScreen';
 import RegistScreen from '../screens/RegistScreen';
+import {el} from 'date-fns/locale';
+import {missingRegist, preRegist} from '../../API/apiMissingPerson';
+import {format} from 'date-fns';
+import ko from 'date-fns/esm/locale/ko/index.js';
 
 const Stack = createNativeStackNavigator();
 
@@ -25,6 +38,13 @@ const styles = StyleSheet.create({
 
 const RegistStackNavigation = ({navigation}) => {
   const registPropsState = useRecoilValue(registProps);
+  const imageList = useRecoilValue(registImageList);
+  const name = useRecoilValue(registName);
+  const birth = useRecoilValue(registBirth);
+  const gender = useRecoilValue(registGender);
+  const date = useRecoilValue(registMissingDate);
+  const pos = useRecoilValue(registPos);
+  const mode = useRecoilValue(registMode);
   return (
     <Stack.Navigator initialRouteName="registRoot">
       <Stack.Screen
@@ -42,21 +62,56 @@ const RegistStackNavigation = ({navigation}) => {
           headerRight: () => {
             return (
               <TouchableOpacity
-                onPress={() => {
+                onPress={async () => {
                   // 서버에 실종자 정보 등록
+                  let status = 200;
                   const {prop, state} = registPropsState;
-                  if (state) {
+                  if (!state) {
                     Alert.alert('', prop + '을 추가해주세요', [
                       {
                         text: '확인',
-                        onPress: () => {
-                          return;
-                        },
+                        onPress: () => {},
                       },
                     ]);
                   } else {
+                    if (mode == 0) {
+                      console.log(mode);
+                      try {
+                        status = await preRegist({
+                          data: {
+                            imageList: imageList,
+                            name: name,
+                            birth: birth,
+                            gender: gender,
+                          },
+                        });
+                      } catch (e) {
+                        console.log(e);
+                      }
+                    } else {
+                      console.log(mode);
+                      const dateString = format(date, 'yyyy-MM-dd HH:mm:ss', {
+                        locale: ko,
+                      });
+                      try {
+                        status = await missingRegist({
+                          data: {
+                            imageList: imageList,
+                            name: name,
+                            birth: birth,
+                            gender: gender,
+                            date: dateString,
+                            pos: pos,
+                          },
+                        });
+                      } catch (e) {
+                        console.log(e);
+                      }
+                    }
                   }
-                  navigation.reset({routes: [{name: 'Home'}]});
+                  if (status == 200) {
+                    // navigation.reset({routes: [{name: 'Home'}]});
+                  }
                 }}>
                 <Text style={styles.completeBtnTitle}>완료</Text>
               </TouchableOpacity>
