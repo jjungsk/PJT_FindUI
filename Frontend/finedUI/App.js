@@ -1,6 +1,5 @@
 // react
 import React, {useEffect} from 'react';
-import React, {useEffect} from 'react';
 import {View, StyleSheet, Platform, PermissionsAndroid} from 'react-native';
 import Geolocation from 'react-native-geolocation-service';
 import {

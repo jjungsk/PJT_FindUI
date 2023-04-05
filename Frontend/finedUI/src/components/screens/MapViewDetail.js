@@ -15,7 +15,6 @@ import {
   registPos,
   userPosition,
 } from '../store_regist/registStore';
-import {apiGetAddress} from '../../API/apiKakao';
 
 const styles = StyleSheet.create({
   mainContainer: {

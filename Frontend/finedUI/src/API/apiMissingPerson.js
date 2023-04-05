@@ -75,7 +75,7 @@ const missingRegist = async ({data}) => {
 // 실종자 정보 조회 (detail)
 const apiGetMissingPerson = async registId => {
   try {
-    const response = await api.get(`/api/regist/detail/${registId}`);
+    const response = await api.get(`/api/regist/detail?registId=${registId}`);
     return response;
   } catch (error) {
     return error;

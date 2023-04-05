@@ -3,25 +3,15 @@
   by.정세권
 */
 
-import {Alert} from 'react-native';
-
-// check token
-import {checkAcess, checkRefresh} from './AccountApi';
-
 // state token
-import {
-  getAccessTokenFromKeychain,
-  getRefreshTokenFromKeychain,
-  saveAccessToKeychain,
-  saveRefreshToKeychain,
-} from '../store/keychain/loginToken';
+import {getAccessTokenFromKeychain} from '../store/keychain/loginToken';
 
 const apiInterceptor = instance => {
   // Add a request interceptor
   instance.interceptors.request.use(
-    config => {
+    async config => {
       // instance 전역 설정
-      const authTokenAccessToken = getAccessTokenFromKeychain();
+      const authTokenAccessToken = await getAccessTokenFromKeychain();
       const newConfig = config;
       newConfig.headers.Authorization = `Bearer ${authTokenAccessToken}`;
       return newConfig;

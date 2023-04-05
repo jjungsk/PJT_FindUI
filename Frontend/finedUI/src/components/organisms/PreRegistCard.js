@@ -14,10 +14,7 @@ import {
 // icons
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import {format} from 'date-fns';
-import ko from 'date-fns/esm/locale/ko/index.js';
-
-const PreRegistCard = ({registUser, navigation}) => {
+const PreRegistCard = ({registUser, userInfo, navigation}) => {
   return (
     <View style={styles.container}>
       <Image
@@ -34,6 +31,7 @@ const PreRegistCard = ({registUser, navigation}) => {
             onPress={() => {
               navigation.navigate('ModifyScreen', {
                 registId: registUser.registId,
+                userInfo: userInfo,
               });
             }}>
             <Icon
@@ -56,10 +54,10 @@ const PreRegistCard = ({registUser, navigation}) => {
             생년 월일 : {registUser.birthDate}
           </Text>
           <Text numberOfLines={1} style={styles.text}>
-            보호자 주소 : {registUser.address}
+            보호자 주소 : {userInfo.address}
           </Text>
           <Text numberOfLines={1} style={styles.text}>
-            보호자 연락처 : {registUser.phonenumber}
+            보호자 연락처 : {userInfo.phoneNumber}
           </Text>
         </View>
       </View>

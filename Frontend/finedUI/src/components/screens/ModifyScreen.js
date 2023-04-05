@@ -39,11 +39,6 @@ import {apiGetMissingPerson} from '../../API/apiMissingPerson.js';
 
 const ModifyScreen = ({navigation, route}) => {
   // STATE
-  // Recoil state - test 용
-  const [text, setText] = useRecoilState(stringState);
-  const value = useRecoilValue(stringState);
-  const selResult = useRecoilValue(selCountState);
-
   // Local state - 실종자 정보
   const [missingPerson, setMissingPerson] = useState({});
 
@@ -74,6 +69,7 @@ const ModifyScreen = ({navigation, route}) => {
     // route로 넘어온 등록된 ID
     const registId = route.params.registId;
 
+    console.log(registId);
     const auto = async () => {
       await apiGetMissingPerson(registId)
         .then(({data}) => {
@@ -81,7 +77,7 @@ const ModifyScreen = ({navigation, route}) => {
           console.log(data.data);
         })
         .catch(error => {
-          Alert.alert(error);
+          Alert.alert(error.message);
         });
     };
     auto();

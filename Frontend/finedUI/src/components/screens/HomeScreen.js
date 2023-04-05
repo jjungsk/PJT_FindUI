@@ -39,12 +39,23 @@ import {Carousel} from 'react-native-basic-carousel';
 import {MissingPersonCard} from '../organisms/MissingPersonCard';
 
 // apis
-import {apiGetUserRegistMissingPersons} from '../../API/apiHome';
-import {apiGetAddress, apiGetLngLat} from '../../API/apiKakao';
+import {getUserInfo} from '../../API/UserApi';
+import {
+  apiGetUserRegistMissingPersons,
+  apiGetMissingPersonAll,
+} from '../../API/apiHome';
 
 const HomeScreen = ({navigation}) => {
+  // STATE
+  // (0) 로그인 유저
+  // 현재 위치
   const [position, setPosition] = useRecoilState(userPosition);
+  // 몰루?
   const [isChange, setIsChange] = useState(false);
+  // 유저 정보
+  const [userInfo, setUserInfo] = useState({});
+
+  // (1) 사용자가 등록한 실종자 정보
   const [registUsers, setRegistUser] = useState([
     {
       name: '샘스미스',
@@ -60,8 +71,25 @@ const HomeScreen = ({navigation}) => {
       phone: '010-6725-5590',
       image: null,
     },
+    {
+      registId: 9,
+      userId: 4,
+      name: '홍길동',
+      birthDate: 19960625,
+      gender: 1,
+      frontImagePath: null,
+      otherImage1Path: null,
+      otherImage2Path: null,
+      missingTime: null,
+      longitude: null,
+      latitude: null,
+      createDate: 1680702391416,
+      isMissing: null,
+      updateDate: 1680702391416,
+    },
   ]);
 
+  // (2) 공지사항
   const [notices, setNotice] = useState([
     {
       title: '미아 발견 시, 대처 방법',
@@ -75,29 +103,8 @@ const HomeScreen = ({navigation}) => {
     },
   ]);
 
-  const [missingPersons, setMissingPerson] = useState([
-    {
-      name: 'Name1',
-      identity: 'birthDate1',
-      location: '서울',
-      image: null,
-      registId: 1,
-    },
-    {
-      name: 'Name2',
-      identity: 'birthDate2',
-      location: '서울',
-      image: null,
-      registId: 2,
-    },
-    {
-      name: 'Name3',
-      identity: 'birthDate3',
-      location: '서울',
-      image: null,
-      registId: 3,
-    },
-  ]);
+  // (3) 전체 실종자 정보
+  const [missingPersons, setMissingPerson] = useState([]);
 
   const width = Dimensions.get('window').width;
 
@@ -116,6 +123,16 @@ const HomeScreen = ({navigation}) => {
       );
     });
 
+    // (0) 로그인한 유저의 정보 저장
+    const auto = async () => {
+      await getUserInfo()
+        .then(res => {
+          setUserInfo(res);
+        })
+        .catch(error => console.log(error));
+    };
+    auto();
+
     // (1) User가 등록한 실종자 등록 정보
     const userId = 1;
     const auto1 = async () => {
@@ -130,6 +147,15 @@ const HomeScreen = ({navigation}) => {
     // (2) notices list 반환
 
     // (3) 전체 실종자 list 반환
+    const auto3 = async () => {
+      await apiGetMissingPersonAll(userId)
+        .then(({data}) => {
+          setMissingPerson(data.data);
+        })
+        .catch(error => console.log(error));
+    };
+    auto3();
+    // test
   }, []);
 
   // component
@@ -178,7 +204,11 @@ const HomeScreen = ({navigation}) => {
               data={registUsers}
               renderItem={({item}) => (
                 <View style={styles.carouselItem}>
-                  <PreRegistCard registUser={item} navigation={navigation} />
+                  <PreRegistCard
+                    registUser={item}
+                    userInfo={userInfo}
+                    navigation={navigation}
+                  />
                 </View>
               )}
               itemWidth={width}
@@ -206,7 +236,7 @@ const HomeScreen = ({navigation}) => {
             data={missingPersons}
             renderItem={missingCardRender}
             horizontal={true}
-            keyExtractor={item => String(item.identity)}
+            keyExtractor={item => String(item.registId)}
           />
         </View>
         <View style={styles.realtimeMissingContainer}>
@@ -218,7 +248,7 @@ const HomeScreen = ({navigation}) => {
               data={missingPersons}
               renderItem={missingCardRender}
               horizontal={true}
-              keyExtractor={item => String(item.identity)}
+              keyExtractor={item => String(item.registId)}
             />
           </View>
         </View>
