@@ -3,6 +3,7 @@ import React, {useEffect} from 'react';
 import {View, StyleSheet, Platform, PermissionsAndroid} from 'react-native';
 import Geolocation from 'react-native-geolocation-service';
 import {RecoilRoot, useRecoilState, useRecoilValue, useSetRecoilState} from 'recoil';
+import RecoilNexus from "recoil-nexus";
 
 // stack
 import StackNavigation from './src/components/navigator/StackNavigation';
@@ -59,6 +60,7 @@ const App = () => {
       }
     }
     if(isLoading){
+      requestPermission();
       checkLogin();
     }
   }
@@ -78,6 +80,7 @@ const App = () => {
 export default function WrappedApp() {
   return (
     <RecoilRoot>
+      <RecoilNexus />
       <App />
     </RecoilRoot>
   );

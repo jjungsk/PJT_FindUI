@@ -16,7 +16,7 @@ export const saveRefreshToKeychain = async (refreshToken) => {
 
 // Access Token을 가져오는 함수
 export const getAccessTokenFromKeychain = async () => {
-  const credentials = await Keychain.getInternetCredentials(SERVICE_NAME, ACCESS_TOKEN_KEY);
+  const credentials = await Keychain.getInternetCredentials(SERVICE_NAME, { key: ACCESS_TOKEN_KEY });
   if (credentials) {
     return credentials.password;
   }
@@ -25,7 +25,7 @@ export const getAccessTokenFromKeychain = async () => {
 
 // Refresh Token을 가져오는 함수
 export const getRefreshTokenFromKeychain = async () => {
-  const credentials = await Keychain.getInternetCredentials(SERVICE_NAME, REFRESH_TOKEN_KEY);
+  const credentials = await Keychain.getInternetCredentials(SERVICE_NAME, { key: REFRESH_TOKEN_KEY });
   if (credentials) {
     return credentials.password;
   }
@@ -34,6 +34,6 @@ export const getRefreshTokenFromKeychain = async () => {
 
 // Access Token과 Refresh Token을 삭제하는 함수
 export const deleteTokensFromKeychain = async () => {
-  await Keychain.resetInternetCredentials(SERVICE_NAME, ACCESS_TOKEN_KEY);
-  await Keychain.resetInternetCredentials(SERVICE_NAME, REFRESH_TOKEN_KEY);
+  await Keychain.resetInternetCredentials(SERVICE_NAME, { key: ACCESS_TOKEN_KEY });
+  await Keychain.resetInternetCredentials(SERVICE_NAME, { key: REFRESH_TOKEN_KEY });
 };

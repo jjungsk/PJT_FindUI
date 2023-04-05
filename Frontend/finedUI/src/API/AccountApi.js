@@ -1,8 +1,8 @@
 import apiInstance from "./apiInstance";
 import { deleteTokensFromKeychain, getAccessTokenFromKeychain, getRefreshTokenFromKeychain, saveAccessToKeychain, saveRefreshToKeychain } from "../store/keychain/loginToken";
 import { reset } from "../components/navigator/NavigationService";
-import { useSetRecoilState } from "recoil";
 import { isLoginState } from "../store/atoms/userState";
+import { setRecoil } from "recoil-nexus";
 
 const api = apiInstance();
 
@@ -26,7 +26,6 @@ export const signup = async (name, address, email, password, phoneNumber) => {
 // refresh token 유효성 검사
 export const checkRefresh = async () => {
   try{
-    const setIsLogin = useSetRecoilState(isLoginState)
     const accesstoken = await getAccessTokenFromKeychain();
     const token = await getRefreshTokenFromKeychain();
     const response = await api.post(`/api/user/token/refresh`, {}, {
@@ -39,7 +38,7 @@ export const checkRefresh = async () => {
       saveAccessToKeychain(response.data.accessToken)
       return true
     } else {
-      setIsLogin(false)
+      setRecoil(isLoginState, false)
       deleteTokensFromKeychain();
       reset('LoginPage')
       return false
@@ -53,13 +52,14 @@ export const checkRefresh = async () => {
 // access token 유효성 검사
 export const checkAcess = async () => {
   try{
-    const setIsLogin = useSetRecoilState(isLoginState)
     const token = await getAccessTokenFromKeychain();
+    console.log(token)
     const response = await api.post(`/api/user/token`, {}, {
       headers: {
         'Authorization': 'Bearer ' + token
       }  
     });  
+    console.log(response)
     if (response.status === 200 ) {
       return true
     }
@@ -70,9 +70,10 @@ export const checkAcess = async () => {
     }
 
     if (response.status === 401) {
-      setIsLogin(false)
+      setRecoil(isLoginState, false)
       deleteTokensFromKeychain();
       reset('LoginPage')
+      return false
     }
   } catch (error) {
     console.error(error)
