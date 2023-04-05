@@ -69,8 +69,10 @@ const registProps = selector({
     if (gender === null) {
       return {prop: '성별', state: false};
     }
-    if (pos === null) {
-      return {prop: '실종 장소', state: false};
+    if (mode !== 0) {
+      if (pos === null) {
+        return {prop: '실종 장소', state: false};
+      }
     }
 
     return {prop: null, state: true};

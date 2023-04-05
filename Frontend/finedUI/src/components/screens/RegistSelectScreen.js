@@ -23,7 +23,10 @@ const RegistSelectScreen = ({navigation}) => {
     <SafeAreaView style={styles.container}>
       <TouchableOpacity
         activeOpacity={0.6}
-        onPress={() => navigation.navigate('registMain')}>
+        onPress={() => {
+          resetRegistProps((mode = 0));
+          navigation.navigate('registMain');
+        }}>
         <RegistSelectBtn selectItem={preRegistItem} />
       </TouchableOpacity>
       <TouchableOpacity
