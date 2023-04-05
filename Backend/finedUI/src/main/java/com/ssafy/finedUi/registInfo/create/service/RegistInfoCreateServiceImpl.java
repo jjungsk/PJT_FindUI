@@ -1,5 +1,6 @@
 package com.ssafy.finedUi.registInfo.create.service;
 
+import com.ssafy.finedUi.db.entity.RegistInfo;
 import com.ssafy.finedUi.registInfo.RegistInfoRepository;
 import com.ssafy.finedUi.registInfo.create.request.RegistInfoCreateRequest;
 import com.ssafy.finedUi.registInfo.create.response.RegistInfoCreateResponse;
@@ -15,6 +16,7 @@ import java.awt.*;
 import java.net.URL;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @Transactional
@@ -32,7 +34,9 @@ public class RegistInfoCreateServiceImpl implements RegistInfoCreateService {
     public RegistInfoCreateResponse save(RegistInfoCreateRequest registInfoCreateRequest) {
         // user
         Long userId = registInfoCreateRequest.getUserId();
+        System.out.println(userId);
         // userId로 user를 조회하여 dto에 user 할당
+        System.out.println(userRepository.findById(userId).get().getUserId());
         registInfoCreateRequest.setUser(userRepository.findById(userId).get());
         // 좌표값 할당
         Double longitude = registInfoCreateRequest.getLongitude();
@@ -49,7 +53,9 @@ public class RegistInfoCreateServiceImpl implements RegistInfoCreateService {
         // 이미지 파일 배열 생성
         MultipartFile[] multipartFiles = {registInfoCreateRequest.getFrontImage(), registInfoCreateRequest.getOtherImage1(), registInfoCreateRequest.getOtherImage2()};
         // 이미지 저장 경로들 filePaths에 할당
-        String[] filePaths = imageSaveService.save(multipartFiles, userId);
+        List<RegistInfo> registInfoList = registInfoRepository.findAll();
+        Long registId = registInfoList.get(registInfoList.size() - 1).getRegistId() + 1;
+        String[] filePaths = imageSaveService.save(multipartFiles, registId);
         // 각 이미지들에 맞게 파일 경로 할당
         registInfoCreateRequest.setFrontImagePath(filePaths[0]);
         registInfoCreateRequest.setOtherImage1Path(filePaths[1]);

@@ -12,7 +12,7 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 public class RegistInfoGetResponse {
     private Long registId;              // 실종 번호
-    private Long userId;                // 사용자(FK)
+//    private Long userId;                // 사용자(FK)
     private String name;                // 이름
     private Integer birthDate;          // 생년월일(ex: 1996.06.25)
     private Integer gender;             // 성별
@@ -31,7 +31,7 @@ public class RegistInfoGetResponse {
 
     public RegistInfoGetResponse(RegistInfo registInfo) {
         this.registId = registInfo.getRegistId();
-        this.userId = registInfo.getUser().getUserId();
+//        this.userId = registInfo.getUser().getUserId();
         this.name = registInfo.getName();
         this.birthDate = registInfo.getBirthDate();
         this.gender = registInfo.getGender();
