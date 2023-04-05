@@ -21,12 +21,14 @@ import {isLoginState} from '../../store/atoms/userState';
 import {deleteTokensFromKeychain} from '../../store/keychain/loginToken';
 import {reset} from '../navigator/NavigationService';
 import { preInfoState } from '../../store/atoms/InfoState';
+import NoRegistCard from '../organisms/NoRegistCard';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: '#ffffff',
   },
   text: {
     fontWeight: 'bold',
@@ -68,12 +70,7 @@ const MyPage = () => {
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [myInfo, setMyInfo] = useState({
-    name: '이한나',
-    email: 'dlgkssk@ssafy.com',
-    phone: '01022222222',
-    address: '서울시 성북구 종암동',
-  });
+  const [myInfo, setMyInfo] = useState({});
   const [address, setAddress] = useState(myInfo.address); // 주소
   const [phoneNumber, setPhoneNumber] = useState(myInfo.phone); // 이메일
   const setIsLogin = useSetRecoilState(isLoginState);
@@ -161,7 +158,13 @@ const MyPage = () => {
           </Text>
           <View style={styles.line} />
         </View>
-        <Carousel
+        {registUsers.length <1 
+        ?
+        <View style={styles.carouselItem}>
+          <NoRegistCard textInfo={'등록된 사전 등록 정보가 없습니다.'}/>
+        </View>
+        :
+        (<Carousel
           data={registUsers}
           renderItem={({item}) => (
             <View style={styles.carouselItem}>
@@ -173,7 +176,8 @@ const MyPage = () => {
           )}
           itemWidth={width}
           pagination
-        />
+        />)
+        }
         <View style={{paddingHorizontal: widthPercentage(10), marginBottom: 40}}>
           <Text style={[styles.text, {marginBottom: 10, marginTop: 10}]}>
             계정관리

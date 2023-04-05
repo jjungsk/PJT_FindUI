@@ -36,13 +36,12 @@ import {MissingPersonCard} from '../organisms/MissingPersonCard';
 // apis
 import {apiGetUserRegistMissingPersons} from '../../API/apiHome';
 import {apiGetAddress, apiGetLngLat} from '../../API/apiKakao';
-// import { missingInfoState, preInfoState } from '../../store/atoms/InfoState';
 import { missingSelector, preSelector } from '../../store/selectors/RegistSelector';
 import NoRegistCard from '../organisms/NoRegistCard';
 
 const HomeScreen = ({navigation}) => {
   const setPosition = useSetRecoilState(userPosition);
-  const [isChange, setIsChange] = useState(false);
+  const [isChange, setIsChange] = useState(true);
   const registUsers = useRecoilValue(preSelector)
   const longPersons = [
     {
@@ -96,27 +95,6 @@ const HomeScreen = ({navigation}) => {
   }, []);
 
   const width = Dimensions.get('window').width;
-
-  // FUNCTION
-
-  // function - render
-  // useEffect(() => {
-  //   // (1) User가 등록한 실종자 등록 정보
-  //   const userId = 1;
-  //   const auto1 = async () => {
-  //     await apiGetUserRegistMissingPersons(userId)
-  //       .then(({data}) => {
-  //         setRegistUser(data.data);
-  //       })
-  //       .catch(error => console.log(error));
-  //   };
-  //   auto1();
-
-  //   // (2) notices list 반환
-
-  //   // (3) 전체 실종자 list 반환
-  // }, []);
-
   
   // component
   const missingCardRender = ({item}) => {
@@ -138,15 +116,26 @@ const HomeScreen = ({navigation}) => {
               alignItems: 'center',
             }}>
             <View style={styles.titleContainer}>
-              <Text style={styles.title}>등록 정보</Text>
+              <Text style={[styles.title, isChange&&{color: '#d3d3d3'}]}
+              onPress={() => {
+                setIsChange(true);
+              }}
+              >사전 등록 정보</Text>
             </View>
-            <TouchableOpacity
-              style={{marginRight: 8}}
+            <View style={styles.titleContainer} >
+              <Text style={[styles.title, !isChange&&{color: '#d3d3d3'}]}
+              onPress={() => {
+                setIsChange(false);
+              }}
+              >실종 등록 정보</Text>
+            </View>
+            {/* <TouchableOpacity
+              style={{marginRight: 8, backgroundColor: '#1570EF', padding: 5, justifyContent:"center", alignItems: 'center', borderRadius: 5}}
               onPress={() => {
                 setIsChange(!isChange);
               }}>
-              <Text>Change</Text>
-            </TouchableOpacity>
+              <Text>{isChange? '실종 정보' : '사전 정보'}</Text>
+            </TouchableOpacity> */}
           </View>
           {isChange ? (
             registUsers.length < 1 ?
@@ -171,7 +160,7 @@ const HomeScreen = ({navigation}) => {
           ) : (registUsers.length < 1
           ?(
             <View style={styles.carouselItem}>
-              <NoRegistCard textInfo={'등록힌실종 정보가 없습니다.'}/>
+              <NoRegistCard textInfo={'등록한 실종 정보가 없습니다.'}/>
             </View>
           )
           :
