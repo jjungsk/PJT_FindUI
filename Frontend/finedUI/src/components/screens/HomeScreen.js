@@ -97,7 +97,12 @@ const HomeScreen = ({navigation}) => {
     },
   ]);
 
+  const width = Dimensions.get('window').width;
+
+  // FUNCTION
+  // function - render
   useEffect(() => {
+    // (0) 로그인 후 사용자의 현재 위치 값 저장
     Geolocation.getCurrentPosition(position => {
       const {latitude, longitude} = position.coords;
       setPosition(
@@ -108,14 +113,7 @@ const HomeScreen = ({navigation}) => {
         {enableHighAccuracy: true, timeout: 5000, maximumAge: 5000},
       );
     });
-  }, []);
 
-  const width = Dimensions.get('window').width;
-
-  // FUNCTION
-
-  // function - render
-  useEffect(() => {
     // (1) User가 등록한 실종자 등록 정보
     const userId = 1;
     const auto1 = async () => {
