@@ -1790,3 +1790,252 @@
     where
         user0_.user_id=?
 2023-04-05 16:57:31.303 DEBUG 2568 --- [http-nio-8080-exec-2] s.s.w.c.SecurityContextPersistenceFilter : Cleared SecurityContextHolder to complete request
+2023-04-05 17:22:53.683  INFO 242540 --- [restartedMain] com.ssafy.finedUi.FinedUiApplication     : Starting FinedUiApplication using Java 11.0.18 on DESKTOP-DOGVPUB with PID 242540 (C:\Users\SSAFY\AJH\FinedUI\S08P22A108\Backend\finedUI\build\classes\java\main started by SSAFY in C:\Users\SSAFY\AJH\FinedUI\S08P22A108\Backend\finedUI)
+2023-04-05 17:22:53.684  INFO 242540 --- [restartedMain] com.ssafy.finedUi.FinedUiApplication     : The following 3 profiles are active: "oauth2", "redis", "sms"
+2023-04-05 17:22:53.718  INFO 242540 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-04-05 17:22:53.718  INFO 242540 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-04-05 17:22:54.496  INFO 242540 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2023-04-05 17:22:54.496  INFO 242540 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-04-05 17:22:54.587  INFO 242540 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 85 ms. Found 4 JPA repository interfaces.
+2023-04-05 17:22:54.597  INFO 242540 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2023-04-05 17:22:54.598  INFO 242540 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2023-04-05 17:22:54.620  INFO 242540 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ssafy.finedUi.chatImage.ChatImageRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-04-05 17:22:54.620  INFO 242540 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ssafy.finedUi.registInfo.RegistInfoRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-04-05 17:22:54.620  INFO 242540 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ssafy.finedUi.social.SocialRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-04-05 17:22:54.620  INFO 242540 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ssafy.finedUi.user.UserRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-04-05 17:22:54.620  INFO 242540 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 17 ms. Found 0 Redis repository interfaces.
+2023-04-05 17:22:54.877  INFO 242540 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean '(inner bean)#44bdc2c9' of type [com.amazonaws.auth.BasicAWSCredentials] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-04-05 17:22:54.878  INFO 242540 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean '(inner bean)#386aac19' of type [com.amazonaws.auth.AWSStaticCredentialsProvider] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-04-05 17:22:54.883  INFO 242540 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean '(inner bean)#63c09268' of type [com.amazonaws.auth.profile.ProfileCredentialsProvider] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-04-05 17:22:54.885  INFO 242540 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'credentialsProvider' of type [org.springframework.cloud.aws.core.credentials.CredentialsProviderFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-04-05 17:22:54.885  INFO 242540 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'credentialsProvider' of type [com.amazonaws.auth.AWSCredentialsProviderChain] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-04-05 17:22:55.092  INFO 242540 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2023-04-05 17:22:55.099  INFO 242540 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-04-05 17:22:55.099  INFO 242540 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.71]
+2023-04-05 17:22:55.177  INFO 242540 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-04-05 17:22:55.177  INFO 242540 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1459 ms
+2023-04-05 17:22:55.292  INFO 242540 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-04-05 17:22:55.324  INFO 242540 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.15.Final
+2023-04-05 17:22:55.417  INFO 242540 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-04-05 17:22:55.480  INFO 242540 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : fined&youHikariPool - Starting...
+2023-04-05 17:22:55.645  INFO 242540 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : fined&youHikariPool - Start completed.
+2023-04-05 17:22:55.655  INFO 242540 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL57Dialect
+2023-04-05 17:22:56.144  INFO 242540 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-04-05 17:22:56.153  INFO 242540 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-04-05 17:22:56.554  WARN 242540 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-04-05 17:22:57.207  WARN 242540 --- [restartedMain] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/v3/api-docs']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-04-05 17:22:57.208  INFO 242540 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/v3/api-docs']
+2023-04-05 17:22:57.208  WARN 242540 --- [restartedMain] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/swagger*/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-04-05 17:22:57.208  INFO 242540 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/swagger*/**']
+2023-04-05 17:22:57.209  WARN 242540 --- [restartedMain] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/error']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-04-05 17:22:57.209  INFO 242540 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/error']
+2023-04-05 17:22:57.233 DEBUG 242540 --- [restartedMain] edFilterInvocationSecurityMetadataSource : Adding web access control expression [permitAll] for Ant [pattern='/**']
+2023-04-05 17:22:57.238 DEBUG 242540 --- [restartedMain] edFilterInvocationSecurityMetadataSource : Adding web access control expression [authenticated] for any request
+2023-04-05 17:22:57.244  INFO 242540 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@261123e5, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@211d0eb, org.springframework.security.web.context.SecurityContextPersistenceFilter@58a604c0, org.springframework.security.web.header.HeaderWriterFilter@771cfa2b, org.springframework.security.web.authentication.logout.LogoutFilter@7c74c73f, org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter@348fe7b7, org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter@4b716ec2, com.ssafy.finedUi.common.jwt.JwtTokenAuthenticationFilter@622ddcac, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@452e3a21, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@74c05e69, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@52185729, org.springframework.security.web.session.SessionManagementFilter@24ebc627, org.springframework.security.web.access.ExceptionTranslationFilter@38840dfe, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@21d4bd8c]
+2023-04-05 17:22:57.301  INFO 242540 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-04-05 17:22:57.531  INFO 242540 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2023-04-05 17:22:57.706  INFO 242540 --- [restartedMain] com.ssafy.finedUi.FinedUiApplication     : Started FinedUiApplication in 4.377 seconds (JVM running for 5.268)
+2023-04-05 17:25:28.842  INFO 242540 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-04-05 17:25:28.845  INFO 242540 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : fined&youHikariPool - Shutdown initiated...
+2023-04-05 17:25:28.849  INFO 242540 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : fined&youHikariPool - Shutdown completed.
+2023-04-05 17:25:32.922  INFO 229840 --- [restartedMain] com.ssafy.finedUi.FinedUiApplication     : Starting FinedUiApplication using Java 11.0.18 on DESKTOP-DOGVPUB with PID 229840 (C:\Users\SSAFY\AJH\FinedUI\S08P22A108\Backend\finedUI\build\classes\java\main started by SSAFY in C:\Users\SSAFY\AJH\FinedUI\S08P22A108\Backend\finedUI)
+2023-04-05 17:25:32.923  INFO 229840 --- [restartedMain] com.ssafy.finedUi.FinedUiApplication     : The following 3 profiles are active: "oauth2", "redis", "sms"
+2023-04-05 17:25:32.958  INFO 229840 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-04-05 17:25:32.958  INFO 229840 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-04-05 17:25:33.753  INFO 229840 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2023-04-05 17:25:33.754  INFO 229840 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-04-05 17:25:33.856  INFO 229840 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 95 ms. Found 5 JPA repository interfaces.
+2023-04-05 17:25:33.867  INFO 229840 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2023-04-05 17:25:33.868  INFO 229840 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2023-04-05 17:25:33.893  INFO 229840 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ssafy.finedUi.chatImage.ChatImageRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-04-05 17:25:33.894  INFO 229840 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ssafy.finedUi.notice.NoticeRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-04-05 17:25:33.894  INFO 229840 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ssafy.finedUi.registInfo.RegistInfoRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-04-05 17:25:33.894  INFO 229840 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ssafy.finedUi.social.SocialRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-04-05 17:25:33.895  INFO 229840 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ssafy.finedUi.user.UserRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-04-05 17:25:33.895  INFO 229840 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 19 ms. Found 0 Redis repository interfaces.
+2023-04-05 17:25:34.159  INFO 229840 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean '(inner bean)#77a49d87' of type [com.amazonaws.auth.BasicAWSCredentials] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-04-05 17:25:34.160  INFO 229840 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean '(inner bean)#59c44c2b' of type [com.amazonaws.auth.AWSStaticCredentialsProvider] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-04-05 17:25:34.165  INFO 229840 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean '(inner bean)#6f03b1f7' of type [com.amazonaws.auth.profile.ProfileCredentialsProvider] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-04-05 17:25:34.166  INFO 229840 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'credentialsProvider' of type [org.springframework.cloud.aws.core.credentials.CredentialsProviderFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-04-05 17:25:34.166  INFO 229840 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'credentialsProvider' of type [com.amazonaws.auth.AWSCredentialsProviderChain] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-04-05 17:25:34.360  INFO 229840 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2023-04-05 17:25:34.367  INFO 229840 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-04-05 17:25:34.367  INFO 229840 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.71]
+2023-04-05 17:25:34.447  INFO 229840 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-04-05 17:25:34.447  INFO 229840 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1488 ms
+2023-04-05 17:25:34.574  INFO 229840 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-04-05 17:25:34.605  INFO 229840 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.15.Final
+2023-04-05 17:25:34.697  INFO 229840 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-04-05 17:25:34.756  INFO 229840 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : fined&youHikariPool - Starting...
+2023-04-05 17:25:34.890  INFO 229840 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : fined&youHikariPool - Start completed.
+2023-04-05 17:25:34.899  INFO 229840 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL57Dialect
+2023-04-05 17:25:35.415  INFO 229840 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-04-05 17:25:35.428  INFO 229840 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-04-05 17:25:35.826  WARN 229840 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-04-05 17:25:36.412  WARN 229840 --- [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'webMvcRequestHandlerProvider' defined in URL [jar:file:/C:/Users/SSAFY/.gradle/caches/modules-2/files-2.1/io.springfox/springfox-spring-webmvc/3.0.0/7ed22363fdfd651cd811c0b2391f16bddb91db8b/springfox-spring-webmvc-3.0.0.jar!/springfox/documentation/spring/web/plugins/WebMvcRequestHandlerProvider.class]: Unsatisfied dependency expressed through constructor parameter 2; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'requestMappingHandlerMapping' defined in org.springframework.web.servlet.config.annotation.DelegatingWebMvcConfiguration: Invocation of init method failed; nested exception is java.lang.IllegalStateException: Ambiguous mapping. Cannot map 'noticeGetController' method 
+com.ssafy.finedUi.notice.get.NoticeGetController#getAllNotice()
+to {GET [/api/notice]}: There is already 'noticeGetController' bean method
+com.ssafy.finedUi.notice.get.NoticeGetController#getDetailNotice(Long) mapped.
+2023-04-05 17:25:36.530  INFO 229840 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-04-05 17:25:36.533  INFO 229840 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : fined&youHikariPool - Shutdown initiated...
+2023-04-05 17:25:36.537  INFO 229840 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : fined&youHikariPool - Shutdown completed.
+2023-04-05 17:25:36.539  INFO 229840 --- [restartedMain] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2023-04-05 17:25:36.548  INFO 229840 --- [restartedMain] ConditionEvaluationReportLoggingListener : 
+
+Error starting ApplicationContext. To display the conditions report re-run your application with 'debug' enabled.
+2023-04-05 17:25:36.570 ERROR 229840 --- [restartedMain] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'webMvcRequestHandlerProvider' defined in URL [jar:file:/C:/Users/SSAFY/.gradle/caches/modules-2/files-2.1/io.springfox/springfox-spring-webmvc/3.0.0/7ed22363fdfd651cd811c0b2391f16bddb91db8b/springfox-spring-webmvc-3.0.0.jar!/springfox/documentation/spring/web/plugins/WebMvcRequestHandlerProvider.class]: Unsatisfied dependency expressed through constructor parameter 2; nested exception is org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'requestMappingHandlerMapping' defined in org.springframework.web.servlet.config.annotation.DelegatingWebMvcConfiguration: Invocation of init method failed; nested exception is java.lang.IllegalStateException: Ambiguous mapping. Cannot map 'noticeGetController' method 
+com.ssafy.finedUi.notice.get.NoticeGetController#getAllNotice()
+to {GET [/api/notice]}: There is already 'noticeGetController' bean method
+com.ssafy.finedUi.notice.get.NoticeGetController#getDetailNotice(Long) mapped.
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:800) ~[spring-beans-5.3.25.jar:5.3.25]
+	at org.springframework.beans.factory.support.ConstructorResolver.autowireConstructor(ConstructorResolver.java:229) ~[spring-beans-5.3.25.jar:5.3.25]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.autowireConstructor(AbstractAutowireCapableBeanFactory.java:1372) ~[spring-beans-5.3.25.jar:5.3.25]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1222) ~[spring-beans-5.3.25.jar:5.3.25]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:582) ~[spring-beans-5.3.25.jar:5.3.25]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542) ~[spring-beans-5.3.25.jar:5.3.25]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335) ~[spring-beans-5.3.25.jar:5.3.25]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.3.25.jar:5.3.25]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333) ~[spring-beans-5.3.25.jar:5.3.25]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208) ~[spring-beans-5.3.25.jar:5.3.25]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.preInstantiateSingletons(DefaultListableBeanFactory.java:955) ~[spring-beans-5.3.25.jar:5.3.25]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:918) ~[spring-context-5.3.25.jar:5.3.25]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:583) ~[spring-context-5.3.25.jar:5.3.25]
+	at org.springframework.boot.web.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:147) ~[spring-boot-2.7.9.jar:2.7.9]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:731) ~[spring-boot-2.7.9.jar:2.7.9]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:408) ~[spring-boot-2.7.9.jar:2.7.9]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:307) ~[spring-boot-2.7.9.jar:2.7.9]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1303) ~[spring-boot-2.7.9.jar:2.7.9]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1292) ~[spring-boot-2.7.9.jar:2.7.9]
+	at com.ssafy.finedUi.FinedUiApplication.main(FinedUiApplication.java:26) ~[main/:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke0(Native Method) ~[na:na]
+	at java.base/jdk.internal.reflect.NativeMethodAccessorImpl.invoke(NativeMethodAccessorImpl.java:62) ~[na:na]
+	at java.base/jdk.internal.reflect.DelegatingMethodAccessorImpl.invoke(DelegatingMethodAccessorImpl.java:43) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:566) ~[na:na]
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:49) ~[spring-boot-devtools-2.6.2.jar:2.6.2]
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'requestMappingHandlerMapping' defined in org.springframework.web.servlet.config.annotation.DelegatingWebMvcConfiguration: Invocation of init method failed; nested exception is java.lang.IllegalStateException: Ambiguous mapping. Cannot map 'noticeGetController' method 
+com.ssafy.finedUi.notice.get.NoticeGetController#getAllNotice()
+to {GET [/api/notice]}: There is already 'noticeGetController' bean method
+com.ssafy.finedUi.notice.get.NoticeGetController#getDetailNotice(Long) mapped.
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1804) ~[spring-beans-5.3.25.jar:5.3.25]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:620) ~[spring-beans-5.3.25.jar:5.3.25]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:542) ~[spring-beans-5.3.25.jar:5.3.25]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:335) ~[spring-beans-5.3.25.jar:5.3.25]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:234) ~[spring-beans-5.3.25.jar:5.3.25]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:333) ~[spring-beans-5.3.25.jar:5.3.25]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:208) ~[spring-beans-5.3.25.jar:5.3.25]
+	at org.springframework.beans.factory.config.DependencyDescriptor.resolveCandidate(DependencyDescriptor.java:276) ~[spring-beans-5.3.25.jar:5.3.25]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.addCandidateEntry(DefaultListableBeanFactory.java:1609) ~[spring-beans-5.3.25.jar:5.3.25]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.findAutowireCandidates(DefaultListableBeanFactory.java:1573) ~[spring-beans-5.3.25.jar:5.3.25]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveMultipleBeans(DefaultListableBeanFactory.java:1462) ~[spring-beans-5.3.25.jar:5.3.25]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1349) ~[spring-beans-5.3.25.jar:5.3.25]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1311) ~[spring-beans-5.3.25.jar:5.3.25]
+	at org.springframework.beans.factory.support.ConstructorResolver.resolveAutowiredArgument(ConstructorResolver.java:887) ~[spring-beans-5.3.25.jar:5.3.25]
+	at org.springframework.beans.factory.support.ConstructorResolver.createArgumentArray(ConstructorResolver.java:791) ~[spring-beans-5.3.25.jar:5.3.25]
+	... 24 common frames omitted
+Caused by: java.lang.IllegalStateException: Ambiguous mapping. Cannot map 'noticeGetController' method 
+com.ssafy.finedUi.notice.get.NoticeGetController#getAllNotice()
+to {GET [/api/notice]}: There is already 'noticeGetController' bean method
+com.ssafy.finedUi.notice.get.NoticeGetController#getDetailNotice(Long) mapped.
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry.validateMethodMapping(AbstractHandlerMethodMapping.java:669) ~[spring-webmvc-5.3.25.jar:5.3.25]
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping$MappingRegistry.register(AbstractHandlerMethodMapping.java:635) ~[spring-webmvc-5.3.25.jar:5.3.25]
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.registerHandlerMethod(AbstractHandlerMethodMapping.java:332) ~[spring-webmvc-5.3.25.jar:5.3.25]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping.registerHandlerMethod(RequestMappingHandlerMapping.java:420) ~[spring-webmvc-5.3.25.jar:5.3.25]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping.registerHandlerMethod(RequestMappingHandlerMapping.java:76) ~[spring-webmvc-5.3.25.jar:5.3.25]
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.lambda$detectHandlerMethods$2(AbstractHandlerMethodMapping.java:299) ~[spring-webmvc-5.3.25.jar:5.3.25]
+	at java.base/java.util.LinkedHashMap.forEach(LinkedHashMap.java:684) ~[na:na]
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.detectHandlerMethods(AbstractHandlerMethodMapping.java:297) ~[spring-webmvc-5.3.25.jar:5.3.25]
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.processCandidateBean(AbstractHandlerMethodMapping.java:266) ~[spring-webmvc-5.3.25.jar:5.3.25]
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.initHandlerMethods(AbstractHandlerMethodMapping.java:225) ~[spring-webmvc-5.3.25.jar:5.3.25]
+	at org.springframework.web.servlet.handler.AbstractHandlerMethodMapping.afterPropertiesSet(AbstractHandlerMethodMapping.java:213) ~[spring-webmvc-5.3.25.jar:5.3.25]
+	at org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping.afterPropertiesSet(RequestMappingHandlerMapping.java:205) ~[spring-webmvc-5.3.25.jar:5.3.25]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1863) ~[spring-beans-5.3.25.jar:5.3.25]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1800) ~[spring-beans-5.3.25.jar:5.3.25]
+	... 38 common frames omitted
+
+2023-04-05 17:26:06.613  INFO 242428 --- [restartedMain] com.ssafy.finedUi.FinedUiApplication     : Starting FinedUiApplication using Java 11.0.18 on DESKTOP-DOGVPUB with PID 242428 (C:\Users\SSAFY\AJH\FinedUI\S08P22A108\Backend\finedUI\build\classes\java\main started by SSAFY in C:\Users\SSAFY\AJH\FinedUI\S08P22A108\Backend\finedUI)
+2023-04-05 17:26:06.614  INFO 242428 --- [restartedMain] com.ssafy.finedUi.FinedUiApplication     : The following 3 profiles are active: "oauth2", "redis", "sms"
+2023-04-05 17:26:06.649  INFO 242428 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-04-05 17:26:06.649  INFO 242428 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-04-05 17:26:07.424  INFO 242428 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2023-04-05 17:26:07.424  INFO 242428 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-04-05 17:26:07.518  INFO 242428 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 87 ms. Found 5 JPA repository interfaces.
+2023-04-05 17:26:07.528  INFO 242428 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2023-04-05 17:26:07.529  INFO 242428 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2023-04-05 17:26:07.551  INFO 242428 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ssafy.finedUi.chatImage.ChatImageRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-04-05 17:26:07.551  INFO 242428 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ssafy.finedUi.notice.NoticeRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-04-05 17:26:07.552  INFO 242428 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ssafy.finedUi.registInfo.RegistInfoRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-04-05 17:26:07.552  INFO 242428 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ssafy.finedUi.social.SocialRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-04-05 17:26:07.552  INFO 242428 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ssafy.finedUi.user.UserRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-04-05 17:26:07.552  INFO 242428 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 17 ms. Found 0 Redis repository interfaces.
+2023-04-05 17:26:07.817  INFO 242428 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean '(inner bean)#468c45ce' of type [com.amazonaws.auth.BasicAWSCredentials] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-04-05 17:26:07.818  INFO 242428 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean '(inner bean)#7b707353' of type [com.amazonaws.auth.AWSStaticCredentialsProvider] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-04-05 17:26:07.825  INFO 242428 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean '(inner bean)#4c07c813' of type [com.amazonaws.auth.profile.ProfileCredentialsProvider] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-04-05 17:26:07.827  INFO 242428 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'credentialsProvider' of type [org.springframework.cloud.aws.core.credentials.CredentialsProviderFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-04-05 17:26:07.827  INFO 242428 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'credentialsProvider' of type [com.amazonaws.auth.AWSCredentialsProviderChain] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-04-05 17:26:08.030  INFO 242428 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2023-04-05 17:26:08.040  INFO 242428 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-04-05 17:26:08.040  INFO 242428 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.71]
+2023-04-05 17:26:08.138  INFO 242428 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-04-05 17:26:08.139  INFO 242428 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1489 ms
+2023-04-05 17:26:08.296  INFO 242428 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-04-05 17:26:08.329  INFO 242428 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.15.Final
+2023-04-05 17:26:08.459  INFO 242428 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-04-05 17:26:08.562  INFO 242428 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : fined&youHikariPool - Starting...
+2023-04-05 17:26:08.734  INFO 242428 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : fined&youHikariPool - Start completed.
+2023-04-05 17:26:08.750  INFO 242428 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL57Dialect
+2023-04-05 17:26:09.489  INFO 242428 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-04-05 17:26:09.503  INFO 242428 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-04-05 17:26:10.110  WARN 242428 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-04-05 17:26:11.196  WARN 242428 --- [restartedMain] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/v3/api-docs']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-04-05 17:26:11.197  INFO 242428 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/v3/api-docs']
+2023-04-05 17:26:11.198  WARN 242428 --- [restartedMain] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/swagger*/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-04-05 17:26:11.198  INFO 242428 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/swagger*/**']
+2023-04-05 17:26:11.198  WARN 242428 --- [restartedMain] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/error']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-04-05 17:26:11.198  INFO 242428 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/error']
+2023-04-05 17:26:11.242 DEBUG 242428 --- [restartedMain] edFilterInvocationSecurityMetadataSource : Adding web access control expression [permitAll] for Ant [pattern='/**']
+2023-04-05 17:26:11.250 DEBUG 242428 --- [restartedMain] edFilterInvocationSecurityMetadataSource : Adding web access control expression [authenticated] for any request
+2023-04-05 17:26:11.261  INFO 242428 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@554e727f, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@6139763a, org.springframework.security.web.context.SecurityContextPersistenceFilter@7d7bb863, org.springframework.security.web.header.HeaderWriterFilter@50842f0e, org.springframework.security.web.authentication.logout.LogoutFilter@5ce614b7, org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter@50e0aecf, org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter@2f4dc335, com.ssafy.finedUi.common.jwt.JwtTokenAuthenticationFilter@5d24611c, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@3f53c042, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@79eb84d7, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@609cd91a, org.springframework.security.web.session.SessionManagementFilter@1c08e8f7, org.springframework.security.web.access.ExceptionTranslationFilter@3692f8b5, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@157e1f84]
+2023-04-05 17:26:11.361  INFO 242428 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-04-05 17:26:11.694  INFO 242428 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2023-04-05 17:26:11.933  INFO 242428 --- [restartedMain] com.ssafy.finedUi.FinedUiApplication     : Started FinedUiApplication in 5.669 seconds (JVM running for 6.572)
+2023-04-05 17:28:00.054  INFO 242428 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-04-05 17:28:00.057  INFO 242428 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-04-05 17:28:00.058  INFO 242428 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2023-04-05 17:28:00.066 DEBUG 242428 --- [http-nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing GET /api/notice/all
+2023-04-05 17:28:00.070 DEBUG 242428 --- [http-nio-8080-exec-1] s.s.w.c.SecurityContextPersistenceFilter : Set SecurityContextHolder to empty SecurityContext
+2023-04-05 17:28:00.071  INFO 242428 --- [http-nio-8080-exec-1] c.s.f.c.j.JwtTokenAuthenticationFilter   : jwtFilter 진입 : ----------------------
+2023-04-05 17:28:00.072 DEBUG 242428 --- [http-nio-8080-exec-1] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2023-04-05 17:28:00.078 DEBUG 242428 --- [http-nio-8080-exec-1] o.s.s.w.a.i.FilterSecurityInterceptor    : Authorized filter invocation [GET /api/notice/all] with attributes [permitAll]
+2023-04-05 17:28:00.078 DEBUG 242428 --- [http-nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Secured GET /api/notice/all
+2023-04-05 17:28:00.149 DEBUG 242428 --- [http-nio-8080-exec-1] org.hibernate.SQL                        : 
+    select
+        notice0_.notice_id as notice_i1_1_,
+        notice0_.content as content2_1_,
+        notice0_.title as title3_1_ 
+    from
+        notice notice0_
+2023-04-05 17:28:00.213 DEBUG 242428 --- [http-nio-8080-exec-1] s.s.w.c.SecurityContextPersistenceFilter : Cleared SecurityContextHolder to complete request
+2023-04-05 17:28:19.727 DEBUG 242428 --- [http-nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Securing GET /api/notice?noticeId=1
+2023-04-05 17:28:19.727 DEBUG 242428 --- [http-nio-8080-exec-3] s.s.w.c.SecurityContextPersistenceFilter : Set SecurityContextHolder to empty SecurityContext
+2023-04-05 17:28:19.727  INFO 242428 --- [http-nio-8080-exec-3] c.s.f.c.j.JwtTokenAuthenticationFilter   : jwtFilter 진입 : ----------------------
+2023-04-05 17:28:19.727 DEBUG 242428 --- [http-nio-8080-exec-3] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2023-04-05 17:28:19.727 DEBUG 242428 --- [http-nio-8080-exec-3] o.s.s.w.a.i.FilterSecurityInterceptor    : Authorized filter invocation [GET /api/notice?noticeId=1] with attributes [permitAll]
+2023-04-05 17:28:19.727 DEBUG 242428 --- [http-nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Secured GET /api/notice?noticeId=1
+2023-04-05 17:28:19.751 DEBUG 242428 --- [http-nio-8080-exec-3] org.hibernate.SQL                        : 
+    select
+        notice0_.notice_id as notice_i1_1_0_,
+        notice0_.content as content2_1_0_,
+        notice0_.title as title3_1_0_ 
+    from
+        notice notice0_ 
+    where
+        notice0_.notice_id=?
+2023-04-05 17:28:19.779 ERROR 242428 --- [http-nio-8080-exec-3] c.s.finedUi.common.advice.ErrorAdvice    : java.util.NoSuchElementException: No value present
+2023-04-05 17:28:19.788 DEBUG 242428 --- [http-nio-8080-exec-3] s.s.w.c.SecurityContextPersistenceFilter : Cleared SecurityContextHolder to complete request
+2023-04-05 17:29:12.966 DEBUG 242428 --- [http-nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Securing GET /api/notice/all
+2023-04-05 17:29:12.966 DEBUG 242428 --- [http-nio-8080-exec-5] s.s.w.c.SecurityContextPersistenceFilter : Set SecurityContextHolder to empty SecurityContext
+2023-04-05 17:29:12.966  INFO 242428 --- [http-nio-8080-exec-5] c.s.f.c.j.JwtTokenAuthenticationFilter   : jwtFilter 진입 : ----------------------
+2023-04-05 17:29:12.966 DEBUG 242428 --- [http-nio-8080-exec-5] o.s.s.w.a.AnonymousAuthenticationFilter  : Set SecurityContextHolder to anonymous SecurityContext
+2023-04-05 17:29:12.967 DEBUG 242428 --- [http-nio-8080-exec-5] o.s.s.w.a.i.FilterSecurityInterceptor    : Authorized filter invocation [GET /api/notice/all] with attributes [permitAll]
