@@ -29,7 +29,6 @@ public class RegistInfoCreateRequest {
     private String frontImagePath;      // 정면 사진 저장 경로
     private String otherImage1Path;     // 추가 사진 1 저장 경로
     private String otherImage2Path;     // 추가 사진 2 저장 경로
-    private String description;         // 설명
 //    private Timestamp createDate;       // 생성 시간
 
     public RegistInfo toEntity() {
@@ -46,7 +45,6 @@ public class RegistInfoCreateRequest {
                 .otherImage1Path(otherImage1Path)
                 .otherImage2Path(otherImage2Path)
                 .user(user)
-                .description(description)
 //                .createDate(createDate)
 //                .updateDate(Timestamp.valueOf(LocalDateTime.now()))
                 .build();

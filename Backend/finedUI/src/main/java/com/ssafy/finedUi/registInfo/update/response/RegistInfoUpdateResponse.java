@@ -27,7 +27,6 @@ public class RegistInfoUpdateResponse {
     private String otherImage2Path;     // 추가 사진 2 저장 경로
     private Timestamp createDate;       // 생성 시간
     private Timestamp updateDate;       // 수정 시간
-    private String description;         // 설명
 
     public RegistInfoUpdateResponse(RegistInfo registInfo) {
         this.registId = registInfo.getRegistId();
@@ -44,6 +43,5 @@ public class RegistInfoUpdateResponse {
         this.otherImage2Path = registInfo.getOtherImage2Path();
         this.createDate = registInfo.getCreateDate();
         this.updateDate = registInfo.getUpdateDate();
-        this.description = registInfo.getDescription();
     }
 }

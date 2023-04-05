@@ -36,7 +36,6 @@ public class RegistInfoUpdateRequest {
     private String otherImage1Path;     // 추가 사진 1 저장 경로
     private String otherImage2Path;     // 추가 사진 2 저장 경로
     private Timestamp createDate;       // 생성 시간
-    private String description;         // 설명
 
     public RegistInfoUpdateRequest(RegistInfo registInfo) {
         this.registId = registInfo.getRegistId();
@@ -52,7 +51,6 @@ public class RegistInfoUpdateRequest {
         this.otherImage1Path = registInfo.getOtherImage1Path(); // 추가 사진 1 저장 경로
         this.otherImage2Path = registInfo.getOtherImage2Path(); // 추가 사진 2 저장 경로
         this.createDate = registInfo.getCreateDate();           // 생성 시간
-        this.description = registInfo.getDescription();         // 설명
     }
 
     public RegistInfo toEntity() {
@@ -70,7 +68,6 @@ public class RegistInfoUpdateRequest {
                 .otherImage2Path(otherImage2Path)
                 .user(user)
                 .createDate(createDate)
-                .description(description)
                 .build();
     }
 }
