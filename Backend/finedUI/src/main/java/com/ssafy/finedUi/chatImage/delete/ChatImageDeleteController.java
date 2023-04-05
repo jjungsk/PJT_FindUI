@@ -19,7 +19,7 @@ public class ChatImageDeleteController {
     private final ChatImageDeleteService chatImageDeleteService;
 
     @DeleteMapping
-    public ResponseEntity<Object> delete(@RequestParam  Long userId,@RequestParam Long registId) {
+    public ResponseEntity<Object> delete(@RequestParam Long registId) {
         try {
             chatImageDeleteService.delete(SecurityUtils.getUserPricipal().getId(), registId);
         } catch (Exception e) {

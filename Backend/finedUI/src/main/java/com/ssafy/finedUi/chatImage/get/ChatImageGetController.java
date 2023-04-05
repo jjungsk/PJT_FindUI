@@ -17,7 +17,7 @@ public class ChatImageGetController {
 
     // userId : 사용자 번호
     @GetMapping(path = "/user")
-    public ResponseEntity<Object> searchByUser(@RequestParam Long userId) {
+    public ResponseEntity<Object> searchByUser() {
         return ResponseHandler.generateResponse(true, "OK", HttpStatus.OK, chatImageGetService.searchByUser(
                 SecurityUtils.getUserPricipal().getId()
         ));
