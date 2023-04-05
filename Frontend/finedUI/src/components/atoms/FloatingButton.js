@@ -1,35 +1,34 @@
 import React from 'react';
 import { View, TouchableOpacity, StyleSheet, Text } from 'react-native';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import { widthPercentage } from '../../styles/ResponsiveSize';
 
 const styles = StyleSheet.create({
   container: {
     position: 'absolute',
     bottom: 20,
-    width:"80%",
-    alignSelf: "center",
-    zIndex: 999,
+    right: 20,
   },
   button: {
-    backgroundColor:"#1570EF",
-    borderRadius:5,
-    alignItems:"center",
-    justifyContent:"center",
-    padding: 10,
-    marginTop: 25,
-    marginBottom: 13
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    backgroundColor: '#1570EF',
+    justifyContent: 'center',
+    alignItems: 'center',
+    zIndex: 999,
   },
-  btnText:{
-    color:"white",
-    fontSize: 18,
-    fontWeight: "bold"
-  }
 });
 
 const FloatingButton = ({ onPress }) => {
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.button} onPress={onPress}>
-        <Text style={styles.btnText}>제보자 신고하기</Text>
+        <Icon
+              name="alarm-light-outline"
+              color={'#ffffff'}
+              size={widthPercentage(25)}
+            />
       </TouchableOpacity>
     </View>
   );

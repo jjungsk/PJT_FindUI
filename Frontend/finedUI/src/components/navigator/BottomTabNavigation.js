@@ -27,6 +27,7 @@ import {heightPercentage, widthPercentage} from '../../styles/ResponsiveSize';
 import HomeScreen from '../screens/HomeScreen';
 import RegistStackNavigation from './RegistStackNavigation';
 import MyPage from '../screens/MyPage';
+import SearchPage from '../screens/SearchPage';
 
 const Tab = createBottomTabNavigator();
 
@@ -63,6 +64,22 @@ const TabNavigation = ({navigation}) => {
             />
           ),
           headerShown: false,
+        }}
+      />
+      <Tab.Screen 
+        name = 'SearchPage'
+        component={SearchPage}
+        options={{
+          title: 'Find & You',
+          tabBarLabel: '검색',
+          tabBarIcon: ({color, size}) => (
+            <Icon
+              name="magnify"
+              color={color}
+              size={widthPercentage(size)}
+            />
+          )
+          
         }}
       />
       <Tab.Screen 

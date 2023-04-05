@@ -16,16 +16,19 @@ import {widthPercentage} from '../../styles/ResponsiveSize';
 import PwModal from '../organisms/PwModal';
 import InfoModal from '../organisms/InfoModal';
 import {getUserInfo, modifyInfo, deleteUser} from '../../API/UserApi';
-import {useSetRecoilState} from 'recoil';
+import {useRecoilValue, useSetRecoilState} from 'recoil';
 import {isLoginState} from '../../store/atoms/userState';
 import {deleteTokensFromKeychain} from '../../store/keychain/loginToken';
 import {reset} from '../navigator/NavigationService';
+import { preInfoState } from '../../store/atoms/InfoState';
+import NoRegistCard from '../organisms/NoRegistCard';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: '#ffffff',
   },
   text: {
     fontWeight: 'bold',
@@ -48,6 +51,14 @@ const styles = StyleSheet.create({
   carouselItem: {
     paddingHorizontal: widthPercentage(9),
   },
+  button: {
+    backgroundColor:"#1570EF",
+    borderRadius:10,
+    // alignSelf: 'center',
+    justifyContent: 'center', 
+    marginTop: 10,
+    padding: 10
+  }
 });
 const width = Dimensions.get('window').width;
 
@@ -59,32 +70,11 @@ const MyPage = () => {
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [myInfo, setMyInfo] = useState({
-    name: '이한나',
-    email: 'dlgkssk@ssafy.com',
-    phone: '01022222222',
-    address: '서울시 성북구 종암동',
-  });
+  const [myInfo, setMyInfo] = useState({});
   const [address, setAddress] = useState(myInfo.address); // 주소
   const [phoneNumber, setPhoneNumber] = useState(myInfo.phone); // 이메일
   const setIsLogin = useSetRecoilState(isLoginState);
-  const [registUsers, setRegistUser] = useState([
-    {
-      name: '샘스미스',
-      birthday: new Date(1997, 2, 18),
-      address: '서울시 역삼동 멀티캠퍼스',
-      phone: '010-6725-5590',
-      image: null,
-    },
-    {
-      name: '정둘권',
-      birthday: new Date(1997, 2, 18),
-      address: '서울시 역삼동 멀티캠퍼스',
-      phone: '010-6725-5590',
-      image: null,
-    },
-  ]);
-
+  const registUsers = useRecoilValue(preInfoState)
   const toggleLogoutModal = () => {
     setIsLogoutModalVisible(!isLogoutModalVisible);
   };
@@ -139,7 +129,6 @@ const MyPage = () => {
     // 정보 변경 코드
     console.log(address, phoneNumber);
     const response = await modifyInfo(address, phoneNumber);
-    console.log(response.data);
     if (response.status === 200) {
       Alert.alert('정보가 변경되었습니다.');
       setMyInfo(response.data);
@@ -159,28 +148,38 @@ const MyPage = () => {
   return (
     <View style={styles.container}>
       <ScrollView style={{width: '100%'}}>
-        <View style={{paddingHorizontal: widthPercentage(10)}}>
-          <Text
-            style={[
-              styles.text,
-              {marginBottom: 20, fontSize: 28, marginTop: 40},
-            ]}>
+        <View style={{paddingHorizontal: widthPercentage(10), marginBottom: 10}}>
+          <Text style={[styles.text, {marginBottom: 20, fontSize: 28, marginTop: 20},]}>
             마이페이지
           </Text>
           <MyInfoCard myInfo={myInfo} onPress={toggleInfoModal} />
+          <Text style={[styles.text, {marginBottom: 10, marginTop: 20, }]}>
+            사전 등록
+          </Text>
+          <View style={styles.line} />
         </View>
-        <Carousel
+        {registUsers.length <1 
+        ?
+        <View style={styles.carouselItem}>
+          <NoRegistCard textInfo={'등록된 사전 등록 정보가 없습니다.'}/>
+        </View>
+        :
+        (<Carousel
           data={registUsers}
           renderItem={({item}) => (
             <View style={styles.carouselItem}>
               <PreRegistCard registUser={item} />
+              <TouchableOpacity style={styles.button}>
+                <Text style={{ color:"white", fontSize: 15, fontWeight: "bold", alignSelf: 'center'}}>신고하기</Text>
+              </TouchableOpacity>
             </View>
           )}
           itemWidth={width}
           pagination
-        />
-        <View style={{paddingHorizontal: widthPercentage(10)}}>
-          <Text style={[styles.text, {marginBottom: 10, marginTop: 20}]}>
+        />)
+        }
+        <View style={{paddingHorizontal: widthPercentage(10), marginBottom: 40}}>
+          <Text style={[styles.text, {marginBottom: 10, marginTop: 10}]}>
             계정관리
           </Text>
           <View style={styles.line} />
