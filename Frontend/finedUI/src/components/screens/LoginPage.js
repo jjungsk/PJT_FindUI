@@ -6,7 +6,7 @@ import LoginInput from '../atoms/LoginInput';
 import GoogleButton from '../atoms/GoogleButton';
 import KakaoButton from '../atoms/KakaoButton';
 import Logo from '../atoms/Logo';
-import {login, validateAccessToken} from '../../API/LoginApi';
+import {login} from '../../API/LoginApi';
 import {
   saveAccessToKeychain,
   saveRefreshToKeychain,

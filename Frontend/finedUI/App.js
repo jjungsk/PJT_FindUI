@@ -1,8 +1,14 @@
 // react
-import React, {useEffect, useTransition} from 'react';
+import React, {useEffect} from 'react';
+import React, {useEffect} from 'react';
 import {View, StyleSheet, Platform, PermissionsAndroid} from 'react-native';
 import Geolocation from 'react-native-geolocation-service';
-import {RecoilRoot, useRecoilState, useRecoilValue, useSetRecoilState} from 'recoil';
+import {
+  RecoilRoot,
+  useRecoilState,
+  useRecoilValue,
+  useSetRecoilState,
+} from 'recoil';
 
 // stack
 import StackNavigation from './src/components/navigator/StackNavigation';
@@ -10,8 +16,8 @@ import StackNavigation from './src/components/navigator/StackNavigation';
 // components
 import Loading from './src/components/atoms/Loading';
 import {isLoadingState} from './src/store/atoms/IsLoadingState';
-import { checkAcess } from './src/API/AccountApi';
-import { isLoginState } from './src/store/atoms/userState';
+import {checkAcess} from './src/API/AccountApi';
+import {isLoginState} from './src/store/atoms/userState';
 
 async function requestPermission() {
   try {
@@ -37,39 +43,31 @@ const styles = StyleSheet.create({
   },
 });
 
-function delay(ms = 1000) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
-
 const App = () => {
   useEffect(() => {
     requestPermission();
   }, []);
 
-  const [ispending, setTransition] = useTransition()
-  const isLoading = useRecoilValue(isLoadingState)
-  const setIsLoading = useSetRecoilState(isLoadingState)
+  const isLoading = useRecoilValue(isLoadingState);
+  const setIsLoading = useSetRecoilState(isLoadingState);
   const setIsLogin = useSetRecoilState(isLoginState);
 
   useEffect(() => {
     const checkLogin = async () => {
       const response = await checkAcess();
-      setTransition(()=>{
-        setIsLoading(false)
-      })
+      setIsLoading(false);
       if (response === true) {
-        console.log('동작')
-        setIsLogin(true)
+        console.log('동작');
+        setIsLogin(true);
       } else {
-        console.log('실패')
-        setIsLogin(false)
+        console.log('실패');
+        setIsLogin(false);
       }
-    }
-    if(isLoading){
+    };
+    if (isLoading) {
       checkLogin();
     }
-  }
-  , []);
+  }, []);
 
   if (isLoading) {
     return (

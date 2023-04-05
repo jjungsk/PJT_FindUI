@@ -1,4 +1,4 @@
-import React, {useEffect, useCallback} from 'react';
+import React, {useEffect, useState, Suspense} from 'react';
 import {
   View,
   Text,
@@ -9,6 +9,7 @@ import {
   FlatList,
   TouchableOpacity,
   Alert,
+  ActivityIndicator,
 } from 'react-native';
 import {
   fontPercentage,
@@ -16,7 +17,8 @@ import {
   widthPercentage,
 } from '../../styles/ResponsiveSize';
 
-import {useFocusEffect} from '@react-navigation/native';
+// position
+import Geolocation from 'react-native-geolocation-service';
 
 // icons
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -29,25 +31,19 @@ import {
   useRecoilValue,
 } from 'recoil';
 import {
-  registBirth,
-  registGender,
+  registAddress,
   registImageList,
-  registMissingDate,
   registMode,
-  registName,
   registPos,
-  registNote,
+  userPosition,
 } from '../store_regist/registStore';
-import {userPosition} from '../store_regist/homeStore';
-
-// position
-import Geolocation from 'react-native-geolocation-service';
 
 import ImagePicker from 'react-native-image-crop-picker';
 import ImagePickModal from '../organisms/ImagePickModal';
 import RegistInputForm from '../organisms/RegistInputForm';
 import GoogleMapNotTouch from '../organisms/GoogleMapNotTouch';
 import Divider from '../atoms/Divider';
+import {apiGetAddress} from '../../API/apiKakao';
 
 const modeDict = {
   0: '사전 등록',
@@ -56,47 +52,45 @@ const modeDict = {
 };
 
 const RegistScreen = ({route, navigation}) => {
-  const mode = route.params.mode;
+  const mode = useRecoilValue(registMode);
   const [imageList, setImageList] = useRecoilState(registImageList);
   const [position, setPosition] = useRecoilState(userPosition);
+  const [toggleMap, setToggleMap] = useState(false);
+  const [address, setAddress] = useState('');
   const pos = useRecoilValue(registPos);
 
-  const setMode = useSetRecoilState(registMode);
-  const resetImageList = useResetRecoilState(registImageList);
-  const resetName = useResetRecoilState(registName);
-  const resetBirth = useResetRecoilState(registBirth);
-  const resetGender = useResetRecoilState(registGender);
-  const resetMissingDate = useResetRecoilState(registMissingDate);
-  const resetPos = useResetRecoilState(registPos);
-  const resetNote = useResetRecoilState(registNote);
-  const resetMode = useResetRecoilState(registMode);
-
   useEffect(() => {
-    setMode(mode);
+    console.log(address);
     Geolocation.getCurrentPosition(
       position => {
         const {latitude, longitude} = position.coords;
         setPosition({lat: latitude, lng: longitude});
         console.log('position change');
+        return {lat: latitude, lng: longitude};
       },
       error => {
         console.log(error);
       },
       {enableHighAccuracy: true, timeout: 5000, maximumAge: 5000},
     );
-    navigation.addListener('beforeRemove', e => {
-      e.preventDefault();
-      resetImageList();
-      resetName();
-      resetBirth();
-      resetGender();
-      resetMissingDate();
-      resetPos();
-      resetNote();
-      resetMode();
-      navigation.dispatch(e.data.action);
-    });
   }, []);
+
+  useEffect(() => {
+    const getAddress = () => {
+      console.log('pos : ', pos.lng, pos.lat);
+      const auto = async () => {
+        const result = await apiGetAddress(pos.lng, pos.lat);
+
+        console.log('주소 response : ', result);
+
+        setAddress(result['address_name']);
+      };
+      auto();
+    };
+    if (pos !== null) {
+      getAddress();
+    }
+  }, [pos]);
 
   const removeImage = item => {
     const newImageList = imageList.filter(element => element !== item);
@@ -117,7 +111,6 @@ const RegistScreen = ({route, navigation}) => {
           height: image.height,
           mime: image.mime,
         };
-        console.log(image);
         setImageList([...imageList, selectImage]);
       });
     } catch (e) {
@@ -128,86 +121,93 @@ const RegistScreen = ({route, navigation}) => {
   return (
     <SafeAreaView style={{flex: 1}}>
       <ImagePickModal />
-      <ScrollView style={styles.mainContainer}>
-        <View style={styles.titleContainer}>
-          <Text style={styles.title}>{modeDict[mode]}</Text>
-        </View>
-        <View style={styles.imageListContainer}>
-          <FlatList
-            data={imageList}
-            renderItem={({item}) => (
-              <>
-                <View style={styles.imageContainer}>
-                  <Image source={{uri: item.uri}} style={styles.imageSize} />
-                </View>
-                <TouchableOpacity
-                  activeOpacity={0.6}
-                  onPress={() => {
-                    removeImage(item);
-                  }}
-                  style={styles.closeBtn}>
-                  <Icon
-                    name="close-circle"
-                    size={25}
-                    style={styles.closeBtnIcon}
-                  />
-                </TouchableOpacity>
-              </>
-            )}
-            ListFooterComponent={() => {
-              if (imageList.length < 3) {
-                return (
+      <Suspense
+        fallback={
+          <View style={styles.container}>
+            <ActivityIndicator size="large" color="#1570EF" />
+          </View>
+        }>
+        <ScrollView style={styles.mainContainer}>
+          <View style={styles.titleContainer}>
+            <Text style={styles.title}>{modeDict[mode]}</Text>
+          </View>
+          <View style={styles.imageListContainer}>
+            <FlatList
+              data={imageList}
+              renderItem={({item}) => (
+                <>
+                  <View style={styles.imageContainer}>
+                    <Image source={{uri: item.uri}} style={styles.imageSize} />
+                  </View>
                   <TouchableOpacity
                     activeOpacity={0.6}
-                    onPress={pickImage}
-                    style={styles.addImageBtn}>
-                    <Icon name="image-plus" color={'#000000'} size={25} />
-                    <Text style={styles.addImageText}>
-                      {imageList.length} / 3
-                    </Text>
+                    onPress={() => {
+                      removeImage(item);
+                    }}
+                    style={styles.closeBtn}>
+                    <Icon
+                      name="close-circle"
+                      size={25}
+                      style={styles.closeBtnIcon}
+                    />
                   </TouchableOpacity>
-                );
-              } else {
-                return null;
-              }
-            }}
-            keyExtractor={item => item.uri}
-            horizontal={true}
-            showsHorizontalScrollIndicator={false}
-          />
-        </View>
-        <View style={styles.registForm}>
-          <Divider />
-          <RegistInputForm />
-          {/* 맵 설정 */}
-          {mode !== 0 ? (
-            <TouchableOpacity
-              activeOpacity={0.6}
-              style={styles.selectPos}
-              onPress={() => navigation.navigate('MapDetail', {mode: mode})}>
-              <View style={styles.selectPosInfoContainer}>
-                <Text style={styles.selectTitle}>실종 위치</Text>
-                <Text style={styles.selectPosInfo}>{position.lat}</Text>
-                <View style={styles.selectPosSubTitle}>
-                  <Text style={styles.selectPosInfo}>위치 선택</Text>
-                  <Icon
-                    name="chevron-right"
-                    size={widthPercentage(20)}
-                    color={'#667085'}
+                </>
+              )}
+              ListFooterComponent={() => {
+                if (imageList.length < 3) {
+                  return (
+                    <TouchableOpacity
+                      activeOpacity={0.6}
+                      onPress={pickImage}
+                      style={styles.addImageBtn}>
+                      <Icon name="image-plus" color={'#000000'} size={25} />
+                      <Text style={styles.addImageText}>
+                        {imageList.length} / 3
+                      </Text>
+                    </TouchableOpacity>
+                  );
+                } else {
+                  return null;
+                }
+              }}
+              keyExtractor={item => item.uri}
+              horizontal={true}
+              showsHorizontalScrollIndicator={false}
+            />
+          </View>
+          <View style={styles.registForm}>
+            <Divider />
+            <RegistInputForm />
+            {/* 맵 설정 */}
+            {mode !== 0 ? (
+              <TouchableOpacity
+                activeOpacity={0.6}
+                style={styles.selectPos}
+                onPress={() => navigation.navigate('MapDetail', {mode: mode})}>
+                <View style={styles.selectPosInfoContainer}>
+                  <Text style={styles.selectTitle}>실종 위치</Text>
+                  <Text style={styles.selectPosInfo}>{address}</Text>
+                  <View style={styles.selectPosSubTitle}>
+                    <Text style={styles.selectPosInfo}>위치 선택</Text>
+                    <Icon
+                      name="chevron-right"
+                      size={widthPercentage(20)}
+                      color={'#667085'}
+                    />
+                  </View>
+                </View>
+                <View style={styles.mapContainer} pointerEvents="none">
+                  <GoogleMapNotTouch lat={position.lat} lng={position.lng} />
+                  <Image
+                    source={require('../../assets/images/marker_img.png')}
+                    style={styles.mapMarker}
                   />
                 </View>
-              </View>
-              <View style={styles.mapContainer} pointerEvents="none">
-                <GoogleMapNotTouch lat={position.lat} lng={position.lng} />
-                <Image
-                  source={require('../../assets/images/marker_img.png')}
-                  style={styles.mapMarker}
-                />
-              </View>
-            </TouchableOpacity>
-          ) : null}
-        </View>
-      </ScrollView>
+              </TouchableOpacity>
+            ) : null}
+          </View>
+        </ScrollView>
+      </Suspense>
     </SafeAreaView>
   );
 };
@@ -305,6 +305,11 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: '32%',
     alignSelf: 'center',
+  },
+  container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });
 

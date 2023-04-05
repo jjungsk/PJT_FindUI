@@ -15,6 +15,7 @@ import {
   Dimensions,
   ScrollView,
   FlatList,
+  TouchableOpacity,
 } from 'react-native';
 
 // sizes
@@ -26,7 +27,7 @@ import {
 
 // recoil
 import {useRecoilState} from 'recoil';
-import {userPosition} from '../store_regist/homeStore';
+import {userPosition} from '../store_regist/registStore';
 
 // position
 import Geolocation from 'react-native-geolocation-service';
@@ -43,6 +44,7 @@ import {apiGetAddress, apiGetLngLat} from '../../API/apiKakao';
 
 const HomeScreen = ({navigation}) => {
   const [position, setPosition] = useRecoilState(userPosition);
+  const [isChange, setIsChange] = useState(false);
   const [registUsers, setRegistUser] = useState([
     {
       name: '샘스미스',
@@ -143,19 +145,46 @@ const HomeScreen = ({navigation}) => {
     <SafeAreaView style={{flex: 1}}>
       <ScrollView>
         <View style={styles.registContainer}>
-          <View style={styles.titleContainer}>
-            <Text style={styles.title}>등록 정보</Text>
+          <View
+            style={{
+              justifyContent: 'space-between',
+              flexDirection: 'row',
+              alignItems: 'center',
+            }}>
+            <View style={styles.titleContainer}>
+              <Text style={styles.title}>등록 정보</Text>
+            </View>
+            <TouchableOpacity
+              style={{marginRight: 8}}
+              onPress={() => {
+                setIsChange(!isChange);
+              }}>
+              <Text>Change</Text>
+            </TouchableOpacity>
           </View>
-          <Carousel
-            data={registUsers}
-            renderItem={({item}) => (
-              <View style={styles.carouselItem}>
-                <PreRegistCard registUser={item} navigation={navigation} />
-              </View>
-            )}
-            itemWidth={width}
-            pagination
-          />
+          {isChange ? (
+            <Carousel
+              data={registUsers}
+              renderItem={({item}) => (
+                <View style={styles.carouselItem}>
+                  <PreRegistCard registUser={item} navigation={navigation} />
+                </View>
+              )}
+              itemWidth={width}
+              pagination
+            />
+          ) : (
+            <Carousel
+              data={registUsers}
+              renderItem={({item}) => (
+                <View style={styles.carouselItem}>
+                  <PreRegistCard registUser={item} navigation={navigation} />
+                </View>
+              )}
+              itemWidth={width}
+              pagination
+            />
+          )}
         </View>
         <View style={styles.noticeContainer}>
           <Carousel
