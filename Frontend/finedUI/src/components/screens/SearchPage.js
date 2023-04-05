@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import { FlatList, StyleSheet, TextInput, View, Text } from 'react-native';
+import { FlatList, StyleSheet, TextInput, View, Text, TouchableOpacity } from 'react-native';
 import FloatingButton from '../atoms/FloatingButton';
 import { MissingPersonCard } from '../organisms/MissingPersonCard';
 
@@ -59,6 +59,42 @@ const SearchPage = ({navigation}) => {
       location: '서울',
       image: null,
     },
+    {
+      name: '정세권',
+      identity: 930332,
+      location: '서울',
+      image: null,
+    },
+    {
+      name: '정세권',
+      identity: 930333,
+      location: '서울',
+      image: null,
+    },
+    {
+      name: '정세권',
+      identity: 930404,
+      location: '서울',
+      image: null,
+    },
+    {
+      name: '정세권',
+      identity: 930335,
+      location: '서울',
+      image: null,
+    },
+    {
+      name: '정세권',
+      identity: 930336,
+      location: '서울',
+      image: null,
+    },
+    {
+      name: '정세권',
+      identity: 930407,
+      location: '서울',
+      image: null,
+    },
   ]);
   
   const missingCardRender = ({item}) => {
@@ -73,13 +109,12 @@ const SearchPage = ({navigation}) => {
     <View style={styles.container}>
       <FloatingButton />
       <View style={{width: "80%"}}>
-        <TextInput
-          style={styles.input}
-          value={query}
-          onChangeText={setQuery}
-          placeholder="검색어를 입력하세요"
-        />
-        <Text style={{marginBottom: 16, alignSelf: "flex-start"}}>*사진 또는 이름, 지역, 생년월일 등으로 검색</Text>
+        <TouchableOpacity style={{backgroundColor:"#1570EF", borderRadius:10, justifyContent: 'center', marginTop: 10, padding: 10}}>
+          <Text style={{ color:"white", fontSize: 15, fontWeight: "bold", alignSelf: 'center'}}>
+            이미지 검색
+          </Text>
+        </TouchableOpacity>
+        <Text style={{marginBottom: 16, alignSelf: "flex-start"}}>*사진을 찍어 실종자 검색을 해보세요.</Text>
       </View>
       <FlatList
         style={styles.list}
