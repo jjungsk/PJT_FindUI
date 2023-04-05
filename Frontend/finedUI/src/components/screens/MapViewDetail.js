@@ -9,7 +9,12 @@ import {
 
 import GoogleMapDetail from '../organisms/GoogleMapDetail';
 import {useRecoilState, useRecoilValue, useSetRecoilState} from 'recoil';
-import {registMode, registPos, userPosition} from '../store_regist/registStore';
+import {
+  registAddress,
+  registMode,
+  registPos,
+  userPosition,
+} from '../store_regist/registStore';
 import {apiGetAddress} from '../../API/apiKakao';
 
 const styles = StyleSheet.create({
@@ -46,6 +51,7 @@ const styles = StyleSheet.create({
 const MapViewDetail = ({navigation, route}) => {
   const position = useRecoilValue(userPosition);
   const setPos = useSetRecoilState(registPos);
+  const setAddress = useSetRecoilState(registAddress);
   const mode = useRecoilValue(registMode);
 
   return (
@@ -60,10 +66,10 @@ const MapViewDetail = ({navigation, route}) => {
           />
           <TouchableOpacity
             style={styles.setPosBtn}
-            onPress={() => {
+            onPress={async () => {
               setPos(position);
-              apiGetAddress(((lat = position.lat), (lng = position.lng)));
-              // console.log('res', res);
+              // const address = await apiGetAddress(position.lng, position.lat);
+              // setAddress(address);
               navigation.goBack();
             }}>
             <Text style={styles.setPosBtnTitle}>선택 완료</Text>

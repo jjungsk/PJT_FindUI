@@ -43,6 +43,7 @@ import ImagePickModal from '../organisms/ImagePickModal';
 import RegistInputForm from '../organisms/RegistInputForm';
 import GoogleMapNotTouch from '../organisms/GoogleMapNotTouch';
 import Divider from '../atoms/Divider';
+import {apiGetAddress} from '../../API/apiKakao';
 
 const modeDict = {
   0: '사전 등록',
@@ -55,11 +56,11 @@ const RegistScreen = ({route, navigation}) => {
   const [imageList, setImageList] = useRecoilState(registImageList);
   const [position, setPosition] = useRecoilState(userPosition);
   const [toggleMap, setToggleMap] = useState(false);
-  const address = useRecoilValue(registAddress);
-  console.log(address);
+  const [address, setAddress] = useState('');
   const pos = useRecoilValue(registPos);
 
   useEffect(() => {
+    console.log(address);
     Geolocation.getCurrentPosition(
       position => {
         const {latitude, longitude} = position.coords;
@@ -73,6 +74,23 @@ const RegistScreen = ({route, navigation}) => {
       {enableHighAccuracy: true, timeout: 5000, maximumAge: 5000},
     );
   }, []);
+
+  useEffect(() => {
+    const getAddress = () => {
+      console.log('pos : ', pos.lng, pos.lat);
+      const auto = async () => {
+        const result = await apiGetAddress(pos.lng, pos.lat);
+
+        console.log('주소 response : ', result);
+
+        setAddress(result['address_name']);
+      };
+      auto();
+    };
+    if (pos !== null) {
+      getAddress();
+    }
+  }, [pos]);
 
   const removeImage = item => {
     const newImageList = imageList.filter(element => element !== item);
