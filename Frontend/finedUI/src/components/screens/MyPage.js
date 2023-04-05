@@ -48,6 +48,14 @@ const styles = StyleSheet.create({
   carouselItem: {
     paddingHorizontal: widthPercentage(9),
   },
+  button: {
+    backgroundColor:"#1570EF",
+    borderRadius:10,
+    // alignSelf: 'center',
+    justifyContent: 'center', 
+    marginTop: 10,
+    padding: 10
+  }
 });
 const width = Dimensions.get('window').width;
 
@@ -159,28 +167,31 @@ const MyPage = () => {
   return (
     <View style={styles.container}>
       <ScrollView style={{width: '100%'}}>
-        <View style={{paddingHorizontal: widthPercentage(10)}}>
-          <Text
-            style={[
-              styles.text,
-              {marginBottom: 20, fontSize: 28, marginTop: 40},
-            ]}>
+        <View style={{paddingHorizontal: widthPercentage(10), marginBottom: 10}}>
+          <Text style={[styles.text, {marginBottom: 20, fontSize: 28, marginTop: 20},]}>
             마이페이지
           </Text>
           <MyInfoCard myInfo={myInfo} onPress={toggleInfoModal} />
+          <Text style={[styles.text, {marginBottom: 10, marginTop: 20, paddingHorizontal: widthPercentage(10),}]}>
+            사전 등록
+          </Text>
+          <View style={styles.line} />
         </View>
         <Carousel
           data={registUsers}
           renderItem={({item}) => (
             <View style={styles.carouselItem}>
               <PreRegistCard registUser={item} />
+              <TouchableOpacity style={styles.button}>
+                <Text style={{ color:"white", fontSize: 15, fontWeight: "bold", alignSelf: 'center'}}>신고하기</Text>
+              </TouchableOpacity>
             </View>
           )}
           itemWidth={width}
           pagination
         />
-        <View style={{paddingHorizontal: widthPercentage(10)}}>
-          <Text style={[styles.text, {marginBottom: 10, marginTop: 20}]}>
+        <View style={{paddingHorizontal: widthPercentage(10), marginBottom: 40}}>
+          <Text style={[styles.text, {marginBottom: 10, marginTop: 10}]}>
             계정관리
           </Text>
           <View style={styles.line} />
