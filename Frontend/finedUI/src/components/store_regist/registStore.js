@@ -54,24 +54,23 @@ const registProps = selector({
     const gender = get(registGender);
     const date = get(registMissingDate);
     const pos = get(registPos);
+    const mode = get(registMode);
+    console.log('date :', date);
 
     if (imageList.length < 1) {
-      return {porp: '사진', state: false};
+      return {prop: '사진', state: false};
     }
     if (name === '') {
-      return {porp: '이름', state: false};
+      return {prop: '이름', state: false};
     }
-    if (birth === null) {
-      return {porp: '생년월일', state: false};
+    if (birth === null || birth.length < 8) {
+      return {prop: '생년월일', state: false};
     }
     if (gender === null) {
-      return {porp: '성별', state: false};
+      return {prop: '성별', state: false};
     }
-    // if (date !=){
-    //   return {porp:"사진", state:false}
-    // }
     if (pos === null) {
-      return {porp: '실종 장소', state: false};
+      return {prop: '실종 장소', state: false};
     }
 
     return {prop: null, state: true};
@@ -80,6 +79,7 @@ const registProps = selector({
 
 const resetRegistAtoms = selector({
   key: 'resetRegistAtoms',
+  get: () => {},
   set: ({set}, mode) => {
     set(registImageList, []);
     set(registName, '');

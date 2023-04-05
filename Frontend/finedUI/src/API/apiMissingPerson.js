@@ -19,6 +19,7 @@
   by.정세권
 */
 
+import {getAccessTokenFromKeychain} from '../store/keychain/loginToken.js';
 import apiInstance from './apiInstance.js';
 
 const api = apiInstance();
@@ -26,12 +27,12 @@ const api = apiInstance();
 // ================================= Test ================================================
 // 사전 등록 정보 생성
 const preRegist = async ({data}) => {
+  const token = getAccessTokenFromKeychain();
   const imageList = data.imageList;
   try {
     const response = api.post(
       '/api/regist',
       (data = {
-        userId: data.userId,
         frontImage: imageList[0],
         otherImage1: imageList >= 2 ? imageList[1] : null,
         otherImage2: imageList >= 3 ? imageList[2] : null,
@@ -40,6 +41,11 @@ const preRegist = async ({data}) => {
         gender: data.gender,
         isMissing: false,
       }),
+      {
+        headers: {
+          Authorization: 'Bearer ' + token,
+        },
+      },
     );
     return response;
   } catch (e) {
