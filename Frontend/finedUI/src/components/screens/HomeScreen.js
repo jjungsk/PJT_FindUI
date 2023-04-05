@@ -1,8 +1,3 @@
-/*
-  Home-Screen Main
-  by.황진태
-*/
-
 // react
 import React, {useState, useEffect} from 'react';
 
@@ -26,7 +21,7 @@ import {
 } from '../../styles/ResponsiveSize';
 
 // recoil
-import {useRecoilState} from 'recoil';
+import {useRecoilState, useRecoilValue, useSetRecoilState} from 'recoil';
 import {userPosition} from '../store_regist/registStore';
 
 // position
@@ -41,41 +36,15 @@ import {MissingPersonCard} from '../organisms/MissingPersonCard';
 // apis
 import {apiGetUserRegistMissingPersons} from '../../API/apiHome';
 import {apiGetAddress, apiGetLngLat} from '../../API/apiKakao';
+// import { missingInfoState, preInfoState } from '../../store/atoms/InfoState';
+import { missingSelector, preSelector } from '../../store/selectors/RegistSelector';
+import NoRegistCard from '../organisms/NoRegistCard';
 
 const HomeScreen = ({navigation}) => {
-  const [position, setPosition] = useRecoilState(userPosition);
+  const setPosition = useSetRecoilState(userPosition);
   const [isChange, setIsChange] = useState(false);
-  const [registUsers, setRegistUser] = useState([
-    {
-      name: '샘스미스',
-      birthday: 970218,
-      address: '서울시 역삼동 멀티캠퍼스',
-      phone: '010-6725-5590',
-      image: null,
-    },
-    {
-      name: '정둘권',
-      birthday: 970218,
-      address: '서울시 역삼동 멀티캠퍼스',
-      phone: '010-6725-5590',
-      image: null,
-    },
-  ]);
-
-  const [notices, setNotice] = useState([
-    {
-      title: '미아 발견 시, 대처 방법',
-      content:
-        '우선 경찰서에 전화로 신고를 하세요. 전국 어디서나 국번없이 182번(타 지역이 경우에는 지역번호+182)을 누르고, 미아발생 신고를 합니다. 경찰청 182센터는 전국적으로 미아. 가출아동을 수배하는 곳입니다.',
-    },
-    {
-      title: '미아 발견 시, 대처 방법',
-      content:
-        '우선 경찰서에 전화로 신고를 하세요. 전국 어디서나 국번없이 182번(타 지역이 경우에는 지역번호+182)을 누르고, 미아발생 신고를 합니다. 경찰청 182센터는 전국적으로 미아. 가출아동을 수배하는 곳입니다.',
-    },
-  ]);
-
-  const [missingPersons, setMissingPerson] = useState([
+  const registUsers = useRecoilValue(preSelector)
+  const longPersons = [
     {
       name: 'Name1',
       identity: 'birthDate1',
@@ -97,7 +66,21 @@ const HomeScreen = ({navigation}) => {
       image: null,
       registId: 3,
     },
+  ]
+  const [notices, setNotice] = useState([
+    {
+      title: '미아 발견 시, 대처 방법',
+      content:
+        '우선 경찰서에 전화로 신고를 하세요. 전국 어디서나 국번없이 182번(타 지역이 경우에는 지역번호+182)을 누르고, 미아발생 신고를 합니다. 경찰청 182센터는 전국적으로 미아. 가출아동을 수배하는 곳입니다.',
+    },
+    {
+      title: '미아 발견 시, 대처 방법',
+      content:
+        '우선 경찰서에 전화로 신고를 하세요. 전국 어디서나 국번없이 182번(타 지역이 경우에는 지역번호+182)을 누르고, 미아발생 신고를 합니다. 경찰청 182센터는 전국적으로 미아. 가출아동을 수배하는 곳입니다.',
+    },
   ]);
+
+  const missingPersons = useRecoilValue(missingSelector)
 
   useEffect(() => {
     Geolocation.getCurrentPosition(position => {
@@ -117,23 +100,24 @@ const HomeScreen = ({navigation}) => {
   // FUNCTION
 
   // function - render
-  useEffect(() => {
-    // (1) User가 등록한 실종자 등록 정보
-    const userId = 1;
-    const auto1 = async () => {
-      await apiGetUserRegistMissingPersons(userId)
-        .then(({data}) => {
-          setRegistUser(data.data);
-        })
-        .catch(error => console.log(error));
-    };
-    auto1();
+  // useEffect(() => {
+  //   // (1) User가 등록한 실종자 등록 정보
+  //   const userId = 1;
+  //   const auto1 = async () => {
+  //     await apiGetUserRegistMissingPersons(userId)
+  //       .then(({data}) => {
+  //         setRegistUser(data.data);
+  //       })
+  //       .catch(error => console.log(error));
+  //   };
+  //   auto1();
 
-    // (2) notices list 반환
+  //   // (2) notices list 반환
 
-    // (3) 전체 실종자 list 반환
-  }, []);
+  //   // (3) 전체 실종자 list 반환
+  // }, []);
 
+  
   // component
   const missingCardRender = ({item}) => {
     return (
@@ -165,6 +149,14 @@ const HomeScreen = ({navigation}) => {
             </TouchableOpacity>
           </View>
           {isChange ? (
+            registUsers.length < 1 ?
+            (
+              <View style={styles.carouselItem}>
+                <NoRegistCard textInfo={'등록된 사전 등록 정보가 없습니다.'}/>
+              </View>
+            )
+            :
+            (
             <Carousel
               data={registUsers}
               renderItem={({item}) => (
@@ -175,9 +167,17 @@ const HomeScreen = ({navigation}) => {
               itemWidth={width}
               pagination
             />
-          ) : (
+            )
+          ) : (registUsers.length < 1
+          ?(
+            <View style={styles.carouselItem}>
+              <NoRegistCard textInfo={'등록힌실종 정보가 없습니다.'}/>
+            </View>
+          )
+          :
+          (
             <Carousel
-              data={registUsers}
+              data={missingPersons}
               renderItem={({item}) => (
                 <View style={styles.carouselItem}>
                   <PreRegistCard registUser={item} navigation={navigation} />
@@ -186,6 +186,7 @@ const HomeScreen = ({navigation}) => {
               itemWidth={width}
               pagination
             />
+          )
           )}
         </View>
         <View style={styles.noticeContainer}>
@@ -205,7 +206,7 @@ const HomeScreen = ({navigation}) => {
             <Text style={styles.title}>실시간 실종자 정보</Text>
           </View>
           <FlatList
-            data={missingPersons}
+            data={longPersons}
             renderItem={missingCardRender}
             horizontal={true}
             keyExtractor={item => String(item.identity)}
@@ -217,7 +218,7 @@ const HomeScreen = ({navigation}) => {
           </View>
           <View style={styles.cardContainer}>
             <FlatList
-              data={missingPersons}
+              data={longPersons}
               renderItem={missingCardRender}
               horizontal={true}
               keyExtractor={item => String(item.identity)}
