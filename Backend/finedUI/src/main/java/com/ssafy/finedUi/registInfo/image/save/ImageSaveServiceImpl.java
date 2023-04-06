@@ -28,9 +28,9 @@ public class ImageSaveServiceImpl implements ImageSaveService{
         for (int value=0; value<multipartFiles.length; value++) {
             // 이미지 파일
             MultipartFile file = multipartFiles[value];
-
+            System.out.println(file);
             // 이미지가 아닐 경우 종료
-            if (file.getContentType() == null || file.getContentType().toString().startsWith("image") == false) {
+            if (file == null || file.isEmpty() == true) {
 //                System.out.println("this is not image");
                 continue;
             }
