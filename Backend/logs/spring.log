@@ -1,0 +1,750 @@
+2023-04-07 02:57:45.894  INFO 31022 --- [restartedMain] com.ssafy.finedUi.FinedUiApplication     : Starting FinedUiApplication using Java 11.0.18 on anjunhong-ui-MacBookPro.local with PID 31022 (/Users/ahnjunhong/Documents/GitHub/FinedUI/S08P22A108/Backend/finedUI/build/classes/java/main started by ahnjunhong in /Users/ahnjunhong/Documents/GitHub/FinedUI/S08P22A108/Backend)
+2023-04-07 02:57:45.896  INFO 31022 --- [restartedMain] com.ssafy.finedUi.FinedUiApplication     : The following 4 profiles are active: "oauth2", "redis", "sms", "aiserver"
+2023-04-07 02:57:45.956  INFO 31022 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-04-07 02:57:45.956  INFO 31022 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-04-07 02:57:47.151  INFO 31022 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2023-04-07 02:57:47.153  INFO 31022 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-04-07 02:57:47.439  INFO 31022 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 279 ms. Found 8 JPA repository interfaces.
+2023-04-07 02:57:47.470  INFO 31022 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2023-04-07 02:57:47.471  INFO 31022 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2023-04-07 02:57:47.493  INFO 31022 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ssafy.finedUi.chatImage.ChatImageRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-04-07 02:57:47.493  INFO 31022 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ssafy.finedUi.chatMessage.ChatMessageRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-04-07 02:57:47.494  INFO 31022 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ssafy.finedUi.chatRoom.ChatRoomRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-04-07 02:57:47.494  INFO 31022 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ssafy.finedUi.chatRoomUser.ChatRoomUserRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-04-07 02:57:47.495  INFO 31022 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ssafy.finedUi.notice.NoticeRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-04-07 02:57:47.497  INFO 31022 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ssafy.finedUi.registInfo.RegistInfoRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-04-07 02:57:47.498  INFO 31022 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ssafy.finedUi.social.SocialRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-04-07 02:57:47.499  INFO 31022 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ssafy.finedUi.user.UserRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-04-07 02:57:47.499  INFO 31022 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 20 ms. Found 0 Redis repository interfaces.
+2023-04-07 02:57:54.703  INFO 31022 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean '(inner bean)#3153a003' of type [com.amazonaws.auth.BasicAWSCredentials] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-04-07 02:57:54.705  INFO 31022 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean '(inner bean)#4713117c' of type [com.amazonaws.auth.AWSStaticCredentialsProvider] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-04-07 02:57:54.711  INFO 31022 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean '(inner bean)#45764a62' of type [com.amazonaws.auth.profile.ProfileCredentialsProvider] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-04-07 02:57:54.718  INFO 31022 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'credentialsProvider' of type [org.springframework.cloud.aws.core.credentials.CredentialsProviderFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-04-07 02:57:54.718  INFO 31022 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'credentialsProvider' of type [com.amazonaws.auth.AWSCredentialsProviderChain] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-04-07 02:57:55.080  INFO 31022 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2023-04-07 02:57:55.091  INFO 31022 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-04-07 02:57:55.091  INFO 31022 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.71]
+2023-04-07 02:57:55.169  INFO 31022 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-04-07 02:57:55.169  INFO 31022 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 9212 ms
+2023-04-07 02:57:55.374  INFO 31022 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-04-07 02:57:55.415  INFO 31022 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.15.Final
+2023-04-07 02:57:55.567  INFO 31022 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-04-07 02:57:55.646  INFO 31022 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : fined&youHikariPool - Starting...
+2023-04-07 02:57:55.989  INFO 31022 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : fined&youHikariPool - Start completed.
+2023-04-07 02:57:56.006  INFO 31022 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL57Dialect
+2023-04-07 02:57:56.790 DEBUG 31022 --- [restartedMain] org.hibernate.SQL                        : 
+    
+    create table participant (
+       participant_id bigint not null auto_increment,
+        room_id bigint,
+        user_id bigint,
+        primary key (participant_id)
+    ) engine=InnoDB
+2023-04-07 02:57:57.115 DEBUG 31022 --- [restartedMain] org.hibernate.SQL                        : 
+    
+    alter table participant 
+       add constraint FKm2a4ku3s9mx4o2dg4roardipo 
+       foreign key (room_id) 
+       references chat_room (room_id)
+2023-04-07 02:57:57.255 DEBUG 31022 --- [restartedMain] org.hibernate.SQL                        : 
+    
+    alter table participant 
+       add constraint FKj2ywtc5meno2ouhf5pcq9rsbh 
+       foreign key (user_id) 
+       references user (user_id)
+2023-04-07 02:57:57.501  INFO 31022 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-04-07 02:57:57.513  INFO 31022 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-04-07 02:57:58.184  WARN 31022 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-04-07 02:57:59.471  WARN 31022 --- [restartedMain] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/v3/api-docs']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-04-07 02:57:59.472  INFO 31022 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/v3/api-docs']
+2023-04-07 02:57:59.472  WARN 31022 --- [restartedMain] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/swagger*/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-04-07 02:57:59.473  INFO 31022 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/swagger*/**']
+2023-04-07 02:57:59.473  WARN 31022 --- [restartedMain] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/api/regist/image/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-04-07 02:57:59.473  INFO 31022 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/api/regist/image/**']
+2023-04-07 02:57:59.473  WARN 31022 --- [restartedMain] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/error']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-04-07 02:57:59.473  INFO 31022 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/error']
+2023-04-07 02:57:59.505 DEBUG 31022 --- [restartedMain] edFilterInvocationSecurityMetadataSource : Adding web access control expression [permitAll] for Ant [pattern='/api/user/login']
+2023-04-07 02:57:59.521 DEBUG 31022 --- [restartedMain] edFilterInvocationSecurityMetadataSource : Adding web access control expression [permitAll] for Ant [pattern='/api/user/create']
+2023-04-07 02:57:59.521 DEBUG 31022 --- [restartedMain] edFilterInvocationSecurityMetadataSource : Adding web access control expression [permitAll] for Ant [pattern='/api/user/phoneconfirm']
+2023-04-07 02:57:59.522 DEBUG 31022 --- [restartedMain] edFilterInvocationSecurityMetadataSource : Adding web access control expression [permitAll] for Ant [pattern='/api/user/phoneauth']
+2023-04-07 02:57:59.522 DEBUG 31022 --- [restartedMain] edFilterInvocationSecurityMetadataSource : Adding web access control expression [permitAll] for Ant [pattern='/oauth2/**']
+2023-04-07 02:57:59.522 DEBUG 31022 --- [restartedMain] edFilterInvocationSecurityMetadataSource : Adding web access control expression [authenticated] for any request
+2023-04-07 02:57:59.531  INFO 31022 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@52e2ec4, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@405af5b5, org.springframework.security.web.context.SecurityContextPersistenceFilter@10ebbfc2, org.springframework.security.web.header.HeaderWriterFilter@4f1ae8b8, org.springframework.security.web.authentication.logout.LogoutFilter@2bef97a2, org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter@65e40aae, org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter@59557c45, com.ssafy.finedUi.common.jwt.JwtTokenAuthenticationFilter@149167a1, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@35b6ce71, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@531a475, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@321f1eaf, org.springframework.security.web.session.SessionManagementFilter@63372572, org.springframework.security.web.access.ExceptionTranslationFilter@304bdab9, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@1da897bd]
+2023-04-07 02:57:59.708  INFO 31022 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-04-07 02:58:00.025  INFO 31022 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2023-04-07 02:58:00.490  INFO 31022 --- [restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : Starting...
+2023-04-07 02:58:00.492  INFO 31022 --- [restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@412cfee9]]
+2023-04-07 02:58:00.493  INFO 31022 --- [restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : Started.
+2023-04-07 02:58:00.507  INFO 31022 --- [restartedMain] com.ssafy.finedUi.FinedUiApplication     : Started FinedUiApplication in 15.258 seconds (JVM running for 16.228)
+2023-04-07 02:58:59.599  INFO 31022 --- [MessageBroker-1] o.s.w.s.c.WebSocketMessageBrokerStats    : WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 1, active threads = 1, queued tasks = 0, completed tasks = 0]
+2023-04-07 03:07:27.812  INFO 31022 --- [SpringApplicationShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopping...
+2023-04-07 03:07:27.814  INFO 31022 --- [SpringApplicationShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=false, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@412cfee9]]
+2023-04-07 03:07:27.815  INFO 31022 --- [SpringApplicationShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopped.
+2023-04-07 03:07:28.049  INFO 31022 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-04-07 03:07:28.055  INFO 31022 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : fined&youHikariPool - Shutdown initiated...
+2023-04-07 03:07:28.087  INFO 31022 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : fined&youHikariPool - Shutdown completed.
+2023-04-07 03:07:35.575  INFO 31456 --- [restartedMain] com.ssafy.finedUi.FinedUiApplication     : Starting FinedUiApplication using Java 11.0.18 on anjunhong-ui-MacBookPro.local with PID 31456 (/Users/ahnjunhong/Documents/GitHub/FinedUI/S08P22A108/Backend/finedUI/build/classes/java/main started by ahnjunhong in /Users/ahnjunhong/Documents/GitHub/FinedUI/S08P22A108/Backend)
+2023-04-07 03:07:35.576  INFO 31456 --- [restartedMain] com.ssafy.finedUi.FinedUiApplication     : The following 4 profiles are active: "oauth2", "redis", "sms", "aiserver"
+2023-04-07 03:07:35.631  INFO 31456 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-04-07 03:07:35.632  INFO 31456 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-04-07 03:07:37.030  INFO 31456 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2023-04-07 03:07:37.032  INFO 31456 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-04-07 03:07:37.303  INFO 31456 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 264 ms. Found 8 JPA repository interfaces.
+2023-04-07 03:07:37.331  INFO 31456 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2023-04-07 03:07:37.332  INFO 31456 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2023-04-07 03:07:37.355  INFO 31456 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ssafy.finedUi.chatImage.ChatImageRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-04-07 03:07:37.355  INFO 31456 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ssafy.finedUi.chatMessage.ChatMessageRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-04-07 03:07:37.355  INFO 31456 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ssafy.finedUi.chatRoom.ChatRoomRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-04-07 03:07:37.356  INFO 31456 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ssafy.finedUi.chatRoomUser.ChatRoomUserRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-04-07 03:07:37.357  INFO 31456 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ssafy.finedUi.notice.NoticeRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-04-07 03:07:37.359  INFO 31456 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ssafy.finedUi.registInfo.RegistInfoRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-04-07 03:07:37.360  INFO 31456 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ssafy.finedUi.social.SocialRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-04-07 03:07:37.360  INFO 31456 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ssafy.finedUi.user.UserRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-04-07 03:07:37.361  INFO 31456 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 22 ms. Found 0 Redis repository interfaces.
+2023-04-07 03:07:45.517  INFO 31456 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean '(inner bean)#6d706c44' of type [com.amazonaws.auth.BasicAWSCredentials] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-04-07 03:07:45.521  INFO 31456 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean '(inner bean)#28bdd9b4' of type [com.amazonaws.auth.AWSStaticCredentialsProvider] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-04-07 03:07:45.527  INFO 31456 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean '(inner bean)#7b70ef30' of type [com.amazonaws.auth.profile.ProfileCredentialsProvider] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-04-07 03:07:45.530  INFO 31456 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'credentialsProvider' of type [org.springframework.cloud.aws.core.credentials.CredentialsProviderFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-04-07 03:07:45.530  INFO 31456 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'credentialsProvider' of type [com.amazonaws.auth.AWSCredentialsProviderChain] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-04-07 03:07:45.866  INFO 31456 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2023-04-07 03:07:45.876  INFO 31456 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-04-07 03:07:45.876  INFO 31456 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.71]
+2023-04-07 03:07:45.951  INFO 31456 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-04-07 03:07:45.951  INFO 31456 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 10319 ms
+2023-04-07 03:07:46.161  INFO 31456 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-04-07 03:07:46.238  INFO 31456 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.15.Final
+2023-04-07 03:07:46.366  INFO 31456 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-04-07 03:07:46.441  INFO 31456 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : fined&youHikariPool - Starting...
+2023-04-07 03:07:46.715  INFO 31456 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : fined&youHikariPool - Start completed.
+2023-04-07 03:07:46.730  INFO 31456 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL57Dialect
+2023-04-07 03:07:47.994  INFO 31456 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-04-07 03:07:48.021  INFO 31456 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-04-07 03:07:48.687  WARN 31456 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-04-07 03:07:50.164  WARN 31456 --- [restartedMain] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/v3/api-docs']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-04-07 03:07:50.168  INFO 31456 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/v3/api-docs']
+2023-04-07 03:07:50.168  WARN 31456 --- [restartedMain] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/swagger*/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-04-07 03:07:50.168  INFO 31456 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/swagger*/**']
+2023-04-07 03:07:50.168  WARN 31456 --- [restartedMain] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/api/regist/image/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-04-07 03:07:50.168  INFO 31456 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/api/regist/image/**']
+2023-04-07 03:07:50.168  WARN 31456 --- [restartedMain] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/error']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-04-07 03:07:50.168  INFO 31456 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/error']
+2023-04-07 03:07:50.202 DEBUG 31456 --- [restartedMain] edFilterInvocationSecurityMetadataSource : Adding web access control expression [permitAll] for Ant [pattern='/api/user/login']
+2023-04-07 03:07:50.218 DEBUG 31456 --- [restartedMain] edFilterInvocationSecurityMetadataSource : Adding web access control expression [permitAll] for Ant [pattern='/api/user/create']
+2023-04-07 03:07:50.219 DEBUG 31456 --- [restartedMain] edFilterInvocationSecurityMetadataSource : Adding web access control expression [permitAll] for Ant [pattern='/api/user/phoneconfirm']
+2023-04-07 03:07:50.219 DEBUG 31456 --- [restartedMain] edFilterInvocationSecurityMetadataSource : Adding web access control expression [permitAll] for Ant [pattern='/api/user/phoneauth']
+2023-04-07 03:07:50.219 DEBUG 31456 --- [restartedMain] edFilterInvocationSecurityMetadataSource : Adding web access control expression [permitAll] for Ant [pattern='/oauth2/**']
+2023-04-07 03:07:50.219 DEBUG 31456 --- [restartedMain] edFilterInvocationSecurityMetadataSource : Adding web access control expression [authenticated] for any request
+2023-04-07 03:07:50.228  INFO 31456 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@18d9aae0, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@5ee9cb70, org.springframework.security.web.context.SecurityContextPersistenceFilter@6be226fa, org.springframework.security.web.header.HeaderWriterFilter@7307514, org.springframework.security.web.authentication.logout.LogoutFilter@6ffb8fbf, org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter@55927c8f, org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter@5179bb89, com.ssafy.finedUi.common.jwt.JwtTokenAuthenticationFilter@75c91b61, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@17143784, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@6980d621, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@42d086d7, org.springframework.security.web.session.SessionManagementFilter@1b2e4f4c, org.springframework.security.web.access.ExceptionTranslationFilter@598b357a, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@7dc4e4ea]
+2023-04-07 03:07:50.407  INFO 31456 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-04-07 03:07:50.767  INFO 31456 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2023-04-07 03:07:51.260  INFO 31456 --- [restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : Starting...
+2023-04-07 03:07:51.262  INFO 31456 --- [restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@31f60be7]]
+2023-04-07 03:07:51.263  INFO 31456 --- [restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : Started.
+2023-04-07 03:07:51.277  INFO 31456 --- [restartedMain] com.ssafy.finedUi.FinedUiApplication     : Started FinedUiApplication in 16.391 seconds (JVM running for 17.637)
+2023-04-07 03:08:07.232  INFO 31456 --- [http-nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-04-07 03:08:07.234  INFO 31456 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-04-07 03:08:07.237  INFO 31456 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 3 ms
+2023-04-07 03:08:07.248 DEBUG 31456 --- [http-nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing PATCH /api/regist?registId=79
+2023-04-07 03:08:07.256 DEBUG 31456 --- [http-nio-8080-exec-2] s.s.w.c.SecurityContextPersistenceFilter : Set SecurityContextHolder to empty SecurityContext
+2023-04-07 03:08:07.258  INFO 31456 --- [http-nio-8080-exec-2] c.s.f.c.j.JwtTokenAuthenticationFilter   : jwtFilter 진입 : ----------------------
+2023-04-07 03:08:07.299  INFO 31456 --- [http-nio-8080-exec-2] c.s.finedUi.common.jwt.TokenProvider     : token에서 id 갖고오기 : 3
+2023-04-07 03:08:07.311 DEBUG 31456 --- [http-nio-8080-exec-2] o.s.s.w.a.i.FilterSecurityInterceptor    : Authorized filter invocation [PATCH /api/regist?registId=79] with attributes [authenticated]
+2023-04-07 03:08:07.311 DEBUG 31456 --- [http-nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Secured PATCH /api/regist?registId=79
+2023-04-07 03:08:07.443 DEBUG 31456 --- [http-nio-8080-exec-2] org.hibernate.SQL                        : 
+    select
+        registinfo0_.regist_id as regist_i1_5_0_,
+        registinfo0_.birth_date as birth_da2_5_0_,
+        registinfo0_.create_date as create_d3_5_0_,
+        registinfo0_.description as descript4_5_0_,
+        registinfo0_.front_image_path as front_im5_5_0_,
+        registinfo0_.gender as gender6_5_0_,
+        registinfo0_.is_missing as is_missi7_5_0_,
+        registinfo0_.latitude as latitude8_5_0_,
+        registinfo0_.longitude as longitud9_5_0_,
+        registinfo0_.missing_time as missing10_5_0_,
+        registinfo0_.name as name11_5_0_,
+        registinfo0_.other_image_1_path as other_i12_5_0_,
+        registinfo0_.other_image_2_path as other_i13_5_0_,
+        registinfo0_.update_date as update_14_5_0_,
+        registinfo0_.user_id as user_id15_5_0_,
+        user1_.user_id as user_id1_7_1_,
+        user1_.address as address2_7_1_,
+        user1_.email as email3_7_1_,
+        user1_.is_admin as is_admin4_7_1_,
+        user1_.join_date as join_dat5_7_1_,
+        user1_.name as name6_7_1_,
+        user1_.password as password7_7_1_,
+        user1_.phone_number as phone_nu8_7_1_,
+        user1_.social_id as social_i9_7_1_,
+        social2_.id as id1_6_2_,
+        social2_.provider as provider2_6_2_ 
+    from
+        regist_info registinfo0_ 
+    left outer join
+        user user1_ 
+            on registinfo0_.user_id=user1_.user_id 
+    left outer join
+        social social2_ 
+            on user1_.social_id=social2_.id 
+    where
+        registinfo0_.regist_id=?
+2023-04-07 03:08:07.670 DEBUG 31456 --- [http-nio-8080-exec-2] org.hibernate.SQL                        : 
+    update
+        regist_info 
+    set
+        birth_date=?,
+        create_date=?,
+        description=?,
+        front_image_path=?,
+        gender=?,
+        is_missing=?,
+        latitude=?,
+        longitude=?,
+        missing_time=?,
+        name=?,
+        other_image_1_path=?,
+        other_image_2_path=?,
+        update_date=?,
+        user_id=? 
+    where
+        regist_id=?
+2023-04-07 03:08:07.792 DEBUG 31456 --- [http-nio-8080-exec-2] s.s.w.c.SecurityContextPersistenceFilter : Cleared SecurityContextHolder to complete request
+2023-04-07 03:08:20.890  INFO 31456 --- [SpringApplicationShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopping...
+2023-04-07 03:08:20.890  INFO 31456 --- [SpringApplicationShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=false, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@31f60be7]]
+2023-04-07 03:08:20.891  INFO 31456 --- [SpringApplicationShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopped.
+2023-04-07 03:08:21.067  INFO 31456 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-04-07 03:08:21.072  INFO 31456 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : fined&youHikariPool - Shutdown initiated...
+2023-04-07 03:08:21.088  INFO 31456 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : fined&youHikariPool - Shutdown completed.
+2023-04-07 03:08:27.437  INFO 31462 --- [restartedMain] com.ssafy.finedUi.FinedUiApplication     : Starting FinedUiApplication using Java 11.0.18 on anjunhong-ui-MacBookPro.local with PID 31462 (/Users/ahnjunhong/Documents/GitHub/FinedUI/S08P22A108/Backend/finedUI/build/classes/java/main started by ahnjunhong in /Users/ahnjunhong/Documents/GitHub/FinedUI/S08P22A108/Backend)
+2023-04-07 03:08:27.438  INFO 31462 --- [restartedMain] com.ssafy.finedUi.FinedUiApplication     : The following 4 profiles are active: "oauth2", "redis", "sms", "aiserver"
+2023-04-07 03:08:27.489  INFO 31462 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-04-07 03:08:27.489  INFO 31462 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-04-07 03:08:28.721  INFO 31462 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2023-04-07 03:08:28.723  INFO 31462 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-04-07 03:08:28.994  INFO 31462 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 263 ms. Found 8 JPA repository interfaces.
+2023-04-07 03:08:29.022  INFO 31462 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2023-04-07 03:08:29.023  INFO 31462 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2023-04-07 03:08:29.041  INFO 31462 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ssafy.finedUi.chatImage.ChatImageRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-04-07 03:08:29.042  INFO 31462 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ssafy.finedUi.chatMessage.ChatMessageRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-04-07 03:08:29.042  INFO 31462 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ssafy.finedUi.chatRoom.ChatRoomRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-04-07 03:08:29.042  INFO 31462 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ssafy.finedUi.chatRoomUser.ChatRoomUserRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-04-07 03:08:29.043  INFO 31462 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ssafy.finedUi.notice.NoticeRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-04-07 03:08:29.044  INFO 31462 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ssafy.finedUi.registInfo.RegistInfoRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-04-07 03:08:29.046  INFO 31462 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ssafy.finedUi.social.SocialRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-04-07 03:08:29.046  INFO 31462 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ssafy.finedUi.user.UserRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-04-07 03:08:29.047  INFO 31462 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 17 ms. Found 0 Redis repository interfaces.
+2023-04-07 03:08:36.183  INFO 31462 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean '(inner bean)#289c4ed7' of type [com.amazonaws.auth.BasicAWSCredentials] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-04-07 03:08:36.185  INFO 31462 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean '(inner bean)#6bc68997' of type [com.amazonaws.auth.AWSStaticCredentialsProvider] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-04-07 03:08:36.192  INFO 31462 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean '(inner bean)#46ffb033' of type [com.amazonaws.auth.profile.ProfileCredentialsProvider] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-04-07 03:08:36.199  INFO 31462 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'credentialsProvider' of type [org.springframework.cloud.aws.core.credentials.CredentialsProviderFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-04-07 03:08:36.199  INFO 31462 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'credentialsProvider' of type [com.amazonaws.auth.AWSCredentialsProviderChain] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-04-07 03:08:36.535  INFO 31462 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2023-04-07 03:08:36.545  INFO 31462 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-04-07 03:08:36.545  INFO 31462 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.71]
+2023-04-07 03:08:36.622  INFO 31462 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-04-07 03:08:36.623  INFO 31462 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 9133 ms
+2023-04-07 03:08:36.847  INFO 31462 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-04-07 03:08:36.889  INFO 31462 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.15.Final
+2023-04-07 03:08:37.066  INFO 31462 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-04-07 03:08:37.146  INFO 31462 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : fined&youHikariPool - Starting...
+2023-04-07 03:08:37.419  INFO 31462 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : fined&youHikariPool - Start completed.
+2023-04-07 03:08:37.436  INFO 31462 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL57Dialect
+2023-04-07 03:08:38.674  INFO 31462 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-04-07 03:08:38.693  INFO 31462 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-04-07 03:08:39.360  WARN 31462 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-04-07 03:08:40.783  WARN 31462 --- [restartedMain] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/v3/api-docs']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-04-07 03:08:40.787  INFO 31462 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/v3/api-docs']
+2023-04-07 03:08:40.787  WARN 31462 --- [restartedMain] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/swagger*/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-04-07 03:08:40.787  INFO 31462 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/swagger*/**']
+2023-04-07 03:08:40.787  WARN 31462 --- [restartedMain] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/api/regist/image/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-04-07 03:08:40.788  INFO 31462 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/api/regist/image/**']
+2023-04-07 03:08:40.788  WARN 31462 --- [restartedMain] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/error']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-04-07 03:08:40.788  INFO 31462 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/error']
+2023-04-07 03:08:40.828 DEBUG 31462 --- [restartedMain] edFilterInvocationSecurityMetadataSource : Adding web access control expression [permitAll] for Ant [pattern='/api/user/login']
+2023-04-07 03:08:40.846 DEBUG 31462 --- [restartedMain] edFilterInvocationSecurityMetadataSource : Adding web access control expression [permitAll] for Ant [pattern='/api/user/create']
+2023-04-07 03:08:40.846 DEBUG 31462 --- [restartedMain] edFilterInvocationSecurityMetadataSource : Adding web access control expression [permitAll] for Ant [pattern='/api/user/phoneconfirm']
+2023-04-07 03:08:40.846 DEBUG 31462 --- [restartedMain] edFilterInvocationSecurityMetadataSource : Adding web access control expression [permitAll] for Ant [pattern='/api/user/phoneauth']
+2023-04-07 03:08:40.846 DEBUG 31462 --- [restartedMain] edFilterInvocationSecurityMetadataSource : Adding web access control expression [permitAll] for Ant [pattern='/oauth2/**']
+2023-04-07 03:08:40.846 DEBUG 31462 --- [restartedMain] edFilterInvocationSecurityMetadataSource : Adding web access control expression [authenticated] for any request
+2023-04-07 03:08:40.856  INFO 31462 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@1160ae3e, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@633c67f5, org.springframework.security.web.context.SecurityContextPersistenceFilter@299ca19b, org.springframework.security.web.header.HeaderWriterFilter@17865940, org.springframework.security.web.authentication.logout.LogoutFilter@7e8fa8d0, org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter@61027582, org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter@42522505, com.ssafy.finedUi.common.jwt.JwtTokenAuthenticationFilter@7a7d57af, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@5507752, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@5c9629ec, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@30150c9a, org.springframework.security.web.session.SessionManagementFilter@7ab1716e, org.springframework.security.web.access.ExceptionTranslationFilter@3dbe2381, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@2814fae3]
+2023-04-07 03:08:41.026  INFO 31462 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-04-07 03:08:41.382  INFO 31462 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2023-04-07 03:08:41.942  INFO 31462 --- [restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : Starting...
+2023-04-07 03:08:41.943  INFO 31462 --- [restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@2448e43a]]
+2023-04-07 03:08:41.944  INFO 31462 --- [restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : Started.
+2023-04-07 03:08:41.960  INFO 31462 --- [restartedMain] com.ssafy.finedUi.FinedUiApplication     : Started FinedUiApplication in 15.12 seconds (JVM running for 16.028)
+2023-04-07 03:08:44.035  INFO 31462 --- [http-nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-04-07 03:08:44.037  INFO 31462 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-04-07 03:08:44.041  INFO 31462 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 4 ms
+2023-04-07 03:08:44.054 DEBUG 31462 --- [http-nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing PATCH /api/regist?registId=79
+2023-04-07 03:08:44.060 DEBUG 31462 --- [http-nio-8080-exec-2] s.s.w.c.SecurityContextPersistenceFilter : Set SecurityContextHolder to empty SecurityContext
+2023-04-07 03:08:44.063  INFO 31462 --- [http-nio-8080-exec-2] c.s.f.c.j.JwtTokenAuthenticationFilter   : jwtFilter 진입 : ----------------------
+2023-04-07 03:08:44.103  INFO 31462 --- [http-nio-8080-exec-2] c.s.finedUi.common.jwt.TokenProvider     : token에서 id 갖고오기 : 3
+2023-04-07 03:08:44.112 DEBUG 31462 --- [http-nio-8080-exec-2] o.s.s.w.a.i.FilterSecurityInterceptor    : Authorized filter invocation [PATCH /api/regist?registId=79] with attributes [authenticated]
+2023-04-07 03:08:44.113 DEBUG 31462 --- [http-nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Secured PATCH /api/regist?registId=79
+2023-04-07 03:08:44.172  WARN 31462 --- [http-nio-8080-exec-2] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.web.HttpMediaTypeNotSupportedException: Content type 'multipart/form-data;boundary=--------------------------324882693155105765042141;charset=UTF-8' not supported]
+2023-04-07 03:08:44.174 DEBUG 31462 --- [http-nio-8080-exec-2] s.s.w.c.SecurityContextPersistenceFilter : Cleared SecurityContextHolder to complete request
+2023-04-07 03:09:04.126  INFO 31462 --- [SpringApplicationShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopping...
+2023-04-07 03:09:04.127  INFO 31462 --- [SpringApplicationShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=false, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@2448e43a]]
+2023-04-07 03:09:04.127  INFO 31462 --- [SpringApplicationShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopped.
+2023-04-07 03:09:04.308  INFO 31462 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-04-07 03:09:04.314  INFO 31462 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : fined&youHikariPool - Shutdown initiated...
+2023-04-07 03:09:04.324  INFO 31462 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : fined&youHikariPool - Shutdown completed.
+2023-04-07 03:09:10.795  INFO 31465 --- [restartedMain] com.ssafy.finedUi.FinedUiApplication     : Starting FinedUiApplication using Java 11.0.18 on anjunhong-ui-MacBookPro.local with PID 31465 (/Users/ahnjunhong/Documents/GitHub/FinedUI/S08P22A108/Backend/finedUI/build/classes/java/main started by ahnjunhong in /Users/ahnjunhong/Documents/GitHub/FinedUI/S08P22A108/Backend)
+2023-04-07 03:09:10.795  INFO 31465 --- [restartedMain] com.ssafy.finedUi.FinedUiApplication     : The following 4 profiles are active: "oauth2", "redis", "sms", "aiserver"
+2023-04-07 03:09:10.854  INFO 31465 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-04-07 03:09:10.854  INFO 31465 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-04-07 03:09:12.093  INFO 31465 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2023-04-07 03:09:12.095  INFO 31465 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-04-07 03:09:12.425  INFO 31465 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 279 ms. Found 8 JPA repository interfaces.
+2023-04-07 03:09:12.457  INFO 31465 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2023-04-07 03:09:12.458  INFO 31465 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2023-04-07 03:09:12.478  INFO 31465 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ssafy.finedUi.chatImage.ChatImageRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-04-07 03:09:12.479  INFO 31465 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ssafy.finedUi.chatMessage.ChatMessageRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-04-07 03:09:12.479  INFO 31465 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ssafy.finedUi.chatRoom.ChatRoomRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-04-07 03:09:12.479  INFO 31465 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ssafy.finedUi.chatRoomUser.ChatRoomUserRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-04-07 03:09:12.480  INFO 31465 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ssafy.finedUi.notice.NoticeRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-04-07 03:09:12.483  INFO 31465 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ssafy.finedUi.registInfo.RegistInfoRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-04-07 03:09:12.483  INFO 31465 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ssafy.finedUi.social.SocialRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-04-07 03:09:12.484  INFO 31465 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ssafy.finedUi.user.UserRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-04-07 03:09:12.485  INFO 31465 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 19 ms. Found 0 Redis repository interfaces.
+2023-04-07 03:09:19.703  INFO 31465 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean '(inner bean)#5104a670' of type [com.amazonaws.auth.BasicAWSCredentials] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-04-07 03:09:19.705  INFO 31465 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean '(inner bean)#3e86357b' of type [com.amazonaws.auth.AWSStaticCredentialsProvider] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-04-07 03:09:19.714  INFO 31465 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean '(inner bean)#7927231a' of type [com.amazonaws.auth.profile.ProfileCredentialsProvider] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-04-07 03:09:19.722  INFO 31465 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'credentialsProvider' of type [org.springframework.cloud.aws.core.credentials.CredentialsProviderFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-04-07 03:09:19.723  INFO 31465 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'credentialsProvider' of type [com.amazonaws.auth.AWSCredentialsProviderChain] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-04-07 03:09:20.079  INFO 31465 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2023-04-07 03:09:20.093  INFO 31465 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-04-07 03:09:20.093  INFO 31465 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.71]
+2023-04-07 03:09:20.182  INFO 31465 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-04-07 03:09:20.182  INFO 31465 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 9328 ms
+2023-04-07 03:09:20.414  INFO 31465 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-04-07 03:09:20.451  INFO 31465 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.15.Final
+2023-04-07 03:09:20.619  INFO 31465 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-04-07 03:09:20.700  INFO 31465 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : fined&youHikariPool - Starting...
+2023-04-07 03:09:20.972  INFO 31465 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : fined&youHikariPool - Start completed.
+2023-04-07 03:09:20.989  INFO 31465 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL57Dialect
+2023-04-07 03:09:22.228  INFO 31465 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-04-07 03:09:22.260  INFO 31465 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-04-07 03:09:22.934  WARN 31465 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-04-07 03:09:24.269  WARN 31465 --- [restartedMain] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/v3/api-docs']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-04-07 03:09:24.270  INFO 31465 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/v3/api-docs']
+2023-04-07 03:09:24.271  WARN 31465 --- [restartedMain] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/swagger*/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-04-07 03:09:24.271  INFO 31465 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/swagger*/**']
+2023-04-07 03:09:24.271  WARN 31465 --- [restartedMain] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/api/regist/image/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-04-07 03:09:24.271  INFO 31465 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/api/regist/image/**']
+2023-04-07 03:09:24.271  WARN 31465 --- [restartedMain] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/error']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-04-07 03:09:24.271  INFO 31465 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/error']
+2023-04-07 03:09:24.305 DEBUG 31465 --- [restartedMain] edFilterInvocationSecurityMetadataSource : Adding web access control expression [permitAll] for Ant [pattern='/api/user/login']
+2023-04-07 03:09:24.321 DEBUG 31465 --- [restartedMain] edFilterInvocationSecurityMetadataSource : Adding web access control expression [permitAll] for Ant [pattern='/api/user/create']
+2023-04-07 03:09:24.322 DEBUG 31465 --- [restartedMain] edFilterInvocationSecurityMetadataSource : Adding web access control expression [permitAll] for Ant [pattern='/api/user/phoneconfirm']
+2023-04-07 03:09:24.322 DEBUG 31465 --- [restartedMain] edFilterInvocationSecurityMetadataSource : Adding web access control expression [permitAll] for Ant [pattern='/api/user/phoneauth']
+2023-04-07 03:09:24.322 DEBUG 31465 --- [restartedMain] edFilterInvocationSecurityMetadataSource : Adding web access control expression [permitAll] for Ant [pattern='/oauth2/**']
+2023-04-07 03:09:24.322 DEBUG 31465 --- [restartedMain] edFilterInvocationSecurityMetadataSource : Adding web access control expression [authenticated] for any request
+2023-04-07 03:09:24.331  INFO 31465 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@63961beb, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@79d9c609, org.springframework.security.web.context.SecurityContextPersistenceFilter@76b548dd, org.springframework.security.web.header.HeaderWriterFilter@3492e854, org.springframework.security.web.authentication.logout.LogoutFilter@6107139a, org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter@33752414, org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter@180a4828, com.ssafy.finedUi.common.jwt.JwtTokenAuthenticationFilter@5921b009, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@454ad997, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@406ac73, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@33d88a12, org.springframework.security.web.session.SessionManagementFilter@5a853dcd, org.springframework.security.web.access.ExceptionTranslationFilter@5b73ea25, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@23126abb]
+2023-04-07 03:09:24.492  INFO 31465 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-04-07 03:09:24.806  INFO 31465 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2023-04-07 03:09:25.275  INFO 31465 --- [restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : Starting...
+2023-04-07 03:09:25.276  INFO 31465 --- [restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@16596b6a]]
+2023-04-07 03:09:25.279  INFO 31465 --- [restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : Started.
+2023-04-07 03:09:25.295  INFO 31465 --- [restartedMain] com.ssafy.finedUi.FinedUiApplication     : Started FinedUiApplication in 15.136 seconds (JVM running for 16.184)
+2023-04-07 03:09:26.135  INFO 31465 --- [http-nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-04-07 03:09:26.137  INFO 31465 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-04-07 03:09:26.139  INFO 31465 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2023-04-07 03:09:26.148 DEBUG 31465 --- [http-nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing PATCH /api/regist
+2023-04-07 03:09:26.153 DEBUG 31465 --- [http-nio-8080-exec-2] s.s.w.c.SecurityContextPersistenceFilter : Set SecurityContextHolder to empty SecurityContext
+2023-04-07 03:09:26.155  INFO 31465 --- [http-nio-8080-exec-2] c.s.f.c.j.JwtTokenAuthenticationFilter   : jwtFilter 진입 : ----------------------
+2023-04-07 03:09:26.189  INFO 31465 --- [http-nio-8080-exec-2] c.s.finedUi.common.jwt.TokenProvider     : token에서 id 갖고오기 : 3
+2023-04-07 03:09:26.198 DEBUG 31465 --- [http-nio-8080-exec-2] o.s.s.w.a.i.FilterSecurityInterceptor    : Authorized filter invocation [PATCH /api/regist] with attributes [authenticated]
+2023-04-07 03:09:26.198 DEBUG 31465 --- [http-nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Secured PATCH /api/regist
+2023-04-07 03:09:26.252  WARN 31465 --- [http-nio-8080-exec-2] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.web.HttpMediaTypeNotSupportedException: Content type 'multipart/form-data;boundary=--------------------------620667691046887315461530;charset=UTF-8' not supported]
+2023-04-07 03:09:26.254 DEBUG 31465 --- [http-nio-8080-exec-2] s.s.w.c.SecurityContextPersistenceFilter : Cleared SecurityContextHolder to complete request
+2023-04-07 03:09:27.435 DEBUG 31465 --- [http-nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Securing PATCH /api/regist
+2023-04-07 03:09:27.438 DEBUG 31465 --- [http-nio-8080-exec-3] s.s.w.c.SecurityContextPersistenceFilter : Set SecurityContextHolder to empty SecurityContext
+2023-04-07 03:09:27.439  INFO 31465 --- [http-nio-8080-exec-3] c.s.f.c.j.JwtTokenAuthenticationFilter   : jwtFilter 진입 : ----------------------
+2023-04-07 03:09:27.451  INFO 31465 --- [http-nio-8080-exec-3] c.s.finedUi.common.jwt.TokenProvider     : token에서 id 갖고오기 : 3
+2023-04-07 03:09:27.452 DEBUG 31465 --- [http-nio-8080-exec-3] o.s.s.w.a.i.FilterSecurityInterceptor    : Authorized filter invocation [PATCH /api/regist] with attributes [authenticated]
+2023-04-07 03:09:27.452 DEBUG 31465 --- [http-nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Secured PATCH /api/regist
+2023-04-07 03:09:27.455  WARN 31465 --- [http-nio-8080-exec-3] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.web.HttpMediaTypeNotSupportedException: Content type 'multipart/form-data;boundary=--------------------------152816866747461156202224;charset=UTF-8' not supported]
+2023-04-07 03:09:27.456 DEBUG 31465 --- [http-nio-8080-exec-3] s.s.w.c.SecurityContextPersistenceFilter : Cleared SecurityContextHolder to complete request
+2023-04-07 03:09:28.553 DEBUG 31465 --- [http-nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Securing PATCH /api/regist
+2023-04-07 03:09:28.555 DEBUG 31465 --- [http-nio-8080-exec-4] s.s.w.c.SecurityContextPersistenceFilter : Set SecurityContextHolder to empty SecurityContext
+2023-04-07 03:09:28.555  INFO 31465 --- [http-nio-8080-exec-4] c.s.f.c.j.JwtTokenAuthenticationFilter   : jwtFilter 진입 : ----------------------
+2023-04-07 03:09:28.579  INFO 31465 --- [http-nio-8080-exec-4] c.s.finedUi.common.jwt.TokenProvider     : token에서 id 갖고오기 : 3
+2023-04-07 03:09:28.580 DEBUG 31465 --- [http-nio-8080-exec-4] o.s.s.w.a.i.FilterSecurityInterceptor    : Authorized filter invocation [PATCH /api/regist] with attributes [authenticated]
+2023-04-07 03:09:28.580 DEBUG 31465 --- [http-nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Secured PATCH /api/regist
+2023-04-07 03:09:28.583  WARN 31465 --- [http-nio-8080-exec-4] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.web.HttpMediaTypeNotSupportedException: Content type 'multipart/form-data;boundary=--------------------------145818015471614310832732;charset=UTF-8' not supported]
+2023-04-07 03:09:28.583 DEBUG 31465 --- [http-nio-8080-exec-4] s.s.w.c.SecurityContextPersistenceFilter : Cleared SecurityContextHolder to complete request
+2023-04-07 03:09:59.079  INFO 31465 --- [SpringApplicationShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopping...
+2023-04-07 03:09:59.080  INFO 31465 --- [SpringApplicationShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=false, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@16596b6a]]
+2023-04-07 03:09:59.080  INFO 31465 --- [SpringApplicationShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopped.
+2023-04-07 03:09:59.252  INFO 31465 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-04-07 03:09:59.257  INFO 31465 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : fined&youHikariPool - Shutdown initiated...
+2023-04-07 03:09:59.270  INFO 31465 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : fined&youHikariPool - Shutdown completed.
+2023-04-07 03:10:05.861  INFO 31475 --- [restartedMain] com.ssafy.finedUi.FinedUiApplication     : Starting FinedUiApplication using Java 11.0.18 on anjunhong-ui-MacBookPro.local with PID 31475 (/Users/ahnjunhong/Documents/GitHub/FinedUI/S08P22A108/Backend/finedUI/build/classes/java/main started by ahnjunhong in /Users/ahnjunhong/Documents/GitHub/FinedUI/S08P22A108/Backend)
+2023-04-07 03:10:05.862  INFO 31475 --- [restartedMain] com.ssafy.finedUi.FinedUiApplication     : The following 4 profiles are active: "oauth2", "redis", "sms", "aiserver"
+2023-04-07 03:10:05.931  INFO 31475 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-04-07 03:10:05.932  INFO 31475 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-04-07 03:10:07.352  INFO 31475 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2023-04-07 03:10:07.354  INFO 31475 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-04-07 03:10:07.669  INFO 31475 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 259 ms. Found 8 JPA repository interfaces.
+2023-04-07 03:10:07.702  INFO 31475 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2023-04-07 03:10:07.703  INFO 31475 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2023-04-07 03:10:07.723  INFO 31475 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ssafy.finedUi.chatImage.ChatImageRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-04-07 03:10:07.724  INFO 31475 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ssafy.finedUi.chatMessage.ChatMessageRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-04-07 03:10:07.725  INFO 31475 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ssafy.finedUi.chatRoom.ChatRoomRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-04-07 03:10:07.725  INFO 31475 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ssafy.finedUi.chatRoomUser.ChatRoomUserRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-04-07 03:10:07.726  INFO 31475 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ssafy.finedUi.notice.NoticeRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-04-07 03:10:07.728  INFO 31475 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ssafy.finedUi.registInfo.RegistInfoRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-04-07 03:10:07.729  INFO 31475 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ssafy.finedUi.social.SocialRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-04-07 03:10:07.729  INFO 31475 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ssafy.finedUi.user.UserRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-04-07 03:10:07.729  INFO 31475 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 19 ms. Found 0 Redis repository interfaces.
+2023-04-07 03:10:14.944  INFO 31475 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean '(inner bean)#33571531' of type [com.amazonaws.auth.BasicAWSCredentials] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-04-07 03:10:14.950  INFO 31475 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean '(inner bean)#449796f2' of type [com.amazonaws.auth.AWSStaticCredentialsProvider] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-04-07 03:10:14.957  INFO 31475 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean '(inner bean)#59b0d6b3' of type [com.amazonaws.auth.profile.ProfileCredentialsProvider] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-04-07 03:10:14.961  INFO 31475 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'credentialsProvider' of type [org.springframework.cloud.aws.core.credentials.CredentialsProviderFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-04-07 03:10:14.961  INFO 31475 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'credentialsProvider' of type [com.amazonaws.auth.AWSCredentialsProviderChain] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-04-07 03:10:15.321  INFO 31475 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2023-04-07 03:10:15.330  INFO 31475 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-04-07 03:10:15.331  INFO 31475 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.71]
+2023-04-07 03:10:15.420  INFO 31475 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-04-07 03:10:15.420  INFO 31475 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 9487 ms
+2023-04-07 03:10:15.637  INFO 31475 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-04-07 03:10:15.677  INFO 31475 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.15.Final
+2023-04-07 03:10:15.853  INFO 31475 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-04-07 03:10:15.932  INFO 31475 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : fined&youHikariPool - Starting...
+2023-04-07 03:10:16.227  INFO 31475 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : fined&youHikariPool - Start completed.
+2023-04-07 03:10:16.244  INFO 31475 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL57Dialect
+2023-04-07 03:10:17.588  INFO 31475 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-04-07 03:10:17.619  INFO 31475 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-04-07 03:10:18.316  WARN 31475 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-04-07 03:10:19.626  WARN 31475 --- [restartedMain] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/v3/api-docs']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-04-07 03:10:19.629  INFO 31475 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/v3/api-docs']
+2023-04-07 03:10:19.630  WARN 31475 --- [restartedMain] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/swagger*/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-04-07 03:10:19.630  INFO 31475 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/swagger*/**']
+2023-04-07 03:10:19.630  WARN 31475 --- [restartedMain] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/api/regist/image/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-04-07 03:10:19.630  INFO 31475 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/api/regist/image/**']
+2023-04-07 03:10:19.630  WARN 31475 --- [restartedMain] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/error']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-04-07 03:10:19.630  INFO 31475 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/error']
+2023-04-07 03:10:19.662 DEBUG 31475 --- [restartedMain] edFilterInvocationSecurityMetadataSource : Adding web access control expression [permitAll] for Ant [pattern='/api/user/login']
+2023-04-07 03:10:19.679 DEBUG 31475 --- [restartedMain] edFilterInvocationSecurityMetadataSource : Adding web access control expression [permitAll] for Ant [pattern='/api/user/create']
+2023-04-07 03:10:19.680 DEBUG 31475 --- [restartedMain] edFilterInvocationSecurityMetadataSource : Adding web access control expression [permitAll] for Ant [pattern='/api/user/phoneconfirm']
+2023-04-07 03:10:19.680 DEBUG 31475 --- [restartedMain] edFilterInvocationSecurityMetadataSource : Adding web access control expression [permitAll] for Ant [pattern='/api/user/phoneauth']
+2023-04-07 03:10:19.680 DEBUG 31475 --- [restartedMain] edFilterInvocationSecurityMetadataSource : Adding web access control expression [permitAll] for Ant [pattern='/oauth2/**']
+2023-04-07 03:10:19.680 DEBUG 31475 --- [restartedMain] edFilterInvocationSecurityMetadataSource : Adding web access control expression [authenticated] for any request
+2023-04-07 03:10:19.690  INFO 31475 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@6fab53dc, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@27f25216, org.springframework.security.web.context.SecurityContextPersistenceFilter@3502e38b, org.springframework.security.web.header.HeaderWriterFilter@59a24b24, org.springframework.security.web.authentication.logout.LogoutFilter@594186a4, org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter@cf89d32, org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter@2d5ee8f4, com.ssafy.finedUi.common.jwt.JwtTokenAuthenticationFilter@b8da8dd, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@36c221c0, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@5fd088a8, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@7db11754, org.springframework.security.web.session.SessionManagementFilter@3121da08, org.springframework.security.web.access.ExceptionTranslationFilter@687ca316, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@74b5cde8]
+2023-04-07 03:10:19.849  INFO 31475 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-04-07 03:10:20.164  INFO 31475 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2023-04-07 03:10:20.598  INFO 31475 --- [restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : Starting...
+2023-04-07 03:10:20.598  INFO 31475 --- [restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@43593ed4]]
+2023-04-07 03:10:20.599  INFO 31475 --- [restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : Started.
+2023-04-07 03:10:20.613  INFO 31475 --- [restartedMain] com.ssafy.finedUi.FinedUiApplication     : Started FinedUiApplication in 15.426 seconds (JVM running for 16.631)
+2023-04-07 03:10:38.459  INFO 31475 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-04-07 03:10:38.461  INFO 31475 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-04-07 03:10:38.463  INFO 31475 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2023-04-07 03:10:38.475 DEBUG 31475 --- [http-nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing PATCH /api/regist
+2023-04-07 03:10:38.480 DEBUG 31475 --- [http-nio-8080-exec-1] s.s.w.c.SecurityContextPersistenceFilter : Set SecurityContextHolder to empty SecurityContext
+2023-04-07 03:10:38.482  INFO 31475 --- [http-nio-8080-exec-1] c.s.f.c.j.JwtTokenAuthenticationFilter   : jwtFilter 진입 : ----------------------
+2023-04-07 03:10:38.521  INFO 31475 --- [http-nio-8080-exec-1] c.s.finedUi.common.jwt.TokenProvider     : token에서 id 갖고오기 : 3
+2023-04-07 03:10:38.531 DEBUG 31475 --- [http-nio-8080-exec-1] o.s.s.w.a.i.FilterSecurityInterceptor    : Authorized filter invocation [PATCH /api/regist] with attributes [authenticated]
+2023-04-07 03:10:38.532 DEBUG 31475 --- [http-nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Secured PATCH /api/regist
+2023-04-07 03:10:38.587  WARN 31475 --- [http-nio-8080-exec-1] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.web.HttpMediaTypeNotSupportedException: Content type 'multipart/form-data;boundary=--------------------------498406129019143337959411;charset=UTF-8' not supported]
+2023-04-07 03:10:38.590 DEBUG 31475 --- [http-nio-8080-exec-1] s.s.w.c.SecurityContextPersistenceFilter : Cleared SecurityContextHolder to complete request
+2023-04-07 03:11:19.754  INFO 31475 --- [MessageBroker-1] o.s.w.s.c.WebSocketMessageBrokerStats    : WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 1, active threads = 1, queued tasks = 0, completed tasks = 0]
+2023-04-07 03:15:12.028  INFO 31475 --- [SpringApplicationShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopping...
+2023-04-07 03:15:12.030  INFO 31475 --- [SpringApplicationShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=false, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@43593ed4]]
+2023-04-07 03:15:12.030  INFO 31475 --- [SpringApplicationShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopped.
+2023-04-07 03:15:12.253  INFO 31475 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-04-07 03:15:12.260  INFO 31475 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : fined&youHikariPool - Shutdown initiated...
+2023-04-07 03:15:12.278  INFO 31475 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : fined&youHikariPool - Shutdown completed.
+2023-04-07 03:15:19.432  INFO 31497 --- [restartedMain] com.ssafy.finedUi.FinedUiApplication     : Starting FinedUiApplication using Java 11.0.18 on anjunhong-ui-MacBookPro.local with PID 31497 (/Users/ahnjunhong/Documents/GitHub/FinedUI/S08P22A108/Backend/finedUI/build/classes/java/main started by ahnjunhong in /Users/ahnjunhong/Documents/GitHub/FinedUI/S08P22A108/Backend)
+2023-04-07 03:15:19.433  INFO 31497 --- [restartedMain] com.ssafy.finedUi.FinedUiApplication     : The following 4 profiles are active: "oauth2", "redis", "sms", "aiserver"
+2023-04-07 03:15:19.482  INFO 31497 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-04-07 03:15:19.483  INFO 31497 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-04-07 03:15:20.770  INFO 31497 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2023-04-07 03:15:20.772  INFO 31497 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-04-07 03:15:21.075  INFO 31497 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 295 ms. Found 8 JPA repository interfaces.
+2023-04-07 03:15:21.102  INFO 31497 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2023-04-07 03:15:21.103  INFO 31497 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2023-04-07 03:15:21.122  INFO 31497 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ssafy.finedUi.chatImage.ChatImageRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-04-07 03:15:21.123  INFO 31497 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ssafy.finedUi.chatMessage.ChatMessageRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-04-07 03:15:21.123  INFO 31497 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ssafy.finedUi.chatRoom.ChatRoomRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-04-07 03:15:21.124  INFO 31497 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ssafy.finedUi.chatRoomUser.ChatRoomUserRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-04-07 03:15:21.124  INFO 31497 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ssafy.finedUi.notice.NoticeRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-04-07 03:15:21.126  INFO 31497 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ssafy.finedUi.registInfo.RegistInfoRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-04-07 03:15:21.127  INFO 31497 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ssafy.finedUi.social.SocialRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-04-07 03:15:21.127  INFO 31497 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ssafy.finedUi.user.UserRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-04-07 03:15:21.128  INFO 31497 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 18 ms. Found 0 Redis repository interfaces.
+2023-04-07 03:15:29.356  INFO 31497 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean '(inner bean)#4ac0c258' of type [com.amazonaws.auth.BasicAWSCredentials] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-04-07 03:15:29.363  INFO 31497 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean '(inner bean)#47c3ed41' of type [com.amazonaws.auth.AWSStaticCredentialsProvider] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-04-07 03:15:29.376  INFO 31497 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean '(inner bean)#65defc23' of type [com.amazonaws.auth.profile.ProfileCredentialsProvider] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-04-07 03:15:29.380  INFO 31497 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'credentialsProvider' of type [org.springframework.cloud.aws.core.credentials.CredentialsProviderFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-04-07 03:15:29.380  INFO 31497 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'credentialsProvider' of type [com.amazonaws.auth.AWSCredentialsProviderChain] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-04-07 03:15:29.765  INFO 31497 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2023-04-07 03:15:29.775  INFO 31497 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-04-07 03:15:29.776  INFO 31497 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.71]
+2023-04-07 03:15:29.856  INFO 31497 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-04-07 03:15:29.857  INFO 31497 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 10374 ms
+2023-04-07 03:15:30.074  INFO 31497 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-04-07 03:15:30.139  INFO 31497 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.15.Final
+2023-04-07 03:15:30.270  INFO 31497 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-04-07 03:15:30.343  INFO 31497 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : fined&youHikariPool - Starting...
+2023-04-07 03:15:30.634  INFO 31497 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : fined&youHikariPool - Start completed.
+2023-04-07 03:15:30.649  INFO 31497 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL57Dialect
+2023-04-07 03:15:31.912  INFO 31497 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-04-07 03:15:31.942  INFO 31497 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-04-07 03:15:32.622  WARN 31497 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-04-07 03:15:33.902  WARN 31497 --- [restartedMain] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/v3/api-docs']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-04-07 03:15:33.906  INFO 31497 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/v3/api-docs']
+2023-04-07 03:15:33.906  WARN 31497 --- [restartedMain] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/swagger*/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-04-07 03:15:33.906  INFO 31497 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/swagger*/**']
+2023-04-07 03:15:33.906  WARN 31497 --- [restartedMain] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/api/regist/image/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-04-07 03:15:33.906  INFO 31497 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/api/regist/image/**']
+2023-04-07 03:15:33.906  WARN 31497 --- [restartedMain] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/error']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-04-07 03:15:33.906  INFO 31497 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/error']
+2023-04-07 03:15:33.938 DEBUG 31497 --- [restartedMain] edFilterInvocationSecurityMetadataSource : Adding web access control expression [permitAll] for Ant [pattern='/api/user/login']
+2023-04-07 03:15:33.954 DEBUG 31497 --- [restartedMain] edFilterInvocationSecurityMetadataSource : Adding web access control expression [permitAll] for Ant [pattern='/api/user/create']
+2023-04-07 03:15:33.955 DEBUG 31497 --- [restartedMain] edFilterInvocationSecurityMetadataSource : Adding web access control expression [permitAll] for Ant [pattern='/api/user/phoneconfirm']
+2023-04-07 03:15:33.955 DEBUG 31497 --- [restartedMain] edFilterInvocationSecurityMetadataSource : Adding web access control expression [permitAll] for Ant [pattern='/api/user/phoneauth']
+2023-04-07 03:15:33.955 DEBUG 31497 --- [restartedMain] edFilterInvocationSecurityMetadataSource : Adding web access control expression [permitAll] for Ant [pattern='/oauth2/**']
+2023-04-07 03:15:33.955 DEBUG 31497 --- [restartedMain] edFilterInvocationSecurityMetadataSource : Adding web access control expression [authenticated] for any request
+2023-04-07 03:15:33.964  INFO 31497 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@584e82a5, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@34d2faa6, org.springframework.security.web.context.SecurityContextPersistenceFilter@3121e663, org.springframework.security.web.header.HeaderWriterFilter@34f4785e, org.springframework.security.web.authentication.logout.LogoutFilter@2007ddee, org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter@2aa8db19, org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter@6c6af519, com.ssafy.finedUi.common.jwt.JwtTokenAuthenticationFilter@541090fa, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@6e123af3, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@5e84be71, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@f2b0318, org.springframework.security.web.session.SessionManagementFilter@1398ed33, org.springframework.security.web.access.ExceptionTranslationFilter@19a08c9f, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@6e8be05a]
+2023-04-07 03:15:34.127  INFO 31497 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-04-07 03:15:34.433  INFO 31497 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2023-04-07 03:15:34.906  INFO 31497 --- [restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : Starting...
+2023-04-07 03:15:34.907  INFO 31497 --- [restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@44cc170a]]
+2023-04-07 03:15:34.908  INFO 31497 --- [restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : Started.
+2023-04-07 03:15:34.923  INFO 31497 --- [restartedMain] com.ssafy.finedUi.FinedUiApplication     : Started FinedUiApplication in 16.079 seconds (JVM running for 17.213)
+2023-04-07 03:15:38.158  INFO 31497 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-04-07 03:15:38.160  INFO 31497 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-04-07 03:15:38.162  INFO 31497 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2023-04-07 03:15:38.172 DEBUG 31497 --- [http-nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing PATCH /api/regist
+2023-04-07 03:15:38.177 DEBUG 31497 --- [http-nio-8080-exec-1] s.s.w.c.SecurityContextPersistenceFilter : Set SecurityContextHolder to empty SecurityContext
+2023-04-07 03:15:38.179  INFO 31497 --- [http-nio-8080-exec-1] c.s.f.c.j.JwtTokenAuthenticationFilter   : jwtFilter 진입 : ----------------------
+2023-04-07 03:15:38.213  INFO 31497 --- [http-nio-8080-exec-1] c.s.finedUi.common.jwt.TokenProvider     : token에서 id 갖고오기 : 3
+2023-04-07 03:15:38.222 DEBUG 31497 --- [http-nio-8080-exec-1] o.s.s.w.a.i.FilterSecurityInterceptor    : Authorized filter invocation [PATCH /api/regist] with attributes [authenticated]
+2023-04-07 03:15:38.222 DEBUG 31497 --- [http-nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Secured PATCH /api/regist
+2023-04-07 03:15:38.277  WARN 31497 --- [http-nio-8080-exec-1] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.web.HttpMediaTypeNotSupportedException: Content type 'multipart/form-data;boundary=--------------------------332365461037887045852639;charset=UTF-8' not supported]
+2023-04-07 03:15:38.279 DEBUG 31497 --- [http-nio-8080-exec-1] s.s.w.c.SecurityContextPersistenceFilter : Cleared SecurityContextHolder to complete request
+2023-04-07 03:15:40.124 DEBUG 31497 --- [http-nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Securing PATCH /api/regist
+2023-04-07 03:15:40.129 DEBUG 31497 --- [http-nio-8080-exec-3] s.s.w.c.SecurityContextPersistenceFilter : Set SecurityContextHolder to empty SecurityContext
+2023-04-07 03:15:40.130  INFO 31497 --- [http-nio-8080-exec-3] c.s.f.c.j.JwtTokenAuthenticationFilter   : jwtFilter 진입 : ----------------------
+2023-04-07 03:15:40.138  INFO 31497 --- [http-nio-8080-exec-3] c.s.finedUi.common.jwt.TokenProvider     : token에서 id 갖고오기 : 3
+2023-04-07 03:15:40.139 DEBUG 31497 --- [http-nio-8080-exec-3] o.s.s.w.a.i.FilterSecurityInterceptor    : Authorized filter invocation [PATCH /api/regist] with attributes [authenticated]
+2023-04-07 03:15:40.140 DEBUG 31497 --- [http-nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Secured PATCH /api/regist
+2023-04-07 03:15:40.143  WARN 31497 --- [http-nio-8080-exec-3] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.web.HttpMediaTypeNotSupportedException: Content type 'multipart/form-data;boundary=--------------------------557571185713386204601541;charset=UTF-8' not supported]
+2023-04-07 03:15:40.145 DEBUG 31497 --- [http-nio-8080-exec-3] s.s.w.c.SecurityContextPersistenceFilter : Cleared SecurityContextHolder to complete request
+2023-04-07 03:16:24.581 DEBUG 31497 --- [http-nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Securing PATCH /api/regist
+2023-04-07 03:16:24.592 DEBUG 31497 --- [http-nio-8080-exec-4] s.s.w.c.SecurityContextPersistenceFilter : Set SecurityContextHolder to empty SecurityContext
+2023-04-07 03:16:24.594  INFO 31497 --- [http-nio-8080-exec-4] c.s.f.c.j.JwtTokenAuthenticationFilter   : jwtFilter 진입 : ----------------------
+2023-04-07 03:16:24.615  INFO 31497 --- [http-nio-8080-exec-4] c.s.finedUi.common.jwt.TokenProvider     : token에서 id 갖고오기 : 3
+2023-04-07 03:16:24.616 DEBUG 31497 --- [http-nio-8080-exec-4] o.s.s.w.a.i.FilterSecurityInterceptor    : Authorized filter invocation [PATCH /api/regist] with attributes [authenticated]
+2023-04-07 03:16:24.616 DEBUG 31497 --- [http-nio-8080-exec-4] o.s.security.web.FilterChainProxy        : Secured PATCH /api/regist
+2023-04-07 03:16:24.619  WARN 31497 --- [http-nio-8080-exec-4] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.web.HttpMediaTypeNotSupportedException: Content type 'multipart/form-data;boundary=--------------------------680036148059022334191728;charset=UTF-8' not supported]
+2023-04-07 03:16:24.620 DEBUG 31497 --- [http-nio-8080-exec-4] s.s.w.c.SecurityContextPersistenceFilter : Cleared SecurityContextHolder to complete request
+2023-04-07 03:16:25.926 DEBUG 31497 --- [http-nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Securing PATCH /api/regist
+2023-04-07 03:16:25.929 DEBUG 31497 --- [http-nio-8080-exec-5] s.s.w.c.SecurityContextPersistenceFilter : Set SecurityContextHolder to empty SecurityContext
+2023-04-07 03:16:25.935  INFO 31497 --- [http-nio-8080-exec-5] c.s.f.c.j.JwtTokenAuthenticationFilter   : jwtFilter 진입 : ----------------------
+2023-04-07 03:16:25.958  INFO 31497 --- [http-nio-8080-exec-5] c.s.finedUi.common.jwt.TokenProvider     : token에서 id 갖고오기 : 3
+2023-04-07 03:16:25.959 DEBUG 31497 --- [http-nio-8080-exec-5] o.s.s.w.a.i.FilterSecurityInterceptor    : Authorized filter invocation [PATCH /api/regist] with attributes [authenticated]
+2023-04-07 03:16:25.959 DEBUG 31497 --- [http-nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Secured PATCH /api/regist
+2023-04-07 03:16:25.962  WARN 31497 --- [http-nio-8080-exec-5] .m.m.a.ExceptionHandlerExceptionResolver : Resolved [org.springframework.web.HttpMediaTypeNotSupportedException: Content type 'multipart/form-data;boundary=--------------------------276040898693614046191838;charset=UTF-8' not supported]
+2023-04-07 03:16:25.962 DEBUG 31497 --- [http-nio-8080-exec-5] s.s.w.c.SecurityContextPersistenceFilter : Cleared SecurityContextHolder to complete request
+2023-04-07 03:16:34.033  INFO 31497 --- [MessageBroker-1] o.s.w.s.c.WebSocketMessageBrokerStats    : WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 1, active threads = 1, queued tasks = 0, completed tasks = 0]
+2023-04-07 03:17:25.494  INFO 31497 --- [SpringApplicationShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopping...
+2023-04-07 03:17:25.495  INFO 31497 --- [SpringApplicationShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=false, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@44cc170a]]
+2023-04-07 03:17:25.496  INFO 31497 --- [SpringApplicationShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopped.
+2023-04-07 03:17:25.723  INFO 31497 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-04-07 03:17:25.731  INFO 31497 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : fined&youHikariPool - Shutdown initiated...
+2023-04-07 03:17:25.748  INFO 31497 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : fined&youHikariPool - Shutdown completed.
+2023-04-07 03:17:32.499  INFO 31528 --- [restartedMain] com.ssafy.finedUi.FinedUiApplication     : Starting FinedUiApplication using Java 11.0.18 on anjunhong-ui-MacBookPro.local with PID 31528 (/Users/ahnjunhong/Documents/GitHub/FinedUI/S08P22A108/Backend/finedUI/build/classes/java/main started by ahnjunhong in /Users/ahnjunhong/Documents/GitHub/FinedUI/S08P22A108/Backend)
+2023-04-07 03:17:32.500  INFO 31528 --- [restartedMain] com.ssafy.finedUi.FinedUiApplication     : The following 4 profiles are active: "oauth2", "redis", "sms", "aiserver"
+2023-04-07 03:17:32.556  INFO 31528 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-04-07 03:17:32.556  INFO 31528 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-04-07 03:17:34.011  INFO 31528 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2023-04-07 03:17:34.013  INFO 31528 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-04-07 03:17:34.319  INFO 31528 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 298 ms. Found 8 JPA repository interfaces.
+2023-04-07 03:17:34.347  INFO 31528 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2023-04-07 03:17:34.348  INFO 31528 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2023-04-07 03:17:34.366  INFO 31528 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ssafy.finedUi.chatImage.ChatImageRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-04-07 03:17:34.367  INFO 31528 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ssafy.finedUi.chatMessage.ChatMessageRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-04-07 03:17:34.367  INFO 31528 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ssafy.finedUi.chatRoom.ChatRoomRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-04-07 03:17:34.368  INFO 31528 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ssafy.finedUi.chatRoomUser.ChatRoomUserRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-04-07 03:17:34.369  INFO 31528 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ssafy.finedUi.notice.NoticeRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-04-07 03:17:34.371  INFO 31528 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ssafy.finedUi.registInfo.RegistInfoRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-04-07 03:17:34.372  INFO 31528 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ssafy.finedUi.social.SocialRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-04-07 03:17:34.372  INFO 31528 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ssafy.finedUi.user.UserRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-04-07 03:17:34.373  INFO 31528 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 17 ms. Found 0 Redis repository interfaces.
+2023-04-07 03:17:41.541  INFO 31528 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean '(inner bean)#6d65f545' of type [com.amazonaws.auth.BasicAWSCredentials] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-04-07 03:17:41.546  INFO 31528 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean '(inner bean)#12b64593' of type [com.amazonaws.auth.AWSStaticCredentialsProvider] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-04-07 03:17:41.552  INFO 31528 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean '(inner bean)#474b3dea' of type [com.amazonaws.auth.profile.ProfileCredentialsProvider] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-04-07 03:17:41.556  INFO 31528 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'credentialsProvider' of type [org.springframework.cloud.aws.core.credentials.CredentialsProviderFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-04-07 03:17:41.556  INFO 31528 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'credentialsProvider' of type [com.amazonaws.auth.AWSCredentialsProviderChain] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-04-07 03:17:41.904  INFO 31528 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2023-04-07 03:17:41.915  INFO 31528 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-04-07 03:17:41.915  INFO 31528 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.71]
+2023-04-07 03:17:42.000  INFO 31528 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-04-07 03:17:42.001  INFO 31528 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 9444 ms
+2023-04-07 03:17:42.229  INFO 31528 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-04-07 03:17:42.267  INFO 31528 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.15.Final
+2023-04-07 03:17:42.438  INFO 31528 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-04-07 03:17:42.520  INFO 31528 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : fined&youHikariPool - Starting...
+2023-04-07 03:17:42.801  INFO 31528 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : fined&youHikariPool - Start completed.
+2023-04-07 03:17:42.817  INFO 31528 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL57Dialect
+2023-04-07 03:17:44.121  INFO 31528 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-04-07 03:17:44.133  INFO 31528 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-04-07 03:17:44.962  WARN 31528 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-04-07 03:17:46.527  WARN 31528 --- [restartedMain] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/v3/api-docs']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-04-07 03:17:46.531  INFO 31528 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/v3/api-docs']
+2023-04-07 03:17:46.531  WARN 31528 --- [restartedMain] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/swagger*/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-04-07 03:17:46.532  INFO 31528 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/swagger*/**']
+2023-04-07 03:17:46.532  WARN 31528 --- [restartedMain] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/api/regist/image/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-04-07 03:17:46.532  INFO 31528 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/api/regist/image/**']
+2023-04-07 03:17:46.532  WARN 31528 --- [restartedMain] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/error']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-04-07 03:17:46.532  INFO 31528 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/error']
+2023-04-07 03:17:46.573 DEBUG 31528 --- [restartedMain] edFilterInvocationSecurityMetadataSource : Adding web access control expression [permitAll] for Ant [pattern='/api/user/login']
+2023-04-07 03:17:46.592 DEBUG 31528 --- [restartedMain] edFilterInvocationSecurityMetadataSource : Adding web access control expression [permitAll] for Ant [pattern='/api/user/create']
+2023-04-07 03:17:46.592 DEBUG 31528 --- [restartedMain] edFilterInvocationSecurityMetadataSource : Adding web access control expression [permitAll] for Ant [pattern='/api/user/phoneconfirm']
+2023-04-07 03:17:46.592 DEBUG 31528 --- [restartedMain] edFilterInvocationSecurityMetadataSource : Adding web access control expression [permitAll] for Ant [pattern='/api/user/phoneauth']
+2023-04-07 03:17:46.592 DEBUG 31528 --- [restartedMain] edFilterInvocationSecurityMetadataSource : Adding web access control expression [permitAll] for Ant [pattern='/oauth2/**']
+2023-04-07 03:17:46.592 DEBUG 31528 --- [restartedMain] edFilterInvocationSecurityMetadataSource : Adding web access control expression [authenticated] for any request
+2023-04-07 03:17:46.602  INFO 31528 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@157c59c0, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@611f0966, org.springframework.security.web.context.SecurityContextPersistenceFilter@1657df86, org.springframework.security.web.header.HeaderWriterFilter@71fff887, org.springframework.security.web.authentication.logout.LogoutFilter@86b9687, org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter@3d3935dc, org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter@44d57292, com.ssafy.finedUi.common.jwt.JwtTokenAuthenticationFilter@72ad9d53, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@3c8a9078, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@2bedcd06, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@eb1a635, org.springframework.security.web.session.SessionManagementFilter@2382f867, org.springframework.security.web.access.ExceptionTranslationFilter@fb28fe9, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@40f767d8]
+2023-04-07 03:17:46.806  INFO 31528 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-04-07 03:17:47.176  INFO 31528 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2023-04-07 03:17:47.830  INFO 31528 --- [restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : Starting...
+2023-04-07 03:17:47.831  INFO 31528 --- [restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@1e92d7e]]
+2023-04-07 03:17:47.832  INFO 31528 --- [restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : Started.
+2023-04-07 03:17:47.848  INFO 31528 --- [restartedMain] com.ssafy.finedUi.FinedUiApplication     : Started FinedUiApplication in 16.047 seconds (JVM running for 17.26)
+2023-04-07 03:17:49.728  INFO 31528 --- [http-nio-8080-exec-2] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-04-07 03:17:49.730  INFO 31528 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-04-07 03:17:49.732  INFO 31528 --- [http-nio-8080-exec-2] o.s.web.servlet.DispatcherServlet        : Completed initialization in 1 ms
+2023-04-07 03:17:49.743 DEBUG 31528 --- [http-nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Securing PATCH /api/regist
+2023-04-07 03:17:49.749 DEBUG 31528 --- [http-nio-8080-exec-2] s.s.w.c.SecurityContextPersistenceFilter : Set SecurityContextHolder to empty SecurityContext
+2023-04-07 03:17:49.750  INFO 31528 --- [http-nio-8080-exec-2] c.s.f.c.j.JwtTokenAuthenticationFilter   : jwtFilter 진입 : ----------------------
+2023-04-07 03:17:49.791  INFO 31528 --- [http-nio-8080-exec-2] c.s.finedUi.common.jwt.TokenProvider     : token에서 id 갖고오기 : 3
+2023-04-07 03:17:49.801 DEBUG 31528 --- [http-nio-8080-exec-2] o.s.s.w.a.i.FilterSecurityInterceptor    : Authorized filter invocation [PATCH /api/regist] with attributes [authenticated]
+2023-04-07 03:17:49.801 DEBUG 31528 --- [http-nio-8080-exec-2] o.s.security.web.FilterChainProxy        : Secured PATCH /api/regist
+2023-04-07 03:17:49.944 DEBUG 31528 --- [http-nio-8080-exec-2] org.hibernate.SQL                        : 
+    select
+        registinfo0_.regist_id as regist_i1_5_0_,
+        registinfo0_.birth_date as birth_da2_5_0_,
+        registinfo0_.create_date as create_d3_5_0_,
+        registinfo0_.description as descript4_5_0_,
+        registinfo0_.front_image_path as front_im5_5_0_,
+        registinfo0_.gender as gender6_5_0_,
+        registinfo0_.is_missing as is_missi7_5_0_,
+        registinfo0_.latitude as latitude8_5_0_,
+        registinfo0_.longitude as longitud9_5_0_,
+        registinfo0_.missing_time as missing10_5_0_,
+        registinfo0_.name as name11_5_0_,
+        registinfo0_.other_image_1_path as other_i12_5_0_,
+        registinfo0_.other_image_2_path as other_i13_5_0_,
+        registinfo0_.update_date as update_14_5_0_,
+        registinfo0_.user_id as user_id15_5_0_,
+        user1_.user_id as user_id1_7_1_,
+        user1_.address as address2_7_1_,
+        user1_.email as email3_7_1_,
+        user1_.is_admin as is_admin4_7_1_,
+        user1_.join_date as join_dat5_7_1_,
+        user1_.name as name6_7_1_,
+        user1_.password as password7_7_1_,
+        user1_.phone_number as phone_nu8_7_1_,
+        user1_.social_id as social_i9_7_1_,
+        social2_.id as id1_6_2_,
+        social2_.provider as provider2_6_2_ 
+    from
+        regist_info registinfo0_ 
+    left outer join
+        user user1_ 
+            on registinfo0_.user_id=user1_.user_id 
+    left outer join
+        social social2_ 
+            on user1_.social_id=social2_.id 
+    where
+        registinfo0_.regist_id=?
+2023-04-07 03:17:50.171 DEBUG 31528 --- [http-nio-8080-exec-2] org.hibernate.SQL                        : 
+    update
+        regist_info 
+    set
+        birth_date=?,
+        create_date=?,
+        description=?,
+        front_image_path=?,
+        gender=?,
+        is_missing=?,
+        latitude=?,
+        longitude=?,
+        missing_time=?,
+        name=?,
+        other_image_1_path=?,
+        other_image_2_path=?,
+        update_date=?,
+        user_id=? 
+    where
+        regist_id=?
+2023-04-07 03:17:50.283 DEBUG 31528 --- [http-nio-8080-exec-2] s.s.w.c.SecurityContextPersistenceFilter : Cleared SecurityContextHolder to complete request
+2023-04-07 03:17:52.650 DEBUG 31528 --- [http-nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Securing PATCH /api/regist
+2023-04-07 03:17:52.653 DEBUG 31528 --- [http-nio-8080-exec-3] s.s.w.c.SecurityContextPersistenceFilter : Set SecurityContextHolder to empty SecurityContext
+2023-04-07 03:17:52.653  INFO 31528 --- [http-nio-8080-exec-3] c.s.f.c.j.JwtTokenAuthenticationFilter   : jwtFilter 진입 : ----------------------
+2023-04-07 03:17:52.670  INFO 31528 --- [http-nio-8080-exec-3] c.s.finedUi.common.jwt.TokenProvider     : token에서 id 갖고오기 : 3
+2023-04-07 03:17:52.671 DEBUG 31528 --- [http-nio-8080-exec-3] o.s.s.w.a.i.FilterSecurityInterceptor    : Authorized filter invocation [PATCH /api/regist] with attributes [authenticated]
+2023-04-07 03:17:52.672 DEBUG 31528 --- [http-nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Secured PATCH /api/regist
+2023-04-07 03:17:52.724 DEBUG 31528 --- [http-nio-8080-exec-3] org.hibernate.SQL                        : 
+    select
+        registinfo0_.regist_id as regist_i1_5_0_,
+        registinfo0_.birth_date as birth_da2_5_0_,
+        registinfo0_.create_date as create_d3_5_0_,
+        registinfo0_.description as descript4_5_0_,
+        registinfo0_.front_image_path as front_im5_5_0_,
+        registinfo0_.gender as gender6_5_0_,
+        registinfo0_.is_missing as is_missi7_5_0_,
+        registinfo0_.latitude as latitude8_5_0_,
+        registinfo0_.longitude as longitud9_5_0_,
+        registinfo0_.missing_time as missing10_5_0_,
+        registinfo0_.name as name11_5_0_,
+        registinfo0_.other_image_1_path as other_i12_5_0_,
+        registinfo0_.other_image_2_path as other_i13_5_0_,
+        registinfo0_.update_date as update_14_5_0_,
+        registinfo0_.user_id as user_id15_5_0_,
+        user1_.user_id as user_id1_7_1_,
+        user1_.address as address2_7_1_,
+        user1_.email as email3_7_1_,
+        user1_.is_admin as is_admin4_7_1_,
+        user1_.join_date as join_dat5_7_1_,
+        user1_.name as name6_7_1_,
+        user1_.password as password7_7_1_,
+        user1_.phone_number as phone_nu8_7_1_,
+        user1_.social_id as social_i9_7_1_,
+        social2_.id as id1_6_2_,
+        social2_.provider as provider2_6_2_ 
+    from
+        regist_info registinfo0_ 
+    left outer join
+        user user1_ 
+            on registinfo0_.user_id=user1_.user_id 
+    left outer join
+        social social2_ 
+            on user1_.social_id=social2_.id 
+    where
+        registinfo0_.regist_id=?
+2023-04-07 03:17:52.890 DEBUG 31528 --- [http-nio-8080-exec-3] org.hibernate.SQL                        : 
+    update
+        regist_info 
+    set
+        birth_date=?,
+        create_date=?,
+        description=?,
+        front_image_path=?,
+        gender=?,
+        is_missing=?,
+        latitude=?,
+        longitude=?,
+        missing_time=?,
+        name=?,
+        other_image_1_path=?,
+        other_image_2_path=?,
+        update_date=?,
+        user_id=? 
+    where
+        regist_id=?
+2023-04-07 03:17:52.957 DEBUG 31528 --- [http-nio-8080-exec-3] s.s.w.c.SecurityContextPersistenceFilter : Cleared SecurityContextHolder to complete request

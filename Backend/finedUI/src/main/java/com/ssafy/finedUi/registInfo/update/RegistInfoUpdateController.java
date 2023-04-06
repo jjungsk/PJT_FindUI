@@ -2,6 +2,7 @@ package com.ssafy.finedUi.registInfo.update;
 
 import com.ssafy.finedUi.common.security.SecurityUtils;
 import com.ssafy.finedUi.handler.ResponseHandler;
+import com.ssafy.finedUi.registInfo.update.request.RegistInfoIsMissingRequest;
 import com.ssafy.finedUi.registInfo.update.request.RegistInfoUpdateRequest;
 import com.ssafy.finedUi.registInfo.update.service.RegistInfoUpdateServiceImpl;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +25,7 @@ public class RegistInfoUpdateController {
     }
 
     @PatchMapping
-    public ResponseEntity<Object> isMissingChange(@RequestParam Long registId, @RequestBody Double longitude, @RequestBody Double latitude) {
-        return ResponseHandler.generateResponse(true, "CHANGE", HttpStatus.OK, registInfoUpdateService.isMissingChange(registId, longitude, latitude));
+    public ResponseEntity<Object> isMissingChange(@ModelAttribute RegistInfoIsMissingRequest request) {
+        return ResponseHandler.generateResponse(true, "CHANGE", HttpStatus.OK, registInfoUpdateService.isMissingChange(request));
     }
 }

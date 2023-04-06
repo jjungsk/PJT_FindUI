@@ -3,6 +3,7 @@ package com.ssafy.finedUi.registInfo.update.service;
 import com.ssafy.finedUi.db.entity.RegistInfo;
 import com.ssafy.finedUi.registInfo.RegistInfoRepository;
 import com.ssafy.finedUi.registInfo.image.save.ImageSaveServiceImpl;
+import com.ssafy.finedUi.registInfo.update.request.RegistInfoIsMissingRequest;
 import com.ssafy.finedUi.registInfo.update.request.RegistInfoUpdateRequest;
 import com.ssafy.finedUi.registInfo.update.response.RegistInfoUpdateResponse;
 import com.ssafy.finedUi.user.UserRepository;
@@ -45,13 +46,13 @@ public class RegistInfoUpdateServiceImpl implements RegistInfoUpdateService {
 
     // 실종 변경
     @Override
-    public RegistInfoUpdateResponse isMissingChange(Long registId, Double longitude, Double latitude) {
-        RegistInfoUpdateRequest registInfoUpdateRequest = new RegistInfoUpdateRequest(registInfoRepository.findById(registId).get());
+    public RegistInfoUpdateResponse isMissingChange(RegistInfoIsMissingRequest request) {
+        RegistInfoUpdateRequest registInfoUpdateRequest = new RegistInfoUpdateRequest(registInfoRepository.findById(request.getRegistId()).get());
         Boolean isMissing = registInfoUpdateRequest.getLongitude() != null && registInfoUpdateRequest.getLatitude() != null;
         // 실종 신고한 경우
         if (!isMissing) {
-            registInfoUpdateRequest.setLongitude(longitude);                    // 경도 설정
-            registInfoUpdateRequest.setLatitude(latitude);                      // 위도 설정
+            registInfoUpdateRequest.setLongitude(request.getLongitude());                    // 경도 설정
+            registInfoUpdateRequest.setLatitude(request.getLatitude());                      // 위도 설정
             // 실종 신고 하지 않은 경우
         } else {
             registInfoUpdateRequest.setLongitude(null);                         // 경도 설정
