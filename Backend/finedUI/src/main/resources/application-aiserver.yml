@@ -1,8 +1,9 @@
 ai:
 #  서버용
-  host: "http://aiserver:8000"
+#  host: "http://aiserver:8000"
 #  로컬 테스트용
 #  host: "http://localhost:8000"
+  host: "http://122.43.185.37:8080"
   search: "/api/search"
   create: "/api/regist"
   update: "/api/update"
