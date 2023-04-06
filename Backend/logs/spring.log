@@ -748,3 +748,367 @@
     where
         regist_id=?
 2023-04-07 03:17:52.957 DEBUG 31528 --- [http-nio-8080-exec-3] s.s.w.c.SecurityContextPersistenceFilter : Cleared SecurityContextHolder to complete request
+2023-04-07 03:18:46.676  INFO 31528 --- [MessageBroker-1] o.s.w.s.c.WebSocketMessageBrokerStats    : WebSocketSession[0 current WS(0)-HttpStream(0)-HttpPoll(0), 0 total, 0 closed abnormally (0 connect failure, 0 send limit, 0 transport error)], stompSubProtocol[processed CONNECT(0)-CONNECTED(0)-DISCONNECT(0)], stompBrokerRelay[null], inboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], outboundChannel[pool size = 0, active threads = 0, queued tasks = 0, completed tasks = 0], sockJsScheduler[pool size = 1, active threads = 1, queued tasks = 0, completed tasks = 0]
+2023-04-07 03:21:00.346 DEBUG 31528 --- [http-nio-8080-exec-5] o.s.security.web.FilterChainProxy        : Securing GET /api/regist/detail?registId=79
+2023-04-07 03:21:00.349 DEBUG 31528 --- [http-nio-8080-exec-5] s.s.w.c.SecurityContextPersistenceFilter : Set SecurityContextHolder to empty SecurityContext
+2023-04-07 03:21:00.350  INFO 31528 --- [http-nio-8080-exec-5] c.s.f.c.j.JwtTokenAuthenticationFilter   : jwtFilter 진입 : ----------------------
+2023-04-07 03:21:00.367  INFO 31528 --- [http-nio-8080-exec-5] c.s.f.c.j.JwtTokenAuthenticationFilter   : 만료된 access jwt 토큰입니다
+2023-04-07 03:21:00.368  INFO 31528 --- [http-nio-8080-exec-5] c.s.f.c.j.JwtTokenAuthenticationFilter   : refresh 토큰 : null
+2023-04-07 03:21:00.377 DEBUG 31528 --- [http-nio-8080-exec-5] s.s.w.c.SecurityContextPersistenceFilter : Cleared SecurityContextHolder to complete request
+2023-04-07 03:21:12.270 DEBUG 31528 --- [http-nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Securing GET /api/regist/detail?registId=79
+2023-04-07 03:21:12.274 DEBUG 31528 --- [http-nio-8080-exec-7] s.s.w.c.SecurityContextPersistenceFilter : Set SecurityContextHolder to empty SecurityContext
+2023-04-07 03:21:12.274  INFO 31528 --- [http-nio-8080-exec-7] c.s.f.c.j.JwtTokenAuthenticationFilter   : jwtFilter 진입 : ----------------------
+2023-04-07 03:21:12.299  INFO 31528 --- [http-nio-8080-exec-7] c.s.finedUi.common.jwt.TokenProvider     : token에서 id 갖고오기 : 3
+2023-04-07 03:21:12.301 DEBUG 31528 --- [http-nio-8080-exec-7] o.s.s.w.a.i.FilterSecurityInterceptor    : Authorized filter invocation [GET /api/regist/detail?registId=79] with attributes [authenticated]
+2023-04-07 03:21:12.301 DEBUG 31528 --- [http-nio-8080-exec-7] o.s.security.web.FilterChainProxy        : Secured GET /api/regist/detail?registId=79
+2023-04-07 03:21:12.381 DEBUG 31528 --- [http-nio-8080-exec-7] org.hibernate.SQL                        : 
+    select
+        registinfo0_.regist_id as regist_i1_5_0_,
+        registinfo0_.birth_date as birth_da2_5_0_,
+        registinfo0_.create_date as create_d3_5_0_,
+        registinfo0_.description as descript4_5_0_,
+        registinfo0_.front_image_path as front_im5_5_0_,
+        registinfo0_.gender as gender6_5_0_,
+        registinfo0_.is_missing as is_missi7_5_0_,
+        registinfo0_.latitude as latitude8_5_0_,
+        registinfo0_.longitude as longitud9_5_0_,
+        registinfo0_.missing_time as missing10_5_0_,
+        registinfo0_.name as name11_5_0_,
+        registinfo0_.other_image_1_path as other_i12_5_0_,
+        registinfo0_.other_image_2_path as other_i13_5_0_,
+        registinfo0_.update_date as update_14_5_0_,
+        registinfo0_.user_id as user_id15_5_0_,
+        user1_.user_id as user_id1_7_1_,
+        user1_.address as address2_7_1_,
+        user1_.email as email3_7_1_,
+        user1_.is_admin as is_admin4_7_1_,
+        user1_.join_date as join_dat5_7_1_,
+        user1_.name as name6_7_1_,
+        user1_.password as password7_7_1_,
+        user1_.phone_number as phone_nu8_7_1_,
+        user1_.social_id as social_i9_7_1_,
+        social2_.id as id1_6_2_,
+        social2_.provider as provider2_6_2_ 
+    from
+        regist_info registinfo0_ 
+    left outer join
+        user user1_ 
+            on registinfo0_.user_id=user1_.user_id 
+    left outer join
+        social social2_ 
+            on user1_.social_id=social2_.id 
+    where
+        registinfo0_.regist_id=?
+2023-04-07 03:21:12.460 DEBUG 31528 --- [http-nio-8080-exec-7] org.hibernate.SQL                        : 
+    select
+        chatroomus0_.user_id as user_id3_4_0_,
+        chatroomus0_.participant_id as particip1_4_0_,
+        chatroomus0_.participant_id as particip1_4_1_,
+        chatroomus0_.room_id as room_id2_4_1_,
+        chatroomus0_.user_id as user_id3_4_1_,
+        chatroom1_.room_id as room_id1_2_2_,
+        chatroom1_.regist_id as regist_i3_2_2_,
+        chatroom1_.room_name as room_nam2_2_2_,
+        registinfo2_.regist_id as regist_i1_5_3_,
+        registinfo2_.birth_date as birth_da2_5_3_,
+        registinfo2_.create_date as create_d3_5_3_,
+        registinfo2_.description as descript4_5_3_,
+        registinfo2_.front_image_path as front_im5_5_3_,
+        registinfo2_.gender as gender6_5_3_,
+        registinfo2_.is_missing as is_missi7_5_3_,
+        registinfo2_.latitude as latitude8_5_3_,
+        registinfo2_.longitude as longitud9_5_3_,
+        registinfo2_.missing_time as missing10_5_3_,
+        registinfo2_.name as name11_5_3_,
+        registinfo2_.other_image_1_path as other_i12_5_3_,
+        registinfo2_.other_image_2_path as other_i13_5_3_,
+        registinfo2_.update_date as update_14_5_3_,
+        registinfo2_.user_id as user_id15_5_3_ 
+    from
+        participant chatroomus0_ 
+    left outer join
+        chat_room chatroom1_ 
+            on chatroomus0_.room_id=chatroom1_.room_id 
+    left outer join
+        regist_info registinfo2_ 
+            on chatroom1_.regist_id=registinfo2_.regist_id 
+    where
+        chatroomus0_.user_id=?
+2023-04-07 03:21:12.484 DEBUG 31528 --- [http-nio-8080-exec-7] s.s.w.c.SecurityContextPersistenceFilter : Cleared SecurityContextHolder to complete request
+2023-04-07 03:21:14.760 DEBUG 31528 --- [http-nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Securing GET /api/regist/detail?registId=79
+2023-04-07 03:21:14.761 DEBUG 31528 --- [http-nio-8080-exec-8] s.s.w.c.SecurityContextPersistenceFilter : Set SecurityContextHolder to empty SecurityContext
+2023-04-07 03:21:14.762  INFO 31528 --- [http-nio-8080-exec-8] c.s.f.c.j.JwtTokenAuthenticationFilter   : jwtFilter 진입 : ----------------------
+2023-04-07 03:21:14.780  INFO 31528 --- [http-nio-8080-exec-8] c.s.finedUi.common.jwt.TokenProvider     : token에서 id 갖고오기 : 3
+2023-04-07 03:21:14.780 DEBUG 31528 --- [http-nio-8080-exec-8] o.s.s.w.a.i.FilterSecurityInterceptor    : Authorized filter invocation [GET /api/regist/detail?registId=79] with attributes [authenticated]
+2023-04-07 03:21:14.781 DEBUG 31528 --- [http-nio-8080-exec-8] o.s.security.web.FilterChainProxy        : Secured GET /api/regist/detail?registId=79
+2023-04-07 03:21:14.815 DEBUG 31528 --- [http-nio-8080-exec-8] org.hibernate.SQL                        : 
+    select
+        registinfo0_.regist_id as regist_i1_5_0_,
+        registinfo0_.birth_date as birth_da2_5_0_,
+        registinfo0_.create_date as create_d3_5_0_,
+        registinfo0_.description as descript4_5_0_,
+        registinfo0_.front_image_path as front_im5_5_0_,
+        registinfo0_.gender as gender6_5_0_,
+        registinfo0_.is_missing as is_missi7_5_0_,
+        registinfo0_.latitude as latitude8_5_0_,
+        registinfo0_.longitude as longitud9_5_0_,
+        registinfo0_.missing_time as missing10_5_0_,
+        registinfo0_.name as name11_5_0_,
+        registinfo0_.other_image_1_path as other_i12_5_0_,
+        registinfo0_.other_image_2_path as other_i13_5_0_,
+        registinfo0_.update_date as update_14_5_0_,
+        registinfo0_.user_id as user_id15_5_0_,
+        user1_.user_id as user_id1_7_1_,
+        user1_.address as address2_7_1_,
+        user1_.email as email3_7_1_,
+        user1_.is_admin as is_admin4_7_1_,
+        user1_.join_date as join_dat5_7_1_,
+        user1_.name as name6_7_1_,
+        user1_.password as password7_7_1_,
+        user1_.phone_number as phone_nu8_7_1_,
+        user1_.social_id as social_i9_7_1_,
+        social2_.id as id1_6_2_,
+        social2_.provider as provider2_6_2_ 
+    from
+        regist_info registinfo0_ 
+    left outer join
+        user user1_ 
+            on registinfo0_.user_id=user1_.user_id 
+    left outer join
+        social social2_ 
+            on user1_.social_id=social2_.id 
+    where
+        registinfo0_.regist_id=?
+2023-04-07 03:21:14.874 DEBUG 31528 --- [http-nio-8080-exec-8] org.hibernate.SQL                        : 
+    select
+        chatroomus0_.user_id as user_id3_4_0_,
+        chatroomus0_.participant_id as particip1_4_0_,
+        chatroomus0_.participant_id as particip1_4_1_,
+        chatroomus0_.room_id as room_id2_4_1_,
+        chatroomus0_.user_id as user_id3_4_1_,
+        chatroom1_.room_id as room_id1_2_2_,
+        chatroom1_.regist_id as regist_i3_2_2_,
+        chatroom1_.room_name as room_nam2_2_2_,
+        registinfo2_.regist_id as regist_i1_5_3_,
+        registinfo2_.birth_date as birth_da2_5_3_,
+        registinfo2_.create_date as create_d3_5_3_,
+        registinfo2_.description as descript4_5_3_,
+        registinfo2_.front_image_path as front_im5_5_3_,
+        registinfo2_.gender as gender6_5_3_,
+        registinfo2_.is_missing as is_missi7_5_3_,
+        registinfo2_.latitude as latitude8_5_3_,
+        registinfo2_.longitude as longitud9_5_3_,
+        registinfo2_.missing_time as missing10_5_3_,
+        registinfo2_.name as name11_5_3_,
+        registinfo2_.other_image_1_path as other_i12_5_3_,
+        registinfo2_.other_image_2_path as other_i13_5_3_,
+        registinfo2_.update_date as update_14_5_3_,
+        registinfo2_.user_id as user_id15_5_3_ 
+    from
+        participant chatroomus0_ 
+    left outer join
+        chat_room chatroom1_ 
+            on chatroomus0_.room_id=chatroom1_.room_id 
+    left outer join
+        regist_info registinfo2_ 
+            on chatroom1_.regist_id=registinfo2_.regist_id 
+    where
+        chatroomus0_.user_id=?
+2023-04-07 03:21:14.893 DEBUG 31528 --- [http-nio-8080-exec-8] s.s.w.c.SecurityContextPersistenceFilter : Cleared SecurityContextHolder to complete request
+2023-04-07 03:30:19.819  INFO 31528 --- [SpringApplicationShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopping...
+2023-04-07 03:30:19.822  INFO 31528 --- [SpringApplicationShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=false, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@1e92d7e]]
+2023-04-07 03:30:19.822  INFO 31528 --- [SpringApplicationShutdownHook] o.s.m.s.b.SimpleBrokerMessageHandler     : Stopped.
+2023-04-07 03:30:20.069  INFO 31528 --- [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2023-04-07 03:30:20.075  INFO 31528 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : fined&youHikariPool - Shutdown initiated...
+2023-04-07 03:30:20.091  INFO 31528 --- [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : fined&youHikariPool - Shutdown completed.
+2023-04-07 03:30:26.193  INFO 31698 --- [restartedMain] com.ssafy.finedUi.FinedUiApplication     : Starting FinedUiApplication using Java 11.0.18 on anjunhong-ui-MacBookPro.local with PID 31698 (/Users/ahnjunhong/Documents/GitHub/FinedUI/S08P22A108/Backend/finedUI/build/classes/java/main started by ahnjunhong in /Users/ahnjunhong/Documents/GitHub/FinedUI/S08P22A108/Backend)
+2023-04-07 03:30:26.194  INFO 31698 --- [restartedMain] com.ssafy.finedUi.FinedUiApplication     : The following 4 profiles are active: "oauth2", "redis", "sms", "aiserver"
+2023-04-07 03:30:26.241  INFO 31698 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2023-04-07 03:30:26.242  INFO 31698 --- [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2023-04-07 03:30:27.494  INFO 31698 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2023-04-07 03:30:27.496  INFO 31698 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2023-04-07 03:30:27.770  INFO 31698 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 221 ms. Found 8 JPA repository interfaces.
+2023-04-07 03:30:27.798  INFO 31698 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Multiple Spring Data modules found, entering strict repository configuration mode
+2023-04-07 03:30:27.799  INFO 31698 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data Redis repositories in DEFAULT mode.
+2023-04-07 03:30:27.818  INFO 31698 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ssafy.finedUi.chatImage.ChatImageRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-04-07 03:30:27.818  INFO 31698 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ssafy.finedUi.chatMessage.ChatMessageRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-04-07 03:30:27.819  INFO 31698 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ssafy.finedUi.chatRoom.ChatRoomRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-04-07 03:30:27.819  INFO 31698 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ssafy.finedUi.chatRoomUser.ChatRoomUserRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-04-07 03:30:27.820  INFO 31698 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ssafy.finedUi.notice.NoticeRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-04-07 03:30:27.822  INFO 31698 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ssafy.finedUi.registInfo.RegistInfoRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-04-07 03:30:27.822  INFO 31698 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ssafy.finedUi.social.SocialRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-04-07 03:30:27.823  INFO 31698 --- [restartedMain] .RepositoryConfigurationExtensionSupport : Spring Data Redis - Could not safely identify store assignment for repository candidate interface com.ssafy.finedUi.user.UserRepository; If you want this repository to be a Redis repository, consider annotating your entities with one of these annotations: org.springframework.data.redis.core.RedisHash (preferred), or consider extending one of the following types with your repository: org.springframework.data.keyvalue.repository.KeyValueRepository
+2023-04-07 03:30:27.823  INFO 31698 --- [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 17 ms. Found 0 Redis repository interfaces.
+2023-04-07 03:30:35.033  INFO 31698 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean '(inner bean)#e229672' of type [com.amazonaws.auth.BasicAWSCredentials] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-04-07 03:30:35.034  INFO 31698 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean '(inner bean)#1536a2fd' of type [com.amazonaws.auth.AWSStaticCredentialsProvider] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-04-07 03:30:35.042  INFO 31698 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean '(inner bean)#4e543efc' of type [com.amazonaws.auth.profile.ProfileCredentialsProvider] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-04-07 03:30:35.048  INFO 31698 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'credentialsProvider' of type [org.springframework.cloud.aws.core.credentials.CredentialsProviderFactoryBean] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-04-07 03:30:35.048  INFO 31698 --- [restartedMain] trationDelegate$BeanPostProcessorChecker : Bean 'credentialsProvider' of type [com.amazonaws.auth.AWSCredentialsProviderChain] is not eligible for getting processed by all BeanPostProcessors (for example: not eligible for auto-proxying)
+2023-04-07 03:30:35.396  INFO 31698 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port(s): 8080 (http)
+2023-04-07 03:30:35.407  INFO 31698 --- [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2023-04-07 03:30:35.407  INFO 31698 --- [restartedMain] org.apache.catalina.core.StandardEngine  : Starting Servlet engine: [Apache Tomcat/9.0.71]
+2023-04-07 03:30:35.497  INFO 31698 --- [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2023-04-07 03:30:35.497  INFO 31698 --- [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 9255 ms
+2023-04-07 03:30:35.735  INFO 31698 --- [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2023-04-07 03:30:35.773  INFO 31698 --- [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 5.6.15.Final
+2023-04-07 03:30:35.942  INFO 31698 --- [restartedMain] o.hibernate.annotations.common.Version   : HCANN000001: Hibernate Commons Annotations {5.1.2.Final}
+2023-04-07 03:30:36.019  INFO 31698 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : fined&youHikariPool - Starting...
+2023-04-07 03:30:36.332  INFO 31698 --- [restartedMain] com.zaxxer.hikari.HikariDataSource       : fined&youHikariPool - Start completed.
+2023-04-07 03:30:36.348  INFO 31698 --- [restartedMain] org.hibernate.dialect.Dialect            : HHH000400: Using dialect: org.hibernate.dialect.MySQL57Dialect
+2023-04-07 03:30:37.672  INFO 31698 --- [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000490: Using JtaPlatform implementation: [org.hibernate.engine.transaction.jta.platform.internal.NoJtaPlatform]
+2023-04-07 03:30:37.691  INFO 31698 --- [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2023-04-07 03:30:38.496  WARN 31698 --- [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2023-04-07 03:30:40.069  WARN 31698 --- [restartedMain] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/v3/api-docs']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-04-07 03:30:40.074  INFO 31698 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/v3/api-docs']
+2023-04-07 03:30:40.079  WARN 31698 --- [restartedMain] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/swagger*/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-04-07 03:30:40.079  INFO 31698 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/swagger*/**']
+2023-04-07 03:30:40.080  WARN 31698 --- [restartedMain] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/api/regist/image/**']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-04-07 03:30:40.080  INFO 31698 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/api/regist/image/**']
+2023-04-07 03:30:40.080  WARN 31698 --- [restartedMain] o.s.s.c.a.web.builders.WebSecurity       : You are asking Spring Security to ignore Ant [pattern='/error']. This is not recommended -- please use permitAll via HttpSecurity#authorizeHttpRequests instead.
+2023-04-07 03:30:40.080  INFO 31698 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will not secure Ant [pattern='/error']
+2023-04-07 03:30:40.121 DEBUG 31698 --- [restartedMain] edFilterInvocationSecurityMetadataSource : Adding web access control expression [permitAll] for Ant [pattern='/api/user/login']
+2023-04-07 03:30:40.138 DEBUG 31698 --- [restartedMain] edFilterInvocationSecurityMetadataSource : Adding web access control expression [permitAll] for Ant [pattern='/api/user/create']
+2023-04-07 03:30:40.139 DEBUG 31698 --- [restartedMain] edFilterInvocationSecurityMetadataSource : Adding web access control expression [permitAll] for Ant [pattern='/api/user/phoneconfirm']
+2023-04-07 03:30:40.139 DEBUG 31698 --- [restartedMain] edFilterInvocationSecurityMetadataSource : Adding web access control expression [permitAll] for Ant [pattern='/api/user/phoneauth']
+2023-04-07 03:30:40.139 DEBUG 31698 --- [restartedMain] edFilterInvocationSecurityMetadataSource : Adding web access control expression [permitAll] for Ant [pattern='/oauth2/**']
+2023-04-07 03:30:40.139 DEBUG 31698 --- [restartedMain] edFilterInvocationSecurityMetadataSource : Adding web access control expression [authenticated] for any request
+2023-04-07 03:30:40.150  INFO 31698 --- [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@5d46541a, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@2996a2b8, org.springframework.security.web.context.SecurityContextPersistenceFilter@2531cddd, org.springframework.security.web.header.HeaderWriterFilter@4848ef20, org.springframework.security.web.authentication.logout.LogoutFilter@5ca80260, org.springframework.security.oauth2.client.web.OAuth2AuthorizationRequestRedirectFilter@2aec153, org.springframework.security.oauth2.client.web.OAuth2LoginAuthenticationFilter@8a965b2, com.ssafy.finedUi.common.jwt.JwtTokenAuthenticationFilter@615e4f74, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@3afe78cd, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7883685e, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@6ad1d6cd, org.springframework.security.web.session.SessionManagementFilter@2b6b27b3, org.springframework.security.web.access.ExceptionTranslationFilter@48f4f845, org.springframework.security.web.access.intercept.FilterSecurityInterceptor@6d558195]
+2023-04-07 03:30:40.364  INFO 31698 --- [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2023-04-07 03:30:40.750  INFO 31698 --- [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 8080 (http) with context path ''
+2023-04-07 03:30:41.285  INFO 31698 --- [restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : Starting...
+2023-04-07 03:30:41.286  INFO 31698 --- [restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : BrokerAvailabilityEvent[available=true, SimpleBrokerMessageHandler [org.springframework.messaging.simp.broker.DefaultSubscriptionRegistry@751f3626]]
+2023-04-07 03:30:41.287  INFO 31698 --- [restartedMain] o.s.m.s.b.SimpleBrokerMessageHandler     : Started.
+2023-04-07 03:30:41.300  INFO 31698 --- [restartedMain] com.ssafy.finedUi.FinedUiApplication     : Started FinedUiApplication in 15.683 seconds (JVM running for 16.809)
+2023-04-07 03:30:43.813  INFO 31698 --- [http-nio-8080-exec-1] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2023-04-07 03:30:43.815  INFO 31698 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2023-04-07 03:30:43.817  INFO 31698 --- [http-nio-8080-exec-1] o.s.web.servlet.DispatcherServlet        : Completed initialization in 2 ms
+2023-04-07 03:30:43.830 DEBUG 31698 --- [http-nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Securing PATCH /api/regist
+2023-04-07 03:30:43.836 DEBUG 31698 --- [http-nio-8080-exec-1] s.s.w.c.SecurityContextPersistenceFilter : Set SecurityContextHolder to empty SecurityContext
+2023-04-07 03:30:43.838  INFO 31698 --- [http-nio-8080-exec-1] c.s.f.c.j.JwtTokenAuthenticationFilter   : jwtFilter 진입 : ----------------------
+2023-04-07 03:30:43.878  INFO 31698 --- [http-nio-8080-exec-1] c.s.finedUi.common.jwt.TokenProvider     : token에서 id 갖고오기 : 3
+2023-04-07 03:30:43.888 DEBUG 31698 --- [http-nio-8080-exec-1] o.s.s.w.a.i.FilterSecurityInterceptor    : Authorized filter invocation [PATCH /api/regist] with attributes [authenticated]
+2023-04-07 03:30:43.889 DEBUG 31698 --- [http-nio-8080-exec-1] o.s.security.web.FilterChainProxy        : Secured PATCH /api/regist
+2023-04-07 03:30:44.011 DEBUG 31698 --- [http-nio-8080-exec-1] org.hibernate.SQL                        : 
+    select
+        registinfo0_.regist_id as regist_i1_5_0_,
+        registinfo0_.birth_date as birth_da2_5_0_,
+        registinfo0_.create_date as create_d3_5_0_,
+        registinfo0_.description as descript4_5_0_,
+        registinfo0_.front_image_path as front_im5_5_0_,
+        registinfo0_.gender as gender6_5_0_,
+        registinfo0_.is_missing as is_missi7_5_0_,
+        registinfo0_.latitude as latitude8_5_0_,
+        registinfo0_.longitude as longitud9_5_0_,
+        registinfo0_.missing_time as missing10_5_0_,
+        registinfo0_.name as name11_5_0_,
+        registinfo0_.other_image_1_path as other_i12_5_0_,
+        registinfo0_.other_image_2_path as other_i13_5_0_,
+        registinfo0_.update_date as update_14_5_0_,
+        registinfo0_.user_id as user_id15_5_0_,
+        user1_.user_id as user_id1_7_1_,
+        user1_.address as address2_7_1_,
+        user1_.email as email3_7_1_,
+        user1_.is_admin as is_admin4_7_1_,
+        user1_.join_date as join_dat5_7_1_,
+        user1_.name as name6_7_1_,
+        user1_.password as password7_7_1_,
+        user1_.phone_number as phone_nu8_7_1_,
+        user1_.social_id as social_i9_7_1_,
+        social2_.id as id1_6_2_,
+        social2_.provider as provider2_6_2_ 
+    from
+        regist_info registinfo0_ 
+    left outer join
+        user user1_ 
+            on registinfo0_.user_id=user1_.user_id 
+    left outer join
+        social social2_ 
+            on user1_.social_id=social2_.id 
+    where
+        registinfo0_.regist_id=?
+2023-04-07 03:30:44.236 DEBUG 31698 --- [http-nio-8080-exec-1] org.hibernate.SQL                        : 
+    update
+        regist_info 
+    set
+        birth_date=?,
+        create_date=?,
+        description=?,
+        front_image_path=?,
+        gender=?,
+        is_missing=?,
+        latitude=?,
+        longitude=?,
+        missing_time=?,
+        name=?,
+        other_image_1_path=?,
+        other_image_2_path=?,
+        update_date=?,
+        user_id=? 
+    where
+        regist_id=?
+2023-04-07 03:30:44.337 DEBUG 31698 --- [http-nio-8080-exec-1] s.s.w.c.SecurityContextPersistenceFilter : Cleared SecurityContextHolder to complete request
+2023-04-07 03:30:46.002 DEBUG 31698 --- [http-nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Securing PATCH /api/regist
+2023-04-07 03:30:46.004 DEBUG 31698 --- [http-nio-8080-exec-3] s.s.w.c.SecurityContextPersistenceFilter : Set SecurityContextHolder to empty SecurityContext
+2023-04-07 03:30:46.004  INFO 31698 --- [http-nio-8080-exec-3] c.s.f.c.j.JwtTokenAuthenticationFilter   : jwtFilter 진입 : ----------------------
+2023-04-07 03:30:46.023  INFO 31698 --- [http-nio-8080-exec-3] c.s.finedUi.common.jwt.TokenProvider     : token에서 id 갖고오기 : 3
+2023-04-07 03:30:46.024 DEBUG 31698 --- [http-nio-8080-exec-3] o.s.s.w.a.i.FilterSecurityInterceptor    : Authorized filter invocation [PATCH /api/regist] with attributes [authenticated]
+2023-04-07 03:30:46.025 DEBUG 31698 --- [http-nio-8080-exec-3] o.s.security.web.FilterChainProxy        : Secured PATCH /api/regist
+2023-04-07 03:30:46.093 DEBUG 31698 --- [http-nio-8080-exec-3] org.hibernate.SQL                        : 
+    select
+        registinfo0_.regist_id as regist_i1_5_0_,
+        registinfo0_.birth_date as birth_da2_5_0_,
+        registinfo0_.create_date as create_d3_5_0_,
+        registinfo0_.description as descript4_5_0_,
+        registinfo0_.front_image_path as front_im5_5_0_,
+        registinfo0_.gender as gender6_5_0_,
+        registinfo0_.is_missing as is_missi7_5_0_,
+        registinfo0_.latitude as latitude8_5_0_,
+        registinfo0_.longitude as longitud9_5_0_,
+        registinfo0_.missing_time as missing10_5_0_,
+        registinfo0_.name as name11_5_0_,
+        registinfo0_.other_image_1_path as other_i12_5_0_,
+        registinfo0_.other_image_2_path as other_i13_5_0_,
+        registinfo0_.update_date as update_14_5_0_,
+        registinfo0_.user_id as user_id15_5_0_,
+        user1_.user_id as user_id1_7_1_,
+        user1_.address as address2_7_1_,
+        user1_.email as email3_7_1_,
+        user1_.is_admin as is_admin4_7_1_,
+        user1_.join_date as join_dat5_7_1_,
+        user1_.name as name6_7_1_,
+        user1_.password as password7_7_1_,
+        user1_.phone_number as phone_nu8_7_1_,
+        user1_.social_id as social_i9_7_1_,
+        social2_.id as id1_6_2_,
+        social2_.provider as provider2_6_2_ 
+    from
+        regist_info registinfo0_ 
+    left outer join
+        user user1_ 
+            on registinfo0_.user_id=user1_.user_id 
+    left outer join
+        social social2_ 
+            on user1_.social_id=social2_.id 
+    where
+        registinfo0_.regist_id=?
+2023-04-07 03:30:46.276 DEBUG 31698 --- [http-nio-8080-exec-3] org.hibernate.SQL                        : 
+    update
+        regist_info 
+    set
+        birth_date=?,
+        create_date=?,
+        description=?,
+        front_image_path=?,
+        gender=?,
+        is_missing=?,
+        latitude=?,
+        longitude=?,
+        missing_time=?,
+        name=?,
+        other_image_1_path=?,
+        other_image_2_path=?,
+        update_date=?,
+        user_id=? 
+    where
+        regist_id=?
+2023-04-07 03:30:46.342 DEBUG 31698 --- [http-nio-8080-exec-3] s.s.w.c.SecurityContextPersistenceFilter : Cleared SecurityContextHolder to complete request
