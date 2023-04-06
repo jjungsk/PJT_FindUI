@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   StyleSheet,
   View,
@@ -13,16 +13,16 @@ import {
 import MyPageModal from '../atoms/MyPageModal';
 import MyInfoCard from '../organisms/MyInfoCard';
 import PreRegistCard from '../organisms/PreRegistCard';
-import { Carousel } from 'react-native-basic-carousel';
-import { widthPercentage } from '../../styles/ResponsiveSize';
+import {Carousel} from 'react-native-basic-carousel';
+import {widthPercentage} from '../../styles/ResponsiveSize';
 import PwModal from '../organisms/PwModal';
 import InfoModal from '../organisms/InfoModal';
-import { getUserInfo, modifyInfo, deleteUser } from '../../API/UserApi';
-import { useRecoilValue, useSetRecoilState } from 'recoil';
-import { isLoginState } from '../../store/atoms/userState';
-import { deleteTokensFromKeychain } from '../../store/keychain/loginToken';
-import { reset } from '../navigator/NavigationService';
-import { preInfoState } from '../../store/atoms/InfoState';
+import {getUserInfo, modifyInfo, deleteUser} from '../../API/UserApi';
+import {useRecoilValue, useSetRecoilState} from 'recoil';
+import {isLoginState} from '../../store/atoms/userState';
+import {deleteTokensFromKeychain} from '../../store/keychain/loginToken';
+import {reset} from '../navigator/NavigationService';
+import {preInfoState} from '../../store/atoms/InfoState';
 import NoRegistCard from '../organisms/NoRegistCard';
 import CallRegistContainer from '../organisms/CallRegistContainer';
 
@@ -65,7 +65,7 @@ const styles = StyleSheet.create({
 });
 const width = Dimensions.get('window').width;
 
-const MyPage = ({ navigation }) => {
+const MyPage = ({navigation}) => {
   const [isLogoutModalVisible, setIsLogoutModalVisible] = useState(false);
   const [isWithdrawalVisible, setIsWithdrawalVisible] = useState(false);
   const [isPwVisible, setIsPwVisible] = useState(false);
@@ -151,7 +151,8 @@ const MyPage = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Modal animationType="fade"
+      <Modal
+        animationType="fade"
         transparent={true}
         visible={callRegistVisible}
         onRequestClose={() => {
@@ -164,46 +165,63 @@ const MyPage = ({ navigation }) => {
           }}
           onPress={() => setCallRegistVisible(!callRegistVisible)}
         />
-        <CallRegistContainer />
+        {/* confirmCallback return 경도 위도 데이터 */}
+        <CallRegistContainer
+          cancelCallback={({value}) => setCallRegistVisible(value)}
+          confirmCallback={({pos}) => {
+            console.log(pos);
+            setCallRegistVisible(!callRegistVisible);
+          }}
+        />
       </Modal>
-      <ScrollView style={{ width: '100%' }}>
+      <ScrollView style={{width: '100%'}}>
         <View
-          style={{ paddingHorizontal: widthPercentage(12), marginBottom: 10 }}>
+          style={{paddingHorizontal: widthPercentage(12), marginBottom: 10}}>
           <Text
             style={[
               styles.text,
-              { marginBottom: 20, fontSize: 28, marginTop: 20 },
+              {marginBottom: 20, fontSize: 28, marginTop: 20},
             ]}>
             마이페이지
           </Text>
           <MyInfoCard myInfo={myInfo} onPress={toggleInfoModal} />
-          <Text style={[styles.text, { marginBottom: 10, marginTop: 20 }]}>
+          <Text style={[styles.text, {marginBottom: 10, marginTop: 20}]}>
             사전 등록
           </Text>
           <View style={styles.line} />
         </View>
-        {registUsers.length < 1
-          ?
-          (<View style={styles.carouselItem}>
+        {registUsers.length < 1 ? (
+          <View style={styles.carouselItem}>
             <NoRegistCard textInfo={'등록된 사전 등록 정보가 없습니다.'} />
-          </View>)
-          :
-          (<Carousel
+          </View>
+        ) : (
+          <Carousel
             data={registUsers}
-            renderItem={({ item }) => (
+            renderItem={({item}) => (
               <View style={styles.carouselItem}>
                 <PreRegistCard registUser={item} navigation={navigation} />
-                <TouchableOpacity style={styles.button} onPress={() => setCallRegistVisible(!callRegistVisible)}>
-                  <Text style={{ color: "white", fontSize: 15, fontWeight: "bold", alignSelf: 'center' }}>신고하기</Text>
+                <TouchableOpacity
+                  style={styles.button}
+                  onPress={() => setCallRegistVisible(!callRegistVisible)}>
+                  <Text
+                    style={{
+                      color: 'white',
+                      fontSize: 15,
+                      fontWeight: 'bold',
+                      alignSelf: 'center',
+                    }}>
+                    신고하기
+                  </Text>
                 </TouchableOpacity>
               </View>
             )}
             itemWidth={width}
             pagination
-          />)
-        }
-        <View style={{ paddingHorizontal: widthPercentage(10), marginBottom: 40 }}>
-          <Text style={[styles.text, { marginBottom: 10, marginTop: 10 }]}>
+          />
+        )}
+        <View
+          style={{paddingHorizontal: widthPercentage(10), marginBottom: 40}}>
+          <Text style={[styles.text, {marginBottom: 10, marginTop: 10}]}>
             계정관리
           </Text>
           <View style={styles.line} />
@@ -228,7 +246,7 @@ const MyPage = ({ navigation }) => {
             onPress1={handleWithdrawal}
             onPress2={toggleWithdrawalModal}
           />
-          <View style={{ alignSelf: 'flex-start' }}>
+          <View style={{alignSelf: 'flex-start'}}>
             <PwModal
               visible={isPwVisible}
               value1={currentPassword}
