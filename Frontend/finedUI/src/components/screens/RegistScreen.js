@@ -19,6 +19,8 @@ import {
   widthPercentage,
 } from '../../styles/ResponsiveSize';
 
+import {MAIN_URL} from '@env';
+
 // position
 import Geolocation from 'react-native-geolocation-service';
 
@@ -74,29 +76,36 @@ const RegistScreen = ({route, navigation}) => {
     if (mode === 3 || mode === 4) {
       // 등록번호 셋팅
       setId(route.params.userInfo.registId);
+      const mainUrl = MAIN_URL.substring(7, 29);
       // 이미지 set 1
       if (route.params.userInfo.frontImagePath !== null) {
-        const url = route.params.userInfo.frontImagePath;
-        const initUrl = url.substring(0, 6);
-        console.log('(RegistScreen.js) url : ', initUrl);
-        setImageList([
-          ...imageList,
-          {uri: route.params.userInfo.frontImagePath},
-        ]);
+        const initUrl = route.params.userInfo.frontImagePath.substring(0, 22);
+        let newUrl = route.params.userInfo.frontImagePath;
+        if (initUrl === mainUrl) {
+          newUrl = 'http://' + newUrl;
+        }
+        console.log('(RegistScreen.js) newUrl 1 : ', newUrl);
+        setImageList([...imageList, {uri: newUrl}]);
       }
       // 이미지 set 2
       if (route.params.userInfo.otherImage1Path !== null) {
-        setImageList([
-          ...imageList,
-          {uri: route.params.userInfo.otherImage1Path},
-        ]);
+        const initUrl = route.params.userInfo.otherImage1Path.substring(0, 22);
+        const newUrl = route.params.userInfo.otherImage1Path;
+        if (initUrl === mainUrl) {
+          newUrl = 'http://' + newUrl;
+        }
+        console.log('(RegistScreen.js) newUrl 2 : ', newUrl);
+        setImageList([...imageList, {uri: newUrl}]);
       }
       // 이미지 set 3
       if (route.params.userInfo.otherImage2Path !== null) {
-        setImageList([
-          ...imageList,
-          {uri: route.params.userInfo.otherImage2Path},
-        ]);
+        const initUrl = route.params.userInfo.otherImage2Path.substring(0, 22);
+        const newUrl = route.params.userInfo.otherImage2Path;
+        if (initUrl === mainUrl) {
+          newUrl = 'http://' + newUrl;
+        }
+        console.log('(RegistScreen.js) newUrl 3 : ', newUrl);
+        setImageList([...imageList, {uri: newUrl}]);
       }
     }
 
