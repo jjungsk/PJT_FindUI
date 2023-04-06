@@ -1,5 +1,5 @@
 // react
-import React from 'react';
+import React, {useEffect} from 'react';
 
 // react-native
 import {View, Text, Image, TouchableOpacity, StyleSheet} from 'react-native';
@@ -18,15 +18,20 @@ import {
 // icons
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const PreRegistCard = ({registUser, userInfo = null, navigation}) => {
+const PreRegistCard = ({registUser, userInfo = null, mode = 0, navigation}) => {
   // recoil data 초기화
   const resetRegistProps = useSetRecoilState(resetRegistAtoms);
+
+  useEffect(() => {
+    console.log('(PreRegistCard.js) 실종자 정보 상세 : ', userInfo);
+    console.log('(PreRegistCard.js) mode=2 사전 / mode=3 실종 : ', mode);
+  }, []);
   return (
     <View style={styles.container}>
       <Image
         source={
           registUser.frontImagePath != null
-            ? {uri : 'http://' + registUser.frontImagePath}
+            ? {uri: 'http://' + registUser.frontImagePath}
             : require('../../assets/images/no_profile_image.png')
         }
         style={styles.image}
@@ -35,14 +40,10 @@ const PreRegistCard = ({registUser, userInfo = null, navigation}) => {
         <View style={styles.icons}>
           <TouchableOpacity
             onPress={() => {
-              resetRegistProps((mode = 3));
+              resetRegistProps((mode = mode));
               navigation.navigate('registMain', {
                 userInfo: registUser,
               });
-              // navigation.navigate('ModifyScreen', {
-              //   registId: registUser.registId,
-              //   userInfo: userInfo,
-              // });
             }}>
             <Icon
               name="square-edit-outline"
@@ -67,7 +68,7 @@ const PreRegistCard = ({registUser, userInfo = null, navigation}) => {
             보호자 주소 : {userInfo !== null && userInfo.address}
           </Text>
           <Text numberOfLines={1} style={styles.text}>
-            보호자 연락처 : {registUser.phonenumber}
+            보호자 연락처 : {userInfo !== null && userInfo.phoneNumber}
           </Text>
         </View>
       </View>

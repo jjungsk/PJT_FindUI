@@ -163,27 +163,39 @@ const MyPage = ({navigation}) => {
           </Text>
           <View style={styles.line} />
         </View>
-        {registUsers.length <1 
-        ?
-        (<View style={styles.carouselItem}>
-          <NoRegistCard textInfo={'등록된 사전 등록 정보가 없습니다.'}/>
-        </View>)
-        :
-        (<Carousel
-          data={registUsers}
-          renderItem={({item}) => (
-            <View style={styles.carouselItem}>
-              <PreRegistCard registUser={item} navigation={navigation}/>
-              <TouchableOpacity style={styles.button}>
-                <Text style={{ color:"white", fontSize: 15, fontWeight: "bold", alignSelf: 'center'}}>신고하기</Text>
-              </TouchableOpacity>
-            </View>
-          )}
-          itemWidth={width}
-          pagination
-        />)
-        }
-        <View style={{paddingHorizontal: widthPercentage(10), marginBottom: 40}}>
+        {registUsers.length < 1 ? (
+          <View style={styles.carouselItem}>
+            <NoRegistCard textInfo={'등록된 사전 등록 정보가 없습니다.'} />
+          </View>
+        ) : (
+          <Carousel
+            data={registUsers}
+            renderItem={({item}) => (
+              <View style={styles.carouselItem}>
+                <PreRegistCard
+                  registUser={item}
+                  userInfo={myInfo}
+                  navigation={navigation}
+                />
+                <TouchableOpacity style={styles.button}>
+                  <Text
+                    style={{
+                      color: 'white',
+                      fontSize: 15,
+                      fontWeight: 'bold',
+                      alignSelf: 'center',
+                    }}>
+                    신고하기
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            )}
+            itemWidth={width}
+            pagination
+          />
+        )}
+        <View
+          style={{paddingHorizontal: widthPercentage(10), marginBottom: 40}}>
           <Text style={[styles.text, {marginBottom: 10, marginTop: 10}]}>
             계정관리
           </Text>
