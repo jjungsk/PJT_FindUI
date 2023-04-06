@@ -21,8 +21,11 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
     padding: widthPercentage(12),
-    borderWidth: 1,
     borderRadius: 20,
+    backgroundColor: '#ffffff',
+    borderWidth: 2,
+    borderColor: '#c7d7fe',
+    elevation: 5,
   },
   titleContainer: {
     width: '100%',

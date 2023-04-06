@@ -12,17 +12,15 @@ import {
 // apis
 import {getMissingInfo, getPreInfo} from '../../API/PreRegistration';
 import {apiGetNotices, apiGetMissingPersonAll} from '../../API/apiHome';
+import { setRecoil } from 'recoil-nexus';
 
 export const preSelector = selector({
   key: 'preSelector',
 
   get: async ({get}) => {
     const addInfo = get(addInfoState);
-    if (addInfo) {
-      const response = await getPreInfo();
-      return response.data;
-    }
-    return get(preInfoState);
+    const response = await getPreInfo();
+    return response.data;
   },
   set: ({set}, newValue) => {
     set(preInfoState, newValue);
@@ -33,11 +31,8 @@ export const missingSelector = selector({
   key: 'missingSelector',
   get: async ({get}) => {
     const addInfo = get(addInfoState);
-    if (addInfo) {
-      const response = await getMissingInfo();
-      return response.data;
-    }
-    return get(missingInfoState);
+    const response = await getMissingInfo();
+    return response.data;
   },
   set: ({set}, newValue) => {
     set(missingInfoState, newValue);
