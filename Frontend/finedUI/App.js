@@ -4,7 +4,7 @@ import {View, StyleSheet, Platform, PermissionsAndroid} from 'react-native';
 import Geolocation from 'react-native-geolocation-service';
 import {RecoilRoot, useRecoilValue, useSetRecoilState} from 'recoil';
 import RecoilNexus from 'recoil-nexus';
-// import AnimatedLottieView from 'lottie-react-native';
+import Lottie from 'lottie-react-native'
 
 // stack
 import StackNavigation from './src/components/navigator/StackNavigation';
@@ -67,9 +67,10 @@ const App = () => {
 
   if (isLoading) {
     return (
-      <View style={styles.container}>
-        <Loading visible={isLoading} />
-      </View>
+      // <View style={styles.container}>
+      //   <Loading visible={isLoading} />
+      // </View>
+      <Lottie autoPlay source={require('../finedUI/src/assets/lottie/loading.json')} />
     );
   } else {
     return <StackNavigation />;
