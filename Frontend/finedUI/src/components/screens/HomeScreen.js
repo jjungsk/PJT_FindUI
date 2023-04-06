@@ -116,14 +116,14 @@ const HomeScreen = ({navigation}) => {
               alignItems: 'center',
             }}>
             <View style={styles.titleContainer}>
-              <Text style={[styles.title, isChange&&{color: '#d3d3d3'}]}
+              <Text style={[styles.title, !isChange&&{color: '#d3d3d3'}]}
               onPress={() => {
                 setIsChange(true);
               }}
               >사전 등록 정보</Text>
             </View>
             <View style={styles.titleContainer} >
-              <Text style={[styles.title, !isChange&&{color: '#d3d3d3'}]}
+              <Text style={[styles.title, isChange&&{color: '#d3d3d3'}]}
               onPress={() => {
                 setIsChange(false);
               }}
@@ -157,7 +157,7 @@ const HomeScreen = ({navigation}) => {
               pagination
             />
             )
-          ) : (registUsers.length < 1
+          ) : (missingPersons.length < 1
           ?(
             <View style={styles.carouselItem}>
               <NoRegistCard textInfo={'등록한 실종 정보가 없습니다.'}/>
