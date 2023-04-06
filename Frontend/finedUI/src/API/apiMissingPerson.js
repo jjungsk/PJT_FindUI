@@ -29,7 +29,7 @@ const api = apiInstance();
 
 // ================================= Test ================================================
 // 사전 등록 정보 생성
-const preRegist = async ({ data }) => {
+const preRegist = async ({data}) => {
   console.log(data);
   const token = await getAccessTokenFromKeychain();
   const imageList = data.imageList;
@@ -134,16 +134,24 @@ const preRegist = async ({ data }) => {
 //   }
 // };
 
-
 // 실종자 정보 생성
 const missingRegist = async ({data}) => {
   const token = await getAccessTokenFromKeychain();
   const imageList = data.imageList;
   const dataFormat = new FormData();
   console.log('pos : ', data.pos.lat, data.pos.lng);
+  const file = new File();
   dataFormat.append('frontImage', imageList[0]);
-  dataFormat.append('otherImage1', imageList >= 2 ? imageList[1] : null);
-  dataFormat.append('otherImage2', imageList >= 3 ? imageList[2] : null);
+  dataFormat.append(
+    'otherImage1',
+    imageList >= 2 ? imageList[1] : file,
+    'file',
+  );
+  dataFormat.append(
+    'otherImage2',
+    imageList >= 3 ? imageList[2] : file,
+    'file',
+  );
   dataFormat.append('name', data.name);
   dataFormat.append('birthDate', data.birth);
   dataFormat.append('gender', data.gender);

@@ -34,7 +34,8 @@ const Tab = createBottomTabNavigator();
 
 const TabNavigation = ({navigation}) => {
   return (
-    <Tab.Navigator screenOptions={{tabBarHideOnKeyboard: true}}>
+    <Tab.Navigator
+      screenOptions={{tabBarHideOnKeyboard: true, unmountOnBlur: true}}>
       {/* homescreen */}
       <Tab.Screen
         name="Home"
