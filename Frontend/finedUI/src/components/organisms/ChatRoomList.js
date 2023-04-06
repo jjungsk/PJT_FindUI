@@ -30,7 +30,11 @@ const ChatRoomList = ({navigation}) => {
         data={dataList}
         keyExtractor={item => item.roomId}
         renderItem={({item}) => (
-          <ChatRoom navigation={navigation} roomName={item.roomName} />
+          <ChatRoom
+            navigation={navigation}
+            roomId={item.roomId}
+            roomName={item.registName}
+          />
         )}
       />
     </View>

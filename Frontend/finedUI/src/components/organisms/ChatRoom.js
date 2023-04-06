@@ -62,9 +62,9 @@ const styles = StyleSheet.create({
   },
 });
 
-const ChatRoom = ({roomName, navigation}) => {
+const ChatRoom = ({roomName, roomId, navigation}) => {
   return (
-    <TouchableOpacity onPress={() => navigation.navigate('Chat')}>
+    <TouchableOpacity onPress={(() => navigation.navigate('Chat'), {roomId})}>
       <View style={styles.container}>
         <View style={styles.profile}>
           <Image style={styles.profileContent} />

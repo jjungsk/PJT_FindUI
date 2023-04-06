@@ -69,12 +69,12 @@ const SOCKET_URL = 'http://10.0.2.2:8080/ws';
 let sockJS = new SockJS(SOCKET_URL);
 let stompClient = Stomp.over(sockJS);
 let serverMessagesList = [];
-const ChatScreen = () => {
+const ChatScreen = ({route}) => {
   const [messages, setMessages] = useState('');
   const [user, setUser] = useState(null);
   //보낸 메시지 리스트
   const [serverMessages, setServerMessages] = useState([]);
-
+  let roomId = route.params.roomId;
   useFocusEffect(
     useCallback(() => {
       stompClient.connect({}, onConnected, onError);
@@ -89,7 +89,7 @@ const ChatScreen = () => {
   };
   let onConnected = () => {
     //subscribe에서roomid로 하면 될 듯
-    stompClient.subscribe('/topic/public', onMessageReceived);
+    stompClient.subscribe(`/topic/public/${roomId}`, onMessageReceived);
 
     console.log('Connected');
     // Tell your username to the server
