@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#f5f8ff',
+    backgroundColor: '#ffffff',
   },
   text: {
     fontWeight: 'bold',
@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   carouselItem: {
-    paddingHorizontal: widthPercentage(9),
+    paddingHorizontal: widthPercentage(14),
   },
   button: {
     backgroundColor: '#1570EF',
@@ -149,7 +149,7 @@ const MyPage = ({navigation}) => {
     <View style={styles.container}>
       <ScrollView style={{width: '100%'}}>
         <View
-          style={{paddingHorizontal: widthPercentage(10), marginBottom: 10}}>
+          style={{paddingHorizontal: widthPercentage(12), marginBottom: 10}}>
           <Text
             style={[
               styles.text,

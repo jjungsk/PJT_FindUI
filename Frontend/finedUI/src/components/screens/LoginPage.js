@@ -19,7 +19,7 @@ import useSleep from '../../utils/useSleep';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    // backgroundColor: '',
+    backgroundColor: '#ffffff',
     alignItems: 'center',
     justifyContent: 'center',
   },

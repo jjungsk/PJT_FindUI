@@ -8,8 +8,8 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: '#f5f8ff',
-    marginTop: 20
+    backgroundColor: '#ffffff',
+    // marginTop: 20
   },
   input: {
     height: 40,
@@ -112,7 +112,7 @@ const SearchPage = ({navigation}) => {
     <View style={styles.container}>
       <FloatingButton />
       <View style={{width: "80%", marginBottom: 10}}>
-        <TouchableOpacity style={{backgroundColor:"#1570EF", borderRadius:10, justifyContent: 'center', marginTop: 10, padding: 10}}>
+        <TouchableOpacity style={{backgroundColor:"#1570EF", borderRadius:10, justifyContent: 'center', marginTop: 40, padding: 10}}>
           <Text style={{ color:"white", fontSize: 15, fontWeight: "bold", alignSelf: 'center'}}>
             이미지 검색
           </Text>

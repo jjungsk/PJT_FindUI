@@ -19,11 +19,8 @@ export const preSelector = selector({
 
   get: async ({get}) => {
     const addInfo = get(addInfoState);
-    if (addInfo) {
-      const response = await getPreInfo();
-      return response.data;
-    }
-    return get(preInfoState);
+    const response = await getPreInfo();
+    return response.data;
   },
   set: ({set}, newValue) => {
     set(preInfoState, newValue);
@@ -34,12 +31,8 @@ export const missingSelector = selector({
   key: 'missingSelector',
   get: async ({get}) => {
     const addInfo = get(addInfoState);
-    if (addInfo) {
-      const response = await getMissingInfo();
-      setRecoil(addInfoState, false)
-      return response.data;
-    }
-    return get(missingInfoState);
+    const response = await getMissingInfo();
+    return response.data;
   },
   set: ({set}, newValue) => {
     set(missingInfoState, newValue);

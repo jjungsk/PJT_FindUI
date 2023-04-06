@@ -4,7 +4,7 @@ import { StyleSheet, View, Text } from 'react-native';
 const styles = StyleSheet.create({
   sign:{
     fontWeight:"bold",
-    fontSize:23,
+    fontSize: 26,
     color: "#0A0A0A",
     marginBottom: 30
   },
