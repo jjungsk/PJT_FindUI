@@ -25,15 +25,13 @@ public class RegistInfoUpdateServiceImpl implements RegistInfoUpdateService {
     public RegistInfoUpdateResponse update(RegistInfoUpdateRequest registInfoUpdateRequest) {
         registInfoUpdateRequest.setUser(userRepository.findById(registInfoUpdateRequest.getUserId()).get());
         registInfoUpdateRequest.setCreateDate((registInfoRepository.findById(registInfoUpdateRequest.getRegistId())).get().getCreateDate());
-//        Integer longitude = registInfoUpdateRequest.getLongitude();
-//        Integer latitude = registInfoUpdateRequest.getLatitude();
-//        if (longitude != null && latitude != null) {
-//            Point missingLocation = new Point(longitude, latitude);
-//            registInfoUpdateRequest.setMissingLocation(missingLocation);
-//            registInfoUpdateRequest.setIsMissing(true);
-//        } else {
-//            registInfoUpdateRequest.setIsMissing(false);
-//        }
+        Double longitude = registInfoUpdateRequest.getLongitude();
+        Double latitude = registInfoUpdateRequest.getLatitude();
+        if (longitude != null && latitude != null) {
+            registInfoUpdateRequest.setIsMissing(true);
+        } else {
+            registInfoUpdateRequest.setIsMissing(false);
+        }
         MultipartFile[] multipartFiles = {registInfoUpdateRequest.getFrontImage(), registInfoUpdateRequest.getOtherImage1(), registInfoUpdateRequest.getOtherImage2()};
         String[] imagePaths = imageSaveService.save(multipartFiles, registInfoUpdateRequest.getRegistId());
         registInfoUpdateRequest.setFrontImagePath(imagePaths[0]);
@@ -53,7 +51,7 @@ public class RegistInfoUpdateServiceImpl implements RegistInfoUpdateService {
             registInfoUpdateRequest.setLongitude(longitude);                    // 경도 설정
             registInfoUpdateRequest.setLatitude(latitude);                      // 위도 설정
             registInfoUpdateRequest.setMissingTime(Timestamp.valueOf(LocalDateTime.now())); // 실종 시간 설정
-        // 실종 신고 하지 않은 경우
+            // 실종 신고 하지 않은 경우
         } else {
             registInfoUpdateRequest.setLongitude(null);                         // 경도 설정
             registInfoUpdateRequest.setLatitude(null);                          // 위도 설정
