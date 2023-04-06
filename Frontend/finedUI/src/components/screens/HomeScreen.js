@@ -100,7 +100,7 @@ const HomeScreen = ({navigation}) => {
 
   return (
     <SafeAreaView style={{flex: 1}}>
-      <ScrollView>
+      <ScrollView style={{backgroundColor: '#ffffff',}}>
         <View style={styles.registContainer}>
           <View
             style={{
@@ -126,13 +126,6 @@ const HomeScreen = ({navigation}) => {
                 실종 등록 정보
               </Text>
             </View>
-            {/* <TouchableOpacity
-              style={{marginRight: 8, backgroundColor: '#1570EF', padding: 5, justifyContent:"center", alignItems: 'center', borderRadius: 5}}
-              onPress={() => {
-                setIsChange(!isChange);
-              }}>
-              <Text>{isChange? '실종 정보' : '사전 정보'}</Text>
-            </TouchableOpacity> */}
           </View>
           {isChange ? (
             registUsers.length < 1 ? (
@@ -237,7 +230,7 @@ const styles = StyleSheet.create({
   carouselItem: {
     paddingHorizontal: widthPercentage(9),
   },
-  noticeContainer: {marginTop: heightPercentage(2), backgroundColor: '#ffffff'},
+  noticeContainer: {marginTop: heightPercentage(15), backgroundColor: '#ffffff'},
   realtimeMissingContainer: {
     marginTop: heightPercentage(2),
     paddingVertical: heightPercentage(12),

@@ -29,3 +29,9 @@ export const missingLongInfoState = atom({
   key: 'missingLongInfoState',
   default: [],
 });
+
+// 확인 버튼 - 다시 불러오기
+export const addInfoState = atom({
+  key: `addInfoState`,
+  default: false,
+});

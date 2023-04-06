@@ -26,7 +26,7 @@ const PreRegistCard = ({registUser, userInfo = null, navigation}) => {
       <Image
         source={
           registUser.frontImagePath != null
-            ? null
+            ? {uri : 'http://' + registUser.frontImagePath}
             : require('../../assets/images/no_profile_image.png')
         }
         style={styles.image}
