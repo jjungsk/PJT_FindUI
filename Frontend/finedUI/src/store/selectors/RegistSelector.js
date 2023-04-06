@@ -16,7 +16,6 @@ import { setRecoil } from 'recoil-nexus';
 
 export const preSelector = selector({
   key: 'preSelector',
-
   get: async ({get}) => {
     const addInfo = get(addInfoState);
     const response = await getPreInfo();
@@ -25,6 +24,7 @@ export const preSelector = selector({
   set: ({set}, newValue) => {
     set(preInfoState, newValue);
   },
+  cachePolicy: 'none'
 });
 
 export const missingSelector = selector({

@@ -1,7 +1,7 @@
-import { missingInfoState, preInfoState } from "../store/atoms/InfoState";
+import { addInfoState, missingInfoState, preInfoState } from "../store/atoms/InfoState";
 import { getAccessTokenFromKeychain } from "../store/keychain/loginToken";
 import apiInstance from "./apiInstance";
-import { setRecoil } from "recoil-nexus";
+import { getRecoil, setRecoil } from "recoil-nexus";
 
 const api = apiInstance();
 
@@ -39,18 +39,22 @@ export const getMissingInfo = async () => {
 }
 };
 
-// 사전->실종 / 실종->사전 변경하기
-export const changeMissing = async ({registId, isMissing}) => {
+// 사전 -> 실종 변경하기
+export const changeMissing = async (registId, longitude, latitude) => {
   try {
+  const addInfo = getRecoil(addInfoState)
   const token = await getAccessTokenFromKeychain();
-  const response = await api.patch(`/api/regist/registId?${registId}`,{
-
+  const response = await api.patch(`/api/regist`,{
+    registId,
+    longitude,
+    latitude
   }, {
     headers: {
       Authorization: 'Bearer ' + token,
     },
   });
-  setRecoil(missingInfoState, response.data.data)
+  setRecoil(addInfoState, !addInfo)
+  // console.log(response)
   return response.data
 } catch (error) {
   console.error(error);

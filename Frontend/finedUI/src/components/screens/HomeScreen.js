@@ -192,6 +192,7 @@ const HomeScreen = ({navigation}) => {
             renderItem={missingCardRender}
             horizontal={true}
             keyExtractor={item => String(item.registId)}
+            showsHorizontalScrollIndicator={false}
           />
         </View>
         {/* 장기간 */}
@@ -205,6 +206,7 @@ const HomeScreen = ({navigation}) => {
               renderItem={missingCardRender}
               horizontal={true}
               keyExtractor={item => String(item.registId)}
+              showsHorizontalScrollIndicator={false}
             />
           </View>
         </View>

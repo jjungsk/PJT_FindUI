@@ -57,6 +57,7 @@ const RegistStackNavigation = ({navigation}) => {
   const pos = useRecoilValue(registPos);
   const mode = useRecoilValue(registMode);
   const [addInfo, setAddInfo] = useRecoilState(addInfoState);
+  console.log('addInfo', addInfo);
   return (
     <Stack.Navigator initialRouteName="registRoot">
       <Stack.Screen
@@ -121,8 +122,8 @@ const RegistStackNavigation = ({navigation}) => {
                     }
                   }
                   if (status === 'CREATED') {
-                    reset('Home');
                     setAddInfo(!addInfo);
+                    reset('Home');
                   }
                 }}>
                 <Text style={styles.completeBtnTitle}>완료</Text>

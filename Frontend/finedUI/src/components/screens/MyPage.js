@@ -7,6 +7,8 @@ import {
   Dimensions,
   Alert,
   ScrollView,
+  Modal,
+  Pressable,
 } from 'react-native';
 import MyPageModal from '../atoms/MyPageModal';
 import MyInfoCard from '../organisms/MyInfoCard';
@@ -23,6 +25,8 @@ import {reset} from '../navigator/NavigationService';
 import {preInfoState} from '../../store/atoms/InfoState';
 import NoRegistCard from '../organisms/NoRegistCard';
 import {preSelector} from '../../store/selectors/RegistSelector';
+import CallRegistContainer from '../organisms/CallRegistContainer';
+import {changeMissing} from '../../API/PreRegistration';
 
 const styles = StyleSheet.create({
   container: {
@@ -74,6 +78,8 @@ const MyPage = ({navigation}) => {
   const [myInfo, setMyInfo] = useRecoilState(myInfoState);
   const [address, setAddress] = useState(myInfo.address); // 주소
   const [phoneNumber, setPhoneNumber] = useState(myInfo.phone); // 이메일
+  const [callRegistVisible, setCallRegistVisible] = useState(false); // 신고 추가 입력사항
+  const [registId, setRegistId] = useState(0);
   const setIsLogin = useSetRecoilState(isLoginState);
   const registUsers = useRecoilValue(preSelector);
   const toggleLogoutModal = () => {
@@ -145,9 +151,33 @@ const MyPage = ({navigation}) => {
 
   return (
     <View style={styles.container}>
+      <Modal
+        animationType="fade"
+        transparent={true}
+        visible={callRegistVisible}
+        onRequestClose={() => {
+          setCallRegistVisible(!callRegistVisible);
+        }}>
+        <Pressable
+          style={{
+            flex: 1,
+            backgroundColor: 'rgba(0,0,0,0.4)',
+          }}
+          onPress={() => setCallRegistVisible(!callRegistVisible)}
+        />
+        {/* confirmCallback return 경도 위도 데이터 */}
+        <CallRegistContainer
+          cancelCallback={({value}) => setCallRegistVisible(value)}
+          confirmCallback={async ({pos}) => {
+            const response = await changeMissing(registId, pos.lng, pos.lat);
+            console.log(response);
+            setCallRegistVisible(!callRegistVisible);
+          }}
+        />
+      </Modal>
       <ScrollView style={{width: '100%'}}>
         <View
-          style={{paddingHorizontal: widthPercentage(12), marginBottom: 10}}>
+          style={{paddingHorizontal: widthPercentage(10), marginBottom: 10}}>
           <Text
             style={[
               styles.text,
@@ -175,7 +205,12 @@ const MyPage = ({navigation}) => {
                   navigation={navigation}
                   userInfo={myInfo}
                 />
-                <TouchableOpacity style={styles.button}>
+                <TouchableOpacity
+                  style={styles.button}
+                  onPress={() => {
+                    setCallRegistVisible(!callRegistVisible);
+                    setRegistId(item.registId);
+                  }}>
                   <Text
                     style={{
                       color: 'white',

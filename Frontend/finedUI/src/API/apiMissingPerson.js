@@ -74,14 +74,85 @@ const preRegist = async ({data}) => {
   }
 };
 
+// const preRegist = async ({ data }) => {
+//   console.log(data);
+//   const token = await getAccessTokenFromKeychain();
+//   const imageList = data.imageList;
+//   const formData = new FormData();
+//   formData.append('name', data.name);
+//   formData.append('birthDate', data.birth);
+//   formData.append('gender', data.gender);
+
+//   if (imageList.length >= 1) {
+//     try {
+//       const base64 = await ImageBase64.getBase64String(imageList[0].uri);
+//       formData.append('frontImage', {
+//         uri: `data:${imageList[0].type};base64,${base64}`,
+//         type: imageList[0].type,
+//         name: imageList[0].name,
+//       });
+//     } catch (e) {
+//       console.log(e);
+//     }
+//   }
+//   if (imageList.length >= 2) {
+//     try {
+//       const base64 = await ImageBase64.getBase64String(imageList[1].uri);
+//       formData.append('otherImage1', {
+//         uri: `data:${imageList[1].type};base64,${base64}`,
+//         type: imageList[1].type,
+//         name: imageList[1].name,
+//       });
+//     } catch (e) {
+//       console.log(e);
+//     }
+//   }
+//   if (imageList.length >= 3) {
+//     try {
+//       const base64 = await ImageBase64.getBase64String(imageList[2].uri);
+//       formData.append('otherImage2', {
+//         uri: `data:${imageList[2].type};base64,${base64}`,
+//         type: imageList[2].type,
+//         name: imageList[2].name,
+//       });
+//     } catch (e) {
+//       console.log(e);
+//     }
+//   }
+
+//   try {
+//     const response = await axios.post(MAIN_URL + '/api/regist/', formData, {
+//       headers: {
+//         Authorization: 'Bearer ' + token,
+//         'Content-Type': 'multipart/form-data',
+//       },
+//     });
+//     const status = response.data.status;
+//     console.log('status', status);
+//     return status;
+//   } catch (e) {
+//     console.log(e);
+//   }
+// };
+
 // 실종자 정보 생성
 const missingRegist = async ({data}) => {
   const token = await getAccessTokenFromKeychain();
   const imageList = data.imageList;
   const dataFormat = new FormData();
+  console.log('pos : ', data.pos.lat, data.pos.lng);
+  const file = new File();
   dataFormat.append('frontImage', imageList[0]);
-  dataFormat.append('otherImage1', imageList >= 2 ? imageList[1] : null);
-  dataFormat.append('otherImage2', imageList >= 3 ? imageList[2] : null);
+  dataFormat.append(
+    'otherImage1',
+    imageList >= 2 ? imageList[1] : file,
+    'file',
+  );
+  dataFormat.append(
+    'otherImage2',
+    imageList >= 3 ? imageList[2] : file,
+    'file',
+  );
   dataFormat.append('name', data.name);
   dataFormat.append('birthDate', data.birth);
   dataFormat.append('gender', data.gender);
