@@ -59,7 +59,7 @@ const RegistInputForm = ({userInfo = null}) => {
 
   // useEffect (mode ==== 3) 실종 정보 수정일 경우
   useEffect(() => {
-    if (mode === 3 || mode === 4) {
+    if (mode === 2 || mode === 3 || mode === 4) {
       if (userInfo.name !== null) setUserName(userInfo.name);
       if (userInfo.birthDate !== null)
         setBirthday(userInfo.birthDate.toString());
@@ -94,7 +94,7 @@ const RegistInputForm = ({userInfo = null}) => {
       <Divider />
 
       {/* 실종 날짜 선택 */}
-      {mode !== 0 ? (
+      {mode === 1 || mode === 3 || mode === 4 ? (
         <>
           <View style={styles.selectDateContainer}>
             <Text style={styles.selectTitle}>실종 날짜</Text>

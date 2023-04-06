@@ -54,7 +54,6 @@ const DetailScreen = ({navigation, route}) => {
         route.params.missingPerson.latitude,
       )
         .then(res => {
-          console.log('detailcontents.js', res.address_name);
           setAddress(res.address_name);
         })
         .catch(error => console.log(error));
