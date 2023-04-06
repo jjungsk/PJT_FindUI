@@ -8,7 +8,7 @@ import { nameState, addressState, emailState, phoneState, passwordState, pwConfi
 import { Alert } from 'react-native';
 
 const SignUpAll = ({navigation}) => {
-  const [page, setPage] = useState(3)
+  const [page, setPage] = useState(1)
   const name = useRecoilValue(nameState);
   const address = useRecoilValue(addressState);
   const email = useRecoilValue(emailState);

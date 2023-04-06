@@ -3,7 +3,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {Text, Alert, TouchableOpacity, StyleSheet} from 'react-native';
 import {fontPercentage} from '../../styles/ResponsiveSize';
 
-import {useRecoilValue, useSetRecoilState} from 'recoil';
+import {useRecoilState, useRecoilValue, useSetRecoilState} from 'recoil';
 import {
   registBirth,
   registGender,
@@ -53,7 +53,7 @@ const RegistStackNavigation = ({navigation}) => {
   const date = useRecoilValue(registMissingDate);
   const pos = useRecoilValue(registPos);
   const mode = useRecoilValue(registMode);
-  const setAddInfo = useSetRecoilState(addInfoState)
+  const [addInfo, setAddInfo] = useRecoilState(addInfoState)
   return (
     <Stack.Navigator initialRouteName="registRoot">
       <Stack.Screen
@@ -121,7 +121,7 @@ const RegistStackNavigation = ({navigation}) => {
                   }
                   if (status === 'CREATED') {
                     reset('Home')
-                    setAddInfo(true)
+                    setAddInfo(!addInfo)
                   }
                 }}>
                 <Text style={styles.completeBtnTitle}>완료</Text>
