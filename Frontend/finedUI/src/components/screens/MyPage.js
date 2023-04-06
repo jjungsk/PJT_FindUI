@@ -164,7 +164,14 @@ const MyPage = ({navigation}) => {
           }}
           onPress={() => setCallRegistVisible(!callRegistVisible)}
         />
-        <CallRegistContainer />
+        {/* confirmCallback return 경도 위도 데이터 */}
+        <CallRegistContainer
+          cancelCallback={({value}) => setCallRegistVisible(value)}
+          confirmCallback={({pos}) => {
+            console.log(pos);
+            setCallRegistVisible(!callRegistVisible);
+          }}
+        />
       </Modal>
       <ScrollView style={{width: '100%'}}>
         <View
