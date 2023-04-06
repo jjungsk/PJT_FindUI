@@ -18,7 +18,7 @@
 
   by.정세권
 */
-
+import {Platform} from 'react-native';
 import {getAccessTokenFromKeychain} from '../store/keychain/loginToken.js';
 import apiInstance from './apiInstance.js';
 import {MAIN_URL} from '@env';
@@ -31,22 +31,30 @@ const preRegist = async ({data}) => {
   console.log(data);
   const token = await getAccessTokenFromKeychain();
   const imageList = data.imageList;
-  const dataFormat = new FormData();
-  dataFormat.append('frontImage', null);
-  dataFormat.append('otherImage1', imageList >= 2 ? imageList[1] : null);
-  dataFormat.append('otherImage2', imageList >= 3 ? imageList[2] : null);
+  let dataFormat = new FormData();
+  imageList[0].uri =
+    Platform.OS == 'android'
+      ? imageList[0].uri.replace('file://', '')
+      : imageList[0].uri;
+  dataFormat.append('frontImage', imageList[0]);
+  // dataFormat.append('otherImage1', imageList.length >= 2 ? imageList[1] : null);
+  // dataFormat.append('otherImage2', imageList.length >= 3 ? imageList[2] : null);
   dataFormat.append('name', data.name);
   dataFormat.append('birthDate', data.birth);
   dataFormat.append('gender', data.gender);
   try {
-    const response = api.post('/api/regist/', dataFormat, {
+    const response = await fetch(MAIN_URL + '/api/regist/', {
+      method: 'post',
+      body: dataFormat,
       headers: {
         Authorization: 'Bearer ' + token,
         'Content-Type': 'multipart/form-data',
       },
-      transformRequest: dataFormat => dataFormat,
     });
-    const status = response.status;
+    const resJson = await response.json();
+    console.log(resJson);
+    const status = resJson.status;
+    console.log('status', status);
     return status;
   } catch (e) {
     console.log(e);
@@ -68,13 +76,16 @@ const missingRegist = async ({data}) => {
   dataFormat.append('longitude', data.pos.lat);
   dataFormat.append('latitude', data.pos.lng);
   try {
-    const response = api.post('/api/regist/', dataFormat, {
+    const response = await fetch(MAIN_URL + '/api/regist/', {
+      method: 'post',
+      body: dataFormat,
       headers: {
         Authorization: 'Bearer ' + token,
         'Content-Type': 'multipart/form-data',
       },
     });
-    const status = response.status;
+    const resJson = await response.json();
+    const status = resJson.status;
     return status;
   } catch (e) {
     console.log(e);

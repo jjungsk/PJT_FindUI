@@ -1,8 +1,3 @@
-/*
-  Home-Screen Main
-  by.황진태
-*/
-
 // react
 import React, {useState, useEffect} from 'react';
 
@@ -26,7 +21,7 @@ import {
 } from '../../styles/ResponsiveSize';
 
 // recoil
-import {useRecoilState} from 'recoil';
+import {useRecoilState, useRecoilValue, useSetRecoilState} from 'recoil';
 import {userPosition} from '../store_regist/registStore';
 
 // position
@@ -39,57 +34,41 @@ import {Carousel} from 'react-native-basic-carousel';
 import {MissingPersonCard} from '../organisms/MissingPersonCard';
 
 // apis
-import {getUserInfo} from '../../API/UserApi';
+import {apiGetUserRegistMissingPersons} from '../../API/apiHome';
+import {apiGetAddress, apiGetLngLat} from '../../API/apiKakao';
 import {
-  apiGetUserRegistMissingPersons,
-  apiGetMissingPersonAll,
-} from '../../API/apiHome';
+  missingSelector,
+  preSelector,
+} from '../../store/selectors/RegistSelector';
+import NoRegistCard from '../organisms/NoRegistCard';
 
 const HomeScreen = ({navigation}) => {
-  // STATE
-  // (0) 로그인 유저
-  // 현재 위치
-  const [position, setPosition] = useRecoilState(userPosition);
-  // 몰루?
-  const [isChange, setIsChange] = useState(false);
-  // 유저 정보
-  const [userInfo, setUserInfo] = useState({});
-
-  // (1) 사용자가 등록한 실종자 정보
-  const [registUsers, setRegistUser] = useState([
+  const setPosition = useSetRecoilState(userPosition);
+  const [isChange, setIsChange] = useState(true);
+  const registUsers = useRecoilValue(preSelector);
+  const longPersons = [
     {
-      name: '샘스미스',
-      birthday: 970218,
-      address: '서울시 역삼동 멀티캠퍼스',
-      phone: '010-6725-5590',
+      name: 'Name1',
+      identity: 'birthDate1',
+      location: '서울',
       image: null,
+      registId: 1,
     },
     {
-      name: '정둘권',
-      birthday: 970218,
-      address: '서울시 역삼동 멀티캠퍼스',
-      phone: '010-6725-5590',
+      name: 'Name2',
+      identity: 'birthDate2',
+      location: '서울',
       image: null,
+      registId: 2,
     },
     {
-      registId: 9,
-      userId: 4,
-      name: '홍길동',
-      birthDate: 19960625,
-      gender: 1,
-      frontImagePath: null,
-      otherImage1Path: null,
-      otherImage2Path: null,
-      missingTime: null,
-      longitude: null,
-      latitude: null,
-      createDate: 1680702391416,
-      isMissing: null,
-      updateDate: 1680702391416,
+      name: 'Name3',
+      identity: 'birthDate3',
+      location: '서울',
+      image: null,
+      registId: 3,
     },
-  ]);
-
-  // (2) 공지사항
+  ];
   const [notices, setNotice] = useState([
     {
       title: '미아 발견 시, 대처 방법',
@@ -103,13 +82,8 @@ const HomeScreen = ({navigation}) => {
     },
   ]);
 
-  // (3) 전체 실종자 정보
-  const [missingPersons, setMissingPerson] = useState([]);
+  const missingPersons = useRecoilValue(missingSelector);
 
-  const width = Dimensions.get('window').width;
-
-  // FUNCTION
-  // function - render
   useEffect(() => {
     // (0) 로그인 후 사용자의 현재 위치 값 저장
     Geolocation.getCurrentPosition(position => {
@@ -158,6 +132,8 @@ const HomeScreen = ({navigation}) => {
     // test
   }, []);
 
+  const width = Dimensions.get('window').width;
+
   // component
   const missingCardRender = ({item}) => {
     return (
@@ -178,30 +154,55 @@ const HomeScreen = ({navigation}) => {
               alignItems: 'center',
             }}>
             <View style={styles.titleContainer}>
-              <Text style={styles.title}>등록 정보</Text>
+              <Text
+                style={[styles.title, !isChange && {color: '#d3d3d3'}]}
+                onPress={() => {
+                  setIsChange(true);
+                }}>
+                사전 등록 정보
+              </Text>
             </View>
-            <TouchableOpacity
-              style={{marginRight: 8}}
+            <View style={styles.titleContainer}>
+              <Text
+                style={[styles.title, isChange && {color: '#d3d3d3'}]}
+                onPress={() => {
+                  setIsChange(false);
+                }}>
+                실종 등록 정보
+              </Text>
+            </View>
+            {/* <TouchableOpacity
+              style={{marginRight: 8, backgroundColor: '#1570EF', padding: 5, justifyContent:"center", alignItems: 'center', borderRadius: 5}}
               onPress={() => {
                 setIsChange(!isChange);
               }}>
-              <Text>Change</Text>
-            </TouchableOpacity>
+              <Text>{isChange? '실종 정보' : '사전 정보'}</Text>
+            </TouchableOpacity> */}
           </View>
           {isChange ? (
-            <Carousel
-              data={registUsers}
-              renderItem={({item}) => (
-                <View style={styles.carouselItem}>
-                  <PreRegistCard registUser={item} />
-                </View>
-              )}
-              itemWidth={width}
-              pagination
-            />
+            registUsers.length < 1 ? (
+              <View style={styles.carouselItem}>
+                <NoRegistCard textInfo={'등록된 사전 등록 정보가 없습니다.'} />
+              </View>
+            ) : (
+              <Carousel
+                data={registUsers}
+                renderItem={({item}) => (
+                  <View style={styles.carouselItem}>
+                    <PreRegistCard registUser={item} />
+                  </View>
+                )}
+                itemWidth={width}
+                pagination
+              />
+            )
+          ) : missingPersons.length < 1 ? (
+            <View style={styles.carouselItem}>
+              <NoRegistCard textInfo={'등록한 실종 정보가 없습니다.'} />
+            </View>
           ) : (
             <Carousel
-              data={registUsers}
+              data={missingPersons}
               renderItem={({item}) => (
                 <View style={styles.carouselItem}>
                   <PreRegistCard
@@ -233,7 +234,7 @@ const HomeScreen = ({navigation}) => {
             <Text style={styles.title}>실시간 실종자 정보</Text>
           </View>
           <FlatList
-            data={missingPersons}
+            data={longPersons}
             renderItem={missingCardRender}
             horizontal={true}
             keyExtractor={item => String(item.registId)}
@@ -245,7 +246,7 @@ const HomeScreen = ({navigation}) => {
           </View>
           <View style={styles.cardContainer}>
             <FlatList
-              data={missingPersons}
+              data={longPersons}
               renderItem={missingCardRender}
               horizontal={true}
               keyExtractor={item => String(item.registId)}

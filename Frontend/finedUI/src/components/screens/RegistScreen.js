@@ -8,8 +8,9 @@ import {
   ScrollView,
   FlatList,
   TouchableOpacity,
-  Alert,
   ActivityIndicator,
+  Modal,
+  Pressable,
 } from 'react-native';
 import {
   fontPercentage,
@@ -49,7 +50,7 @@ const modeDict = {
 };
 
 const RegistScreen = ({route, navigation}) => {
-  // 현재 모드
+  const [imgSelect, setImgSelect] = useState(false);
   const mode = useRecoilValue(registMode);
   // 이미지
   const [imageList, setImageList] = useRecoilState(registImageList);
@@ -65,11 +66,17 @@ const RegistScreen = ({route, navigation}) => {
   // FUNCTION
   // useEffect - 넘어온 유저의 위치 정보 확인
   useEffect(() => {
-    console.log('(RegistScreen.js) 모드 정보 : ', mode);
-    console.log('(RegistScreen.js) 넘어온 유저 정보 : ', route.params.userInfo);
-    console.log(
-      '(RegistScreen.js) 넘어온 유저 정보 : ',
-      typeof route.params.userInfo.birthDate,
+    console.log(address);
+    Geolocation.getCurrentPosition(
+      position => {
+        const {latitude, longitude} = position.coords;
+        setPosition({lat: latitude, lng: longitude});
+        return {lat: latitude, lng: longitude};
+      },
+      error => {
+        console.log(error);
+      },
+      {enableHighAccuracy: true, timeout: 5000, maximumAge: 5000},
     );
 
     // (1) 등록된 실종자 정보를 수정 할 때
@@ -126,8 +133,8 @@ const RegistScreen = ({route, navigation}) => {
     setImageList(newImageList);
   };
 
-  // 사진 선택
-  const pickImage = async () => {
+  const pickImageFromAlbum = async () => {
+    setImgSelect(!imgSelect);
     try {
       await ImagePicker.openPicker({
         width: widthPercentage(150),
@@ -135,11 +142,37 @@ const RegistScreen = ({route, navigation}) => {
         cropping: true,
         mediaType: 'photo',
       }).then(image => {
+        const image_name = image.path.substring(
+          image.path.lastIndexOf('/') + 1,
+        );
         selectImage = {
           uri: image.path,
-          width: image.width,
-          height: image.height,
-          mime: image.mime,
+          name: image_name,
+          type: image.mime,
+        };
+        setImageList([...imageList, selectImage]);
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  const pickImageFromCamera = async () => {
+    setImgSelect(!imgSelect);
+    try {
+      await ImagePicker.openCamera({
+        width: widthPercentage(150),
+        height: heightPercentage(150),
+        cropping: true,
+        mediaType: 'photo',
+      }).then(image => {
+        const image_name = image.path.substring(
+          image.path.lastIndexOf('/') + 1,
+        );
+        selectImage = {
+          uri: image.path,
+          name: image_name,
+          type: image.mime,
         };
         setImageList([...imageList, selectImage]);
       });
@@ -151,6 +184,39 @@ const RegistScreen = ({route, navigation}) => {
   return (
     <SafeAreaView style={{flex: 1}}>
       <ImagePickModal />
+      <Modal
+        animationType="fade"
+        transparent={true}
+        visible={imgSelect}
+        onRequestClose={() => {
+          setImgSelect(!imgSelect);
+        }}>
+        <Pressable
+          style={{
+            flex: 1,
+            backgroundColor: 'rgba(0,0,0,0.4)',
+          }}
+          onPress={() => setImgSelect(!imgSelect)}
+        />
+        <View style={styles.imgSelectModal}>
+          <View style={styles.imgSelectContainer}>
+            <View style={styles.imgSelectContents}>
+              <TouchableOpacity
+                activeOpacity={0.6}
+                onPress={pickImageFromCamera}
+                style={styles.imgSelectBtn}>
+                <Text style={styles.imgSelectText}>카메라</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                activeOpacity={0.6}
+                onPress={pickImageFromAlbum}
+                style={styles.imgSelectBtn}>
+                <Text style={styles.imgSelectText}>앨범</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      </Modal>
       <Suspense
         fallback={
           <View style={styles.container}>
@@ -188,7 +254,7 @@ const RegistScreen = ({route, navigation}) => {
                   return (
                     <TouchableOpacity
                       activeOpacity={0.6}
-                      onPress={pickImage}
+                      onPress={() => setImgSelect(true)}
                       style={styles.addImageBtn}>
                       <Icon name="image-plus" color={'#000000'} size={25} />
                       <Text style={styles.addImageText}>
@@ -347,6 +413,42 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+  },
+  imgSelectModal: {
+    width: '100%',
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center',
+    position: 'absolute',
+  },
+  imgSelectContainer: {
+    marginHorizontal: widthPercentage(20),
+    borderRadius: widthPercentage(20),
+    paddingHorizontal: widthPercentage(25),
+    paddingVertical: heightPercentage(15),
+    backgroundColor: 'white',
+    alignItems: 'center',
+    elevation: 5,
+  },
+  imgSelectContents: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: widthPercentage(8),
+    paddingVertical: heightPercentage(32),
+  },
+  imgSelectBtn: {
+    flex: 1,
+    alignItems: 'center',
+    marginHorizontal: widthPercentage(8),
+    paddingVertical: heightPercentage(16),
+    borderRadius: 12,
+    backgroundColor: '#1570e1',
+    elevation: 5,
+  },
+  imgSelectText: {
+    fontSize: fontPercentage(16),
+    fontWeight: 'bold',
+    color: '#ffffff',
   },
 });
 
