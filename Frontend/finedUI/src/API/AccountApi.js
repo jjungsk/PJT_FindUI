@@ -53,13 +53,11 @@ export const checkRefresh = async () => {
 export const checkAcess = async () => {
   try{
     const token = await getAccessTokenFromKeychain();
-    console.log(token)
     const response = await api.post(`/api/user/token`, {}, {
       headers: {
         'Authorization': 'Bearer ' + token
       }  
     });  
-    console.log(response)
     if (response.status === 200 ) {
       return true
     }

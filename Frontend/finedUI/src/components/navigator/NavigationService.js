@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { deleteTokensFromKeychain } from '../../store/keychain/loginToken';
 
 export const navigationRef = React.createRef();
 
