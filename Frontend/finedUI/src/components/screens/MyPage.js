@@ -22,6 +22,7 @@ import {deleteTokensFromKeychain} from '../../store/keychain/loginToken';
 import {reset} from '../navigator/NavigationService';
 import {preInfoState} from '../../store/atoms/InfoState';
 import NoRegistCard from '../organisms/NoRegistCard';
+import { preSelector } from '../../store/selectors/RegistSelector';
 
 const styles = StyleSheet.create({
   container: {
@@ -74,7 +75,7 @@ const MyPage = ({navigation}) => {
   const [address, setAddress] = useState(myInfo.address); // 주소
   const [phoneNumber, setPhoneNumber] = useState(myInfo.phone); // 이메일
   const setIsLogin = useSetRecoilState(isLoginState);
-  const registUsers = useRecoilValue(preInfoState);
+  const registUsers = useRecoilValue(preSelector);
   const toggleLogoutModal = () => {
     setIsLogoutModalVisible(!isLogoutModalVisible);
   };

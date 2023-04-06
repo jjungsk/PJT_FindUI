@@ -17,6 +17,7 @@
     "@react-navigation/native-stack": "^6.9.12",
     "axios": "^1.3.4",
     "date-fns": "^2.29.3",
+    "lottie-react-native": "^6.0.0-rc.3",
     "react": "18.1.0",
     "react-native": "0.70.5",
     "react-native-basic-carousel": "^1.0.9",
