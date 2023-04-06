@@ -97,7 +97,7 @@ image:
     # localhost 이미지 url
 #    path: localhost:3306/api/regist/
     # aws ec2 이미지 url
-    path: j8a108.p.ssafy.io:8080/api/regist/
+    path: j8a108.p.ssafy.io:8080/api/regist/image/
 
 # AWS S3
 cloud:
