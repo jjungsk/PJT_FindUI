@@ -22,44 +22,56 @@ import {Platform} from 'react-native';
 import {getAccessTokenFromKeychain} from '../store/keychain/loginToken.js';
 import apiInstance from './apiInstance.js';
 import {MAIN_URL} from '@env';
+import axios from 'axios';
 
 const api = apiInstance();
 
 // ================================= Test ================================================
 // 사전 등록 정보 생성
-const preRegist = async ({data}) => {
+const preRegist = async ({ data }) => {
   console.log(data);
   const token = await getAccessTokenFromKeychain();
   const imageList = data.imageList;
-  let dataFormat = new FormData();
-  imageList[0].uri =
-    Platform.OS == 'android'
-      ? imageList[0].uri.replace('file://', '')
-      : imageList[0].uri;
-  dataFormat.append('frontImage', imageList[0]);
-  // dataFormat.append('otherImage1', imageList.length >= 2 ? imageList[1] : null);
-  // dataFormat.append('otherImage2', imageList.length >= 3 ? imageList[2] : null);
-  dataFormat.append('name', data.name);
-  dataFormat.append('birthDate', data.birth);
-  dataFormat.append('gender', data.gender);
+  const formData = new FormData();
+  formData.append('name', data.name);
+  formData.append('birthDate', data.birth);
+  formData.append('gender', data.gender);
+
+  formData.append('frontImage', {
+    uri: imageList[0].uri,
+    type: imageList[0].type,
+    name: imageList[0].name,
+  });
+  if (imageList.length >= 2) {
+    formData.append('otherImage1', {
+      uri: imageList[1].uri,
+      type: imageList[1].type,
+      name: imageList[1].name,
+    });
+  }
+  if (imageList.length >= 3) {
+    formData.append('otherImage2', {
+      uri: imageList[2].uri,
+      type: imageList[2].type,
+      name: imageList[2].name,
+    });
+  }
+
   try {
-    const response = await fetch(MAIN_URL + '/api/regist/', {
-      method: 'post',
-      body: dataFormat,
+    const response = await axios.post(MAIN_URL + '/api/regist/', formData, {
       headers: {
         Authorization: 'Bearer ' + token,
         'Content-Type': 'multipart/form-data',
       },
     });
-    const resJson = await response.json();
-    console.log(resJson);
-    const status = resJson.status;
+    const status = response.data.status;
     console.log('status', status);
     return status;
   } catch (e) {
     console.log(e);
   }
 };
+
 
 // 실종자 정보 생성
 const missingRegist = async ({data}) => {
