@@ -7,9 +7,10 @@ import lombok.Getter;
 public class ChatRoomResponse {
     private Long roomId;
     private String roomName;
-
+    private String registName;
     public ChatRoomResponse(ChatRoom entity){
         this.roomId = entity.getId();
         this.roomName = entity.getRoomName();
+        this.registName = entity.getRegistInfo().getName();
     }
 }
