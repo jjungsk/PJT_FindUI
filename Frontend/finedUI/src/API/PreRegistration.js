@@ -53,7 +53,7 @@ export const changeMissing = async (registId, longitude, latitude) => {
       Authorization: 'Bearer ' + token,
     },
   });
-  setRecoil(addInfoState, !addInfo)
+  setRecoil(addInfoState, addInfo+1)
   // console.log(response)
   return response.data
 } catch (error) {

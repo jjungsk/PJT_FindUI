@@ -121,7 +121,7 @@ const RegistStackNavigation = ({navigation}) => {
                     }
                   }
                   if (status === 'CREATED') {
-                    setAddInfo(!addInfo)
+                    setAddInfo(addInfo+1)
                     reset('Home')
                   }
                 }}>
