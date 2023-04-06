@@ -48,7 +48,7 @@ import ImgSelectorContainer from '../organisms/ImgSelectorCotainer';
 const modeDict = {
   0: '사전 등록',
   1: '실시간 실종자 등록',
-  2: '이산가족 등록',
+  2: '사전 등록 정보 수정',
   3: '실종자 정보 수정',
   4: '실종자 정보 상세',
 };
@@ -73,7 +73,7 @@ const RegistScreen = ({route, navigation}) => {
   // useEffect - 넘어온 유저의 위치 정보 확인
   useEffect(() => {
     // (1) 등록된 실종자 정보를 수정 할 때
-    if (mode === 3 || mode === 4) {
+    if (mode === 2 || mode === 3 || mode === 4) {
       // 등록번호 셋팅
       setId(route.params.userInfo.registId);
       const mainUrl = MAIN_URL.substring(7, 29);
@@ -111,7 +111,7 @@ const RegistScreen = ({route, navigation}) => {
 
     // (2) setPosition
     if (
-      (mode === 3 || mode === 4) &&
+      (mode === 2 || mode === 3 || mode === 4) &&
       route.params.userInfo.latitude !== null &&
       route.params.userInfo.longitude !== null
     ) {
@@ -310,7 +310,7 @@ const RegistScreen = ({route, navigation}) => {
             <Divider />
             <RegistInputForm userInfo={route.params.userInfo} />
             {/* 맵 설정 */}
-            {mode !== 0 ? (
+            {mode === 1 || mode === 3 || mode === 4 ? (
               <TouchableOpacity
                 disabled={mode === 4 && true}
                 activeOpacity={0.6}

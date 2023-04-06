@@ -10,7 +10,6 @@ import {
   Dimensions,
   ScrollView,
   FlatList,
-  TouchableOpacity,
 } from 'react-native';
 
 // sizes
@@ -21,7 +20,7 @@ import {
 } from '../../styles/ResponsiveSize';
 
 // recoil
-import {useRecoilState, useRecoilValue, useSetRecoilState} from 'recoil';
+import {useRecoilValue, useSetRecoilState} from 'recoil';
 import {userPosition} from '../store_regist/registStore';
 
 // position
@@ -34,7 +33,6 @@ import {Carousel} from 'react-native-basic-carousel';
 import {MissingPersonCard} from '../organisms/MissingPersonCard';
 
 // apis
-import {apiGetUserRegistMissingPersons} from '../../API/apiHome';
 import {getUserInfo} from '../../API/UserApi';
 import {
   missingSelector,
@@ -83,6 +81,7 @@ const HomeScreen = ({navigation}) => {
     const auto = async () => {
       await getUserInfo()
         .then(res => {
+          console.log('(HomeScreen.js) 로그인한 유저 정보 : ', res);
           setUserInfo(res);
         })
         .catch(error => console.log(error));
@@ -143,6 +142,7 @@ const HomeScreen = ({navigation}) => {
                     <PreRegistCard
                       registUser={item}
                       userInfo={userInfo}
+                      mode={2}
                       navigation={navigation}
                     />
                   </View>
@@ -163,6 +163,7 @@ const HomeScreen = ({navigation}) => {
                   <PreRegistCard
                     registUser={item}
                     userInfo={userInfo}
+                    mode={3}
                     navigation={navigation}
                   />
                 </View>

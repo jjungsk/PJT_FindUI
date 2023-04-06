@@ -157,7 +157,9 @@ const StackNavigation = () => {
                           // navigation.reset({routes: [{name: 'Home'}]});
                         }
                       }}>
-                      <Text style={styles.completeBtnTitle}>완료</Text>
+                      {mode !== 4 && (
+                        <Text style={styles.completeBtnTitle}>완료</Text>
+                      )}
                     </TouchableOpacity>
                   );
                 },

@@ -1,5 +1,5 @@
 // react
-import React from 'react';
+import React, {useEffect} from 'react';
 
 // react-native
 import {View, Text, Image, TouchableOpacity, StyleSheet} from 'react-native';
@@ -18,18 +18,18 @@ import {
 // icons
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-const PreRegistCard = ({registUser, userInfo = null, navigation}) => {
+const PreRegistCard = ({registUser, userInfo = null, mode = 0, navigation}) => {
   // recoil data 초기화
   const resetRegistProps = useSetRecoilState(resetRegistAtoms);
-  const address = new String(userInfo.address)
-  const phone = new String(userInfo.phoneNumber)
+  const address = new String(userInfo.address);
+  const phone = new String(userInfo.phoneNumber);
 
   return (
     <View style={styles.container}>
       <Image
         source={
           registUser.frontImagePath != null
-            ? {uri : 'http://' + registUser.frontImagePath}
+            ? {uri: 'http://' + registUser.frontImagePath}
             : require('../../assets/images/no_profile_image.png')
         }
         style={styles.image}
@@ -38,14 +38,10 @@ const PreRegistCard = ({registUser, userInfo = null, navigation}) => {
         <View style={styles.icons}>
           <TouchableOpacity
             onPress={() => {
-              resetRegistProps((mode = 3));
+              resetRegistProps((mode = mode));
               navigation.navigate('registMain', {
                 userInfo: registUser,
               });
-              // navigation.navigate('ModifyScreen', {
-              //   registId: registUser.registId,
-              //   userInfo: userInfo,
-              // });
             }}>
             <Icon
               name="square-edit-outline"
