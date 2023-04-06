@@ -4,8 +4,10 @@ import com.ssafy.finedUi.chatImage.ChatImageRepository;
 import com.ssafy.finedUi.chatImage.get.response.ChatImageGetResponse;
 import com.ssafy.finedUi.chatImage.s3.delete.S3DeleteService;
 import com.ssafy.finedUi.registInfo.RegistInfoRepository;
+import com.ssafy.finedUi.registInfo.aiserever.AiServerUtils;
 import com.ssafy.finedUi.registInfo.delete.request.RegistInfoDeleteRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -26,6 +28,9 @@ public class RegistInfoDeleteServiceImpl implements RegistInfoDeleteService{
     private final RegistInfoRepository registInfoRepository;
     private final ChatImageRepository chatImageRepository;
     private final S3DeleteService s3DeleteService;
+
+    @Autowired
+    private AiServerUtils aiServerUtils;
 
     @Override
     public void delete(Long id) {
@@ -53,5 +58,8 @@ public class RegistInfoDeleteServiceImpl implements RegistInfoDeleteService{
 
         // 채팅 프로필 삭제
         registInfoRepository.delete(registInfoRepository.findById(id).get());
+
+//        벡터 삭제.
+        aiServerUtils.deleteVector(id);
     }
 }

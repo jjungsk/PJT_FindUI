@@ -2,11 +2,13 @@ package com.ssafy.finedUi.registInfo.create.service;
 
 import com.ssafy.finedUi.db.entity.RegistInfo;
 import com.ssafy.finedUi.registInfo.RegistInfoRepository;
+import com.ssafy.finedUi.registInfo.aiserever.AiServerUtils;
 import com.ssafy.finedUi.registInfo.create.request.RegistInfoCreateRequest;
 import com.ssafy.finedUi.registInfo.create.response.RegistInfoCreateResponse;
 import com.ssafy.finedUi.registInfo.image.save.ImageSaveServiceImpl;
 import com.ssafy.finedUi.user.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
@@ -29,6 +31,8 @@ public class RegistInfoCreateServiceImpl implements RegistInfoCreateService {
     // 이미지 저장 service
     private final ImageSaveServiceImpl imageSaveService;
 
+    @Autowired
+    private AiServerUtils aiServerUtils;
     // 등록 정보 저장 메소드
     @Override
     public RegistInfoCreateResponse save(RegistInfoCreateRequest registInfoCreateRequest) {
@@ -52,6 +56,14 @@ public class RegistInfoCreateServiceImpl implements RegistInfoCreateService {
         registInfoCreateRequest.setOtherImage1Path(filePaths[1]);
         registInfoCreateRequest.setOtherImage2Path(filePaths[2]);
         // dto를 entity로 변환하여 저장
-        return new RegistInfoCreateResponse(registInfoRepository.save(registInfoCreateRequest.toEntity()));
+
+        RegistInfo registInfo = registInfoRepository.save(registInfoCreateRequest.toEntity());
+        
+//        실종됐고, 이미지가 있을때만 벡터저장.
+        if(registInfo.getIsMissing() && registInfo.getFrontImagePath()!=null){
+            aiServerUtils.registVector(registInfo,registInfoCreateRequest.getFrontImage());
+        }
+
+        return new RegistInfoCreateResponse(registInfo);
     }
 }
