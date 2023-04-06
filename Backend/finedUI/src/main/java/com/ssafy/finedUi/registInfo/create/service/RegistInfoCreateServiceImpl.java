@@ -54,7 +54,8 @@ public class RegistInfoCreateServiceImpl implements RegistInfoCreateService {
         MultipartFile[] multipartFiles = {registInfoCreateRequest.getFrontImage(), registInfoCreateRequest.getOtherImage1(), registInfoCreateRequest.getOtherImage2()};
         // 이미지 저장 경로들 filePaths에 할당
         List<RegistInfo> registInfoList = registInfoRepository.findAll();
-        Long registId = registInfoList.get(registInfoList.size() - 1).getRegistId() + 1;
+        int idx = registInfoList.size() - 1;
+        Long registId = idx < 0 ? 1 : registInfoList.get(idx).getRegistId() + 1;
         String[] filePaths = imageSaveService.save(multipartFiles, registId);
         // 각 이미지들에 맞게 파일 경로 할당
         registInfoCreateRequest.setFrontImagePath(filePaths[0]);
