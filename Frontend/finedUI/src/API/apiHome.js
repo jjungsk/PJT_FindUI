@@ -10,9 +10,9 @@ import apiInstance from './apiInstance';
 const api = apiInstance();
 
 // (1) 해당 User가 등록한 실종자 정보
-const apiGetUserRegistMissingPersons = async userId => {
+const apiGetUserRegistMissingPersons = async () => {
   try {
-    const response = api.get(`/api/regist/${userId}`);
+    const response = api.get(`/api/regist/user`);
     return response;
   } catch (error) {
     console.log(error);
@@ -22,7 +22,14 @@ const apiGetUserRegistMissingPersons = async userId => {
 // (2) notices
 const apiGetNotices = async () => {};
 
-// (3) 전체 실종자 list
-const apiGetMissingPersons = async () => {};
+// (3) 실종자 정보 조회 (all)
+const apiGetMissingPersonAll = async userId => {
+  try {
+    const response = await api.get(`/api/regist?userId=${userId}`);
+    return response;
+  } catch (error) {
+    return error;
+  }
+};
 
-export {apiGetUserRegistMissingPersons, apiGetNotices, apiGetMissingPersons};
+export {apiGetUserRegistMissingPersons, apiGetNotices, apiGetMissingPersonAll};

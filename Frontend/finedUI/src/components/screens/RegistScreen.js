@@ -1,4 +1,4 @@
-import React, { useEffect, useState, Suspense } from 'react';
+import React, {useEffect, useState, Suspense} from 'react';
 import {
   View,
   Text,
@@ -25,13 +25,14 @@ import Geolocation from 'react-native-geolocation-service';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 // recoil
-import { useRecoilState, useRecoilValue } from 'recoil';
+import {useRecoilState, useRecoilValue, useSetRecoilState} from 'recoil';
 import {
   registAddress,
   registImageList,
   registMode,
   registPos,
   userPosition,
+  registId,
 } from '../store_regist/registStore';
 
 import ImagePicker from 'react-native-image-crop-picker';
@@ -39,37 +40,78 @@ import ImagePickModal from '../organisms/ImagePickModal';
 import RegistInputForm from '../organisms/RegistInputForm';
 import GoogleMapNotTouch from '../organisms/GoogleMapNotTouch';
 import Divider from '../atoms/Divider';
-import { apiGetAddress } from '../../API/apiKakao';
+import {apiGetAddress} from '../../API/apiKakao';
 
 const modeDict = {
   0: '사전 등록',
   1: '실시간 실종자 등록',
   2: '이산가족 등록',
+  3: '실종자 정보 수정',
 };
 
-const RegistScreen = ({ route, navigation }) => {
+const RegistScreen = ({route, navigation}) => {
   const [imgSelect, setImgSelect] = useState(false);
   const mode = useRecoilValue(registMode);
+  // 이미지
   const [imageList, setImageList] = useRecoilState(registImageList);
+  // 현재 위치
   const [position, setPosition] = useRecoilState(userPosition);
+  // 이동한 주소
   const [address, setAddress] = useRecoilState(registAddress);
+  // 이동한 위치
   const pos = useRecoilValue(registPos);
+  // 등록된 Id
+  const setId = useSetRecoilState(registId);
 
+  // FUNCTION
+  // useEffect - 넘어온 유저의 위치 정보 확인
   useEffect(() => {
     console.log(address);
     Geolocation.getCurrentPosition(
       position => {
-        const { latitude, longitude } = position.coords;
-        setPosition({ lat: latitude, lng: longitude });
-        return { lat: latitude, lng: longitude };
+        const {latitude, longitude} = position.coords;
+        setPosition({lat: latitude, lng: longitude});
+        return {lat: latitude, lng: longitude};
       },
       error => {
         console.log(error);
       },
-      { enableHighAccuracy: true, timeout: 5000, maximumAge: 5000 },
+      {enableHighAccuracy: true, timeout: 5000, maximumAge: 5000},
     );
+
+    // (1) 등록된 실종자 정보를 수정 할 때
+    if (mode === 3) {
+      // 등록번호 셋팅
+      setId(route.params.userInfo.registId);
+      // 이미지 set
+    }
+
+    // (2) setPosition
+    if (
+      mode === 3 &&
+      route.params.userInfo.latitude !== null &&
+      route.params.userInfo.longitude !== null
+    ) {
+      setPosition({
+        lat: route.params.userInfo.latitude,
+        lng: route.params.userInfo.longitude,
+      });
+    } else {
+      Geolocation.getCurrentPosition(
+        position => {
+          const {latitude, longitude} = position.coords;
+          setPosition({lat: latitude, lng: longitude});
+          return {lat: latitude, lng: longitude};
+        },
+        error => {
+          console.log(error);
+        },
+        {enableHighAccuracy: true, timeout: 5000, maximumAge: 5000},
+      );
+    }
   }, []);
 
+  // useEffect[pos] - 등록 위치가 변경 될때
   useEffect(() => {
     const getAddress = () => {
       const auto = async () => {
@@ -84,13 +126,15 @@ const RegistScreen = ({ route, navigation }) => {
     }
   }, [pos]);
 
+  // FUNCTION
+  // 사진 삭제
   const removeImage = item => {
     const newImageList = imageList.filter(element => element !== item);
     setImageList(newImageList);
   };
 
   const pickImageFromAlbum = async () => {
-    setImgSelect(!imgSelect)
+    setImgSelect(!imgSelect);
     try {
       await ImagePicker.openPicker({
         width: widthPercentage(150),
@@ -114,7 +158,7 @@ const RegistScreen = ({ route, navigation }) => {
   };
 
   const pickImageFromCamera = async () => {
-    setImgSelect(!imgSelect)
+    setImgSelect(!imgSelect);
     try {
       await ImagePicker.openCamera({
         width: widthPercentage(150),
@@ -138,7 +182,7 @@ const RegistScreen = ({ route, navigation }) => {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+    <SafeAreaView style={{flex: 1}}>
       <ImagePickModal />
       <Modal
         animationType="fade"
@@ -186,10 +230,10 @@ const RegistScreen = ({ route, navigation }) => {
           <View style={styles.imageListContainer}>
             <FlatList
               data={imageList}
-              renderItem={({ item }) => (
+              renderItem={({item}) => (
                 <>
                   <View style={styles.imageContainer}>
-                    <Image source={{ uri: item.uri }} style={styles.imageSize} />
+                    <Image source={{uri: item.uri}} style={styles.imageSize} />
                   </View>
                   <TouchableOpacity
                     activeOpacity={0.6}
@@ -229,13 +273,13 @@ const RegistScreen = ({ route, navigation }) => {
           </View>
           <View style={styles.registForm}>
             <Divider />
-            <RegistInputForm />
+            <RegistInputForm userInfo={route.params.userInfo} />
             {/* 맵 설정 */}
             {mode !== 0 ? (
               <TouchableOpacity
                 activeOpacity={0.6}
                 style={styles.selectPos}
-                onPress={() => navigation.navigate('MapDetail', { mode: mode })}>
+                onPress={() => navigation.navigate('MapDetail', {mode: mode})}>
                 <View style={styles.selectPosInfoContainer}>
                   <Text style={styles.selectTitle}>실종 위치</Text>
                   <Text
@@ -290,7 +334,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  imageContainer: { marginHorizontal: widthPercentage(6) },
+  imageContainer: {marginHorizontal: widthPercentage(6)},
   imageSize: {
     width: widthPercentage(100),
     height: heightPercentage(100),

@@ -1,5 +1,5 @@
-import React, {useState} from 'react';
-import {View, Text, StyleSheet, Image, TouchableOpacity} from 'react-native';
+import React, {useState, useEffect} from 'react';
+import {View, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {
   fontPercentage,
   heightPercentage,
@@ -7,7 +7,7 @@ import {
 } from '../../styles/ResponsiveSize';
 
 // recoil
-import {useRecoilState, useRecoilValue, useSetRecoilState} from 'recoil';
+import {useRecoilState, useRecoilValue} from 'recoil';
 import {
   registName,
   registBirth,
@@ -23,9 +23,12 @@ import CustomInputField from '../atoms/CustomInputField';
 import SelectGender from './SelectGender';
 import Divider from '../atoms/Divider';
 
-const RegistInputForm = () => {
-  const setUserName = useSetRecoilState(registName);
-  const setBirthday = useSetRecoilState(registBirth);
+const RegistInputForm = ({userInfo = null}) => {
+  // 1. 이름
+  const [userName, setUserName] = useRecoilState(registName);
+  // 2. 생년월일 8자리
+  const [birthDay, setBirthday] = useRecoilState(registBirth);
+  // 6. 실종 날짜
   const [missingDate, setMissingDate] = useRecoilState(registMissingDate);
   const [pickerMode, setPickerMode] = useState('date');
   const [visible, setVisible] = useState(false);
@@ -54,11 +57,22 @@ const RegistInputForm = () => {
     setVisible(false); // 모달 close
   };
 
+  // useEffect (mode ==== 3) 실종 정보 수정일 경우
+  useEffect(() => {
+    if (mode === 3) {
+      if (userInfo.name !== null) setUserName(userInfo.name);
+      if (userInfo.birthDate !== null)
+        setBirthday(userInfo.birthDate.toString());
+      if (userInfo.missingTime !== null) setMissingDate(userInfo.missingTime);
+    }
+  }, []);
+
   return (
     <View style={styles.mainContainer}>
       <CustomInputField
         placeholder="이름"
         inputData={text => setUserName(text)}
+        value={userName}
       />
       <Divider />
 
@@ -67,10 +81,11 @@ const RegistInputForm = () => {
         inputData={text => setBirthday(text)}
         maxLength={8}
         keyboardType="number-pad"
+        value={birthDay}
       />
       <Divider />
 
-      <SelectGender />
+      <SelectGender sex={userInfo.gender} />
       <Divider />
 
       {/* 실종 날짜 선택 */}

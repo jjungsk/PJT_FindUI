@@ -1,13 +1,9 @@
 import React from 'react';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {Text, Alert, TouchableOpacity, StyleSheet} from 'react-native';
-import {
-  fontPercentage,
-  heightPercentage,
-  widthPercentage,
-} from '../../styles/ResponsiveSize';
+import {fontPercentage} from '../../styles/ResponsiveSize';
 
-import {useRecoilValue, useResetRecoilState, useSetRecoilState} from 'recoil';
+import {useRecoilValue, useSetRecoilState} from 'recoil';
 import {
   registBirth,
   registGender,
@@ -19,10 +15,18 @@ import {
   registProps,
 } from '../store_regist/registStore';
 
+// organisms
 import RegistSelectScreen from '../screens/RegistSelectScreen';
 import RegistScreen from '../screens/RegistScreen';
-import {el} from 'date-fns/locale';
-import {missingRegist, preRegist} from '../../API/apiMissingPerson';
+
+// apis
+import {
+  missingRegist,
+  preRegist,
+  apiPutMissingPerson,
+} from '../../API/apiMissingPerson';
+
+// date format
 import {format} from 'date-fns';
 import ko from 'date-fns/esm/locale/ko/index.js';
 import { reset } from './NavigationService';
@@ -62,6 +66,7 @@ const RegistStackNavigation = ({navigation}) => {
       <Stack.Screen
         name="registMain"
         component={RegistScreen}
+        initialParams={{userInfo: null}}
         options={{
           title: 'Find & You',
           headerRight: () => {

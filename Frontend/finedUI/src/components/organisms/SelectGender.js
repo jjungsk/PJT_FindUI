@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 
 // recoil
@@ -46,13 +46,17 @@ const styles = StyleSheet.create({
   },
 });
 
-const SelectGender = () => {
+const SelectGender = ({sex = 0}) => {
   const [gender, setGender] = useRecoilState(registGender);
 
   const genderData = [
     {des: '남자', val: 1},
     {des: '여자', val: 2},
   ];
+
+  useEffect(() => {
+    setGender(sex);
+  }, []);
 
   return (
     <View style={styles.genderContainer}>

@@ -35,15 +35,19 @@ import {MissingPersonCard} from '../organisms/MissingPersonCard';
 
 // apis
 import {apiGetUserRegistMissingPersons} from '../../API/apiHome';
-import {apiGetAddress, apiGetLngLat} from '../../API/apiKakao';
-import { missingSelector, preSelector } from '../../store/selectors/RegistSelector';
+import {getUserInfo} from '../../API/UserApi';
+import {
+  missingSelector,
+  preSelector,
+} from '../../store/selectors/RegistSelector';
 import NoRegistCard from '../organisms/NoRegistCard';
 
 const HomeScreen = ({navigation}) => {
+  // 로그인한 유저 정보
+  const [userInfo, setUserInfo] = useState({});
   const setPosition = useSetRecoilState(userPosition);
   const [isChange, setIsChange] = useState(true);
-  const registUsers = useRecoilValue(preSelector)
-  console.log(registUsers)
+  const registUsers = useRecoilValue(preSelector);
   const longPersons = [
     {
       name: 'Name1',
@@ -66,7 +70,7 @@ const HomeScreen = ({navigation}) => {
       image: null,
       registId: 3,
     },
-  ]
+  ];
   const [notices, setNotice] = useState([
     {
       title: '미아 발견 시, 대처 방법',
@@ -80,9 +84,10 @@ const HomeScreen = ({navigation}) => {
     },
   ]);
 
-  const missingPersons = useRecoilValue(missingSelector)
+  const missingPersons = useRecoilValue(missingSelector);
 
   useEffect(() => {
+    // (0) 로그인 후 사용자의 현재 위치 값 저장
     Geolocation.getCurrentPosition(position => {
       const {latitude, longitude} = position.coords;
       setPosition(
@@ -93,10 +98,27 @@ const HomeScreen = ({navigation}) => {
         {enableHighAccuracy: true, timeout: 5000, maximumAge: 5000},
       );
     });
+
+    // (0) 로그인한 유저의 정보 저장
+    const auto = async () => {
+      await getUserInfo()
+        .then(res => {
+          setUserInfo(res);
+          console.log(res);
+        })
+        .catch(error => console.log(error));
+    };
+    auto();
+
+    // (2) notices list 반환
+
+    // (3) 전체 실종자 list 반환
+
+    // test
   }, []);
 
   const width = Dimensions.get('window').width;
-  
+
   // component
   const missingCardRender = ({item}) => {
     return (
@@ -117,59 +139,64 @@ const HomeScreen = ({navigation}) => {
               alignItems: 'center',
             }}>
             <View style={styles.titleContainer}>
-              <Text style={[styles.title, !isChange&&{color: '#d3d3d3'}]}
-              onPress={() => {
-                setIsChange(true);
-              }}
-              >사전 등록 정보</Text>
+              <Text
+                style={[styles.title, !isChange && {color: '#d3d3d3'}]}
+                onPress={() => {
+                  setIsChange(true);
+                }}>
+                사전 등록 정보
+              </Text>
             </View>
-            <View style={styles.titleContainer} >
-              <Text style={[styles.title, isChange&&{color: '#d3d3d3'}]}
-              onPress={() => {
-                setIsChange(false);
-              }}
-              >실종 등록 정보</Text>
+            <View style={styles.titleContainer}>
+              <Text
+                style={[styles.title, isChange && {color: '#d3d3d3'}]}
+                onPress={() => {
+                  setIsChange(false);
+                }}>
+                실종 등록 정보
+              </Text>
             </View>
           </View>
           {isChange ? (
-            registUsers.length < 1 ?
-            (
+            registUsers.length < 1 ? (
               <View style={styles.carouselItem}>
-                <NoRegistCard textInfo={'등록된 사전 등록 정보가 없습니다.'}/>
+                <NoRegistCard textInfo={'등록된 사전 등록 정보가 없습니다.'} />
               </View>
+            ) : (
+              <Carousel
+                data={registUsers}
+                renderItem={({item}) => (
+                  <View style={styles.carouselItem}>
+                    <PreRegistCard
+                      registUser={item}
+                      userInfo={userInfo}
+                      navigation={navigation}
+                    />
+                  </View>
+                )}
+                itemWidth={width}
+                pagination
+              />
             )
-            :
-            (
-            <Carousel
-              data={registUsers}
-              renderItem={({item}) => (
-                <View style={styles.carouselItem}>
-                  <PreRegistCard registUser={item} navigation={navigation} />
-                </View>
-              )}
-              itemWidth={width}
-              pagination
-            />
-            )
-          ) : (missingPersons.length < 1
-          ?(
+          ) : missingPersons.length < 1 ? (
             <View style={styles.carouselItem}>
-              <NoRegistCard textInfo={'등록한 실종 정보가 없습니다.'}/>
+              <NoRegistCard textInfo={'등록한 실종 정보가 없습니다.'} />
             </View>
-          )
-          :
-          (
+          ) : (
             <Carousel
               data={missingPersons}
               renderItem={({item}) => (
                 <View style={styles.carouselItem}>
-                  <PreRegistCard registUser={item} navigation={navigation} />
+                  <PreRegistCard
+                    registUser={item}
+                    userInfo={userInfo}
+                    navigation={navigation}
+                  />
                 </View>
               )}
               itemWidth={width}
               pagination
             />
-          )
           )}
         </View>
         <View style={styles.noticeContainer}>
@@ -192,7 +219,7 @@ const HomeScreen = ({navigation}) => {
             data={longPersons}
             renderItem={missingCardRender}
             horizontal={true}
-            keyExtractor={item => String(item.identity)}
+            keyExtractor={item => String(item.registId)}
           />
         </View>
         <View style={styles.realtimeMissingContainer}>
@@ -204,7 +231,7 @@ const HomeScreen = ({navigation}) => {
               data={longPersons}
               renderItem={missingCardRender}
               horizontal={true}
-              keyExtractor={item => String(item.identity)}
+              keyExtractor={item => String(item.registId)}
             />
           </View>
         </View>
