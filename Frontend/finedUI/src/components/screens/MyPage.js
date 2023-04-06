@@ -26,6 +26,7 @@ import {preInfoState} from '../../store/atoms/InfoState';
 import NoRegistCard from '../organisms/NoRegistCard';
 import {preSelector} from '../../store/selectors/RegistSelector';
 import CallRegistContainer from '../organisms/CallRegistContainer';
+import { changeMissing } from '../../API/PreRegistration';
 
 const styles = StyleSheet.create({
   container: {
@@ -78,6 +79,7 @@ const MyPage = ({navigation}) => {
   const [address, setAddress] = useState(myInfo.address); // 주소
   const [phoneNumber, setPhoneNumber] = useState(myInfo.phone); // 이메일
   const [callRegistVisible, setCallRegistVisible] = useState(false); // 신고 추가 입력사항
+  const [registId, setRegistId] = useState(0)
   const setIsLogin = useSetRecoilState(isLoginState);
   const registUsers = useRecoilValue(preSelector);
   const toggleLogoutModal = () => {
@@ -166,8 +168,9 @@ const MyPage = ({navigation}) => {
         {/* confirmCallback return 경도 위도 데이터 */}
         <CallRegistContainer
           cancelCallback={({value}) => setCallRegistVisible(value)}
-          confirmCallback={({pos}) => {
-            console.log(pos);
+          confirmCallback={ async ({pos}) => {
+            const response = await changeMissing(registId ,pos.lng, pos.lat)
+            console.log(response)
             setCallRegistVisible(!callRegistVisible);
           }}
         />
@@ -204,7 +207,10 @@ const MyPage = ({navigation}) => {
                 />
                 <TouchableOpacity
                   style={styles.button}
-                  onPress={() => setCallRegistVisible(!callRegistVisible)}>
+                  onPress={() => {
+                    setCallRegistVisible(!callRegistVisible)
+                    setRegistId(item.registId)
+                    }}>
                   <Text
                     style={{
                       color: 'white',

@@ -40,11 +40,12 @@ export const getMissingInfo = async () => {
 };
 
 // 사전 -> 실종 변경하기
-export const changeMissing = async ({registId, longitude, latitude}) => {
+export const changeMissing = async (registId, longitude, latitude) => {
   try {
   const addInfo = getRecoil(addInfoState)
   const token = await getAccessTokenFromKeychain();
-  const response = await api.patch(`/api/regist/registId?${registId}`,{
+  const response = await api.patch(`/api/regist`,{
+    registId,
     longitude,
     latitude
   }, {
