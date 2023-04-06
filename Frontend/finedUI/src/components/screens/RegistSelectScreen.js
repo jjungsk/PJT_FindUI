@@ -1,8 +1,11 @@
 import React from 'react';
 import {SafeAreaView, StyleSheet, TouchableOpacity} from 'react-native';
+import {useSetRecoilState} from 'recoil';
 import RegistSelectBtn from '../organisms/RegistSelect';
+import {resetRegistAtoms} from '../store_regist/registStore';
 
 const RegistSelectScreen = ({navigation}) => {
+  const resetRegistProps = useSetRecoilState(resetRegistAtoms);
   const preRegistItem = {
     title: '사전 등록',
     content:
@@ -20,12 +23,18 @@ const RegistSelectScreen = ({navigation}) => {
     <SafeAreaView style={styles.container}>
       <TouchableOpacity
         activeOpacity={0.6}
-        onPress={() => navigation.navigate('registMain', {mode: 0})}>
+        onPress={() => {
+          resetRegistProps((mode = 0));
+          navigation.navigate('registMain');
+        }}>
         <RegistSelectBtn selectItem={preRegistItem} />
       </TouchableOpacity>
       <TouchableOpacity
         activeOpacity={0.6}
-        onPress={() => navigation.navigate('registMain', {mode: 1})}>
+        onPress={() => {
+          resetRegistProps((mode = 1));
+          navigation.navigate('registMain');
+        }}>
         <RegistSelectBtn selectItem={missingRegistItem} />
       </TouchableOpacity>
       <TouchableOpacity activeOpacity={0.6}>

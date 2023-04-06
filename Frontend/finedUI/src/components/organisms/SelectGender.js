@@ -1,8 +1,9 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {View, Text, TouchableOpacity, StyleSheet} from 'react-native';
 
 // recoil
-import {useRecoilState} from 'recoil';
+import {useRecoilState, useRecoilValue} from 'recoil';
+import {registMode} from '../store_regist/registStore';
 
 import {
   fontPercentage,
@@ -46,19 +47,25 @@ const styles = StyleSheet.create({
   },
 });
 
-const SelectGender = () => {
+const SelectGender = ({sex = 0}) => {
   const [gender, setGender] = useRecoilState(registGender);
+  const mode = useRecoilValue(registMode);
 
   const genderData = [
-    {des: '남자', val: 0},
-    {des: '여자', val: 1},
+    {des: '남자', val: 1},
+    {des: '여자', val: 2},
   ];
+
+  useEffect(() => {
+    setGender(sex);
+  }, []);
 
   return (
     <View style={styles.genderContainer}>
       {genderData.map(item => {
         return (
           <TouchableOpacity
+            disabled={mode === 4 && true}
             activeOpacity={0.6}
             key={item.des}
             style={[
