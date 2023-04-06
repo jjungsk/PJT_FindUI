@@ -45,6 +45,11 @@ const registAddress = atom({
   default: null,
 });
 
+const registId = atom({
+  key: 'registId',
+  default: 0,
+});
+
 const registProps = selector({
   key: 'registProps',
   get: ({get}) => {
@@ -55,7 +60,7 @@ const registProps = selector({
     const date = get(registMissingDate);
     const pos = get(registPos);
     const mode = get(registMode);
-    console.log('date :', date);
+    console.log(date);
 
     if (imageList.length < 1) {
       return {prop: '사진', state: false};
@@ -92,6 +97,7 @@ const resetRegistAtoms = selector({
     set(registMode, mode);
     set(userPosition, {lat: 0, lng: 0});
     set(registAddress, '');
+    set(registId, 0);
   },
 });
 
@@ -107,4 +113,5 @@ export {
   resetRegistAtoms,
   registAddress,
   registProps,
+  registId,
 };

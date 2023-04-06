@@ -23,7 +23,7 @@ const MissingPersonCard = ({missingPerson, navigation}) => {
   return (
     <TouchableOpacity
       onPress={() => {
-        navigation.navigate('DetailScreen', {registId: missingPerson.registId});
+        navigation.navigate('DetailScreen', {missingPerson: missingPerson});
       }}>
       <ImageBackground
         source={img}
@@ -43,7 +43,7 @@ const MissingPersonCard = ({missingPerson, navigation}) => {
           </View>
           <View>
             <Text style={styles.imageTextContents}>
-              {missingPerson.identity} / {missingPerson.location}
+              {missingPerson.birthDate}
             </Text>
           </View>
         </LinearGradient>
