@@ -28,7 +28,7 @@ public class ChatImageCreateService {
     @Transactional
     // 트랜잭션 처리 로직과 비즈니스 로직의 공존을 피하기 위해 내부적으로 AOP를 통해 트랜잭션 코드 처리 전 후로 구분해주는 annotation
     public ChatImageCreateResponse save(ChatImageCreateRequest chatImageCreateRequest) throws IOException {
-        if (chatImageCreateRequest.getImage() != null || chatImageCreateRequest.getImage().isEmpty()) { // 이미지를 안 넣을시 IOException 발생
+        if (chatImageCreateRequest.getImage() == null || chatImageCreateRequest.getImage().isEmpty()) { // 이미지를 안 넣을시 IOException 발생
             return null;
         }
         String storeFileUrl = s3SaveService.save(chatImageCreateRequest);              // S3에 이미지 저장

@@ -41,12 +41,6 @@ public class RegistInfoCreateServiceImpl implements RegistInfoCreateService {
         // 좌표값 할당
         Double longitude = registInfoCreateRequest.getLongitude();
         Double latitude = registInfoCreateRequest.getLatitude();
-        if (longitude != null && latitude != null) {
-            registInfoCreateRequest.setIsMissing(true); // 실종 여부
-            registInfoCreateRequest.setMissingTime(Timestamp.valueOf(LocalDateTime.now())); // 실종 시간
-        } else {
-            registInfoCreateRequest.setIsMissing(false);
-        }
         MultipartFile[] multipartFiles = {registInfoCreateRequest.getFrontImage(), registInfoCreateRequest.getOtherImage1(), registInfoCreateRequest.getOtherImage2()};
         // 이미지 저장 경로들 filePaths에 할당
         List<RegistInfo> registInfoList = registInfoRepository.findAll();

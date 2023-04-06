@@ -20,9 +20,7 @@ public class RegistInfoCreateRequest {
     private String name;                // 이름
     private Integer birthDate;          // 생년월일 (ex: 1996.06.25)
     private Integer gender;             // 성별 (남자:1 여자:2)
-    private Boolean isMissing;          // 실종 여부
     private Point missingLocation;      // 실종 위치
-    private Timestamp missingTime;      // 실종 시간
     private Double longitude;          // 경도
     private Double latitude;           // 위도
     private MultipartFile frontImage;   // 정면 사진
@@ -35,6 +33,7 @@ public class RegistInfoCreateRequest {
 //    private Timestamp createDate;       // 생성 시간
 
     public RegistInfo toEntity() {
+        Boolean isMissing = longitude != null && latitude != null;
         return RegistInfo.builder()
                 .registId(null)
                 .name(name)
@@ -43,7 +42,7 @@ public class RegistInfoCreateRequest {
                 .isMissing(isMissing)
                 .longitude(longitude)
                 .latitude(latitude)
-                .missingTime(missingTime)
+                .missingTime(isMissing ? Timestamp.valueOf(LocalDateTime.now()) : null)
                 .frontImagePath(frontImagePath)
                 .otherImage1Path(otherImage1Path)
                 .otherImage2Path(otherImage2Path)

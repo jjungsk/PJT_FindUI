@@ -27,16 +27,8 @@ public class RegistInfoUpdateServiceImpl implements RegistInfoUpdateService {
         registInfoUpdateRequest.setUser(userRepository.findById(registInfoUpdateRequest.getUserId()).get());
         RegistInfo registInfo = registInfoRepository.findById(registInfoUpdateRequest.getRegistId()).get();
         registInfoUpdateRequest.setCreateDate(registInfo.getCreateDate());
-        registInfoUpdateRequest.setMissingTime(registInfo.getMissingTime());
         Double longitude = registInfoUpdateRequest.getLongitude();
         Double latitude = registInfoUpdateRequest.getLatitude();
-        if (longitude != null && latitude != null) {
-            registInfoUpdateRequest.setIsMissing(true);
-            registInfoUpdateRequest.setMissingTime(Timestamp.valueOf(LocalDateTime.now()));
-        } else {
-            registInfoUpdateRequest.setIsMissing(false);
-            registInfoUpdateRequest.setMissingTime(null);
-        }
         MultipartFile[] multipartFiles = {registInfoUpdateRequest.getFrontImage(), registInfoUpdateRequest.getOtherImage1(), registInfoUpdateRequest.getOtherImage2()};
         String[] imagePaths = imageSaveService.save(multipartFiles, registInfoUpdateRequest.getRegistId());
         if (registInfoUpdateRequest.getFrontImagePath() == null || registInfoUpdateRequest.getFrontImagePath().isEmpty()) {
@@ -55,18 +47,15 @@ public class RegistInfoUpdateServiceImpl implements RegistInfoUpdateService {
     @Override
     public RegistInfoUpdateResponse isMissingChange(Long registId, Double longitude, Double latitude) {
         RegistInfoUpdateRequest registInfoUpdateRequest = new RegistInfoUpdateRequest(registInfoRepository.findById(registId).get());
-        Boolean isMissing = !registInfoUpdateRequest.getIsMissing();
-        registInfoUpdateRequest.setIsMissing(isMissing);
+        Boolean isMissing = registInfoUpdateRequest.getLongitude() != null && registInfoUpdateRequest.getLatitude() != null;
         // 실종 신고한 경우
-        if (isMissing) {
+        if (!isMissing) {
             registInfoUpdateRequest.setLongitude(longitude);                    // 경도 설정
             registInfoUpdateRequest.setLatitude(latitude);                      // 위도 설정
-            registInfoUpdateRequest.setMissingTime(Timestamp.valueOf(LocalDateTime.now())); // 실종 시간 설정
             // 실종 신고 하지 않은 경우
         } else {
             registInfoUpdateRequest.setLongitude(null);                         // 경도 설정
             registInfoUpdateRequest.setLatitude(null);                          // 위도 설정
-            registInfoUpdateRequest.setMissingTime(null); // 실종 시간 설정
         }
         registInfoUpdateRequest.setUser(userRepository.findById(registInfoUpdateRequest.getUserId()).get());
         return new RegistInfoUpdateResponse(registInfoRepository.save(registInfoUpdateRequest.toEntity()));
