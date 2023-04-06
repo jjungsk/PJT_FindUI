@@ -24,7 +24,7 @@ public class RegistInfoUpdateController {
     }
 
     @PatchMapping
-    public ResponseEntity<Object> isMissingChange(@RequestParam Long registId, Double longitude, Double latitude) {
+    public ResponseEntity<Object> isMissingChange(@RequestParam Long registId, @RequestBody Double longitude, @RequestBody Double latitude) {
         return ResponseHandler.generateResponse(true, "CHANGE", HttpStatus.OK, registInfoUpdateService.isMissingChange(registId, longitude, latitude));
     }
 }
