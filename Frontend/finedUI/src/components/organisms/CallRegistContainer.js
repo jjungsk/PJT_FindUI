@@ -169,7 +169,7 @@ const CallRegistContainer = ({
                 latitudeDelta: LATITUDE_DELTA,
                 longitudeDelta: LONGITUDE_DELTA,
               }}
-              onRegionChange={async region => {
+              onRegionChangeComplete={async region => {
                 const {latitude, longitude} = region;
                 setPosition({lat: latitude, lng: longitude});
                 await apiGetAddress(longitude, latitude)
