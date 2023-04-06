@@ -16,6 +16,9 @@ import {fontPercentage} from '../../styles/ResponsiveSize';
 // react-navigation
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {NavigationContainer} from '@react-navigation/native';
+// import {Test} from '../screens/test';
+import ChatScreen from '../screens/ChatScreen';
+import ChatListScreen from '../screens/ChatListScreen';
 
 // recoil
 import {useRecoilValue} from 'recoil';
@@ -44,9 +47,6 @@ import MapViewDetail from '../screens/MapViewDetail';
 import ModifyScreen from '../screens/ModifyScreen';
 import LoginPage from '../screens/LoginPage';
 import SearchPage from '../screens/SearchPage';
-import {isLoginState} from '../../store/atoms/userState';
-import WrappedSignUpAll from '../screens/SignUpAll';
-import {navigationRef} from './NavigationService';
 import RegistScreen from '../screens/RegistScreen';
 
 // apis
@@ -55,6 +55,9 @@ import {
   preRegist,
   apiPutMissingPerson,
 } from '../../API/apiMissingPerson';
+import {isLoginState} from '../../store/atoms/userState';
+import WrappedSignUpAll from '../screens/SignUpAll';
+import {navigationRef} from './NavigationService';
 
 const Stack = createNativeStackNavigator();
 
@@ -96,6 +99,8 @@ const StackNavigation = () => {
             <Stack.Screen name="DetailScreen" component={DetailScreen} />
             <Stack.Screen name="MapDetail" component={MapViewDetail} />
             <Stack.Screen name="ModifyScreen" component={ModifyScreen} />
+            <Stack.Screen name="ChatList" component={ChatListScreen} />
+            <Stack.Screen name="Chat" component={ChatScreen} />
             <Stack.Screen
               name="registMain"
               component={RegistScreen}
