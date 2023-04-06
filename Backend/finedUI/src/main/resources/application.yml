@@ -91,7 +91,7 @@ image:
     path: file:////Users/SSAFY/Image/
   # 이미지 요청 url
   request:
-    path: /api/regist/**
+    path: /api/regist/image/**
   # 이미지 응답 url
   response:
     # localhost 이미지 url
