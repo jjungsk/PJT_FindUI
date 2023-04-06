@@ -89,6 +89,8 @@ const RegistScreen = ({route, navigation}) => {
       setId(route.params.userInfo.registId);
       // 이미지 set 1
       if (route.params.userInfo.frontImagePath !== null) {
+        const url = route.params.userInfo.frontImagePath;
+        console.log('(RegistScreen.js) url 길이 : ', url.length);
         setImageList([
           ...imageList,
           {uri: route.params.userInfo.frontImagePath},
