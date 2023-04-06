@@ -44,6 +44,8 @@ public class RegistInfoCreateServiceImpl implements RegistInfoCreateService {
         if (longitude != null && latitude != null) {
             registInfoCreateRequest.setIsMissing(true); // 실종 여부
             registInfoCreateRequest.setMissingTime(Timestamp.valueOf(LocalDateTime.now())); // 실종 시간
+        } else {
+            registInfoCreateRequest.setIsMissing(false);
         }
 
         // 생성 날짜가 비어있을 경우 할당하기
