@@ -4,6 +4,7 @@ import {View, StyleSheet, Platform, PermissionsAndroid} from 'react-native';
 import Geolocation from 'react-native-geolocation-service';
 import {RecoilRoot, useRecoilValue, useSetRecoilState} from 'recoil';
 import RecoilNexus from 'recoil-nexus';
+// import AnimatedLottieView from 'lottie-react-native';
 
 // stack
 import StackNavigation from './src/components/navigator/StackNavigation';
