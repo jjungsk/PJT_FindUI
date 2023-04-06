@@ -70,19 +70,6 @@ const RegistScreen = ({route, navigation}) => {
   // FUNCTION
   // useEffect - 넘어온 유저의 위치 정보 확인
   useEffect(() => {
-    // console.log(address);
-    // Geolocation.getCurrentPosition(
-    //   position => {
-    //     const {latitude, longitude} = position.coords;
-    //     setPosition({lat: latitude, lng: longitude});
-    //     return {lat: latitude, lng: longitude};
-    //   },
-    //   error => {
-    //     console.log(error);
-    //   },
-    //   {enableHighAccuracy: true, timeout: 5000, maximumAge: 5000},
-    // );
-
     // (1) 등록된 실종자 정보를 수정 할 때
     if (mode === 3 || mode === 4) {
       // 등록번호 셋팅
@@ -90,7 +77,8 @@ const RegistScreen = ({route, navigation}) => {
       // 이미지 set 1
       if (route.params.userInfo.frontImagePath !== null) {
         const url = route.params.userInfo.frontImagePath;
-        console.log('(RegistScreen.js) url 길이 : ', url.length);
+        const initUrl = url.substring(0, 6);
+        console.log('(RegistScreen.js) url : ', initUrl);
         setImageList([
           ...imageList,
           {uri: route.params.userInfo.frontImagePath},
@@ -122,11 +110,29 @@ const RegistScreen = ({route, navigation}) => {
         lat: route.params.userInfo.latitude,
         lng: route.params.userInfo.longitude,
       });
+      // 주소 api 호출
+      const auto = async () => {
+        const result = await apiGetAddress(
+          route.params.userInfo.longitude,
+          route.params.userInfo.latitude,
+        );
+        setAddress(result['address_name']);
+      };
+      auto();
     } else {
       Geolocation.getCurrentPosition(
         position => {
           const {latitude, longitude} = position.coords;
           setPosition({lat: latitude, lng: longitude});
+          // 주소 api 호출
+          const auto = async () => {
+            const result = await apiGetAddress(
+              position.coords.longitude,
+              position.coords.latitude,
+            );
+            setAddress(result['address_name']);
+          };
+          auto();
           return {lat: latitude, lng: longitude};
         },
         error => {
