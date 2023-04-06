@@ -2,8 +2,10 @@ import React, {useState, useEffect} from 'react';
 import {FlatList, View} from 'react-native';
 import ChatRoom from './ChatRoom';
 import {apiGetChatRooms} from '../../API/apiChat';
+import {apiGetProfile} from '../../API/apiGetProfile';
 const ChatRoomList = ({navigation}) => {
   const [dataList, setDataList] = useState([]);
+  const [profile, setProfile] = useState('');
   const userId = 1;
   const roomList = async () => {
     await apiGetChatRooms(userId).then(({data}) => {
@@ -13,6 +15,9 @@ const ChatRoomList = ({navigation}) => {
       console.log(dataList);
     });
   };
+  // const profile = async () => {
+  //   await apiGetProfile().then({data});
+  // };
   useEffect(() => {
     roomList();
     console.log('실행됨');
