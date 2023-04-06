@@ -12,16 +12,16 @@
 import React from 'react';
 
 // react-native
-import {TouchableOpacity} from 'react-native';
+import { TouchableOpacity } from 'react-native';
 
 // react-navigation
-import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 
 // icons
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 // sizes
-import {heightPercentage, widthPercentage} from '../../styles/ResponsiveSize';
+import { heightPercentage, widthPercentage } from '../../styles/ResponsiveSize';
 
 // components - NavBar
 import HomeScreen from '../screens/HomeScreen';
@@ -31,9 +31,9 @@ import SearchPage from '../screens/SearchPage';
 
 const Tab = createBottomTabNavigator();
 
-const TabNavigation = ({navigation}) => {
+const TabNavigation = ({ navigation }) => {
   return (
-    <Tab.Navigator screenOptions={{tabBarHideOnKeyboard: true}}>
+    <Tab.Navigator screenOptions={{ tabBarHideOnKeyboard: true, unmountOnBlur: true }}>
       {/* homescreen */}
       <Tab.Screen
         name="Home"
@@ -41,7 +41,7 @@ const TabNavigation = ({navigation}) => {
         options={{
           title: 'Find & You',
           tabBarLabel: '홈',
-          tabBarIcon: ({color, size}) => (
+          tabBarIcon: ({ color, size }) => (
             <Icon
               name="home-variant-outline"
               color={color}
@@ -56,7 +56,7 @@ const TabNavigation = ({navigation}) => {
         options={{
           title: 'Find & You',
           tabBarLabel: '등록',
-          tabBarIcon: ({color, size}) => (
+          tabBarIcon: ({ color, size }) => (
             <Icon
               name="image-plus"
               color={color}
@@ -66,36 +66,36 @@ const TabNavigation = ({navigation}) => {
           headerShown: false,
         }}
       />
-      <Tab.Screen 
-        name = 'SearchPage'
+      <Tab.Screen
+        name='SearchPage'
         component={SearchPage}
         options={{
           title: 'Find & You',
           tabBarLabel: '검색',
-          tabBarIcon: ({color, size}) => (
+          tabBarIcon: ({ color, size }) => (
             <Icon
               name="magnify"
               color={color}
               size={widthPercentage(size)}
             />
           )
-          
+
         }}
       />
-      <Tab.Screen 
-        name = 'MyPage'
+      <Tab.Screen
+        name='MyPage'
         component={MyPage}
         options={{
           title: 'Find & You',
           tabBarLabel: '마이페이지',
-          tabBarIcon: ({color, size}) => (
+          tabBarIcon: ({ color, size }) => (
             <Icon
               name="account-outline"
               color={color}
               size={widthPercentage(size)}
             />
           )
-          
+
         }}
       />
     </Tab.Navigator>

@@ -40,6 +40,7 @@ import RegistInputForm from '../organisms/RegistInputForm';
 import GoogleMapNotTouch from '../organisms/GoogleMapNotTouch';
 import Divider from '../atoms/Divider';
 import { apiGetAddress } from '../../API/apiKakao';
+import ImgSelectorContainer from '../organisms/ImgSelectorCotainer';
 
 const modeDict = {
   0: '사전 등록',
@@ -154,24 +155,7 @@ const RegistScreen = ({ route, navigation }) => {
           }}
           onPress={() => setImgSelect(!imgSelect)}
         />
-        <View style={styles.imgSelectModal}>
-          <View style={styles.imgSelectContainer}>
-            <View style={styles.imgSelectContents}>
-              <TouchableOpacity
-                activeOpacity={0.6}
-                onPress={pickImageFromCamera}
-                style={styles.imgSelectBtn}>
-                <Text style={styles.imgSelectText}>카메라</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                activeOpacity={0.6}
-                onPress={pickImageFromAlbum}
-                style={styles.imgSelectBtn}>
-                <Text style={styles.imgSelectText}>앨범</Text>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </View>
+        <ImgSelectorContainer callback1={pickImageFromCamera} callback2={pickImageFromAlbum} />
       </Modal>
       <Suspense
         fallback={
@@ -369,42 +353,6 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
-  },
-  imgSelectModal: {
-    width: '100%',
-    height: '100%',
-    justifyContent: 'center',
-    alignItems: 'center',
-    position: 'absolute',
-  },
-  imgSelectContainer: {
-    marginHorizontal: widthPercentage(20),
-    borderRadius: widthPercentage(20),
-    paddingHorizontal: widthPercentage(25),
-    paddingVertical: heightPercentage(15),
-    backgroundColor: 'white',
-    alignItems: 'center',
-    elevation: 5,
-  },
-  imgSelectContents: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingHorizontal: widthPercentage(8),
-    paddingVertical: heightPercentage(32),
-  },
-  imgSelectBtn: {
-    flex: 1,
-    alignItems: 'center',
-    marginHorizontal: widthPercentage(8),
-    paddingVertical: heightPercentage(16),
-    borderRadius: 12,
-    backgroundColor: '#1570e1',
-    elevation: 5,
-  },
-  imgSelectText: {
-    fontSize: fontPercentage(16),
-    fontWeight: 'bold',
-    color: '#ffffff',
   },
 });
 

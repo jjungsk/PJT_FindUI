@@ -1,5 +1,5 @@
 // react
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 
 // react-native
 import {
@@ -21,25 +21,25 @@ import {
 } from '../../styles/ResponsiveSize';
 
 // recoil
-import {useRecoilState, useRecoilValue, useSetRecoilState} from 'recoil';
-import {userPosition} from '../store_regist/registStore';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
+import { userPosition } from '../store_regist/registStore';
 
 // position
 import Geolocation from 'react-native-geolocation-service';
 
 // components
-import {NoticeCard} from '../organisms/NoticeCard';
+import { NoticeCard } from '../organisms/NoticeCard';
 import PreRegistCard from '../organisms/PreRegistCard';
-import {Carousel} from 'react-native-basic-carousel';
-import {MissingPersonCard} from '../organisms/MissingPersonCard';
+import { Carousel } from 'react-native-basic-carousel';
+import { MissingPersonCard } from '../organisms/MissingPersonCard';
 
 // apis
-import {apiGetUserRegistMissingPersons} from '../../API/apiHome';
-import {apiGetAddress, apiGetLngLat} from '../../API/apiKakao';
+import { apiGetUserRegistMissingPersons } from '../../API/apiHome';
+import { apiGetAddress, apiGetLngLat } from '../../API/apiKakao';
 import { missingSelector, preSelector } from '../../store/selectors/RegistSelector';
 import NoRegistCard from '../organisms/NoRegistCard';
 
-const HomeScreen = ({navigation}) => {
+const HomeScreen = ({ navigation }) => {
   const setPosition = useSetRecoilState(userPosition);
   const [isChange, setIsChange] = useState(true);
   const registUsers = useRecoilValue(preSelector)
@@ -83,21 +83,21 @@ const HomeScreen = ({navigation}) => {
 
   useEffect(() => {
     Geolocation.getCurrentPosition(position => {
-      const {latitude, longitude} = position.coords;
+      const { latitude, longitude } = position.coords;
       setPosition(
-        {lat: latitude, lng: longitude},
+        { lat: latitude, lng: longitude },
         error => {
           console.log(error);
         },
-        {enableHighAccuracy: true, timeout: 5000, maximumAge: 5000},
+        { enableHighAccuracy: true, timeout: 5000, maximumAge: 5000 },
       );
     });
   }, []);
 
   const width = Dimensions.get('window').width;
-  
+
   // component
-  const missingCardRender = ({item}) => {
+  const missingCardRender = ({ item }) => {
     return (
       <View style={styles.missingCard}>
         <MissingPersonCard missingPerson={item} navigation={navigation} />
@@ -106,7 +106,7 @@ const HomeScreen = ({navigation}) => {
   };
 
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <SafeAreaView style={{ flex: 1 }}>
       <ScrollView>
         <View style={styles.registContainer}>
           <View
@@ -116,17 +116,17 @@ const HomeScreen = ({navigation}) => {
               alignItems: 'center',
             }}>
             <View style={styles.titleContainer}>
-              <Text style={[styles.title, !isChange&&{color: '#d3d3d3'}]}
-              onPress={() => {
-                setIsChange(true);
-              }}
+              <Text style={[styles.title, !isChange && { color: '#d3d3d3' }]}
+                onPress={() => {
+                  setIsChange(true);
+                }}
               >사전 등록 정보</Text>
             </View>
             <View style={styles.titleContainer} >
-              <Text style={[styles.title, isChange&&{color: '#d3d3d3'}]}
-              onPress={() => {
-                setIsChange(false);
-              }}
+              <Text style={[styles.title, isChange && { color: '#d3d3d3' }]}
+                onPress={() => {
+                  setIsChange(false);
+                }}
               >실종 등록 정보</Text>
             </View>
             {/* <TouchableOpacity
@@ -139,49 +139,49 @@ const HomeScreen = ({navigation}) => {
           </View>
           {isChange ? (
             registUsers.length < 1 ?
-            (
+              (
+                <View style={styles.carouselItem}>
+                  <NoRegistCard textInfo={'등록된 사전 등록 정보가 없습니다.'} />
+                </View>
+              )
+              :
+              (
+                <Carousel
+                  data={registUsers}
+                  renderItem={({ item }) => (
+                    <View style={styles.carouselItem}>
+                      <PreRegistCard registUser={item} navigation={navigation} />
+                    </View>
+                  )}
+                  itemWidth={width}
+                  pagination
+                />
+              )
+          ) : (missingPersons.length < 1
+            ? (
               <View style={styles.carouselItem}>
-                <NoRegistCard textInfo={'등록된 사전 등록 정보가 없습니다.'}/>
+                <NoRegistCard textInfo={'등록한 실종 정보가 없습니다.'} />
               </View>
             )
             :
             (
-            <Carousel
-              data={registUsers}
-              renderItem={({item}) => (
-                <View style={styles.carouselItem}>
-                  <PreRegistCard registUser={item} navigation={navigation} />
-                </View>
-              )}
-              itemWidth={width}
-              pagination
-            />
+              <Carousel
+                data={missingPersons}
+                renderItem={({ item }) => (
+                  <View style={styles.carouselItem}>
+                    <PreRegistCard registUser={item} navigation={navigation} />
+                  </View>
+                )}
+                itemWidth={width}
+                pagination
+              />
             )
-          ) : (missingPersons.length < 1
-          ?(
-            <View style={styles.carouselItem}>
-              <NoRegistCard textInfo={'등록한 실종 정보가 없습니다.'}/>
-            </View>
-          )
-          :
-          (
-            <Carousel
-              data={missingPersons}
-              renderItem={({item}) => (
-                <View style={styles.carouselItem}>
-                  <PreRegistCard registUser={item} navigation={navigation} />
-                </View>
-              )}
-              itemWidth={width}
-              pagination
-            />
-          )
           )}
         </View>
         <View style={styles.noticeContainer}>
           <Carousel
             data={notices}
-            renderItem={({item}) => (
+            renderItem={({ item }) => (
               <View style={styles.carouselItem}>
                 <NoticeCard notice={item} />
               </View>
@@ -199,6 +199,7 @@ const HomeScreen = ({navigation}) => {
             renderItem={missingCardRender}
             horizontal={true}
             keyExtractor={item => String(item.identity)}
+            showsHorizontalScrollIndicator={false}
           />
         </View>
         <View style={styles.realtimeMissingContainer}>
@@ -211,6 +212,7 @@ const HomeScreen = ({navigation}) => {
               renderItem={missingCardRender}
               horizontal={true}
               keyExtractor={item => String(item.identity)}
+              showsHorizontalScrollIndicator={false}
             />
           </View>
         </View>
@@ -237,7 +239,7 @@ const styles = StyleSheet.create({
   carouselItem: {
     paddingHorizontal: widthPercentage(9),
   },
-  noticeContainer: {marginTop: heightPercentage(2), backgroundColor: '#ffffff'},
+  noticeContainer: { marginTop: heightPercentage(2), backgroundColor: '#ffffff' },
   realtimeMissingContainer: {
     marginTop: heightPercentage(2),
     paddingVertical: heightPercentage(12),

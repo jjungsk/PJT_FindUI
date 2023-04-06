@@ -1,8 +1,8 @@
 // react
-import React, {useEffect} from 'react';
-import {View, StyleSheet, Platform, PermissionsAndroid} from 'react-native';
+import React, { useEffect } from 'react';
+import { View, StyleSheet, Platform, PermissionsAndroid } from 'react-native';
 import Geolocation from 'react-native-geolocation-service';
-import {RecoilRoot, useRecoilValue, useSetRecoilState} from 'recoil';
+import { RecoilRoot, useRecoilValue, useSetRecoilState } from 'recoil';
 import RecoilNexus from 'recoil-nexus';
 
 // stack
@@ -10,9 +10,9 @@ import StackNavigation from './src/components/navigator/StackNavigation';
 
 // components
 import Loading from './src/components/atoms/Loading';
-import {isLoadingState} from './src/store/atoms/IsLoadingState';
-import {checkAcess} from './src/API/AccountApi';
-import {isLoginState} from './src/store/atoms/userState';
+import { isLoadingState } from './src/store/atoms/IsLoadingState';
+import { checkAcess } from './src/API/AccountApi';
+import { isLoginState } from './src/store/atoms/userState';
 
 async function requestPermission() {
   try {

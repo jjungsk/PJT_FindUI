@@ -18,30 +18,31 @@
 
   by.정세권
 */
-import {Platform} from 'react-native';
-import {getAccessTokenFromKeychain} from '../store/keychain/loginToken.js';
+import { Platform } from 'react-native';
+import { getAccessTokenFromKeychain } from '../store/keychain/loginToken.js';
 import apiInstance from './apiInstance.js';
-import {MAIN_URL} from '@env';
+import { MAIN_URL } from '@env';
 
 const api = apiInstance();
 
 // ================================= Test ================================================
 // 사전 등록 정보 생성
-const preRegist = async ({data}) => {
+const preRegist = async ({ data }) => {
   console.log(data);
   const token = await getAccessTokenFromKeychain();
   const imageList = data.imageList;
-  let dataFormat = new FormData();
-  imageList[0].uri =
-    Platform.OS == 'android'
-      ? imageList[0].uri.replace('file://', '')
-      : imageList[0].uri;
+  const dataFormat = new FormData();
+  const file = new File([], "file")
+  // const file = { name: "", uri: "", type: "" }
   dataFormat.append('frontImage', imageList[0]);
-  // dataFormat.append('otherImage1', imageList.length >= 2 ? imageList[1] : null);
-  // dataFormat.append('otherImage2', imageList.length >= 3 ? imageList[2] : null);
+  // dataFormat.append('otherImage1', imageList.length >= 2 ? imageList[1] : file, "file");
+  // dataFormat.append('otherImage2', imageList.length >= 3 ? imageList[2] : file, "file");
   dataFormat.append('name', data.name);
   dataFormat.append('birthDate', data.birth);
   dataFormat.append('gender', data.gender);
+  console.log(dataFormat)
+
+  console.log(token)
   try {
     const response = await fetch(MAIN_URL + '/api/regist/', {
       method: 'post',
@@ -51,6 +52,7 @@ const preRegist = async ({data}) => {
         'Content-Type': 'multipart/form-data',
       },
     });
+    console.log(response)
     const resJson = await response.json();
     console.log(resJson);
     const status = resJson.status;
@@ -62,14 +64,15 @@ const preRegist = async ({data}) => {
 };
 
 // 실종자 정보 생성
-const missingRegist = async ({data}) => {
+const missingRegist = async ({ data }) => {
   const token = await getAccessTokenFromKeychain();
   const imageList = data.imageList;
   const dataFormat = new FormData();
   console.log('pos : ', data.pos.lat, data.pos.lng);
+  const file = new File()
   dataFormat.append('frontImage', imageList[0]);
-  dataFormat.append('otherImage1', imageList >= 2 ? imageList[1] : null);
-  dataFormat.append('otherImage2', imageList >= 3 ? imageList[2] : null);
+  dataFormat.append('otherImage1', imageList >= 2 ? imageList[1] : file, "file");
+  dataFormat.append('otherImage2', imageList >= 3 ? imageList[2] : file, "file");
   dataFormat.append('name', data.name);
   dataFormat.append('birthDate', data.birth);
   dataFormat.append('gender', data.gender);
