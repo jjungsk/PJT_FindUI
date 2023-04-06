@@ -13,6 +13,7 @@ export default CustomInputField = ({
   maxLength = 10,
   multiline = false,
   value = null,
+  editable = true,
   inputData = text => {
     console.log(text);
   },
@@ -26,6 +27,7 @@ export default CustomInputField = ({
       multiline={multiline}
       value={value}
       style={styles.inputTitle}
+      editable={editable}
     />
   );
 };

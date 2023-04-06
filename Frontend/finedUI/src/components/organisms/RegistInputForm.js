@@ -59,11 +59,14 @@ const RegistInputForm = ({userInfo = null}) => {
 
   // useEffect (mode ==== 3) 실종 정보 수정일 경우
   useEffect(() => {
-    if (mode === 3) {
+    if (mode === 3 || mode === 4) {
       if (userInfo.name !== null) setUserName(userInfo.name);
       if (userInfo.birthDate !== null)
         setBirthday(userInfo.birthDate.toString());
-      if (userInfo.missingTime !== null) setMissingDate(userInfo.missingTime);
+      if (userInfo.missingTime !== null) {
+        // type 변경 필요
+        // setMissingDate(userInfo.missingTime);
+      }
     }
   }, []);
 
@@ -73,6 +76,7 @@ const RegistInputForm = ({userInfo = null}) => {
         placeholder="이름"
         inputData={text => setUserName(text)}
         value={userName}
+        editable={mode === 4 ? false : true}
       />
       <Divider />
 
@@ -82,10 +86,11 @@ const RegistInputForm = ({userInfo = null}) => {
         maxLength={8}
         keyboardType="number-pad"
         value={birthDay}
+        editable={mode === 4 ? false : true}
       />
       <Divider />
 
-      <SelectGender sex={userInfo.gender} />
+      <SelectGender sex={userInfo !== null && userInfo.gender} />
       <Divider />
 
       {/* 실종 날짜 선택 */}
@@ -94,6 +99,7 @@ const RegistInputForm = ({userInfo = null}) => {
           <View style={styles.selectDateContainer}>
             <Text style={styles.selectTitle}>실종 날짜</Text>
             <TouchableOpacity
+              disabled={mode === 4 && true}
               activeOpacity={0.6}
               onPress={onPressDate}
               style={styles.selectDateBtn}>
@@ -102,6 +108,7 @@ const RegistInputForm = ({userInfo = null}) => {
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
+              disabled={mode === 4 && true}
               activeOpacity={0.6}
               onPress={onPressTime}
               style={styles.selectDateBtn}>

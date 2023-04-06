@@ -18,15 +18,29 @@ import {
   widthPercentage,
 } from '../../styles/ResponsiveSize';
 
+// recoil
+import {useSetRecoilState} from 'recoil';
+import {resetRegistAtoms} from '../store_regist/registStore';
+
 const MissingPersonCard = ({missingPerson, navigation}) => {
+  // recoil data 초기화
+  const resetRegistProps = useSetRecoilState(resetRegistAtoms);
+
+  // default 이미지
   const img = require('../../assets/images/no_profile_image.png');
   return (
     <TouchableOpacity
       onPress={() => {
-        navigation.navigate('DetailScreen', {missingPerson: missingPerson});
+        resetRegistProps((mode = 4));
+        navigation.navigate('registMain', {userInfo: missingPerson});
       }}>
       <ImageBackground
-        source={img}
+        source={{
+          uri:
+            missingPerson.frontImagePath !== null
+              ? missingPerson.frontImagePath
+              : img,
+        }}
         resizeMode="cover"
         style={styles.image}
         imageStyle={styles.imageStyle}>
@@ -43,7 +57,7 @@ const MissingPersonCard = ({missingPerson, navigation}) => {
           </View>
           <View>
             <Text style={styles.imageTextContents}>
-              {missingPerson.birthDate}
+              {missingPerson.birthDate !== null && missingPerson.birthDate}
             </Text>
           </View>
         </LinearGradient>
