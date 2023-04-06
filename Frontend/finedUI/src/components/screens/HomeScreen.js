@@ -44,12 +44,13 @@ import {
   missingLongSelector,
 } from '../../store/selectors/RegistSelector';
 import NoRegistCard from '../organisms/NoRegistCard';
+import { myInfoState } from '../../store/atoms/userState';
 
 const HomeScreen = ({navigation}) => {
   // 로그인 유저
-  const [userInfo, setUserInfo] = useState({}); // 정보
   const setPosition = useSetRecoilState(userPosition); // 현재 위치
   const [isChange, setIsChange] = useState(true);
+  const [userInfo, setUserInfo] = useRecoilState(myInfoState);
 
   // (1) 로그인 유저가 등록한 실종자 정보
   const registUsers = useRecoilValue(preSelector); // 사전 등록
@@ -59,8 +60,10 @@ const HomeScreen = ({navigation}) => {
   const notices = useRecoilValue(noticeSelector);
 
   // (3) 실시간 & 장기간 실종자 정보
-  const missingShort = useRecoilValue(missingShortSelector); // 실시간 실종
-  const missingLong = useRecoilValue(missingLongSelector); // 장기간 실종
+  // const missingShort = useRecoilValue(missingShortSelector); // 실시간 실종
+  // const missingLong = useRecoilValue(missingLongSelector); // 장기간 실종
+  const missingShort = null; // 실시간 실종
+  const missingLong = null; // 장기간 실종
 
   // useEffect
   useEffect(() => {

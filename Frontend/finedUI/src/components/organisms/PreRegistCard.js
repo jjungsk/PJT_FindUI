@@ -21,6 +21,9 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 const PreRegistCard = ({registUser, userInfo = null, navigation}) => {
   // recoil data 초기화
   const resetRegistProps = useSetRecoilState(resetRegistAtoms);
+  const address = new String(userInfo.address)
+  const phone = new String(userInfo.phoneNumber)
+
   return (
     <View style={styles.container}>
       <Image
@@ -64,10 +67,10 @@ const PreRegistCard = ({registUser, userInfo = null, navigation}) => {
             생년 월일 : {registUser.birthDate}
           </Text>
           <Text numberOfLines={1} style={styles.text}>
-            보호자 주소 : {userInfo !== null && userInfo.address}
+            보호자 주소 : {userInfo !== null && address.slice(0, 5) + '...'}
           </Text>
           <Text numberOfLines={1} style={styles.text}>
-            보호자 연락처 : {registUser.phonenumber}
+            보호자 연락처 : {userInfo !== null && phone.slice(0, 6) + '...'}
           </Text>
         </View>
       </View>
