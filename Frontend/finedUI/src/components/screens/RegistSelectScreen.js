@@ -48,7 +48,7 @@ const styles = StyleSheet.create({
     height: '100%',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#f5f8ff',
+    backgroundColor: '#ffffff',
   },
 });
 
