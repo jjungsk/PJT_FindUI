@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
+import { View, Text, TouchableOpacity, StyleSheet, Dimensions } from 'react-native'
 import { fontPercentage, widthPercentage, heightPercentage } from '../../styles/ResponsiveSize'
 
 // position
@@ -9,16 +9,16 @@ import Geolocation from 'react-native-geolocation-service';
 import { format } from 'date-fns';
 import ko from 'date-fns/esm/locale/ko/index.js';
 import DateTimePickerModal from 'react-native-modal-datetime-picker';
+import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 
 const styles = StyleSheet.create({
     mainContainer: {
-        width: '100%',
-        height: '100%',
+        // width: '100%',
+        // height: '100%',
+        bottom: 0,
         justifyContent: 'center',
         alignItems: 'center',
         position: 'absolute',
-        marginHorizontal: widthPercentage(20),
-        borderRadius: widthPercentage(20),
         paddingHorizontal: widthPercentage(25),
         paddingVertical: heightPercentage(15),
         backgroundColor: 'white',
@@ -28,13 +28,21 @@ const styles = StyleSheet.create({
         elevation: 5,
     },
     titleContainer: {
-
+        marginBottom: heightPercentage(4)
     },
     title: {
-        fontSize: fontPercentage(20)
+        fontSize: fontPercentage(20),
+        fontWeight: 'bold',
+        color: '#000000'
+    },
+    selectTitle: {
+        fontSize: fontPercentage(16),
+        fontWeight: '700',
+        color: '#000000'
     },
     selectDateContainer: {
         flexDirection: 'row',
+        width: '100%',
         justifyContent: 'space-evenly',
         alignItems: 'center',
         paddingHorizontal: widthPercentage(8),
@@ -43,9 +51,9 @@ const styles = StyleSheet.create({
     selectDateBtn: {
         flexDirection: 'row',
         backgroundColor: '#f0f9ff',
-        justifyContent: 'space-between',
+        justifyContent: 'space-evenly',
         alignItems: 'center',
-        paddingHorizontal: widthPercentage(16),
+        paddingHorizontal: widthPercentage(8),
         paddingVertical: heightPercentage(8),
         borderRadius: 16,
     },
@@ -53,10 +61,26 @@ const styles = StyleSheet.create({
         fontSize: fontPercentage(16),
         fontWeight: '700',
         color: '#000000',
+    },
+    selectMapContainer: {
+        width: '100%',
+        height: '100%'
+    },
+    mapContainer: {
+        width: '100%',
+        height: '100%'
+    },
+    containerMap: {
+        width: '100%',
+        height: '100%'
     }
 })
 
 const CallRegistContainer = () => {
+    const { width, height } = Dimensions.get('window');
+    const LATITUDE_DELTA = 0.005;
+    const LONGITUDE_DELTA = LATITUDE_DELTA * (width / height);
+
     const [position, setPosition] = useState(null);
     const [date, setDate] = useState(new Date())
     const [pickerMode, setPickerMode] = useState('date');
@@ -77,7 +101,7 @@ const CallRegistContainer = () => {
     const onConfirm = selectedDate => {
         // 날짜 또는 시간 선택 시
         setVisible(false); // 모달 close
-        setMissingDate(selectedDate); // 선택한 날짜 변경
+        setDate(selectedDate); // 선택한 날짜 변경
     };
 
     const onCancel = () => {
@@ -90,7 +114,6 @@ const CallRegistContainer = () => {
             position => {
                 const { latitude, longitude } = position.coords;
                 setPosition({ lat: latitude, lng: longitude });
-                return { lat: latitude, lng: longitude };
             },
             error => {
                 console.log(error);
@@ -107,21 +130,19 @@ const CallRegistContainer = () => {
             <View style={styles.selectDateContainer}>
                 <Text style={styles.selectTitle}>실종 날짜</Text>
                 <TouchableOpacity
-                    disabled={mode === 4 && true}
                     activeOpacity={0.6}
                     onPress={onPressDate}
                     style={styles.selectDateBtn}>
                     <Text style={styles.selectBtnText}>
-                        {format(new Date(missingDate), 'PPP', { locale: ko })}
+                        {format(new Date(date), 'PPP', { locale: ko })}
                     </Text>
                 </TouchableOpacity>
                 <TouchableOpacity
-                    disabled={mode === 4 && true}
                     activeOpacity={0.6}
                     onPress={onPressTime}
                     style={styles.selectDateBtn}>
                     <Text style={styles.selectBtnText}>
-                        {format(new Date(missingDate), 'p aaa', { locale: ko })}
+                        {format(new Date(date), 'p aaa', { locale: ko })}
                     </Text>
                 </TouchableOpacity>
             </View>
@@ -130,8 +151,24 @@ const CallRegistContainer = () => {
                 mode={pickerMode}
                 onConfirm={onConfirm}
                 onCancel={onCancel}
-                date={missingDate}
+                date={date}
             />
+            <View style={styles.selectMapContainer}>
+                <View style={styles.mapContainer}>
+                    <MapView
+                        style={styles.containerMap}
+                        provider={PROVIDER_GOOGLE}
+                        showsUserLocation={true}
+                        showsMyLocationButton={true}
+                        initialRegion={{
+                            latitude: position.lat,
+                            longitude: position.lng,
+                            latitudeDelta: LATITUDE_DELTA,
+                            longitudeDelta: LONGITUDE_DELTA,
+                        }}
+                    />
+                </View>
+            </View>
         </View>
     )
 }
