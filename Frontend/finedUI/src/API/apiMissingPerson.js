@@ -23,6 +23,7 @@ import {getAccessTokenFromKeychain} from '../store/keychain/loginToken.js';
 import apiInstance from './apiInstance.js';
 import {MAIN_URL} from '@env';
 import axios from 'axios';
+import ImageBase64 from 'react-native-image-base64';
 
 const api = apiInstance();
 
@@ -71,6 +72,67 @@ const preRegist = async ({ data }) => {
     console.log(e);
   }
 };
+
+// const preRegist = async ({ data }) => {
+//   console.log(data);
+//   const token = await getAccessTokenFromKeychain();
+//   const imageList = data.imageList;
+//   const formData = new FormData();
+//   formData.append('name', data.name);
+//   formData.append('birthDate', data.birth);
+//   formData.append('gender', data.gender);
+
+//   if (imageList.length >= 1) {
+//     try {
+//       const base64 = await ImageBase64.getBase64String(imageList[0].uri);
+//       formData.append('frontImage', {
+//         uri: `data:${imageList[0].type};base64,${base64}`,
+//         type: imageList[0].type,
+//         name: imageList[0].name,
+//       });
+//     } catch (e) {
+//       console.log(e);
+//     }
+//   }
+//   if (imageList.length >= 2) {
+//     try {
+//       const base64 = await ImageBase64.getBase64String(imageList[1].uri);
+//       formData.append('otherImage1', {
+//         uri: `data:${imageList[1].type};base64,${base64}`,
+//         type: imageList[1].type,
+//         name: imageList[1].name,
+//       });
+//     } catch (e) {
+//       console.log(e);
+//     }
+//   }
+//   if (imageList.length >= 3) {
+//     try {
+//       const base64 = await ImageBase64.getBase64String(imageList[2].uri);
+//       formData.append('otherImage2', {
+//         uri: `data:${imageList[2].type};base64,${base64}`,
+//         type: imageList[2].type,
+//         name: imageList[2].name,
+//       });
+//     } catch (e) {
+//       console.log(e);
+//     }
+//   }
+
+//   try {
+//     const response = await axios.post(MAIN_URL + '/api/regist/', formData, {
+//       headers: {
+//         Authorization: 'Bearer ' + token,
+//         'Content-Type': 'multipart/form-data',
+//       },
+//     });
+//     const status = response.data.status;
+//     console.log('status', status);
+//     return status;
+//   } catch (e) {
+//     console.log(e);
+//   }
+// };
 
 
 // 실종자 정보 생성

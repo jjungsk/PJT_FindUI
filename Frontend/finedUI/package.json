@@ -21,6 +21,7 @@
     "react-native": "0.70.5",
     "react-native-basic-carousel": "^1.0.9",
     "react-native-geolocation-service": "^5.3.1",
+    "react-native-image-base64": "^0.1.4",
     "react-native-image-crop-picker": "^0.39.0",
     "react-native-keychain": "^8.1.1",
     "react-native-linear-gradient": "^2.6.2",

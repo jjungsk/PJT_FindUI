@@ -7,7 +7,7 @@ import {
   widthPercentage,
 } from '../../styles/ResponsiveSize';
 
-import {useRecoilValue, useResetRecoilState} from 'recoil';
+import {useRecoilValue, useResetRecoilState, useSetRecoilState} from 'recoil';
 import {
   registBirth,
   registGender,
@@ -25,6 +25,10 @@ import {el} from 'date-fns/locale';
 import {missingRegist, preRegist} from '../../API/apiMissingPerson';
 import {format} from 'date-fns';
 import ko from 'date-fns/esm/locale/ko/index.js';
+import { reset } from './NavigationService';
+import { setRecoil } from 'recoil-nexus';
+import { addInfoState } from '../../store/atoms/InfoState';
+import { missingSelector, preSelector } from '../../store/selectors/RegistSelector';
 
 const Stack = createNativeStackNavigator();
 
@@ -45,6 +49,7 @@ const RegistStackNavigation = ({navigation}) => {
   const date = useRecoilValue(registMissingDate);
   const pos = useRecoilValue(registPos);
   const mode = useRecoilValue(registMode);
+  const setAddInfo = useSetRecoilState(addInfoState)
   return (
     <Stack.Navigator initialRouteName="registRoot">
       <Stack.Screen
@@ -109,8 +114,9 @@ const RegistStackNavigation = ({navigation}) => {
                       }
                     }
                   }
-                  if (status == 200) {
-                    // navigation.reset({routes: [{name: 'Home'}]});
+                  if (status === 'CREATED') {
+                    reset('Home')
+                    setAddInfo(true)
                   }
                 }}>
                 <Text style={styles.completeBtnTitle}>완료</Text>

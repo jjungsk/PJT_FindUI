@@ -23,7 +23,7 @@ const PreRegistCard = ({registUser, navigation}) => {
       <Image
         source={
           registUser.frontImagePath != null
-            ? null
+            ? {uri : 'http://' + registUser.frontImagePath}
             : require('../../assets/images/no_profile_image.png')
         }
         style={styles.image}
@@ -56,10 +56,10 @@ const PreRegistCard = ({registUser, navigation}) => {
             생년 월일 : {registUser.birthDate}
           </Text>
           <Text numberOfLines={1} style={styles.text}>
-            보호자 주소 : {registUser.address}
+            보호자 주소 : {registUser.user.address}
           </Text>
           <Text numberOfLines={1} style={styles.text}>
-            보호자 연락처 : {registUser.phonenumber}
+            보호자 연락처 : {registUser.user.phoneNumber}
           </Text>
         </View>
       </View>

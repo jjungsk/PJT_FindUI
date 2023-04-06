@@ -170,7 +170,7 @@ const MyPage = () => {
             <View style={styles.carouselItem}>
               <PreRegistCard registUser={item} />
               <TouchableOpacity style={styles.button}>
-                <Text style={{ color:"white", fontSize: 15, fontWeight: "bold", alignSelf: 'center'}}>신고하기</Text>
+                <Text style={{ color:"white", fontSize: 15, fontWeight: "bold", alignSelf: 'center'}}>실종 신고하기</Text>
               </TouchableOpacity>
             </View>
           )}
