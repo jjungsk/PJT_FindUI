@@ -8,6 +8,7 @@ import com.ssafy.finedUi.common.oauth.HttpCookieOAuth2AuthorizationRequestReposi
 import com.ssafy.finedUi.common.oauth.OAuth2AuthenticationFailureHandler;
 import com.ssafy.finedUi.common.oauth.OAuth2AuthenticationSuccessHandler;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -24,10 +25,13 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    @Value("${image.request.path}")
+    private String requestPath;
     private final CustomUserDetailService customUserDetailService;
     private final CustomOAuth2UserService customOAuth2UserService;
     private final OAuth2AuthenticationSuccessHandler oAuth2AuthenticationSuccessHandler;
     private final OAuth2AuthenticationFailureHandler oAuth2AuthenticationFailureHandler;
+
 
     //    비밀번호 암호화에 사용되는 encoder 등록.
     @Bean
@@ -50,7 +54,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     public void configure(WebSecurity web) throws Exception {
         web.ignoring()
 //                swagger 진입시 security 동작 안하도록.
-                .antMatchers("/v3/api-docs", "/swagger*/**")
+                .antMatchers("/v3/api-docs", "/swagger*/**",requestPath)
 //                error controller 진입시 security 동작 안하도록.
                 .antMatchers("/error");
     }
@@ -70,9 +74,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .formLogin().disable()
                 .authorizeRequests()
 //                //일단 모든 url 인증필요없이 허용
-                .antMatchers("/**").permitAll()
+//                .antMatchers("/**").permitAll()
                 //login, oauth url만 모두 허용.
-//                .antMatchers("/api/user/login", "/api/user/create", "/api/user/phoneconfirm", "/api/user/phoneauth", "/oauth2/**").permitAll() //authenticated 테스트 403 에러 반환 확인.
+                .antMatchers("/api/user/login", "/api/user/create", "/api/user/phoneconfirm", "/api/user/phoneauth", "/oauth2/**").permitAll() //authenticated 테스트 403 에러 반환 확인.
                 .anyRequest().authenticated()
                 .and()
                 .exceptionHandling().authenticationEntryPoint(new RestAuthenticationEntryPoint())
