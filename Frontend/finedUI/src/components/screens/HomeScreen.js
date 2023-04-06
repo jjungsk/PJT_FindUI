@@ -59,8 +59,10 @@ const HomeScreen = ({navigation}) => {
   const notices = useRecoilValue(noticeSelector);
 
   // (3) 실시간 & 장기간 실종자 정보
-  const missingShort = useRecoilValue(missingShortSelector); // 실시간 실종
-  const missingLong = useRecoilValue(missingLongSelector); // 장기간 실종
+  const missingShort = null; // 실시간 실종
+  const missingLong = null; // 장기간 실종
+  // const missingShort = useRecoilValue(missingShortSelector); // 실시간 실종
+  // const missingLong = useRecoilValue(missingLongSelector); // 장기간 실종
 
   // useEffect
   useEffect(() => {
@@ -100,7 +102,7 @@ const HomeScreen = ({navigation}) => {
 
   return (
     <SafeAreaView style={{flex: 1}}>
-      <ScrollView style={{backgroundColor: '#ffffff',}}>
+      <ScrollView style={{backgroundColor: '#ffffff'}}>
         <View style={styles.registContainer}>
           <View
             style={{
@@ -230,7 +232,10 @@ const styles = StyleSheet.create({
   carouselItem: {
     paddingHorizontal: widthPercentage(9),
   },
-  noticeContainer: {marginTop: heightPercentage(15), backgroundColor: '#ffffff'},
+  noticeContainer: {
+    marginTop: heightPercentage(15),
+    backgroundColor: '#ffffff',
+  },
   realtimeMissingContainer: {
     marginTop: heightPercentage(2),
     paddingVertical: heightPercentage(12),
