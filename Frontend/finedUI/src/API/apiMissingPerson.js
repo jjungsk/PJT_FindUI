@@ -21,6 +21,7 @@
 
 import {getAccessTokenFromKeychain} from '../store/keychain/loginToken.js';
 import apiInstance from './apiInstance.js';
+import {MAIN_URL} from '@env';
 
 const api = apiInstance();
 
@@ -84,15 +85,11 @@ const missingRegist = async ({data}) => {
 const apiGetMissingPerson = async registId => {
   const token = await getAccessTokenFromKeychain();
   try {
-<<<<<<< HEAD
-    const response = await api.get(`/api/regist/detail?registId=${registId}`);
-=======
     const response = await api.get(`/api/regist/detail/${registId}`, {
       headers: {
         Authorization: 'Bearer ' + token,
       },
     });
->>>>>>> dev-front
     return response;
   } catch (error) {
     return error;
@@ -100,9 +97,25 @@ const apiGetMissingPerson = async registId => {
 };
 
 // 실종자 정보 수정
-const apiPutMissingPerson = async missingPersonInfo => {
+const apiPutMissingPerson = async ({data}) => {
+  const imageList = data.imageList;
+  const dataFormat = new FormData();
+  console.log('pos : ', data.pos.lat, data.pos.lng);
+  dataFormat.append('frontImage', imageList[0]);
+  dataFormat.append('otherImage1', imageList >= 2 ? imageList[1] : null);
+  dataFormat.append('otherImage2', imageList >= 3 ? imageList[2] : null);
+  dataFormat.append('name', data.name);
+  dataFormat.append('birthDate', data.birth);
+  dataFormat.append('gender', data.gender);
+  dataFormat.append('longitude', data.pos.lat);
+  dataFormat.append('latitude', data.pos.lng);
+  dataFormat.append('registId', data.id);
   try {
-    const response = await api.put(`${FEED_CONTROLLER}/feeds/cards/${cardId}`);
+    const response = await api.put(`/api/regist`, dataFormat, {
+      headers: {
+        'Content-Type': 'multipart/form-data',
+      },
+    });
     return response;
   } catch (error) {
     return error;

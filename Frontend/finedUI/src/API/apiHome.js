@@ -10,9 +10,9 @@ import apiInstance from './apiInstance';
 const api = apiInstance();
 
 // (1) 해당 User가 등록한 실종자 정보
-const apiGetUserRegistMissingPersons = async userId => {
+const apiGetUserRegistMissingPersons = async () => {
   try {
-    const response = api.get(`/api/regist?userId=${userId}`);
+    const response = api.get(`/api/regist/user`);
     return response;
   } catch (error) {
     console.log(error);

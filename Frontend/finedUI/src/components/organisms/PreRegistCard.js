@@ -4,6 +4,10 @@ import React from 'react';
 // react-native
 import {View, Text, Image, TouchableOpacity, StyleSheet} from 'react-native';
 
+// recoil
+import {useSetRecoilState} from 'recoil';
+import {resetRegistAtoms} from '../store_regist/registStore';
+
 // styles
 import {
   fontPercentage,
@@ -15,6 +19,8 @@ import {
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 const PreRegistCard = ({registUser, userInfo, navigation}) => {
+  // recoil data 초기화
+  const resetRegistProps = useSetRecoilState(resetRegistAtoms);
   return (
     <View style={styles.container}>
       <Image
@@ -29,10 +35,14 @@ const PreRegistCard = ({registUser, userInfo, navigation}) => {
         <View style={styles.icons}>
           <TouchableOpacity
             onPress={() => {
-              navigation.navigate('ModifyScreen', {
-                registId: registUser.registId,
-                userInfo: userInfo,
+              resetRegistProps((mode = 3));
+              navigation.navigate('registMain', {
+                userInfo: registUser,
               });
+              // navigation.navigate('ModifyScreen', {
+              //   registId: registUser.registId,
+              //   userInfo: userInfo,
+              // });
             }}>
             <Icon
               name="square-edit-outline"

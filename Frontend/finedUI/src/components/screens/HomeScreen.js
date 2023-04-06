@@ -136,7 +136,7 @@ const HomeScreen = ({navigation}) => {
     // (1) User가 등록한 실종자 등록 정보
     const userId = 1;
     const auto1 = async () => {
-      await apiGetUserRegistMissingPersons(userId)
+      await apiGetUserRegistMissingPersons()
         .then(({data}) => {
           setRegistUser(data.data);
         })
@@ -193,7 +193,7 @@ const HomeScreen = ({navigation}) => {
               data={registUsers}
               renderItem={({item}) => (
                 <View style={styles.carouselItem}>
-                  <PreRegistCard registUser={item} navigation={navigation} />
+                  <PreRegistCard registUser={item} />
                 </View>
               )}
               itemWidth={width}
