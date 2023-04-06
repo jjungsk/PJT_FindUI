@@ -35,7 +35,7 @@ import {MissingPersonCard} from '../organisms/MissingPersonCard';
 
 // apis
 import {apiGetUserRegistMissingPersons} from '../../API/apiHome';
-import {apiGetAddress, apiGetLngLat} from '../../API/apiKakao';
+import {getUserInfo} from '../../API/UserApi';
 import {
   missingSelector,
   preSelector,
@@ -43,6 +43,8 @@ import {
 import NoRegistCard from '../organisms/NoRegistCard';
 
 const HomeScreen = ({navigation}) => {
+  // 로그인한 유저 정보
+  const [userInfo, setUserInfo] = useState({});
   const setPosition = useSetRecoilState(userPosition);
   const [isChange, setIsChange] = useState(true);
   const registUsers = useRecoilValue(preSelector);
@@ -102,33 +104,16 @@ const HomeScreen = ({navigation}) => {
       await getUserInfo()
         .then(res => {
           setUserInfo(res);
+          console.log(res);
         })
         .catch(error => console.log(error));
     };
     auto();
 
-    // (1) User가 등록한 실종자 등록 정보
-    const userId = 1;
-    const auto1 = async () => {
-      await apiGetUserRegistMissingPersons()
-        .then(({data}) => {
-          setRegistUser(data.data);
-        })
-        .catch(error => console.log(error));
-    };
-    auto1();
-
     // (2) notices list 반환
 
     // (3) 전체 실종자 list 반환
-    const auto3 = async () => {
-      await apiGetMissingPersonAll(userId)
-        .then(({data}) => {
-          setMissingPerson(data.data);
-        })
-        .catch(error => console.log(error));
-    };
-    auto3();
+
     // test
   }, []);
 
@@ -189,7 +174,11 @@ const HomeScreen = ({navigation}) => {
                 data={registUsers}
                 renderItem={({item}) => (
                   <View style={styles.carouselItem}>
-                    <PreRegistCard registUser={item} />
+                    <PreRegistCard
+                      registUser={item}
+                      userInfo={userInfo}
+                      navigation={navigation}
+                    />
                   </View>
                 )}
                 itemWidth={width}

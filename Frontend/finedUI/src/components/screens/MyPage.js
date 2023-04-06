@@ -20,7 +20,7 @@ import {useRecoilValue, useSetRecoilState} from 'recoil';
 import {isLoginState} from '../../store/atoms/userState';
 import {deleteTokensFromKeychain} from '../../store/keychain/loginToken';
 import {reset} from '../navigator/NavigationService';
-import { preInfoState } from '../../store/atoms/InfoState';
+import {preInfoState} from '../../store/atoms/InfoState';
 import NoRegistCard from '../organisms/NoRegistCard';
 
 const styles = StyleSheet.create({
@@ -52,17 +52,17 @@ const styles = StyleSheet.create({
     paddingHorizontal: widthPercentage(9),
   },
   button: {
-    backgroundColor:"#1570EF",
-    borderRadius:10,
+    backgroundColor: '#1570EF',
+    borderRadius: 10,
     // alignSelf: 'center',
-    justifyContent: 'center', 
+    justifyContent: 'center',
     marginTop: 10,
-    padding: 10
-  }
+    padding: 10,
+  },
 });
 const width = Dimensions.get('window').width;
 
-const MyPage = () => {
+const MyPage = ({navigation}) => {
   const [isLogoutModalVisible, setIsLogoutModalVisible] = useState(false);
   const [isWithdrawalVisible, setIsWithdrawalVisible] = useState(false);
   const [isPwVisible, setIsPwVisible] = useState(false);
@@ -74,7 +74,7 @@ const MyPage = () => {
   const [address, setAddress] = useState(myInfo.address); // 주소
   const [phoneNumber, setPhoneNumber] = useState(myInfo.phone); // 이메일
   const setIsLogin = useSetRecoilState(isLoginState);
-  const registUsers = useRecoilValue(preInfoState)
+  const registUsers = useRecoilValue(preInfoState);
   const toggleLogoutModal = () => {
     setIsLogoutModalVisible(!isLogoutModalVisible);
   };
@@ -148,37 +148,50 @@ const MyPage = () => {
   return (
     <View style={styles.container}>
       <ScrollView style={{width: '100%'}}>
-        <View style={{paddingHorizontal: widthPercentage(10), marginBottom: 10}}>
-          <Text style={[styles.text, {marginBottom: 20, fontSize: 28, marginTop: 20},]}>
+        <View
+          style={{paddingHorizontal: widthPercentage(10), marginBottom: 10}}>
+          <Text
+            style={[
+              styles.text,
+              {marginBottom: 20, fontSize: 28, marginTop: 20},
+            ]}>
             마이페이지
           </Text>
           <MyInfoCard myInfo={myInfo} onPress={toggleInfoModal} />
-          <Text style={[styles.text, {marginBottom: 10, marginTop: 20, }]}>
+          <Text style={[styles.text, {marginBottom: 10, marginTop: 20}]}>
             사전 등록
           </Text>
           <View style={styles.line} />
         </View>
-        {registUsers.length <1 
-        ?
-        <View style={styles.carouselItem}>
-          <NoRegistCard textInfo={'등록된 사전 등록 정보가 없습니다.'}/>
-        </View>
-        :
-        (<Carousel
-          data={registUsers}
-          renderItem={({item}) => (
-            <View style={styles.carouselItem}>
-              <PreRegistCard registUser={item} />
-              <TouchableOpacity style={styles.button}>
-                <Text style={{ color:"white", fontSize: 15, fontWeight: "bold", alignSelf: 'center'}}>신고하기</Text>
-              </TouchableOpacity>
-            </View>
-          )}
-          itemWidth={width}
-          pagination
-        />)
-        }
-        <View style={{paddingHorizontal: widthPercentage(10), marginBottom: 40}}>
+        {registUsers.length < 1 ? (
+          <View style={styles.carouselItem}>
+            <NoRegistCard textInfo={'등록된 사전 등록 정보가 없습니다.'} />
+          </View>
+        ) : (
+          <Carousel
+            data={registUsers}
+            renderItem={({item}) => (
+              <View style={styles.carouselItem}>
+                <PreRegistCard registUser={item} navigation={navigation} />
+                <TouchableOpacity style={styles.button}>
+                  <Text
+                    style={{
+                      color: 'white',
+                      fontSize: 15,
+                      fontWeight: 'bold',
+                      alignSelf: 'center',
+                    }}>
+                    신고하기
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            )}
+            itemWidth={width}
+            pagination
+          />
+        )}
+        <View
+          style={{paddingHorizontal: widthPercentage(10), marginBottom: 40}}>
           <Text style={[styles.text, {marginBottom: 10, marginTop: 10}]}>
             계정관리
           </Text>
