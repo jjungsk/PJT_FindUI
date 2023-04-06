@@ -12,9 +12,9 @@ spring:
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     # server
-#    url: jdbc:mysql://j8a108.p.ssafy.io:3306/finedui?allowPublicKeyRetrieval=true&useSSL=false&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
+    url: jdbc:mysql://j8a108.p.ssafy.io:3306/finedui?allowPublicKeyRetrieval=true&useSSL=false&characterEncoding=UTF-8&serverTimezone=Asia/Seoul
     # local
-    url: jdbc:mysql://localhost:3306/finedui?allowPublicKeyRetrieval=true&useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
+#    url: jdbc:mysql://localhost:3306/finedui?allowPublicKeyRetrieval=true&useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
     username: ssafy
     password: ssafy
     hikari:
@@ -26,7 +26,7 @@ spring:
     defer-datasource-initialization: true
     database: mysql
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     generate-ddl: false
     properties:
       hibernate:
