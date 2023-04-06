@@ -33,7 +33,10 @@
     "react-native-wrapped-text": "^1.2.2",
     "recoil": "^0.7.7",
     "recoil-nexus": "^0.4.0",
-    "rn-material-ui-textfield": "^1.0.9"
+    "rn-material-ui-textfield": "^1.0.9",
+    "react-stomp": "^5.1.0",
+    "sockjs-client": "^1.6.1",
+    "stompjs": "^2.3.3"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
