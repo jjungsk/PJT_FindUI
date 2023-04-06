@@ -10,7 +10,7 @@ import {
 import SockJS from 'sockjs-client';
 import Stomp from 'stompjs';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
-
+import {myInfoState} from '../../store/atoms/userState';
 import {useFocusEffect} from '@react-navigation/native';
 import {widthPercentage, heightPercentage} from '../../styles/ResponsiveSize';
 const styles = StyleSheet.create({
@@ -69,9 +69,10 @@ const SOCKET_URL = 'http://10.0.2.2:8080/ws';
 let sockJS = new SockJS(SOCKET_URL);
 let stompClient = Stomp.over(sockJS);
 let serverMessagesList = [];
+
 const ChatScreen = ({route}) => {
   const [messages, setMessages] = useState('');
-  const [user, setUser] = useState(null);
+  const [userInfo, setUserInfo] = useRecoilState(myInfoState);
   //보낸 메시지 리스트
   const [serverMessages, setServerMessages] = useState([]);
   let roomId = route.params.roomId;
@@ -88,6 +89,7 @@ const ChatScreen = ({route}) => {
     console.log(err);
   };
   let onConnected = () => {
+    console.log('user정보', userInfo);
     //subscribe에서roomid로 하면 될 듯
     stompClient.subscribe(`/topic/public/${roomId}`, onMessageReceived);
 
@@ -112,18 +114,19 @@ const ChatScreen = ({route}) => {
   };
   let onSendMessage = payload => {
     console.log(payload.body);
+
     console.log('메시지 보낸다' + messages);
     var chatMessage = {
-      sender: 'z',
+      sender: userInfo.userEmail,
       message: messages,
       type: 'CHAT',
     };
     var chat = {
       id: serverMessagesList.length,
-      sender: 'zz',
+      sender: userInfo.userEmail,
       message: messages,
       type: 'CHAT',
-      roomId: 1,
+      roomId: roomId,
     };
     serverMessagesList.push(chat);
     console.log('push후', serverMessagesList);
@@ -156,7 +159,7 @@ const ChatScreen = ({route}) => {
           data={serverMessages}
           keyExtractor={item => item.id}
           renderItem={({item}) =>
-            item.sender == 'minji' ? (
+            item.sender == userInfo.userEmail ? (
               <Text style={styles.myChat}>{item.message}</Text>
             ) : (
               <Text style={styles.otherChat}>{item.message}</Text>
