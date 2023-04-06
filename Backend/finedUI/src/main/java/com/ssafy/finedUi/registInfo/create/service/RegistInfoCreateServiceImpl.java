@@ -44,13 +44,9 @@ public class RegistInfoCreateServiceImpl implements RegistInfoCreateService {
         if (longitude != null && latitude != null) {
             registInfoCreateRequest.setIsMissing(true); // 실종 여부
             registInfoCreateRequest.setMissingTime(Timestamp.valueOf(LocalDateTime.now())); // 실종 시간
+        } else {
+            registInfoCreateRequest.setIsMissing(false);
         }
-
-        // 생성 날짜가 비어있을 경우 할당하기
-//        if (registInfoCreateRequest.getCreateDate() == null) {
-//            registInfoCreateRequest.setCreateDate(Timestamp.valueOf(LocalDateTime.now()));
-//        }
-        // 이미지 파일 배열 생성
         MultipartFile[] multipartFiles = {registInfoCreateRequest.getFrontImage(), registInfoCreateRequest.getOtherImage1(), registInfoCreateRequest.getOtherImage2()};
         // 이미지 저장 경로들 filePaths에 할당
         List<RegistInfo> registInfoList = registInfoRepository.findAll();

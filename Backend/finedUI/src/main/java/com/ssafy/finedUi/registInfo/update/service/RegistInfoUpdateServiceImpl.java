@@ -1,5 +1,6 @@
 package com.ssafy.finedUi.registInfo.update.service;
 
+import com.ssafy.finedUi.db.entity.RegistInfo;
 import com.ssafy.finedUi.registInfo.RegistInfoRepository;
 import com.ssafy.finedUi.registInfo.image.save.ImageSaveServiceImpl;
 import com.ssafy.finedUi.registInfo.update.request.RegistInfoUpdateRequest;
@@ -24,13 +25,17 @@ public class RegistInfoUpdateServiceImpl implements RegistInfoUpdateService {
     @Override
     public RegistInfoUpdateResponse update(RegistInfoUpdateRequest registInfoUpdateRequest) {
         registInfoUpdateRequest.setUser(userRepository.findById(registInfoUpdateRequest.getUserId()).get());
-        registInfoUpdateRequest.setCreateDate((registInfoRepository.findById(registInfoUpdateRequest.getRegistId())).get().getCreateDate());
+        RegistInfo registInfo = registInfoRepository.findById(registInfoUpdateRequest.getRegistId()).get();
+        registInfoUpdateRequest.setCreateDate(registInfo.getCreateDate());
+        registInfoUpdateRequest.setMissingTime(registInfo.getMissingTime());
         Double longitude = registInfoUpdateRequest.getLongitude();
         Double latitude = registInfoUpdateRequest.getLatitude();
         if (longitude != null && latitude != null) {
             registInfoUpdateRequest.setIsMissing(true);
+            registInfoUpdateRequest.setMissingTime(Timestamp.valueOf(LocalDateTime.now()));
         } else {
             registInfoUpdateRequest.setIsMissing(false);
+            registInfoUpdateRequest.setMissingTime(null);
         }
         MultipartFile[] multipartFiles = {registInfoUpdateRequest.getFrontImage(), registInfoUpdateRequest.getOtherImage1(), registInfoUpdateRequest.getOtherImage2()};
         String[] imagePaths = imageSaveService.save(multipartFiles, registInfoUpdateRequest.getRegistId());

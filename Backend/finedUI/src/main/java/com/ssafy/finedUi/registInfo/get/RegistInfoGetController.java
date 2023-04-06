@@ -29,11 +29,7 @@ public class RegistInfoGetController {
     // 단일 조회
     @GetMapping("/detail")
     public ResponseEntity<Object> getDetail(@RequestParam Long registId) {
-        try {
-            return ResponseHandler.generateResponse(true, "OK", HttpStatus.OK, registInfoGetService.findById(registId));
-        } catch (Exception e) {
-            return ResponseHandler.generateResponse(false, e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
-        }
+        return ResponseHandler.generateResponse(true, "OK", HttpStatus.OK, registInfoGetService.findById(registId));
     }
 
     // 사용자가 등록한 모든 실종 + 사전 등록 조회 - 마이 페이지
