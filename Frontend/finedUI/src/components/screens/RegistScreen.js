@@ -1,4 +1,4 @@
-import React, {useEffect, useState, Suspense} from 'react';
+import React, { useEffect, useState, Suspense } from 'react';
 import {
   View,
   Text,
@@ -25,7 +25,7 @@ import Geolocation from 'react-native-geolocation-service';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 // recoil
-import {useRecoilState, useRecoilValue} from 'recoil';
+import { useRecoilState, useRecoilValue } from 'recoil';
 import {
   registAddress,
   registImageList,
@@ -39,7 +39,7 @@ import ImagePickModal from '../organisms/ImagePickModal';
 import RegistInputForm from '../organisms/RegistInputForm';
 import GoogleMapNotTouch from '../organisms/GoogleMapNotTouch';
 import Divider from '../atoms/Divider';
-import {apiGetAddress} from '../../API/apiKakao';
+import { apiGetAddress } from '../../API/apiKakao';
 
 const modeDict = {
   0: '사전 등록',
@@ -47,7 +47,7 @@ const modeDict = {
   2: '이산가족 등록',
 };
 
-const RegistScreen = ({route, navigation}) => {
+const RegistScreen = ({ route, navigation }) => {
   const [imgSelect, setImgSelect] = useState(false);
   const mode = useRecoilValue(registMode);
   const [imageList, setImageList] = useRecoilState(registImageList);
@@ -59,14 +59,14 @@ const RegistScreen = ({route, navigation}) => {
     console.log(address);
     Geolocation.getCurrentPosition(
       position => {
-        const {latitude, longitude} = position.coords;
-        setPosition({lat: latitude, lng: longitude});
-        return {lat: latitude, lng: longitude};
+        const { latitude, longitude } = position.coords;
+        setPosition({ lat: latitude, lng: longitude });
+        return { lat: latitude, lng: longitude };
       },
       error => {
         console.log(error);
       },
-      {enableHighAccuracy: true, timeout: 5000, maximumAge: 5000},
+      { enableHighAccuracy: true, timeout: 5000, maximumAge: 5000 },
     );
   }, []);
 
@@ -90,6 +90,7 @@ const RegistScreen = ({route, navigation}) => {
   };
 
   const pickImageFromAlbum = async () => {
+    setImgSelect(!imgSelect)
     try {
       await ImagePicker.openPicker({
         width: widthPercentage(150),
@@ -103,7 +104,7 @@ const RegistScreen = ({route, navigation}) => {
         selectImage = {
           uri: image.path,
           name: image_name,
-          type: 'multipart/form-data',
+          type: image.mime,
         };
         setImageList([...imageList, selectImage]);
       });
@@ -113,6 +114,7 @@ const RegistScreen = ({route, navigation}) => {
   };
 
   const pickImageFromCamera = async () => {
+    setImgSelect(!imgSelect)
     try {
       await ImagePicker.openCamera({
         width: widthPercentage(150),
@@ -126,7 +128,7 @@ const RegistScreen = ({route, navigation}) => {
         selectImage = {
           uri: image.path,
           name: image_name,
-          type: 'multipart/form-data',
+          type: image.mime,
         };
         setImageList([...imageList, selectImage]);
       });
@@ -136,7 +138,7 @@ const RegistScreen = ({route, navigation}) => {
   };
 
   return (
-    <SafeAreaView style={{flex: 1}}>
+    <SafeAreaView style={{ flex: 1 }}>
       <ImagePickModal />
       <Modal
         animationType="fade"
@@ -184,10 +186,10 @@ const RegistScreen = ({route, navigation}) => {
           <View style={styles.imageListContainer}>
             <FlatList
               data={imageList}
-              renderItem={({item}) => (
+              renderItem={({ item }) => (
                 <>
                   <View style={styles.imageContainer}>
-                    <Image source={{uri: item.uri}} style={styles.imageSize} />
+                    <Image source={{ uri: item.uri }} style={styles.imageSize} />
                   </View>
                   <TouchableOpacity
                     activeOpacity={0.6}
@@ -233,7 +235,7 @@ const RegistScreen = ({route, navigation}) => {
               <TouchableOpacity
                 activeOpacity={0.6}
                 style={styles.selectPos}
-                onPress={() => navigation.navigate('MapDetail', {mode: mode})}>
+                onPress={() => navigation.navigate('MapDetail', { mode: mode })}>
                 <View style={styles.selectPosInfoContainer}>
                   <Text style={styles.selectTitle}>실종 위치</Text>
                   <Text
@@ -288,7 +290,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  imageContainer: {marginHorizontal: widthPercentage(6)},
+  imageContainer: { marginHorizontal: widthPercentage(6) },
   imageSize: {
     width: widthPercentage(100),
     height: heightPercentage(100),
