@@ -20,7 +20,7 @@ import {
 } from '../../styles/ResponsiveSize';
 
 // recoil
-import {useRecoilValue, useSetRecoilState} from 'recoil';
+import {useRecoilValue, useSetRecoilState, useRecoilState} from 'recoil';
 import {userPosition} from '../store_regist/registStore';
 
 // position
@@ -58,10 +58,8 @@ const HomeScreen = ({navigation}) => {
   const notices = useRecoilValue(noticeSelector);
 
   // (3) 실시간 & 장기간 실종자 정보
-  // const missingShort = useRecoilValue(missingShortSelector); // 실시간 실종
-  // const missingLong = useRecoilValue(missingLongSelector); // 장기간 실종
-  const missingShort = null; // 실시간 실종
-  const missingLong = null; // 장기간 실종
+  const missingShort = useRecoilValue(missingShortSelector); // 실시간 실종
+  const missingLong = useRecoilValue(missingLongSelector); // 장기간 실종
 
   // useEffect
   useEffect(() => {
@@ -81,7 +79,6 @@ const HomeScreen = ({navigation}) => {
     const auto = async () => {
       await getUserInfo()
         .then(res => {
-          console.log('(HomeScreen.js) 로그인한 유저 정보 : ', res);
           setUserInfo(res);
         })
         .catch(error => console.log(error));

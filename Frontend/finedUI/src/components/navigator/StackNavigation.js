@@ -21,11 +21,12 @@ import ChatScreen from '../screens/ChatScreen';
 import ChatListScreen from '../screens/ChatListScreen';
 
 // recoil
-import {useRecoilValue} from 'recoil';
+import {useRecoilValue, useRecoilState} from 'recoil';
 import {
   registBirth,
   registGender,
   registImageList,
+  registImagePath,
   registMissingDate,
   registMode,
   registName,
@@ -33,6 +34,7 @@ import {
   registProps,
   registId,
 } from '../store_regist/registStore';
+import {addInfoState} from '../../store/atoms/InfoState';
 
 // date format
 import {format} from 'date-fns';
@@ -59,6 +61,8 @@ import {isLoginState} from '../../store/atoms/userState';
 import WrappedSignUpAll from '../screens/SignUpAll';
 import {navigationRef} from './NavigationService';
 
+import {reset} from './NavigationService';
+
 const Stack = createNativeStackNavigator();
 
 const styles = StyleSheet.create({
@@ -71,10 +75,12 @@ const styles = StyleSheet.create({
 
 const StackNavigation = () => {
   const isLogin = useRecoilValue(isLoginState);
+  const [addInfo, setAddInfo] = useRecoilState(addInfoState);
 
   // 실종자 정보 수정 para
   const registPropsState = useRecoilValue(registProps);
   const imageList = useRecoilValue(registImageList);
+  const imagePath = useRecoilValue(registImagePath);
   const name = useRecoilValue(registName);
   const birth = useRecoilValue(registBirth);
   const gender = useRecoilValue(registGender);
@@ -114,47 +120,30 @@ const StackNavigation = () => {
                         // 서버에 실종자 정보 등록
                         let status = 200;
                         const {prop, state} = registPropsState;
-                        if (!state) {
-                          Alert.alert('', prop + '을 추가해주세요', [
-                            {
-                              text: '확인',
-                              onPress: () => {},
-                            },
-                          ]);
-                        } else {
-                          if (mode === 3) {
-                            const dateString = format(
-                              date,
-                              'yyyy-MM-dd HH:mm:ss',
-                              {
-                                locale: ko,
-                              },
-                            );
-                            const data = {
-                              imageList: imageList,
-                              name: name,
-                              birth: birth,
-                              gender: gender,
-                              date: dateString,
-                              pos: pos,
-                              id: id,
-                            };
-                            console.log(
-                              '(RegistStackNavigation.js)실종자 정보 수정 : ',
-                              data,
-                            );
-                            // 실종자 정보 수정 api 호출
-                            try {
-                              await apiPutMissingPerson({
-                                data,
-                              });
-                            } catch (e) {
-                              console.log(e);
-                            }
-                          }
+                        const dateString = format(date, 'yyyy-MM-dd HH:mm:ss', {
+                          locale: ko,
+                        });
+                        const data = {
+                          id: id,
+                          imageList: imageList,
+                          imagePath: imagePath,
+                          name: name,
+                          birth: birth,
+                          gender: gender,
+                          date: dateString,
+                          pos: pos,
+                        };
+
+                        try {
+                          const res = await apiPutMissingPerson(data);
+                          status = res.status;
+                        } catch (e) {
+                          console.log(e);
                         }
+
                         if (status == 200) {
-                          // navigation.reset({routes: [{name: 'Home'}]});
+                          reset('HomeScreen');
+                          setAddInfo(!addInfo);
                         }
                       }}>
                       {mode !== 4 && (
