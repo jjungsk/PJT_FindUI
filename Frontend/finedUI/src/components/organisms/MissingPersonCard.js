@@ -73,6 +73,9 @@ const styles = StyleSheet.create({
   },
   imageStyle: {
     borderRadius: widthPercentage(20),
+    borderWidth: 2,
+    // elevation: 5,
+    borderColor: '#c7d7fe'
   },
   imageText: {
     width: '100%',

@@ -24,11 +24,9 @@ const NoRegistCard = ({textInfo}) => {
 const styles = StyleSheet.create({
   container: {
     width: '100%',
-    // height: '30%',
+    borderRadius: 20,
     padding: widthPercentage(12),
     borderStyle: 'solid',
-    // borderWidth: 1,
-    // flexDirection: 'row',
     backgroundColor: '#ffffff',
   },
   contents: {

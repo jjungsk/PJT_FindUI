@@ -16,12 +16,13 @@ import {widthPercentage} from '../../styles/ResponsiveSize';
 import PwModal from '../organisms/PwModal';
 import InfoModal from '../organisms/InfoModal';
 import {getUserInfo, modifyInfo, deleteUser} from '../../API/UserApi';
-import {useRecoilValue, useSetRecoilState} from 'recoil';
-import {isLoginState} from '../../store/atoms/userState';
+import {useRecoilState, useRecoilValue, useSetRecoilState} from 'recoil';
+import {isLoginState, myInfoState} from '../../store/atoms/userState';
 import {deleteTokensFromKeychain} from '../../store/keychain/loginToken';
 import {reset} from '../navigator/NavigationService';
 import {preInfoState} from '../../store/atoms/InfoState';
 import NoRegistCard from '../organisms/NoRegistCard';
+import { preSelector } from '../../store/selectors/RegistSelector';
 
 const styles = StyleSheet.create({
   container: {
@@ -49,7 +50,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   carouselItem: {
-    paddingHorizontal: widthPercentage(9),
+    paddingHorizontal: widthPercentage(14),
   },
   button: {
     backgroundColor: '#1570EF',
@@ -70,11 +71,11 @@ const MyPage = ({navigation}) => {
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [myInfo, setMyInfo] = useState({});
+  const [myInfo, setMyInfo] = useRecoilState(myInfoState)
   const [address, setAddress] = useState(myInfo.address); // 주소
   const [phoneNumber, setPhoneNumber] = useState(myInfo.phone); // 이메일
   const setIsLogin = useSetRecoilState(isLoginState);
-  const registUsers = useRecoilValue(preInfoState);
+  const registUsers = useRecoilValue(preSelector);
   const toggleLogoutModal = () => {
     setIsLogoutModalVisible(!isLogoutModalVisible);
   };
@@ -136,11 +137,9 @@ const MyPage = ({navigation}) => {
     }
   };
   useEffect(() => {
-    const getMyInfo = async () => {
-      const info = await getUserInfo();
-      setMyInfo(info);
-      setAddress(info.address);
-      setPhoneNumber(info.phoneNumber);
+    const getMyInfo = () => {
+      setAddress(myInfo.address);
+      setPhoneNumber(myInfo.phoneNumber);
     };
     getMyInfo();
   }, []);
@@ -149,7 +148,7 @@ const MyPage = ({navigation}) => {
     <View style={styles.container}>
       <ScrollView style={{width: '100%'}}>
         <View
-          style={{paddingHorizontal: widthPercentage(10), marginBottom: 10}}>
+          style={{paddingHorizontal: widthPercentage(12), marginBottom: 10}}>
           <Text
             style={[
               styles.text,
@@ -173,7 +172,7 @@ const MyPage = ({navigation}) => {
           data={registUsers}
           renderItem={({item}) => (
             <View style={styles.carouselItem}>
-              <PreRegistCard registUser={item} navigation={navigation}/>
+              <PreRegistCard registUser={item} navigation={navigation} userInfo={myInfo}/>
               <TouchableOpacity style={styles.button}>
                 <Text style={{ color:"white", fontSize: 15, fontWeight: "bold", alignSelf: 'center'}}>신고하기</Text>
               </TouchableOpacity>
