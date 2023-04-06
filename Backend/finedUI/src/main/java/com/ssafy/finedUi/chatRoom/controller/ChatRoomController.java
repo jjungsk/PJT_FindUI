@@ -25,7 +25,8 @@ public class ChatRoomController {
     private final ChatRoomUserService chatRoomUserService;
     //채팅방 목록 가져오기
     @GetMapping("/rooms")
-    public ResponseEntity<Object> getRoomList(@RequestParam Long userId){
+    public ResponseEntity<Object> getRoomList(){
+        Long userId= SecurityUtils.getUserPricipal().getId();
         return ResponseHandler.generateResponse(true,"ok", HttpStatus.OK,chatRoomService.findAllByUserId(userId));
     }
     //채팅방 생성
