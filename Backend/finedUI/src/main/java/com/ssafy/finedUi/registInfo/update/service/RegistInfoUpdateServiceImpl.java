@@ -1,5 +1,6 @@
 package com.ssafy.finedUi.registInfo.update.service;
 
+import com.ssafy.finedUi.db.entity.RegistInfo;
 import com.ssafy.finedUi.registInfo.RegistInfoRepository;
 import com.ssafy.finedUi.registInfo.image.save.ImageSaveServiceImpl;
 import com.ssafy.finedUi.registInfo.update.request.RegistInfoUpdateRequest;
@@ -24,16 +25,18 @@ public class RegistInfoUpdateServiceImpl implements RegistInfoUpdateService {
     @Override
     public RegistInfoUpdateResponse update(RegistInfoUpdateRequest registInfoUpdateRequest) {
         registInfoUpdateRequest.setUser(userRepository.findById(registInfoUpdateRequest.getUserId()).get());
-        registInfoUpdateRequest.setCreateDate((registInfoRepository.findById(registInfoUpdateRequest.getRegistId())).get().getCreateDate());
-//        Integer longitude = registInfoUpdateRequest.getLongitude();
-//        Integer latitude = registInfoUpdateRequest.getLatitude();
-//        if (longitude != null && latitude != null) {
-//            Point missingLocation = new Point(longitude, latitude);
-//            registInfoUpdateRequest.setMissingLocation(missingLocation);
-//            registInfoUpdateRequest.setIsMissing(true);
-//        } else {
-//            registInfoUpdateRequest.setIsMissing(false);
-//        }
+        RegistInfo registInfo = registInfoRepository.findById(registInfoUpdateRequest.getRegistId()).get();
+        registInfoUpdateRequest.setCreateDate(registInfo.getCreateDate());
+        registInfoUpdateRequest.setMissingTime(registInfo.getMissingTime());
+        Double longitude = registInfoUpdateRequest.getLongitude();
+        Double latitude = registInfoUpdateRequest.getLatitude();
+        if (longitude != null && latitude != null) {
+            registInfoUpdateRequest.setIsMissing(true);
+            registInfoUpdateRequest.setMissingTime(Timestamp.valueOf(LocalDateTime.now()));
+        } else {
+            registInfoUpdateRequest.setIsMissing(false);
+            registInfoUpdateRequest.setMissingTime(null);
+        }
         MultipartFile[] multipartFiles = {registInfoUpdateRequest.getFrontImage(), registInfoUpdateRequest.getOtherImage1(), registInfoUpdateRequest.getOtherImage2()};
         String[] imagePaths = imageSaveService.save(multipartFiles, registInfoUpdateRequest.getRegistId());
         registInfoUpdateRequest.setFrontImagePath(imagePaths[0]);
@@ -53,7 +56,7 @@ public class RegistInfoUpdateServiceImpl implements RegistInfoUpdateService {
             registInfoUpdateRequest.setLongitude(longitude);                    // 경도 설정
             registInfoUpdateRequest.setLatitude(latitude);                      // 위도 설정
             registInfoUpdateRequest.setMissingTime(Timestamp.valueOf(LocalDateTime.now())); // 실종 시간 설정
-        // 실종 신고 하지 않은 경우
+            // 실종 신고 하지 않은 경우
         } else {
             registInfoUpdateRequest.setLongitude(null);                         // 경도 설정
             registInfoUpdateRequest.setLatitude(null);                          // 위도 설정

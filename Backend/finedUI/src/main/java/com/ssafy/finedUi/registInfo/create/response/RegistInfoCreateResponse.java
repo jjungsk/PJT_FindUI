@@ -20,12 +20,12 @@ public class RegistInfoCreateResponse {
     //    private Point missingLocation;      // 실종 위치
     private Double longitude;           // 경도
     private Double latitude;            // 위도
-    private Timestamp missingTime;      // 실종 시간
+    private String missingTime;      // 실종 시간
     private String frontImagePath;      // 정면 사진 저장 경로
     private String otherImage1Path;     // 추가 사진 1 저장 경로
     private String otherImage2Path;     // 추가 사진 2 저장 경로
-    private Timestamp createDate;       // 생성 시간
-    private Timestamp updateDate;       // 수정 시간
+    private String createDate;       // 생성 시간
+    private String updateDate;       // 수정 시간
     private String description;         // 설명
 
     public RegistInfoCreateResponse(RegistInfo registInfo) {
@@ -37,12 +37,13 @@ public class RegistInfoCreateResponse {
         this.isMissing = registInfo.getIsMissing();
         this.longitude = registInfo.getLongitude();
         this.latitude = registInfo.getLatitude();
-        this.missingTime = registInfo.getMissingTime();
         this.frontImagePath = registInfo.getFrontImagePath();
         this.otherImage1Path = registInfo.getOtherImage1Path();
         this.otherImage2Path = registInfo.getOtherImage2Path();
-        this.createDate = registInfo.getCreateDate();
-        this.updateDate = registInfo.getUpdateDate();
+        this.missingTime = registInfo.getIsMissing() ?
+                registInfo.getMissingTime().toString().substring(0,19).replace(" ", "T") : null;
+        this.createDate = registInfo.getCreateDate().toString().substring(0,19).replace(" ", "T");
+        this.updateDate = registInfo.getUpdateDate().toString().substring(0,19).replace(" ", "T");
         this.description = registInfo.getDescription();
     }
 }

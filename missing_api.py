@@ -1,4 +1,4 @@
-import requests, pymysql
+import requests, pymysql, datetime
 from PIL import Image 
 from io import BytesIO
 
@@ -36,7 +36,8 @@ for missing in res["list"]:
         add_res = add_res['documents'][0]
         gender = 1 if missing['sexdstnDscd'] == "남자" else 2
         missing_date = f"{missing['occrde'][:4]}-{missing['occrde'][4:6]}-{missing['occrde'][6:8]} 00:00:00.0000000"
+        print(missing_date)
         # print(f"{missing['nm']} : {missing['']}")
-        cur.execute(f"INSERT INTO regist_info(gender, name, longitude, latitude, is_missing, missing_time, front_image_path) VALUES({gender}, '{missing['nm']}', {add_res['x']}, {add_res['y']}, 1, '{missing_date}', '{image_url}')")
+        # cur.execute(f"INSERT INTO regist_info(gender, name, longitude, latitude, is_missing, missing_time, front_image_path, create_date, update_date) VALUES({gender}, '{missing['nm']}', {add_res['x']}, {add_res['y']}, 1, '{missing_date}', '{image_url}', '{missing_date}', '{missing_date}')")
 
-conn.commit()
+# conn.commit()

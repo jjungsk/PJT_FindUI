@@ -1,6 +1,7 @@
 package com.ssafy.finedUi.chatImage.create;
 
 import com.ssafy.finedUi.chatImage.create.request.ChatImageCreateRequest;
+import com.ssafy.finedUi.chatImage.create.response.ChatImageCreateResponse;
 import com.ssafy.finedUi.chatImage.create.service.ChatImageCreateService;
 import com.ssafy.finedUi.common.security.SecurityUtils;
 import com.ssafy.finedUi.handler.ResponseHandler;
@@ -25,6 +26,10 @@ public class ChatImageCreateController {
     public ResponseEntity<Object> save(@ModelAttribute ChatImageCreateRequest chatImageCreateRequest) throws IOException {
 //        access 토큰에서 userId추가.
         chatImageCreateRequest.setUserId(SecurityUtils.getUserPricipal().getId());
-        return ResponseHandler.generateResponse(true, "CREATE", HttpStatus.CREATED, chatImageCreateService.save(chatImageCreateRequest));
+        ChatImageCreateResponse chatImageCreateResponse = chatImageCreateService.save(chatImageCreateRequest);
+        if (chatImageCreateResponse == null) {
+            return ResponseHandler.generateResponse(false, "FAIL", HttpStatus.BAD_REQUEST, null);
+        }
+        return ResponseHandler.generateResponse(true, "CREATE", HttpStatus.CREATED, chatImageCreateResponse);
     }
 }
