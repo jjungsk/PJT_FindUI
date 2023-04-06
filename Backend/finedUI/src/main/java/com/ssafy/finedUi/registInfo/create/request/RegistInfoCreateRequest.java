@@ -3,6 +3,7 @@ package com.ssafy.finedUi.registInfo.create.request;
 import com.ssafy.finedUi.db.entity.RegistInfo;
 import com.ssafy.finedUi.db.entity.User;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -12,6 +13,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @Setter
+@NoArgsConstructor
 public class RegistInfoCreateRequest {
     private Long userId;                // 보호자 번호
     private User user;                  // 사용자 : 보호자 번호로 조회한 사용자
@@ -23,9 +25,9 @@ public class RegistInfoCreateRequest {
     private Timestamp missingTime;      // 실종 시간
     private Double longitude;          // 경도
     private Double latitude;           // 위도
-    private MultipartFile frontImage;   // 정면 사진
-    private MultipartFile otherImage1;  // 추가 사진 1
-    private MultipartFile otherImage2;  // 추가 사진 2
+    private MultipartFile frontImage = null;   // 정면 사진
+    private MultipartFile otherImage1 = null;  // 추가 사진 1
+    private MultipartFile otherImage2 = null;  // 추가 사진 2
     private String frontImagePath;      // 정면 사진 저장 경로
     private String otherImage1Path;     // 추가 사진 1 저장 경로
     private String otherImage2Path;     // 추가 사진 2 저장 경로
