@@ -7,6 +7,8 @@ import {
   Dimensions,
   Alert,
   ScrollView,
+  Modal,
+  Pressable,
 } from 'react-native';
 import MyPageModal from '../atoms/MyPageModal';
 import MyInfoCard from '../organisms/MyInfoCard';
@@ -22,7 +24,8 @@ import {deleteTokensFromKeychain} from '../../store/keychain/loginToken';
 import {reset} from '../navigator/NavigationService';
 import {preInfoState} from '../../store/atoms/InfoState';
 import NoRegistCard from '../organisms/NoRegistCard';
-import { preSelector } from '../../store/selectors/RegistSelector';
+import {preSelector} from '../../store/selectors/RegistSelector';
+import CallRegistContainer from '../organisms/CallRegistContainer';
 
 const styles = StyleSheet.create({
   container: {
@@ -71,9 +74,10 @@ const MyPage = ({navigation}) => {
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [myInfo, setMyInfo] = useRecoilState(myInfoState)
+  const [myInfo, setMyInfo] = useRecoilState(myInfoState);
   const [address, setAddress] = useState(myInfo.address); // 주소
   const [phoneNumber, setPhoneNumber] = useState(myInfo.phone); // 이메일
+  const [callRegistVisible, setCallRegistVisible] = useState(false); // 신고 추가 입력사항
   const setIsLogin = useSetRecoilState(isLoginState);
   const registUsers = useRecoilValue(preSelector);
   const toggleLogoutModal = () => {
@@ -146,9 +150,25 @@ const MyPage = ({navigation}) => {
 
   return (
     <View style={styles.container}>
+      <Modal
+        animationType="fade"
+        transparent={true}
+        visible={callRegistVisible}
+        onRequestClose={() => {
+          setCallRegistVisible(!callRegistVisible);
+        }}>
+        <Pressable
+          style={{
+            flex: 1,
+            backgroundColor: 'rgba(0,0,0,0.4)',
+          }}
+          onPress={() => setCallRegistVisible(!callRegistVisible)}
+        />
+        <CallRegistContainer />
+      </Modal>
       <ScrollView style={{width: '100%'}}>
         <View
-          style={{paddingHorizontal: widthPercentage(12), marginBottom: 10}}>
+          style={{paddingHorizontal: widthPercentage(10), marginBottom: 10}}>
           <Text
             style={[
               styles.text,
@@ -162,27 +182,41 @@ const MyPage = ({navigation}) => {
           </Text>
           <View style={styles.line} />
         </View>
-        {registUsers.length <1 
-        ?
-        (<View style={styles.carouselItem}>
-          <NoRegistCard textInfo={'등록된 사전 등록 정보가 없습니다.'}/>
-        </View>)
-        :
-        (<Carousel
-          data={registUsers}
-          renderItem={({item}) => (
-            <View style={styles.carouselItem}>
-              <PreRegistCard registUser={item} navigation={navigation} userInfo={myInfo}/>
-              <TouchableOpacity style={styles.button}>
-                <Text style={{ color:"white", fontSize: 15, fontWeight: "bold", alignSelf: 'center'}}>신고하기</Text>
-              </TouchableOpacity>
-            </View>
-          )}
-          itemWidth={width}
-          pagination
-        />)
-        }
-        <View style={{paddingHorizontal: widthPercentage(10), marginBottom: 40}}>
+        {registUsers.length < 1 ? (
+          <View style={styles.carouselItem}>
+            <NoRegistCard textInfo={'등록된 사전 등록 정보가 없습니다.'} />
+          </View>
+        ) : (
+          <Carousel
+            data={registUsers}
+            renderItem={({item}) => (
+              <View style={styles.carouselItem}>
+                <PreRegistCard
+                  registUser={item}
+                  navigation={navigation}
+                  userInfo={myInfo}
+                />
+                <TouchableOpacity
+                  style={styles.button}
+                  onPress={() => setCallRegistVisible(!callRegistVisible)}>
+                  <Text
+                    style={{
+                      color: 'white',
+                      fontSize: 15,
+                      fontWeight: 'bold',
+                      alignSelf: 'center',
+                    }}>
+                    신고하기
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            )}
+            itemWidth={width}
+            pagination
+          />
+        )}
+        <View
+          style={{paddingHorizontal: widthPercentage(10), marginBottom: 40}}>
           <Text style={[styles.text, {marginBottom: 10, marginTop: 10}]}>
             계정관리
           </Text>

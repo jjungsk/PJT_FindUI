@@ -11,7 +11,6 @@ import {
   ActivityIndicator,
   Modal,
   Pressable,
-  ImageBackground,
 } from 'react-native';
 import {
   fontPercentage,
