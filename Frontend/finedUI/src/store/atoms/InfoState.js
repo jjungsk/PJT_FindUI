@@ -10,3 +10,8 @@ export const missingInfoState = atom({
   key: `missingInfoState`,
   default: [],
 });
+
+export const addInfoState = atom({
+  key: `addInfoState`,
+  default: false,
+});
