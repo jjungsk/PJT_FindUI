@@ -8,8 +8,13 @@ import {
 } from '../../styles/ResponsiveSize';
 
 import GoogleMapDetail from '../organisms/GoogleMapDetail';
-import {useRecoilValue, useSetRecoilState} from 'recoil';
-import {registMode, registPos, userPosition} from '../store_regist/registStore';
+import {useRecoilState, useRecoilValue, useSetRecoilState} from 'recoil';
+import {
+  registAddress,
+  registMode,
+  registPos,
+  userPosition,
+} from '../store_regist/registStore';
 
 const styles = StyleSheet.create({
   mainContainer: {

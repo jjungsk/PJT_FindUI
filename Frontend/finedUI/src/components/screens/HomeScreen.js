@@ -35,53 +35,36 @@ import { MissingPersonCard } from '../organisms/MissingPersonCard';
 
 // apis
 import { apiGetUserRegistMissingPersons } from '../../API/apiHome';
-import { apiGetAddress, apiGetLngLat } from '../../API/apiKakao';
-import { missingSelector, preSelector } from '../../store/selectors/RegistSelector';
+import { getUserInfo } from '../../API/UserApi';
+import {
+  missingSelector,
+  preSelector,
+  noticeSelector,
+  missingShortSelector,
+  missingLongSelector,
+} from '../../store/selectors/RegistSelector';
 import NoRegistCard from '../organisms/NoRegistCard';
 
 const HomeScreen = ({ navigation }) => {
-  const setPosition = useSetRecoilState(userPosition);
+  // 로그인 유저
+  const [userInfo, setUserInfo] = useState({}); // 정보
+  const setPosition = useSetRecoilState(userPosition); // 현재 위치
   const [isChange, setIsChange] = useState(true);
-  const registUsers = useRecoilValue(preSelector)
-  const longPersons = [
-    {
-      name: 'Name1',
-      identity: 'birthDate1',
-      location: '서울',
-      image: null,
-      registId: 1,
-    },
-    {
-      name: 'Name2',
-      identity: 'birthDate2',
-      location: '서울',
-      image: null,
-      registId: 2,
-    },
-    {
-      name: 'Name3',
-      identity: 'birthDate3',
-      location: '서울',
-      image: null,
-      registId: 3,
-    },
-  ]
-  const [notices, setNotice] = useState([
-    {
-      title: '미아 발견 시, 대처 방법',
-      content:
-        '우선 경찰서에 전화로 신고를 하세요. 전국 어디서나 국번없이 182번(타 지역이 경우에는 지역번호+182)을 누르고, 미아발생 신고를 합니다. 경찰청 182센터는 전국적으로 미아. 가출아동을 수배하는 곳입니다.',
-    },
-    {
-      title: '미아 발견 시, 대처 방법',
-      content:
-        '우선 경찰서에 전화로 신고를 하세요. 전국 어디서나 국번없이 182번(타 지역이 경우에는 지역번호+182)을 누르고, 미아발생 신고를 합니다. 경찰청 182센터는 전국적으로 미아. 가출아동을 수배하는 곳입니다.',
-    },
-  ]);
 
-  const missingPersons = useRecoilValue(missingSelector)
+  // (1) 로그인 유저가 등록한 실종자 정보
+  const registUsers = useRecoilValue(preSelector); // 사전 등록
+  const missingPersons = useRecoilValue(missingSelector); // 사전 등록 후 실제 실종된 정보
 
+  // (2) 공지사항
+  const notices = useRecoilValue(noticeSelector);
+
+  // (3) 실시간 & 장기간 실종자 정보
+  const missingShort = useRecoilValue(missingShortSelector); // 실시간 실종
+  const missingLong = useRecoilValue(missingLongSelector); // 장기간 실종
+
+  // useEffect
   useEffect(() => {
+    // (0) 로그인 후 사용자의 현재 위치 값 저장
     Geolocation.getCurrentPosition(position => {
       const { latitude, longitude } = position.coords;
       setPosition(
@@ -92,6 +75,16 @@ const HomeScreen = ({ navigation }) => {
         { enableHighAccuracy: true, timeout: 5000, maximumAge: 5000 },
       );
     });
+
+    // (0) 로그인한 유저의 정보 저장
+    const auto = async () => {
+      await getUserInfo()
+        .then(res => {
+          setUserInfo(res);
+        })
+        .catch(error => console.log(error));
+    };
+    auto();
   }, []);
 
   const width = Dimensions.get('window').width;
@@ -107,7 +100,7 @@ const HomeScreen = ({ navigation }) => {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <ScrollView>
+      <ScrollView style={{ backgroundColor: '#ffffff', }}>
         <View style={styles.registContainer}>
           <View
             style={{
@@ -116,66 +109,64 @@ const HomeScreen = ({ navigation }) => {
               alignItems: 'center',
             }}>
             <View style={styles.titleContainer}>
-              <Text style={[styles.title, !isChange && { color: '#d3d3d3' }]}
+              <Text
+                style={[styles.title, !isChange && { color: '#d3d3d3' }]}
                 onPress={() => {
                   setIsChange(true);
-                }}
-              >사전 등록 정보</Text>
+                }}>
+                사전 등록 정보
+              </Text>
             </View>
-            <View style={styles.titleContainer} >
-              <Text style={[styles.title, isChange && { color: '#d3d3d3' }]}
+            <View style={styles.titleContainer}>
+              <Text
+                style={[styles.title, isChange && { color: '#d3d3d3' }]}
                 onPress={() => {
                   setIsChange(false);
-                }}
-              >실종 등록 정보</Text>
+                }}>
+                실종 등록 정보
+              </Text>
             </View>
-            {/* <TouchableOpacity
-              style={{marginRight: 8, backgroundColor: '#1570EF', padding: 5, justifyContent:"center", alignItems: 'center', borderRadius: 5}}
-              onPress={() => {
-                setIsChange(!isChange);
-              }}>
-              <Text>{isChange? '실종 정보' : '사전 정보'}</Text>
-            </TouchableOpacity> */}
           </View>
           {isChange ? (
-            registUsers.length < 1 ?
-              (
-                <View style={styles.carouselItem}>
-                  <NoRegistCard textInfo={'등록된 사전 등록 정보가 없습니다.'} />
-                </View>
-              )
-              :
-              (
-                <Carousel
-                  data={registUsers}
-                  renderItem={({ item }) => (
-                    <View style={styles.carouselItem}>
-                      <PreRegistCard registUser={item} navigation={navigation} />
-                    </View>
-                  )}
-                  itemWidth={width}
-                  pagination
-                />
-              )
-          ) : (missingPersons.length < 1
-            ? (
+            registUsers.length < 1 ? (
               <View style={styles.carouselItem}>
-                <NoRegistCard textInfo={'등록한 실종 정보가 없습니다.'} />
+                <NoRegistCard textInfo={'등록된 사전 등록 정보가 없습니다.'} />
               </View>
-            )
-            :
-            (
+            ) : (
               <Carousel
-                data={missingPersons}
+                data={registUsers}
                 renderItem={({ item }) => (
                   <View style={styles.carouselItem}>
-                    <PreRegistCard registUser={item} navigation={navigation} />
+                    <PreRegistCard
+                      registUser={item}
+                      userInfo={userInfo}
+                      navigation={navigation}
+                    />
                   </View>
                 )}
                 itemWidth={width}
                 pagination
               />
             )
+          ) : missingPersons.length < 1 ? (
+            <View style={styles.carouselItem}>
+              <NoRegistCard textInfo={'등록한 실종 정보가 없습니다.'} />
+            </View>
+          ) : (
+            <Carousel
+              data={missingPersons}
+              renderItem={({ item }) => (
+                <View style={styles.carouselItem}>
+                  <PreRegistCard
+                    registUser={item}
+                    userInfo={userInfo}
+                    navigation={navigation}
+                  />
+                </View>
+              )}
+              itemWidth={width}
+              pagination
+            />
           )}
         </View>
         <View style={styles.noticeContainer}>
@@ -190,28 +181,30 @@ const HomeScreen = ({ navigation }) => {
             pagination
           />
         </View>
+        {/* 실시간 */}
         <View style={styles.realtimeMissingContainer}>
           <View style={styles.titleContainer}>
             <Text style={styles.title}>실시간 실종자 정보</Text>
           </View>
           <FlatList
-            data={longPersons}
+            data={missingShort}
             renderItem={missingCardRender}
             horizontal={true}
-            keyExtractor={item => String(item.identity)}
+            keyExtractor={item => String(item.registId)}
             showsHorizontalScrollIndicator={false}
           />
         </View>
+        {/* 장기간 */}
         <View style={styles.realtimeMissingContainer}>
           <View style={styles.titleContainer}>
             <Text style={styles.title}>장기간 실종자 정보</Text>
           </View>
           <View style={styles.cardContainer}>
             <FlatList
-              data={longPersons}
+              data={missingLong}
               renderItem={missingCardRender}
               horizontal={true}
-              keyExtractor={item => String(item.identity)}
+              keyExtractor={item => String(item.registId)}
               showsHorizontalScrollIndicator={false}
             />
           </View>
@@ -239,7 +232,7 @@ const styles = StyleSheet.create({
   carouselItem: {
     paddingHorizontal: widthPercentage(9),
   },
-  noticeContainer: { marginTop: heightPercentage(2), backgroundColor: '#ffffff' },
+  noticeContainer: { marginTop: heightPercentage(15), backgroundColor: '#ffffff' },
   realtimeMissingContainer: {
     marginTop: heightPercentage(2),
     paddingVertical: heightPercentage(12),

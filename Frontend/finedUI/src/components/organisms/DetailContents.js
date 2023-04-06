@@ -19,7 +19,7 @@ import {
 import {format} from 'date-fns';
 import ko from 'date-fns/esm/locale/ko/index.js';
 
-const DetailContents = ({detail}) => {
+const DetailContents = ({detail, address}) => {
   return (
     <View style={styles.table}>
       <View style={styles.row}>
@@ -47,7 +47,7 @@ const DetailContents = ({detail}) => {
           </View>
         </View>
         <View style={styles.right}>
-          <Text style={styles.textContent}>{detail.birthday}</Text>
+          <Text style={styles.textContent}>{detail.birthDate}</Text>
         </View>
       </View>
       <View style={styles.row}>
@@ -60,7 +60,9 @@ const DetailContents = ({detail}) => {
           </View>
         </View>
         <View style={styles.right}>
-          <Text style={styles.textContent}>{detail.phone}</Text>
+          <Text style={styles.textContent}>
+            {detail.gender === 1 ? '남성' : '여성'}
+          </Text>
         </View>
       </View>
       <View style={styles.row}>
@@ -74,7 +76,8 @@ const DetailContents = ({detail}) => {
         </View>
         <View style={styles.right}>
           <Text style={styles.textContent}>
-            {format(detail.lostday, 'PPP aaa', {locale: ko})}
+            {/* {format(detail.missingTime, 'PPP aaa', {locale: ko})} */}
+            {detail.missingTime}
           </Text>
         </View>
       </View>
@@ -88,7 +91,7 @@ const DetailContents = ({detail}) => {
           </View>
         </View>
         <View style={styles.right}>
-          <Text style={styles.textContent}>{detail.location}</Text>
+          <Text style={styles.textContent}>{address}</Text>
         </View>
       </View>
       <View style={styles.row}>

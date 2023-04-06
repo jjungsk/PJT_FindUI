@@ -11,6 +11,7 @@ import {
   ActivityIndicator,
   Modal,
   Pressable,
+  ImageBackground,
 } from 'react-native';
 import {
   fontPercentage,
@@ -25,13 +26,14 @@ import Geolocation from 'react-native-geolocation-service';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 // recoil
-import { useRecoilState, useRecoilValue } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState } from 'recoil';
 import {
   registAddress,
   registImageList,
   registMode,
   registPos,
   userPosition,
+  registId,
 } from '../store_regist/registStore';
 
 import ImagePicker from 'react-native-image-crop-picker';
@@ -46,31 +48,100 @@ const modeDict = {
   0: '사전 등록',
   1: '실시간 실종자 등록',
   2: '이산가족 등록',
+  3: '실종자 정보 수정',
+  4: '실종자 정보 상세',
 };
 
 const RegistScreen = ({ route, navigation }) => {
   const [imgSelect, setImgSelect] = useState(false);
   const mode = useRecoilValue(registMode);
+  // 이미지
   const [imageList, setImageList] = useRecoilState(registImageList);
+  // 현재 위치
   const [position, setPosition] = useRecoilState(userPosition);
+  // 이동한 주소
   const [address, setAddress] = useRecoilState(registAddress);
+  // 이동한 위치
   const pos = useRecoilValue(registPos);
+  // 등록된 Id
+  const setId = useSetRecoilState(registId);
+  // default 이미지
+  const img = require('../../assets/images/no_profile_image.png');
 
+  // FUNCTION
+  // useEffect - 넘어온 유저의 위치 정보 확인
   useEffect(() => {
-    console.log(address);
-    Geolocation.getCurrentPosition(
-      position => {
-        const { latitude, longitude } = position.coords;
-        setPosition({ lat: latitude, lng: longitude });
-        return { lat: latitude, lng: longitude };
-      },
-      error => {
-        console.log(error);
-      },
-      { enableHighAccuracy: true, timeout: 5000, maximumAge: 5000 },
-    );
+    // console.log(address);
+    // Geolocation.getCurrentPosition(
+    //   position => {
+    //     const {latitude, longitude} = position.coords;
+    //     setPosition({lat: latitude, lng: longitude});
+    //     return {lat: latitude, lng: longitude};
+    //   },
+    //   error => {
+    //     console.log(error);
+    //   },
+    //   {enableHighAccuracy: true, timeout: 5000, maximumAge: 5000},
+    // );
+
+    // (1) 등록된 실종자 정보를 수정 할 때
+    if (mode === 3 || mode === 4) {
+      // 등록번호 셋팅
+      setId(route.params.userInfo.registId);
+      // 이미지 set 1
+      if (route.params.userInfo.frontImagePath !== null) {
+        const url = route.params.userInfo.frontImagePath;
+        console.log('(RegistScreen.js) url 길이 : ', url.length);
+        setImageList([
+          ...imageList,
+          { uri: route.params.userInfo.frontImagePath },
+        ]);
+      }
+      // 이미지 set 2
+      if (route.params.userInfo.otherImage1Path !== null) {
+        setImageList([
+          ...imageList,
+          { uri: route.params.userInfo.otherImage1Path },
+        ]);
+      }
+      // 이미지 set 3
+      if (route.params.userInfo.otherImage2Path !== null) {
+        setImageList([
+          ...imageList,
+          { uri: route.params.userInfo.otherImage2Path },
+        ]);
+      }
+    }
+
+    // (2) setPosition
+    if (
+      (mode === 3 || mode === 4) &&
+      route.params.userInfo.latitude !== null &&
+      route.params.userInfo.longitude !== null
+    ) {
+      setPosition({
+        lat: route.params.userInfo.latitude,
+        lng: route.params.userInfo.longitude,
+      });
+    } else {
+      Geolocation.getCurrentPosition(
+        position => {
+          const { latitude, longitude } = position.coords;
+          setPosition({ lat: latitude, lng: longitude });
+          return { lat: latitude, lng: longitude };
+        },
+        error => {
+          console.log(error);
+        },
+        { enableHighAccuracy: true, timeout: 5000, maximumAge: 5000 },
+      );
+    }
+
+    // test
+    console.log('(RegistScreen.js) 실종자 정보 : ', route.params.userInfo);
   }, []);
 
+  // useEffect[pos] - 등록 위치가 변경 될때
   useEffect(() => {
     const getAddress = () => {
       const auto = async () => {
@@ -85,13 +156,15 @@ const RegistScreen = ({ route, navigation }) => {
     }
   }, [pos]);
 
+  // FUNCTION
+  // 사진 삭제
   const removeImage = item => {
     const newImageList = imageList.filter(element => element !== item);
     setImageList(newImageList);
   };
 
   const pickImageFromAlbum = async () => {
-    setImgSelect(!imgSelect)
+    setImgSelect(!imgSelect);
     try {
       await ImagePicker.openPicker({
         width: widthPercentage(150),
@@ -115,7 +188,7 @@ const RegistScreen = ({ route, navigation }) => {
   };
 
   const pickImageFromCamera = async () => {
-    setImgSelect(!imgSelect)
+    setImgSelect(!imgSelect);
     try {
       await ImagePicker.openCamera({
         width: widthPercentage(150),
@@ -140,7 +213,8 @@ const RegistScreen = ({ route, navigation }) => {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <ImagePickModal />
+      {/* 사진 등록 방법 modal */}
+      <ImagePickModal visible={mode === 4 ? false : true} />
       <Modal
         animationType="fade"
         transparent={true}
@@ -167,6 +241,7 @@ const RegistScreen = ({ route, navigation }) => {
           <View style={styles.titleContainer}>
             <Text style={styles.title}>{modeDict[mode]}</Text>
           </View>
+          {/* 이미지 등록 버튼 Start */}
           <View style={styles.imageListContainer}>
             <FlatList
               data={imageList}
@@ -181,16 +256,18 @@ const RegistScreen = ({ route, navigation }) => {
                       removeImage(item);
                     }}
                     style={styles.closeBtn}>
-                    <Icon
-                      name="close-circle"
-                      size={25}
-                      style={styles.closeBtnIcon}
-                    />
+                    {mode !== 4 && (
+                      <Icon
+                        name="close-circle"
+                        size={25}
+                        style={styles.closeBtnIcon}
+                      />
+                    )}
                   </TouchableOpacity>
                 </>
               )}
               ListFooterComponent={() => {
-                if (imageList.length < 3) {
+                if (imageList.length < 3 && mode !== 4) {
                   return (
                     <TouchableOpacity
                       activeOpacity={0.6}
@@ -211,12 +288,14 @@ const RegistScreen = ({ route, navigation }) => {
               showsHorizontalScrollIndicator={false}
             />
           </View>
+          {/* 이미지 등록 버튼 End */}
           <View style={styles.registForm}>
             <Divider />
-            <RegistInputForm />
+            <RegistInputForm userInfo={route.params.userInfo} />
             {/* 맵 설정 */}
             {mode !== 0 ? (
               <TouchableOpacity
+                disabled={mode === 4 && true}
                 activeOpacity={0.6}
                 style={styles.selectPos}
                 onPress={() => navigation.navigate('MapDetail', { mode: mode })}>
