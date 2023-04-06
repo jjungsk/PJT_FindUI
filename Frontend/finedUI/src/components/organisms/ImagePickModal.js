@@ -9,8 +9,8 @@ import {
 
 import WrappedText from 'react-native-wrapped-text';
 
-const ImagePickModal = () => {
-  const [modalVisible, setModalVisible] = useState(true);
+const ImagePickModal = ({visible = true}) => {
+  const [modalVisible, setModalVisible] = useState(visible);
   return (
     <Modal
       animationType="fade"
