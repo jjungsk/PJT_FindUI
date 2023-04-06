@@ -67,7 +67,7 @@ const PreRegistCard = ({registUser, userInfo = null, navigation}) => {
             보호자 주소 : {userInfo !== null && userInfo.address}
           </Text>
           <Text numberOfLines={1} style={styles.text}>
-            보호자 연락처 : {userInfo !== null && userInfo.phoneNumber}
+            보호자 연락처 : {registUser.phonenumber}
           </Text>
         </View>
       </View>
@@ -82,7 +82,9 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     padding: widthPercentage(12),
     borderStyle: 'solid',
-    borderWidth: 1,
+    borderWidth: 2,
+    borderColor: '#c7d7fe',
+    elevation: 5,
     flexDirection: 'row',
     backgroundColor: '#ffffff',
   },
