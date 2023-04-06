@@ -1,7 +1,7 @@
 version: "3"
 # 도커 volume 연결
 volumes:
-  find_vol:
+  find_img:
     # external true로 성정해야 docker volume의 데이터가 삭제 안됨
     external: true
 services:
@@ -33,6 +33,8 @@ services:
     build: .
     ports:
       - 8080:8080
+    volumes:
+      - find_img:/Users/SSAFY/Image
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://j8a108.p.ssafy.io:3306/finedui?allowPublicKeyRetrieval=true&useSSL=false&characterEncoding=UTF-8&serverTimezone=UTC
       SPRING_DATASOURCE_USERNAME: ssafy
