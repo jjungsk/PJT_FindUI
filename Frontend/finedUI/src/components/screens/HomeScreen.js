@@ -44,7 +44,7 @@ import {
   missingLongSelector,
 } from '../../store/selectors/RegistSelector';
 import NoRegistCard from '../organisms/NoRegistCard';
-import { myInfoState } from '../../store/atoms/userState';
+import {myInfoState} from '../../store/atoms/userState';
 
 const HomeScreen = ({navigation}) => {
   // 로그인 유저
@@ -194,6 +194,7 @@ const HomeScreen = ({navigation}) => {
             renderItem={missingCardRender}
             horizontal={true}
             keyExtractor={item => String(item.registId)}
+            showsHorizontalScrollIndicator={false}
           />
         </View>
         {/* 장기간 */}
@@ -207,6 +208,7 @@ const HomeScreen = ({navigation}) => {
               renderItem={missingCardRender}
               horizontal={true}
               keyExtractor={item => String(item.registId)}
+              showsHorizontalScrollIndicator={false}
             />
           </View>
         </View>

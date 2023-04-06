@@ -1,7 +1,7 @@
 import React from 'react';
-import {View} from 'react-native';
+import { View } from 'react-native';
 
-import {widthPercentage, heightPercentage} from '../../styles/ResponsiveSize';
+import { widthPercentage, heightPercentage } from '../../styles/ResponsiveSize';
 
 const Divider = () => {
   return (
@@ -10,7 +10,7 @@ const Divider = () => {
         marginHorizontal: widthPercentage(16),
         marginVertical: heightPercentage(8),
         borderBottomColor: 'rgba(0, 0, 0, .38)',
-        borderBottomWidth: 0.5,
+        borderBottomWidth: 1,
       }}
     />
   );
