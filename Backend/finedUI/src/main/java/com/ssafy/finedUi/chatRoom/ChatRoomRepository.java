@@ -16,6 +16,7 @@ public interface ChatRoomRepository extends JpaRepository<ChatRoom,Long> {
     @Query("select a from ChatRoom a join ChatRoomUser b on a.id = b.chatRoom.id where b.user.id=:userID")
     List<ChatRoom> findChatRoomsByUser_Id(@Param("userID")Long UserId);
 
+    ChatRoom findByRegistInfo_RegistId(@Param("registId")Long registId);
 
 }
 //채팅방 생성하기

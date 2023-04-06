@@ -23,10 +23,13 @@ public class ChatRoom {
     private List<ChatRoomUser> chatRoomUser;
     @OneToMany(mappedBy = "chatRoom", cascade = CascadeType.REMOVE)
     private List<ChatMessage> chatMessageList;
-
+    @OneToOne
+    @JoinColumn(name="regist_id")
+    private RegistInfo registInfo;
     @Builder
-    public ChatRoom(String roomName) {
+    public ChatRoom(String roomName,RegistInfo registInfo) {
         this.roomName = roomName;
+        this.registInfo = registInfo;
     }
     
 }

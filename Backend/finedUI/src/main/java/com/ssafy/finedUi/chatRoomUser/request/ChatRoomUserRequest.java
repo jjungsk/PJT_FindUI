@@ -12,16 +12,17 @@ import lombok.Setter;
 @Setter
 @NoArgsConstructor
 public class ChatRoomUserRequest {
-//    private User user;
+    private User user;
     private ChatRoom chatRoom;
+    private Long roomId;
     @Builder
-    public ChatRoomUserRequest(ChatRoom chatRoom){
-//        this.user = user;
+    public ChatRoomUserRequest(ChatRoom chatRoom,User user){
+        this.user = user;
         this.chatRoom = chatRoom;
     }
     public ChatRoomUser toEntity(){
-//        return ChatRoomUser.builder().user(this.user).chatRoom(this.chatRoom).build();
-        return ChatRoomUser.builder().chatRoom(this.chatRoom).build();
+        return ChatRoomUser.builder().user(this.user).chatRoom(this.chatRoom).build();
+//        return ChatRoomUser.builder().chatRoom(this.chatRoom).build();
 
     }
 
