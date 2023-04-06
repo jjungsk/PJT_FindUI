@@ -79,6 +79,22 @@ const TabNavigation = ({navigation}) => {
         }}
       />
       <Tab.Screen
+        name="ChatList"
+        component={ChatListScreen}
+        options={{
+          title: 'Find & You',
+          subTitle: '채팅목록',
+          tabBarLabel: '채팅목록',
+          tabBarIcon: ({color, size}) => (
+            <Icon
+              name="chat-processing"
+              color={color}
+              size={widthPercentage(size)}
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
         name="MyPage"
         component={MyPage}
         options={{
@@ -91,16 +107,6 @@ const TabNavigation = ({navigation}) => {
               size={widthPercentage(size)}
             />
           ),
-        }}
-      />
-      {/* <Tab.Screen name="Test" component={Test} /> */}
-      <Tab.Screen
-        name="ChatList"
-        component={ChatListScreen}
-        options={{
-          title: 'Find & You',
-          subTitle: '채팅목록',
-          tabBarLabel: '채팅목록',
         }}
       />
     </Tab.Navigator>

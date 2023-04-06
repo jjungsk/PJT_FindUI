@@ -55,7 +55,6 @@ import {
   preRegist,
   apiPutMissingPerson,
 } from '../../API/apiMissingPerson';
-import {useRecoilValue} from 'recoil';
 import {isLoginState} from '../../store/atoms/userState';
 import WrappedSignUpAll from '../screens/SignUpAll';
 import {navigationRef} from './NavigationService';
