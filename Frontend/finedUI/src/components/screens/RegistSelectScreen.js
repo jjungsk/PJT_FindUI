@@ -15,10 +15,7 @@ const RegistSelectScreen = ({navigation}) => {
     title: '실종자 등록',
     content: '실종자 등록을 통해 당신의 소중한 사람을 찾아보세요',
   };
-  const familyRegistItem = {
-    title: '이산가족 등록',
-    content: '멀리 떨어진 가족을 찾아보세요',
-  };
+
   return (
     <SafeAreaView style={styles.container}>
       <TouchableOpacity
@@ -26,7 +23,9 @@ const RegistSelectScreen = ({navigation}) => {
         onPress={() => {
           resetRegistProps((mode = 0));
           navigation.navigate('registMain');
-        }}>
+        }}
+        style={{marginBottom: 17, marginTop: 17}}
+        >
         <RegistSelectBtn selectItem={preRegistItem} />
       </TouchableOpacity>
       <TouchableOpacity
@@ -34,11 +33,10 @@ const RegistSelectScreen = ({navigation}) => {
         onPress={() => {
           resetRegistProps((mode = 1));
           navigation.navigate('registMain');
-        }}>
+        }}
+        style={{marginBottom: 17, marginTop: 17}}
+        >
         <RegistSelectBtn selectItem={missingRegistItem} />
-      </TouchableOpacity>
-      <TouchableOpacity activeOpacity={0.6}>
-        <RegistSelectBtn selectItem={familyRegistItem} />
       </TouchableOpacity>
     </SafeAreaView>
   );
@@ -48,8 +46,9 @@ const styles = StyleSheet.create({
   container: {
     width: '100%',
     height: '100%',
-    justifyContent: 'space-evenly',
+    justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#f5f8ff',
   },
 });
 

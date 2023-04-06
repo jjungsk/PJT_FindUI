@@ -8,6 +8,8 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    backgroundColor: '#f5f8ff',
+    marginTop: 20
   },
   input: {
     height: 40,
@@ -17,7 +19,8 @@ const styles = StyleSheet.create({
     padding: 8,
     marginTop: 55,
     fontSize: 18,
-    width: "100%"
+    width: "100%",
+    // marginBottom: 15
   },
   list: {
     flex: 1,
@@ -99,7 +102,7 @@ const SearchPage = ({navigation}) => {
   
   const missingCardRender = ({item}) => {
     return (
-      <View style={{marginRight: 4, marginLeft:4}}>
+      <View style={{marginRight: 7, marginLeft:7}}>
         <MissingPersonCard missingPerson={item} navigation={navigation} />
       </View>
     );
@@ -108,7 +111,7 @@ const SearchPage = ({navigation}) => {
   return(
     <View style={styles.container}>
       <FloatingButton />
-      <View style={{width: "80%"}}>
+      <View style={{width: "80%", marginBottom: 10}}>
         <TouchableOpacity style={{backgroundColor:"#1570EF", borderRadius:10, justifyContent: 'center', marginTop: 10, padding: 10}}>
           <Text style={{ color:"white", fontSize: 15, fontWeight: "bold", alignSelf: 'center'}}>
             이미지 검색
@@ -122,7 +125,7 @@ const SearchPage = ({navigation}) => {
         numColumns={2}
         renderItem={missingCardRender}
         keyExtractor={(item) => String(item.identity)}
-        ItemSeparatorComponent={() => (<View style={{marginBottom: 8}}/>)}
+        ItemSeparatorComponent={() => (<View style={{marginBottom: 10}}/>)}
         ListEmptyComponent={() => (<View><Text style={{fontSize: 20, fontWeight: "bold", marginTop: 100}}>등록된 정보가 없습니다.</Text></View>)}
         />
     </View>
