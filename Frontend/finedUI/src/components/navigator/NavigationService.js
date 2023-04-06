@@ -9,7 +9,7 @@ export function navigate(name, params) {
 export function reset(name) {
   navigationRef.current?.reset({
     index: 0,
-    routes: [{ name }],
+    routes: [{name}],
   });
 }
 

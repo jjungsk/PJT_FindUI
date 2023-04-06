@@ -36,6 +36,7 @@ import {
   registPos,
   userPosition,
   registId,
+  registImagePath,
 } from '../store_regist/registStore';
 
 import ImagePicker from 'react-native-image-crop-picker';
@@ -58,6 +59,8 @@ const RegistScreen = ({route, navigation}) => {
   const mode = useRecoilValue(registMode);
   // 이미지
   const [imageList, setImageList] = useRecoilState(registImageList);
+  // 이미지 경로
+  const [imagePath, setImagePath] = useRecoilState(registImagePath);
   // 현재 위치
   const [position, setPosition] = useRecoilState(userPosition);
   // 이동한 주소
@@ -84,8 +87,8 @@ const RegistScreen = ({route, navigation}) => {
         if (initUrl === mainUrl) {
           newUrl = 'http://' + newUrl;
         }
-        console.log('(RegistScreen.js) newUrl 1 : ', newUrl);
         setImageList([...imageList, {uri: newUrl}]);
+        setImagePath([...imagePath, {uri: newUrl}]);
       }
       // 이미지 set 2
       if (route.params.userInfo.otherImage1Path !== null) {
@@ -94,8 +97,8 @@ const RegistScreen = ({route, navigation}) => {
         if (initUrl === mainUrl) {
           newUrl = 'http://' + newUrl;
         }
-        console.log('(RegistScreen.js) newUrl 2 : ', newUrl);
         setImageList([...imageList, {uri: newUrl}]);
+        setImagePath([...imagePath, {uri: newUrl}]);
       }
       // 이미지 set 3
       if (route.params.userInfo.otherImage2Path !== null) {
@@ -104,8 +107,8 @@ const RegistScreen = ({route, navigation}) => {
         if (initUrl === mainUrl) {
           newUrl = 'http://' + newUrl;
         }
-        console.log('(RegistScreen.js) newUrl 3 : ', newUrl);
         setImageList([...imageList, {uri: newUrl}]);
+        setImagePath([...imagePath, {uri: newUrl}]);
       }
     }
 
@@ -150,9 +153,6 @@ const RegistScreen = ({route, navigation}) => {
         {enableHighAccuracy: true, timeout: 5000, maximumAge: 5000},
       );
     }
-
-    // test
-    console.log('(RegistScreen.js) 실종자 정보 : ', route.params.userInfo);
   }, []);
 
   // useEffect[pos] - 등록 위치가 변경 될때
@@ -173,8 +173,15 @@ const RegistScreen = ({route, navigation}) => {
   // FUNCTION
   // 사진 삭제
   const removeImage = item => {
-    const newImageList = imageList.filter(element => element !== item);
+    const newImageList = imageList.filter(
+      element => element.uri !== item.uri && element.uri !== null,
+    );
+    const newImagePath = imageList.filter(element => element.uri !== item.uri);
+
+    console.log('삭제후 이미지 리스트', newImageList);
+    console.log('삭제후 패스 리스트', newImagePath);
     setImageList(newImageList);
+    setImagePath(newImagePath);
   };
 
   const pickImageFromAlbum = async () => {
@@ -195,6 +202,7 @@ const RegistScreen = ({route, navigation}) => {
           type: image.mime,
         };
         setImageList([...imageList, selectImage]);
+        console.log('추가 이미지 리스트', selectImage);
       });
     } catch (e) {
       console.log(e);

@@ -90,7 +90,6 @@ const ModifyScreen = ({navigation, route}) => {
       navigation.navigate('HomeScreen');
     } else if (state === 'modify') {
       // 수정 버튼
-      console.log(missingPerson);
       Alert.alert('수정 완료');
       // navigation.navigate('HomeScreen');
     }
@@ -126,11 +125,8 @@ const ModifyScreen = ({navigation, route}) => {
   // function - useEffect[pos]
   useEffect(() => {
     const getAddress = () => {
-      console.log('pos : ', pos.lng, pos.lat);
       const auto = async () => {
         const result = await apiGetAddress(pos.lng, pos.lat);
-
-        console.log('주소 response : ', result);
 
         setAddress(result['address_name']);
       };
@@ -159,7 +155,6 @@ const ModifyScreen = ({navigation, route}) => {
 
     // route로 넘어온 등록된 ID
     const registId = route.params.registId;
-    console.log(registId);
     const auto = async () => {
       await apiGetMissingPerson(registId)
         .then(({data}) => {

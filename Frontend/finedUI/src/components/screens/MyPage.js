@@ -22,7 +22,7 @@ import {deleteTokensFromKeychain} from '../../store/keychain/loginToken';
 import {reset} from '../navigator/NavigationService';
 import {preInfoState} from '../../store/atoms/InfoState';
 import NoRegistCard from '../organisms/NoRegistCard';
-import { preSelector } from '../../store/selectors/RegistSelector';
+import {preSelector} from '../../store/selectors/RegistSelector';
 
 const styles = StyleSheet.create({
   container: {
@@ -128,7 +128,6 @@ const MyPage = ({navigation}) => {
 
   const handleInfo = async () => {
     // 정보 변경 코드
-    console.log(address, phoneNumber);
     const response = await modifyInfo(address, phoneNumber);
     if (response.status === 200) {
       Alert.alert('정보가 변경되었습니다.');
