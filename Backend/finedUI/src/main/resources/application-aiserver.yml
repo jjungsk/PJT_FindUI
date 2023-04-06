@@ -1,6 +1,6 @@
 ai:
 #  서버용
- host: "http://122.43.185.37:8080"
+  host: "http://122.43.185.37:8080"
 #  로컬 테스트용
   # host: "http://localhost:8000"
   search: "/api/search"
