@@ -6,9 +6,9 @@ import {apiGetProfile} from '../../API/apiGetProfile';
 const ChatRoomList = ({navigation}) => {
   const [dataList, setDataList] = useState([]);
   const [profile, setProfile] = useState('');
-  const userId = 1;
+
   const roomList = async () => {
-    await apiGetChatRooms(userId).then(({data}) => {
+    await apiGetChatRooms().then(({data}) => {
       // TODO 마지막 메시지 저장하게 바꿔야됨
       // setLastMsg(data.last);
       setDataList([...data.data]);
