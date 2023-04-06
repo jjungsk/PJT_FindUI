@@ -16,8 +16,8 @@ import {widthPercentage} from '../../styles/ResponsiveSize';
 import PwModal from '../organisms/PwModal';
 import InfoModal from '../organisms/InfoModal';
 import {getUserInfo, modifyInfo, deleteUser} from '../../API/UserApi';
-import {useRecoilValue, useSetRecoilState} from 'recoil';
-import {isLoginState} from '../../store/atoms/userState';
+import {useRecoilState, useRecoilValue, useSetRecoilState} from 'recoil';
+import {isLoginState, myInfoState} from '../../store/atoms/userState';
 import {deleteTokensFromKeychain} from '../../store/keychain/loginToken';
 import {reset} from '../navigator/NavigationService';
 import {preInfoState} from '../../store/atoms/InfoState';
@@ -70,7 +70,7 @@ const MyPage = ({navigation}) => {
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [myInfo, setMyInfo] = useState({});
+  const [myInfo, setMyInfo] = useRecoilState(myInfoState);
   const [address, setAddress] = useState(myInfo.address); // 주소
   const [phoneNumber, setPhoneNumber] = useState(myInfo.phone); // 이메일
   const setIsLogin = useSetRecoilState(isLoginState);
@@ -136,11 +136,9 @@ const MyPage = ({navigation}) => {
     }
   };
   useEffect(() => {
-    const getMyInfo = async () => {
-      const info = await getUserInfo();
-      setMyInfo(info);
-      setAddress(info.address);
-      setPhoneNumber(info.phoneNumber);
+    const getMyInfo = () => {
+      setAddress(myInfo.address);
+      setPhoneNumber(myInfo.phoneNumber);
     };
     getMyInfo();
   }, []);
@@ -174,8 +172,8 @@ const MyPage = ({navigation}) => {
               <View style={styles.carouselItem}>
                 <PreRegistCard
                   registUser={item}
-                  userInfo={myInfo}
                   navigation={navigation}
+                  userInfo={myInfo}
                 />
                 <TouchableOpacity style={styles.button}>
                   <Text
