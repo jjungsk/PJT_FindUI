@@ -38,3 +38,22 @@ export const getMissingInfo = async () => {
   return error
 }
 };
+
+// 사전->실종 / 실종->사전 변경하기
+export const changeMissing = async ({registId, isMissing}) => {
+  try {
+  const token = await getAccessTokenFromKeychain();
+  const response = await api.patch(`/api/regist/registId?${registId}`,{
+
+  }, {
+    headers: {
+      Authorization: 'Bearer ' + token,
+    },
+  });
+  setRecoil(missingInfoState, response.data.data)
+  return response.data
+} catch (error) {
+  console.error(error);
+  return error
+}
+};

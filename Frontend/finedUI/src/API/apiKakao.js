@@ -19,7 +19,6 @@ const apiGetAddress = async (lng, lat) => {
       },
     );
     const result = response.data.documents[0];
-    console.log('kakao 주소 api : ', result);
     return result;
   } catch (error) {
     console.log(error);

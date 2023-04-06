@@ -54,7 +54,7 @@ const ModifyContents = ({missingPerson, onChangeInfo}) => {
           />
         </View>
       </View>
-      <View style={styles.row}>
+      {/* <View style={styles.row}>
         <View style={styles.left}>
           <View style={{width: widthPercentage(80)}}>
             <Text style={styles.textTitle}>보호자 연락처</Text>
@@ -68,10 +68,10 @@ const ModifyContents = ({missingPerson, onChangeInfo}) => {
             keyboardType={'number-pad'}
             style={styles.textContent}
             onChangeText={text => onChangeInfo('phone', text)}
-            value={missingPerson.user}
+            value={missingPerson.user.phoneNumber}
           />
         </View>
-      </View>
+      </View> */}
       <View style={styles.row}>
         <View style={styles.left}>
           <View style={{width: widthPercentage(80)}}>
@@ -102,7 +102,7 @@ const ModifyContents = ({missingPerson, onChangeInfo}) => {
           <TextInput
             style={styles.textContent}
             onChangeText={text => onChangeInfo('missingLocation', text)}
-            value={missingPerson.missingLocation}
+            value={missingPerson.registId}
           />
         </View>
       </View>

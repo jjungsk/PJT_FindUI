@@ -12,6 +12,8 @@ export default CustomInputField = ({
   keyboardType = 'default',
   maxLength = 10,
   multiline = false,
+  value = null,
+  editable = true,
   inputData = text => {
     console.log(text);
   },
@@ -23,7 +25,9 @@ export default CustomInputField = ({
       keyboardType={keyboardType}
       maxLength={maxLength}
       multiline={multiline}
+      value={value}
       style={styles.inputTitle}
+      editable={editable}
     />
   );
 };
