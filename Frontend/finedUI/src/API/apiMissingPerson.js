@@ -186,9 +186,15 @@ const apiPutMissingPerson = async ({data}) => {
   const imageList = data.imageList;
   const dataFormat = new FormData();
   console.log('pos : ', data.pos.lat, data.pos.lng);
+  // formatImgae
   dataFormat.append('frontImage', imageList[0]);
   dataFormat.append('otherImage1', imageList >= 2 ? imageList[1] : null);
   dataFormat.append('otherImage2', imageList >= 3 ? imageList[2] : null);
+  // Image path
+  dataFormat.append('frontImagePath', imageList[0]);
+  dataFormat.append('otherImage1Path', imageList >= 2 ? imageList[1] : null);
+  dataFormat.append('otherImage2Path', imageList >= 3 ? imageList[2] : null);
+
   dataFormat.append('name', data.name);
   dataFormat.append('birthDate', data.birth);
   dataFormat.append('gender', data.gender);
