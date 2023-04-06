@@ -21,10 +21,13 @@ const RegistSelectBtn = ({selectItem}) => {
 
 const styles = StyleSheet.create({
   selectContainer: {
-    width: widthPercentage(265),
-    height: heightPercentage(131),
+    width: widthPercentage(300),
+    height: heightPercentage(140),
     borderRadius: widthPercentage(15),
     borderWidth: 2,
+    elevation: 5,
+    borderColor: '#c7d7fe',
+    padding: 10,
     justifyContent: 'center',
     backgroundColor: '#ffffff',
   },
@@ -43,14 +46,14 @@ const styles = StyleSheet.create({
     paddingVertical: heightPercentage(8),
   },
   title: {
-    fontSize: fontPercentage(18),
+    fontSize: fontPercentage(22),
     fontWeight: 'bold',
     color: '#000000',
   },
   content: {
-    fontSize: fontPercentage(14),
+    fontSize: fontPercentage(15),
     fontWeight: '700',
-    color: '#000000',
+    // color: '#000000',
   },
 });
 

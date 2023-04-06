@@ -100,7 +100,7 @@ const HomeScreen = ({ navigation }) => {
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
-      <ScrollView style={{ backgroundColor: '#ffffff', }}>
+      <ScrollView style={{ backgroundColor: '#ffffff' }}>
         <View style={styles.registContainer}>
           <View
             style={{
@@ -217,10 +217,10 @@ const HomeScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   registContainer: {
     marginTop: heightPercentage(2),
-    backgroundColor: '#ffffff',
   },
   titleContainer: {
-    padding: widthPercentage(8),
+    paddingHorizontal: widthPercentage(16),
+    paddingVertical: widthPercentage(8),
     justifyContent: 'center',
     alignItems: 'flex-start',
   },
@@ -230,17 +230,19 @@ const styles = StyleSheet.create({
     color: '#000000',
   },
   carouselItem: {
-    paddingHorizontal: widthPercentage(9),
+    paddingHorizontal: widthPercentage(16),
   },
-  noticeContainer: { marginTop: heightPercentage(15), backgroundColor: '#ffffff' },
+  noticeContainer: { marginTop: heightPercentage(15) },
   realtimeMissingContainer: {
     marginTop: heightPercentage(2),
     paddingVertical: heightPercentage(12),
-    backgroundColor: '#ffffff',
   },
   cardContainer: {},
   missingCard: {
     marginHorizontal: widthPercentage(12),
+    // borderWidth: 1,
+    // elevation: 5,
+    // borderColor: '#c7d7fe',
   },
 });
 

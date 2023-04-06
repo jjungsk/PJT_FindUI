@@ -164,7 +164,7 @@ const SearchPage = ({ navigation }) => {
 
   const missingCardRender = ({ item }) => {
     return (
-      <View style={{ marginRight: 4, marginLeft: 4 }}>
+      <View style={{ marginRight: 7, marginLeft: 7 }}>
         <MissingPersonCard missingPerson={item} navigation={navigation} />
       </View>
     );
@@ -194,7 +194,7 @@ const SearchPage = ({ navigation }) => {
         <ImgSelectorContainer callback1={pickImageFromCamera} callback2={pickImageFromAlbum} />
       </Modal>
       {imageFile !== null ? <Image source={{ uri: imageFile.uri }} style={styles.imageSize} /> : null}
-      <View style={{ width: "80%" }}>
+      <View style={{ width: "80%", marginBottom: 10 }}>
         <TouchableOpacity style={styles.searchBtn} onPress={() => setImgSelect(!imgSelect)}>
           <Text style={styles.searchBtnText}>
             이미지 검색
@@ -208,9 +208,9 @@ const SearchPage = ({ navigation }) => {
         numColumns={2}
         renderItem={missingCardRender}
         keyExtractor={(item) => String(item.identity)}
-        ItemSeparatorComponent={() => (<View style={{ marginBottom: 8 }} />)}
+        ItemSeparatorComponent={() => (<View style={{ marginBottom: 10 }} />)}
         ListEmptyComponent={() => (<View><Text style={{ fontSize: 20, fontWeight: "bold", marginTop: 100 }}>등록된 정보가 없습니다.</Text></View>)}
-        showsVerticalScrollIndicator={false} />
+      />
     </View>
   )
 }

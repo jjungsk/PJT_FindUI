@@ -52,7 +52,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   carouselItem: {
-    paddingHorizontal: widthPercentage(9),
+    paddingHorizontal: widthPercentage(14),
   },
   button: {
     backgroundColor: '#1570EF',
@@ -168,7 +168,7 @@ const MyPage = ({ navigation }) => {
       </Modal>
       <ScrollView style={{ width: '100%' }}>
         <View
-          style={{ paddingHorizontal: widthPercentage(10), marginBottom: 10 }}>
+          style={{ paddingHorizontal: widthPercentage(12), marginBottom: 10 }}>
           <Text
             style={[
               styles.text,

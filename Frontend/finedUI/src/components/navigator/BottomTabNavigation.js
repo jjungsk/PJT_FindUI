@@ -12,16 +12,17 @@
 import React from 'react';
 
 // react-native
-import { TouchableOpacity } from 'react-native';
 
 // react-navigation
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+// import ChatScreen from '../screens/ChatScreen';
 
 // icons
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
 // sizes
 import { heightPercentage, widthPercentage } from '../../styles/ResponsiveSize';
+import ChatListScreen from '../screens/ChatListScreen';
 
 // components - NavBar
 import HomeScreen from '../screens/HomeScreen';
@@ -73,8 +74,20 @@ const TabNavigation = ({ navigation }) => {
           title: 'Find & You',
           tabBarLabel: '검색',
           tabBarIcon: ({ color, size }) => (
+            <Icon name="magnify" color={color} size={widthPercentage(size)} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="ChatList"
+        component={ChatListScreen}
+        options={{
+          title: 'Find & You',
+          subTitle: '채팅목록',
+          tabBarLabel: '채팅목록',
+          tabBarIcon: ({ color, size }) => (
             <Icon
-              name="magnify"
+              name="chat-processing"
               color={color}
               size={widthPercentage(size)}
             />
