@@ -39,9 +39,15 @@ public class RegistInfoUpdateServiceImpl implements RegistInfoUpdateService {
         }
         MultipartFile[] multipartFiles = {registInfoUpdateRequest.getFrontImage(), registInfoUpdateRequest.getOtherImage1(), registInfoUpdateRequest.getOtherImage2()};
         String[] imagePaths = imageSaveService.save(multipartFiles, registInfoUpdateRequest.getRegistId());
-        registInfoUpdateRequest.setFrontImagePath(imagePaths[0]);
-        registInfoUpdateRequest.setOtherImage1Path(imagePaths[1]);
-        registInfoUpdateRequest.setOtherImage2Path(imagePaths[2]);
+        if (registInfoUpdateRequest.getFrontImagePath() == null || registInfoUpdateRequest.getFrontImagePath().isEmpty()) {
+            registInfoUpdateRequest.setFrontImagePath(imagePaths[0]);
+        }
+        if (registInfoUpdateRequest.getOtherImage1Path() == null || registInfoUpdateRequest.getOtherImage1Path().isEmpty()) {
+            registInfoUpdateRequest.setOtherImage1Path(imagePaths[1]);
+        }
+        if (registInfoUpdateRequest.getOtherImage2Path() == null || registInfoUpdateRequest.getOtherImage2Path().isEmpty()) {
+            registInfoUpdateRequest.setOtherImage2Path(imagePaths[2]);
+        }
         return new RegistInfoUpdateResponse(registInfoRepository.save(registInfoUpdateRequest.toEntity()));
     }
 
