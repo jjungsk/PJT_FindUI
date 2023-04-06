@@ -30,7 +30,7 @@ public class ImageSaveServiceImpl implements ImageSaveService{
             MultipartFile file = multipartFiles[value];
 
             // 이미지가 아닐 경우 종료
-            if (file.getContentType() == null || file.getContentType().startsWith("image") == false) {
+            if (file.getContentType() == null || file.getContentType().toString().startsWith("image") == false) {
 //                System.out.println("this is not image");
                 continue;
             }
@@ -41,6 +41,7 @@ public class ImageSaveServiceImpl implements ImageSaveService{
             Integer imageId = value + 1;
             String fileName = registId.toString() + '_' + imageId.toString() + ".png";
             Path savePath = Paths.get(uploadPath + fileName); // 저장 경로
+            System.out.println(savePath.toString());
 
             // 폴더가 존재하는지 확인하고 존재하지 않는다면 폴더 생성
             File uploadPathFolder = new File(uploadPath, "Image");

@@ -1,6 +1,7 @@
 package com.ssafy.finedUi.registInfo.get.response;
 
 import com.ssafy.finedUi.db.entity.RegistInfo;
+import com.ssafy.finedUi.db.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
@@ -11,7 +12,7 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 public class RegistInfoGetResponse {
     private Long registId;              // 실종 번호
-    private Long userId;                // 사용자(FK)
+//    private Long userId;                // 사용자(FK)
     private String name;                // 이름
     private Integer birthDate;          // 생년월일(ex: 1996.06.25)
     private Integer gender;             // 성별
@@ -25,10 +26,12 @@ public class RegistInfoGetResponse {
     private Timestamp createDate;       // 생성 시간
     private Boolean isMissing;          // 실종 여부
     private Timestamp updateDate;       // 수정 시간
+    private User user;
+    private String description;         // 설명
 
     public RegistInfoGetResponse(RegistInfo registInfo) {
         this.registId = registInfo.getRegistId();
-        this.userId = registInfo.getUser().getUserId();
+//        this.userId = registInfo.getUser().getUserId();
         this.name = registInfo.getName();
         this.birthDate = registInfo.getBirthDate();
         this.gender = registInfo.getGender();
@@ -41,5 +44,7 @@ public class RegistInfoGetResponse {
         this.createDate = registInfo.getCreateDate();
         this.isMissing = registInfo.getIsMissing();
         this.updateDate = registInfo.getUpdateDate();
+        this.user = registInfo.getUser();
+        this.description = registInfo.getDescription();
     }
 }

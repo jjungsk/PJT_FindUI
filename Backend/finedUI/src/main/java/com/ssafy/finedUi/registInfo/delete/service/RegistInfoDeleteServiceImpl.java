@@ -6,6 +6,7 @@ import com.ssafy.finedUi.chatImage.s3.delete.S3DeleteService;
 import com.ssafy.finedUi.registInfo.RegistInfoRepository;
 import com.ssafy.finedUi.registInfo.delete.request.RegistInfoDeleteRequest;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,6 +20,9 @@ import java.nio.file.Paths;
 @RequiredArgsConstructor
 public class RegistInfoDeleteServiceImpl implements RegistInfoDeleteService{
 
+    @Value("${image.upload.path}")
+    private String filePath;    // 이미지 실제 저장 경로
+
     private final RegistInfoRepository registInfoRepository;
     private final ChatImageRepository chatImageRepository;
     private final S3DeleteService s3DeleteService;
@@ -31,7 +35,8 @@ public class RegistInfoDeleteServiceImpl implements RegistInfoDeleteService{
         // 이미지 모두 삭제
         for (String imagePath : imagePathList) {
             if (imagePath == null) {continue;}  // 비어있을 경우 다음 실행
-            Path path = Paths.get(imagePath);   // 경로
+            String[] splitImagePath = imagePath.split("/");
+            Path path = Paths.get(filePath + "\\" + splitImagePath[splitImagePath.length-1]);   // 경로
             try {
                 Files.deleteIfExists(path);     // 파일이 존재할 경우 삭제, 파일이 존재하지 않을 경우 False를 반환
             } catch (IOException e) {           // Exception이 발생하지 않음

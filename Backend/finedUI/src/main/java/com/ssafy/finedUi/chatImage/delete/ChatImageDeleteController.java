@@ -1,6 +1,7 @@
 package com.ssafy.finedUi.chatImage.delete;
 
 import com.ssafy.finedUi.chatImage.delete.service.ChatImageDeleteService;
+import com.ssafy.finedUi.common.security.SecurityUtils;
 import com.ssafy.finedUi.handler.ResponseHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,9 +19,9 @@ public class ChatImageDeleteController {
     private final ChatImageDeleteService chatImageDeleteService;
 
     @DeleteMapping
-    public ResponseEntity<Object> delete(@RequestParam  Long userId,@RequestParam Long registId) {
+    public ResponseEntity<Object> delete(@RequestParam Long registId) {
         try {
-            chatImageDeleteService.delete(userId, registId);
+            chatImageDeleteService.delete(SecurityUtils.getUserPricipal().getId(), registId);
         } catch (Exception e) {
             return ResponseHandler.generateResponse(false, e.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR, null);
         }

@@ -70,5 +70,8 @@ public class RegistInfo {
     @UpdateTimestamp
     @Column(name = "update_date")
     private Timestamp updateDate;       // 수정 시간
+
+    @Column(name = "description")
+    private String description;         // 설명
 }
 

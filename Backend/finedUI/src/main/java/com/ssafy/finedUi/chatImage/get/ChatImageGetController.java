@@ -1,6 +1,7 @@
 package com.ssafy.finedUi.chatImage.get;
 
 import com.ssafy.finedUi.chatImage.get.service.ChatImageGetService;
+import com.ssafy.finedUi.common.security.SecurityUtils;
 import com.ssafy.finedUi.handler.ResponseHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -16,8 +17,10 @@ public class ChatImageGetController {
 
     // userId : 사용자 번호
     @GetMapping(path = "/user")
-    public ResponseEntity<Object> searchByUser(@RequestParam Long userId) {
-        return ResponseHandler.generateResponse(true, "OK", HttpStatus.OK, chatImageGetService.searchByUser(userId));
+    public ResponseEntity<Object> searchByUser() {
+        return ResponseHandler.generateResponse(true, "OK", HttpStatus.OK, chatImageGetService.searchByUser(
+                SecurityUtils.getUserPricipal().getId()
+        ));
     }
 
     // missingId : 실종(등록) 번호
