@@ -28,12 +28,14 @@ import ChatListScreen from '../screens/ChatListScreen';
 import HomeScreen from '../screens/HomeScreen';
 import RegistStackNavigation from './RegistStackNavigation';
 import MyPage from '../screens/MyPage';
+import SearchPage from '../screens/SearchPage';
 
 const Tab = createBottomTabNavigator();
 
 const TabNavigation = ({navigation}) => {
   return (
-    <Tab.Navigator screenOptions={{tabBarHideOnKeyboard: true}}>
+    <Tab.Navigator
+      screenOptions={{tabBarHideOnKeyboard: true, unmountOnBlur: true}}>
       {/* homescreen */}
       <Tab.Screen
         name="Home"
@@ -67,6 +69,33 @@ const TabNavigation = ({navigation}) => {
         }}
       />
       <Tab.Screen
+        name="SearchPage"
+        component={SearchPage}
+        options={{
+          title: 'Find & You',
+          tabBarLabel: '검색',
+          tabBarIcon: ({color, size}) => (
+            <Icon name="magnify" color={color} size={widthPercentage(size)} />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="ChatList"
+        component={ChatListScreen}
+        options={{
+          title: 'Find & You',
+          subTitle: '채팅목록',
+          tabBarLabel: '채팅목록',
+          tabBarIcon: ({color, size}) => (
+            <Icon
+              name="chat-processing"
+              color={color}
+              size={widthPercentage(size)}
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
         name="MyPage"
         component={MyPage}
         options={{
@@ -79,16 +108,6 @@ const TabNavigation = ({navigation}) => {
               size={widthPercentage(size)}
             />
           ),
-        }}
-      />
-      {/* <Tab.Screen name="Test" component={Test} /> */}
-      <Tab.Screen
-        name="ChatList"
-        component={ChatListScreen}
-        options={{
-          title: 'Find & You',
-          subTitle: '채팅목록',
-          tabBarLabel: '채팅목록',
         }}
       />
     </Tab.Navigator>

@@ -30,9 +30,10 @@ const styles = StyleSheet.create({
   }
 });
 
-const KakaoButton = () => {
+const KakaoButton = ({onPress}) => {
   return(
     <TouchableOpacity
+      onPress={onPress}
       style={styles.kakaoStyle}
     >
       <Image

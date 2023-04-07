@@ -30,10 +30,11 @@ const styles = StyleSheet.create({
   }
 });
 
-const GoogleButton = () => {
+const GoogleButton = ({onPress}) => {
   return(
     <TouchableOpacity
       style={styles.googleStyle}
+      onPress={onPress}
     >
       <Image
         source={require("../../assets/google.png")}

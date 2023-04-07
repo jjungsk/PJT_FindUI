@@ -32,50 +32,39 @@ import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import DetailContents from '../organisms/DetailContents';
 import GoogleMapNotTouch from '../organisms/GoogleMapNotTouch';
 import LinkButtons from '../organisms/LinkButtons';
-// import GoogleMap from '../organisms/GoogleMap';
 
 // apis
-import {apiGetMissingPerson} from '../../API/apiMissingPerson';
+import {apiGetAddress} from '../../API/apiKakao';
+import FloatingButton from '../atoms/FloatingButton';
 
 const DetailScreen = ({navigation, route}) => {
+  // State - 실종자 정보
   const [missingPerson, setMissingPerson] = useState({});
-  const [detailUser, setDetailUser] = useState({
-    name: '샘스미스',
-    birthday: 970218,
-    address: '서울시 역삼동 멀티캠퍼스',
-    phone: '010-6725-5590',
-    lostday: new Date(1999, 2, 20),
-    location: '서울시 역삼역 11번 출구 앞',
-    description: '키가 크고 눈이 크며 어쩌구 저쩌구..',
-    image: null,
-  });
-
-  const [position, setPosition] = useState({
-    latitude: 37.564362,
-    longitude: 126.977011,
-  });
+  const [address, setAddress] = useState();
 
   // FUNCTION
   // useEffect
   useEffect(() => {
     // route로 넘어온 등록된 ID
-    const registId = route.params.registId;
+    setMissingPerson(route.params.missingPerson);
 
+    // 위도 경도를 통한 주소 가져오기
     const auto = async () => {
-      await apiGetMissingPerson(registId)
-        .then(({data}) => {
-          setMissingPerson(data.data);
-          console.log(data.data);
+      await apiGetAddress(
+        route.params.missingPerson.longitude,
+        route.params.missingPerson.latitude,
+      )
+        .then(res => {
+          setAddress(res.address_name);
         })
-        .catch(error => {
-          Alert.alert(error);
-        });
+        .catch(error => console.log(error));
     };
     auto();
   }, []);
 
   return (
     <SafeAreaView style={{flex: 1}}>
+      <FloatingButton />
       <ScrollView>
         <View style={styles.detailContainer}>
           <View style={styles.titleContainer}>
@@ -84,7 +73,7 @@ const DetailScreen = ({navigation, route}) => {
           <View style={styles.imageContainer}>
             <Image
               source={
-                detailUser.image != null
+                missingPerson.frontImagePath != null
                   ? null
                   : require('../../assets/images/no_profile_image.png')
               }
@@ -92,7 +81,7 @@ const DetailScreen = ({navigation, route}) => {
             />
           </View>
           <View style={styles.contentContainer}>
-            <DetailContents detail={detailUser} />
+            <DetailContents detail={missingPerson} address={address} />
           </View>
           <View style={styles.linkContainer}>
             <LinkButtons />
@@ -101,8 +90,8 @@ const DetailScreen = ({navigation, route}) => {
             style={styles.mapDetail}
             onPress={() =>
               navigation.navigate('MapDetail', {
-                lat: position.latitude,
-                lng: position.longitude,
+                lat: missingPerson.latitude,
+                lng: missingPerson.longitude,
                 mode: false,
               })
             }>
@@ -117,8 +106,8 @@ const DetailScreen = ({navigation, route}) => {
           </TouchableOpacity>
           <View style={styles.mapContainer} pointerEvents="none">
             <GoogleMapNotTouch
-              lat={position.latitude}
-              lng={position.longitude}
+              lat={missingPerson.latitude}
+              lng={missingPerson.longitude}
             />
             <Image
               source={require('../../assets/images/marker_img.png')}

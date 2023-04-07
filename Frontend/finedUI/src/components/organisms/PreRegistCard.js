@@ -1,8 +1,12 @@
 // react
-import React from 'react';
+import React, {useEffect} from 'react';
 
 // react-native
 import {View, Text, Image, TouchableOpacity, StyleSheet} from 'react-native';
+
+// recoil
+import {useSetRecoilState} from 'recoil';
+import {resetRegistAtoms} from '../store_regist/registStore';
 
 // styles
 import {
@@ -14,16 +18,18 @@ import {
 // icons
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-import {format} from 'date-fns';
-import ko from 'date-fns/esm/locale/ko/index.js';
+const PreRegistCard = ({registUser, userInfo = null, mode = 0, navigation}) => {
+  // recoil data 초기화
+  const resetRegistProps = useSetRecoilState(resetRegistAtoms);
+  const address = new String(userInfo.address);
+  const phone = new String(userInfo.phoneNumber);
 
-const PreRegistCard = ({registUser, navigation}) => {
   return (
     <View style={styles.container}>
       <Image
         source={
           registUser.frontImagePath != null
-            ? null
+            ? {uri: 'http://' + registUser.frontImagePath}
             : require('../../assets/images/no_profile_image.png')
         }
         style={styles.image}
@@ -32,8 +38,9 @@ const PreRegistCard = ({registUser, navigation}) => {
         <View style={styles.icons}>
           <TouchableOpacity
             onPress={() => {
-              navigation.navigate('ModifyScreen', {
-                registId: registUser.registId,
+              resetRegistProps((mode = mode));
+              navigation.navigate('registMain', {
+                userInfo: registUser,
               });
             }}>
             <Icon
@@ -56,10 +63,10 @@ const PreRegistCard = ({registUser, navigation}) => {
             생년 월일 : {registUser.birthDate}
           </Text>
           <Text numberOfLines={1} style={styles.text}>
-            보호자 주소 : {registUser.address}
+            보호자 주소 : {userInfo !== null && address.slice(0, 5) + '...'}
           </Text>
           <Text numberOfLines={1} style={styles.text}>
-            보호자 연락처 : {registUser.phonenumber}
+            보호자 연락처 : {userInfo !== null && phone.slice(0, 6) + '...'}
           </Text>
         </View>
       </View>
@@ -74,7 +81,9 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     padding: widthPercentage(12),
     borderStyle: 'solid',
-    borderWidth: 1,
+    borderWidth: 2,
+    borderColor: '#c7d7fe',
+    elevation: 5,
     flexDirection: 'row',
     backgroundColor: '#ffffff',
   },

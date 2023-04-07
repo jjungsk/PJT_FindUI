@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {View, Text, Image, StyleSheet, TouchableOpacity} from 'react-native';
 
 import {
@@ -9,8 +9,12 @@ import {
 
 import GoogleMapDetail from '../organisms/GoogleMapDetail';
 import {useRecoilState, useRecoilValue, useSetRecoilState} from 'recoil';
-import {userPosition} from '../store_regist/homeStore';
-import {registPos} from '../store_regist/registStore';
+import {
+  registAddress,
+  registMode,
+  registPos,
+  userPosition,
+} from '../store_regist/registStore';
 
 const styles = StyleSheet.create({
   mainContainer: {
@@ -44,18 +48,15 @@ const styles = StyleSheet.create({
 });
 
 const MapViewDetail = ({navigation, route}) => {
-  let position = useRecoilValue(userPosition);
-  const [pos, setPos] = useRecoilState(registPos);
+  const position = useRecoilValue(userPosition);
+  const setPos = useSetRecoilState(registPos);
+  const mode = useRecoilValue(registMode);
 
-  const registMode = route.params.mode ? true : false;
-  if (!registMode) {
-    position = {lat: route.params.lat, lng: route.params.lng};
-  }
   return (
     <View style={styles.mainContainer}>
       <View style={styles.infoContainer}></View>
-      <GoogleMapDetail position={position} setMarker={!registMode} />
-      {registMode ? (
+      <GoogleMapDetail position={position} setMarker={mode} />
+      {mode == 1 || mode == 2 || mode == 3 ? (
         <>
           <Image
             source={require('../../assets/images/marker_img.png')}
@@ -63,11 +64,9 @@ const MapViewDetail = ({navigation, route}) => {
           />
           <TouchableOpacity
             style={styles.setPosBtn}
-            onPress={() => {
+            onPress={async () => {
               setPos(position);
-              if (pos !== null) {
-                navigation.goBack();
-              }
+              navigation.goBack();
             }}>
             <Text style={styles.setPosBtnTitle}>선택 완료</Text>
           </TouchableOpacity>

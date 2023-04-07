@@ -1,8 +1,3 @@
-/*
-  Home-Screen Main
-  by.황진태
-*/
-
 // react
 import React, {useState, useEffect} from 'react';
 
@@ -25,8 +20,8 @@ import {
 } from '../../styles/ResponsiveSize';
 
 // recoil
-import {useRecoilState} from 'recoil';
-import {userPosition} from '../store_regist/homeStore';
+import {useRecoilValue, useSetRecoilState, useRecoilState} from 'recoil';
+import {userPosition} from '../store_regist/registStore';
 
 // position
 import Geolocation from 'react-native-geolocation-service';
@@ -38,66 +33,37 @@ import {Carousel} from 'react-native-basic-carousel';
 import {MissingPersonCard} from '../organisms/MissingPersonCard';
 
 // apis
-import {apiGetUserRegistMissingPersons} from '../../API/apiHome';
-import {apiGetAddress, apiGetLngLat} from '../../API/apiKakao';
+import {getUserInfo} from '../../API/UserApi';
+import {
+  missingSelector,
+  preSelector,
+  noticeSelector,
+  missingShortSelector,
+  missingLongSelector,
+} from '../../store/selectors/RegistSelector';
+import NoRegistCard from '../organisms/NoRegistCard';
+import {myInfoState} from '../../store/atoms/userState';
 
 const HomeScreen = ({navigation}) => {
-  const [position, setPosition] = useRecoilState(userPosition);
-  const [registUsers, setRegistUser] = useState([
-    {
-      name: '샘스미스',
-      birthday: 970218,
-      address: '서울시 역삼동 멀티캠퍼스',
-      phone: '010-6725-5590',
-      image: null,
-    },
-    {
-      name: '정둘권',
-      birthday: 970218,
-      address: '서울시 역삼동 멀티캠퍼스',
-      phone: '010-6725-5590',
-      image: null,
-    },
-  ]);
+  // 로그인 유저
+  const setPosition = useSetRecoilState(userPosition); // 현재 위치
+  const [isChange, setIsChange] = useState(true);
+  const [userInfo, setUserInfo] = useRecoilState(myInfoState);
 
-  const [notices, setNotice] = useState([
-    {
-      title: '미아 발견 시, 대처 방법',
-      content:
-        '우선 경찰서에 전화로 신고를 하세요. 전국 어디서나 국번없이 182번(타 지역이 경우에는 지역번호+182)을 누르고, 미아발생 신고를 합니다. 경찰청 182센터는 전국적으로 미아. 가출아동을 수배하는 곳입니다.',
-    },
-    {
-      title: '미아 발견 시, 대처 방법',
-      content:
-        '우선 경찰서에 전화로 신고를 하세요. 전국 어디서나 국번없이 182번(타 지역이 경우에는 지역번호+182)을 누르고, 미아발생 신고를 합니다. 경찰청 182센터는 전국적으로 미아. 가출아동을 수배하는 곳입니다.',
-    },
-  ]);
+  // (1) 로그인 유저가 등록한 실종자 정보
+  const registUsers = useRecoilValue(preSelector); // 사전 등록
+  const missingPersons = useRecoilValue(missingSelector); // 사전 등록 후 실제 실종된 정보
 
-  const [missingPersons, setMissingPerson] = useState([
-    {
-      name: 'Name1',
-      identity: 'birthDate1',
-      location: '서울',
-      image: null,
-      registId: 1,
-    },
-    {
-      name: 'Name2',
-      identity: 'birthDate2',
-      location: '서울',
-      image: null,
-      registId: 2,
-    },
-    {
-      name: 'Name3',
-      identity: 'birthDate3',
-      location: '서울',
-      image: null,
-      registId: 3,
-    },
-  ]);
+  // (2) 공지사항
+  const notices = useRecoilValue(noticeSelector);
 
+  // (3) 실시간 & 장기간 실종자 정보
+  const missingShort = useRecoilValue(missingShortSelector); // 실시간 실종
+  const missingLong = useRecoilValue(missingLongSelector); // 장기간 실종
+
+  // useEffect
   useEffect(() => {
+    // (0) 로그인 후 사용자의 현재 위치 값 저장
     Geolocation.getCurrentPosition(position => {
       const {latitude, longitude} = position.coords;
       setPosition(
@@ -108,29 +74,19 @@ const HomeScreen = ({navigation}) => {
         {enableHighAccuracy: true, timeout: 5000, maximumAge: 5000},
       );
     });
-  }, []);
 
-  const width = Dimensions.get('window').width;
-
-  // FUNCTION
-
-  // function - render
-  useEffect(() => {
-    // (1) User가 등록한 실종자 등록 정보
-    const userId = 1;
-    const auto1 = async () => {
-      await apiGetUserRegistMissingPersons(userId)
-        .then(({data}) => {
-          setRegistUser(data.data);
+    // (0) 로그인한 유저의 정보 저장
+    const auto = async () => {
+      await getUserInfo()
+        .then(res => {
+          setUserInfo(res);
         })
         .catch(error => console.log(error));
     };
-    auto1();
-
-    // (2) notices list 반환
-
-    // (3) 전체 실종자 list 반환
+    auto();
   }, []);
+
+  const width = Dimensions.get('window').width;
 
   // component
   const missingCardRender = ({item}) => {
@@ -143,21 +99,76 @@ const HomeScreen = ({navigation}) => {
 
   return (
     <SafeAreaView style={{flex: 1}}>
-      <ScrollView>
+      <ScrollView style={{backgroundColor: '#ffffff'}}>
         <View style={styles.registContainer}>
-          <View style={styles.titleContainer}>
-            <Text style={styles.title}>등록 정보</Text>
+          <View
+            style={{
+              justifyContent: 'space-between',
+              flexDirection: 'row',
+              alignItems: 'center',
+            }}>
+            <View style={styles.titleContainer}>
+              <Text
+                style={[styles.title, !isChange && {color: '#d3d3d3'}]}
+                onPress={() => {
+                  setIsChange(true);
+                }}>
+                사전 등록 정보
+              </Text>
+            </View>
+            <View style={styles.titleContainer}>
+              <Text
+                style={[styles.title, isChange && {color: '#d3d3d3'}]}
+                onPress={() => {
+                  setIsChange(false);
+                }}>
+                실종 등록 정보
+              </Text>
+            </View>
           </View>
-          <Carousel
-            data={registUsers}
-            renderItem={({item}) => (
+          {isChange ? (
+            registUsers.length < 1 ? (
               <View style={styles.carouselItem}>
-                <PreRegistCard registUser={item} navigation={navigation} />
+                <NoRegistCard textInfo={'등록된 사전 등록 정보가 없습니다.'} />
               </View>
-            )}
-            itemWidth={width}
-            pagination
-          />
+            ) : (
+              <Carousel
+                data={registUsers}
+                renderItem={({item}) => (
+                  <View style={styles.carouselItem}>
+                    <PreRegistCard
+                      registUser={item}
+                      userInfo={userInfo}
+                      mode={2}
+                      navigation={navigation}
+                    />
+                  </View>
+                )}
+                itemWidth={width}
+                pagination
+              />
+            )
+          ) : missingPersons.length < 1 ? (
+            <View style={styles.carouselItem}>
+              <NoRegistCard textInfo={'등록한 실종 정보가 없습니다.'} />
+            </View>
+          ) : (
+            <Carousel
+              data={missingPersons}
+              renderItem={({item}) => (
+                <View style={styles.carouselItem}>
+                  <PreRegistCard
+                    registUser={item}
+                    userInfo={userInfo}
+                    mode={3}
+                    navigation={navigation}
+                  />
+                </View>
+              )}
+              itemWidth={width}
+              pagination
+            />
+          )}
         </View>
         <View style={styles.noticeContainer}>
           <Carousel
@@ -171,27 +182,31 @@ const HomeScreen = ({navigation}) => {
             pagination
           />
         </View>
+        {/* 실시간 */}
         <View style={styles.realtimeMissingContainer}>
           <View style={styles.titleContainer}>
             <Text style={styles.title}>실시간 실종자 정보</Text>
           </View>
           <FlatList
-            data={missingPersons}
+            data={missingShort}
             renderItem={missingCardRender}
             horizontal={true}
-            keyExtractor={item => String(item.identity)}
+            keyExtractor={item => String(item.registId)}
+            showsHorizontalScrollIndicator={false}
           />
         </View>
+        {/* 장기간 */}
         <View style={styles.realtimeMissingContainer}>
           <View style={styles.titleContainer}>
             <Text style={styles.title}>장기간 실종자 정보</Text>
           </View>
           <View style={styles.cardContainer}>
             <FlatList
-              data={missingPersons}
+              data={missingLong}
               renderItem={missingCardRender}
               horizontal={true}
-              keyExtractor={item => String(item.identity)}
+              keyExtractor={item => String(item.registId)}
+              showsHorizontalScrollIndicator={false}
             />
           </View>
         </View>
@@ -203,10 +218,10 @@ const HomeScreen = ({navigation}) => {
 const styles = StyleSheet.create({
   registContainer: {
     marginTop: heightPercentage(2),
-    backgroundColor: '#ffffff',
   },
   titleContainer: {
-    padding: widthPercentage(8),
+    paddingHorizontal: widthPercentage(16),
+    paddingVertical: widthPercentage(8),
     justifyContent: 'center',
     alignItems: 'flex-start',
   },
@@ -216,17 +231,19 @@ const styles = StyleSheet.create({
     color: '#000000',
   },
   carouselItem: {
-    paddingHorizontal: widthPercentage(9),
+    paddingHorizontal: widthPercentage(16),
   },
-  noticeContainer: {marginTop: heightPercentage(2), backgroundColor: '#ffffff'},
+  noticeContainer: {marginTop: heightPercentage(15)},
   realtimeMissingContainer: {
     marginTop: heightPercentage(2),
     paddingVertical: heightPercentage(12),
-    backgroundColor: '#ffffff',
   },
   cardContainer: {},
   missingCard: {
     marginHorizontal: widthPercentage(12),
+    // borderWidth: 1,
+    // elevation: 5,
+    // borderColor: '#c7d7fe',
   },
 });
 

@@ -1,5 +1,5 @@
 // react
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 
 // react-native
 import {
@@ -18,15 +18,35 @@ import {
   widthPercentage,
 } from '../../styles/ResponsiveSize';
 
+// recoil
+import {useSetRecoilState} from 'recoil';
+import {resetRegistAtoms} from '../store_regist/registStore';
+
 const MissingPersonCard = ({missingPerson, navigation}) => {
+  // recoil data 초기화
+  const resetRegistProps = useSetRecoilState(resetRegistAtoms);
+  if ('url' in missingPerson) {
+    missingPerson.frontImagePath = missingPerson.url;
+  }
+  let imageUrl = new String(missingPerson.frontImagePath);
+  console.log(missingPerson);
+  const urlHeader = imageUrl.search('https') == -1 ? 'http://' : '';
+  // default 이미지
   const img = require('../../assets/images/no_profile_image.png');
   return (
     <TouchableOpacity
       onPress={() => {
-        navigation.navigate('DetailScreen', {registId: missingPerson.registId});
+        resetRegistProps((mode = 4));
+        missingPerson.userId = missingPerson.id;
+        navigation.navigate('registMain', {userInfo: missingPerson});
       }}>
       <ImageBackground
-        source={img}
+        source={{
+          uri:
+            missingPerson.frontImagePath !== null
+              ? urlHeader + missingPerson.frontImagePath
+              : img,
+        }}
         resizeMode="cover"
         style={styles.image}
         imageStyle={styles.imageStyle}>
@@ -43,7 +63,7 @@ const MissingPersonCard = ({missingPerson, navigation}) => {
           </View>
           <View>
             <Text style={styles.imageTextContents}>
-              {missingPerson.identity} / {missingPerson.location}
+              {missingPerson.birthDate !== null && missingPerson.birthDate}
             </Text>
           </View>
         </LinearGradient>
@@ -59,6 +79,9 @@ const styles = StyleSheet.create({
   },
   imageStyle: {
     borderRadius: widthPercentage(20),
+    borderWidth: 2,
+    // elevation: 5,
+    borderColor: '#c7d7fe',
   },
   imageText: {
     width: '100%',

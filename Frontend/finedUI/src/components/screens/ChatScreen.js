@@ -1,7 +1,6 @@
 import React, {useState, useCallback} from 'react';
 import {
   TextInput,
-  SafeAreaView,
   StyleSheet,
   Pressable,
   View,

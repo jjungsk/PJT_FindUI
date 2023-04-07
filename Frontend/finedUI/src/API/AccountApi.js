@@ -1,5 +1,8 @@
 import apiInstance from "./apiInstance";
-import { getAccessTokenFromKeychain, getRefreshTokenFromKeychain, saveAccessToKeychain, saveRefreshToKeychain } from "../store/keychain/loginToken";
+import { deleteTokensFromKeychain, getAccessTokenFromKeychain, getRefreshTokenFromKeychain, saveAccessToKeychain, saveRefreshToKeychain } from "../store/keychain/loginToken";
+import { reset } from "../components/navigator/NavigationService";
+import { isLoginState } from "../store/atoms/userState";
+import { setRecoil } from "recoil-nexus";
 
 const api = apiInstance();
 
@@ -35,7 +38,9 @@ export const checkRefresh = async () => {
       saveAccessToKeychain(response.data.accessToken)
       return true
     } else {
-      //TODO: 로그인 이동
+      setRecoil(isLoginState, false)
+      deleteTokensFromKeychain();
+      reset('LoginPage')
       return false
     }
   } catch (error) {
@@ -63,7 +68,10 @@ export const checkAcess = async () => {
     }
 
     if (response.status === 401) {
-      //TODO: 로그인 이동
+      setRecoil(isLoginState, false)
+      deleteTokensFromKeychain();
+      reset('LoginPage')
+      return false
     }
   } catch (error) {
     console.error(error)

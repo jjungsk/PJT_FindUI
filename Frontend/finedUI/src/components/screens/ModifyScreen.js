@@ -4,23 +4,29 @@
 */
 
 // react
-import React, {useState, useEffect} from 'react';
+import React, {useEffect, useState, Suspense} from 'react';
 
 // react-native
 import {
-  SafeAreaView,
-  StyleSheet,
-  ScrollView,
   View,
   Text,
   Image,
-  Alert,
+  SafeAreaView,
+  StyleSheet,
+  ScrollView,
+  FlatList,
+  TouchableOpacity,
+  ActivityIndicator,
 } from 'react-native';
 
-// recoil
-import {useRecoilState, useRecoilValue} from 'recoil';
-import {stringState} from '../../store/atoms/atoCount.js';
-import {selCountState} from '../../store/selectors/selCount.js';
+// position
+import Geolocation from 'react-native-geolocation-service';
+
+// icons
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+
+// picker
+import ImagePicker from 'react-native-image-crop-picker';
 
 // sizes
 import {
@@ -33,19 +39,40 @@ import {
 import ModifyContents from '../organisms/ModifyContents';
 import LinkButtons from '../organisms/LinkButtons';
 import ModifyButtons from '../organisms/ModifyButtons';
+import ImagePickModal from '../organisms/ImagePickModal';
+import RegistInputForm from '../organisms/RegistInputForm';
+import GoogleMapNotTouch from '../organisms/GoogleMapNotTouch';
+import Divider from '../atoms/Divider';
+import {apiGetAddress} from '../../API/apiKakao';
+
+// recoil
+import {
+  useResetRecoilState,
+  useRecoilState,
+  useSetRecoilState,
+  useRecoilValue,
+} from 'recoil';
+import {
+  registAddress,
+  registImageList,
+  registMode,
+  registPos,
+  userPosition,
+} from '../store_regist/registStore';
 
 // api 호출
 import {apiGetMissingPerson} from '../../API/apiMissingPerson.js';
 
 const ModifyScreen = ({navigation, route}) => {
   // STATE
-  // Recoil state - test 용
-  const [text, setText] = useRecoilState(stringState);
-  const value = useRecoilValue(stringState);
-  const selResult = useRecoilValue(selCountState);
+  // Global state - 지도
+  const pos = useRecoilValue(registPos);
+  const [imageList, setImageList] = useRecoilState(registImageList);
+  const [position, setPosition] = useRecoilState(userPosition);
 
   // Local state - 실종자 정보
   const [missingPerson, setMissingPerson] = useState({});
+  const [address, setAddress] = useState('');
 
   // FUNCTION
   // function - 실종자 정보 수정
@@ -63,17 +90,71 @@ const ModifyScreen = ({navigation, route}) => {
       navigation.navigate('HomeScreen');
     } else if (state === 'modify') {
       // 수정 버튼
-      console.log(missingPerson);
       Alert.alert('수정 완료');
       // navigation.navigate('HomeScreen');
     }
   };
 
+  // function
+  const removeImage = item => {
+    const newImageList = imageList.filter(element => element !== item);
+    setImageList(newImageList);
+  };
+
+  const pickImage = async () => {
+    try {
+      await ImagePicker.openPicker({
+        width: widthPercentage(150),
+        height: heightPercentage(150),
+        cropping: true,
+        mediaType: 'photo',
+      }).then(image => {
+        selectImage = {
+          uri: image.path,
+          width: image.width,
+          height: image.height,
+          mime: image.mime,
+        };
+        setImageList([...imageList, selectImage]);
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+
+  // function - useEffect[pos]
+  useEffect(() => {
+    const getAddress = () => {
+      const auto = async () => {
+        const result = await apiGetAddress(pos.lng, pos.lat);
+
+        setAddress(result['address_name']);
+      };
+      auto();
+    };
+    if (pos !== null) {
+      getAddress();
+    }
+  }, [pos]);
+
   // function - useEffect
   useEffect(() => {
+    // 위치
+    Geolocation.getCurrentPosition(
+      position => {
+        const {latitude, longitude} = position.coords;
+        setPosition({lat: latitude, lng: longitude});
+        console.log('position change');
+        return {lat: latitude, lng: longitude};
+      },
+      error => {
+        console.log(error);
+      },
+      {enableHighAccuracy: true, timeout: 5000, maximumAge: 5000},
+    );
+
     // route로 넘어온 등록된 ID
     const registId = route.params.registId;
-
     const auto = async () => {
       await apiGetMissingPerson(registId)
         .then(({data}) => {
@@ -81,7 +162,7 @@ const ModifyScreen = ({navigation, route}) => {
           console.log(data.data);
         })
         .catch(error => {
-          Alert.alert(error);
+          Alert.alert(error.message);
         });
     };
     auto();
