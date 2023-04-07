@@ -32,8 +32,8 @@ spring:
       hibernate:
         #        SQL 로그를 예쁘게 줄바꿈해서 보여줌
         format_sql: true
-    #
-    show-sql: false
+        #
+        show-sql: false
 
 # log level 설정
 logging:
