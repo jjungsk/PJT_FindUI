@@ -33,5 +33,5 @@ export const missingLongInfoState = atom({
 // 확인 버튼 - 다시 불러오기
 export const addInfoState = atom({
   key: `addInfoState`,
-  default: false,
+  default: 0,
 });

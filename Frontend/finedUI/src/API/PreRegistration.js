@@ -46,26 +46,22 @@ export const getMissingInfo = async () => {
 // 사전 -> 실종 변경하기
 export const changeMissing = async (registId, longitude, latitude) => {
   try {
-    const addInfo = getRecoil(addInfoState);
-    const token = await getAccessTokenFromKeychain();
-    const response = await api.patch(
-      `/api/regist`,
-      {
-        registId,
-        longitude,
-        latitude,
-      },
-      {
-        headers: {
-          Authorization: 'Bearer ' + token,
-        },
-      },
-    );
-    setRecoil(addInfoState, addInfo + 1);
-    // console.log(response)
-    return response.data;
-  } catch (error) {
-    console.error(error);
-    return error;
-  }
+  const addInfo = getRecoil(addInfoState)
+  const token = await getAccessTokenFromKeychain();
+  const response = await api.patch(`/api/regist`,{
+    registId,
+    longitude,
+    latitude
+  }, {
+    headers: {
+      Authorization: 'Bearer ' + token,
+    },
+  });
+  setRecoil(addInfoState, addInfo+1)
+  // console.log(response)
+  return response.data
+} catch (error) {
+  console.error(error);
+  return error
+}
 };

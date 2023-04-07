@@ -121,8 +121,8 @@ const RegistStackNavigation = ({navigation}) => {
                     }
                   }
                   if (status === 'CREATED') {
-                    setAddInfo(!addInfo);
-                    reset('Home');
+                    setAddInfo(addInfo+1)
+                    reset('Home')
                   }
                 }}>
                 <Text style={styles.completeBtnTitle}>완료</Text>
