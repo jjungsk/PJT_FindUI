@@ -1,0 +1,10 @@
+spring:
+  rsocket:
+    server:
+      port: 6565
+      transport: websocket
+      mapping-path: /rs
+  main:
+    allow-circular-references: true
+server:
+  port: 8081

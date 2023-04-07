@@ -1,4 +1,4 @@
-# <h1 align="center"> (가제) Find & You - 사진으로 소중한 사람 찾기 </h1>
+# <h1 align="center">  Find & You - 사진으로 소중한 사람 찾기 </h1>
 
 <!-- ![mainLogo](https://user-images.githubusercontent.com/50399088/218753614-a24db477-a29f-4147-b51a-d46fafca2ed3.png) -->
 
@@ -33,4 +33,6 @@ Find & You 서비스의 사진 인식 기술을 통해 소중한 가족을 쉽�
 - #### 의의
   과거에 잃어 버린 소중한 가족의 사진과 저희 서비스 DB에 업로드 된 사진을 매칭해 주어 소중한 가족을 쉽게 찾아 볼 수 있습니다. 또한, 길을 자주 잃어 버리는 우리 아이, 어르신의 사진을 미리 "Find & You"에 등록하여 실시간으로 제보되는 사진과 매칭하여 빠르게 가족의 품으로 돌아 올 수 있습니다.
 
-feature/detail/FE
+git commit test
+
+jenkins - webhook port connect 8090
