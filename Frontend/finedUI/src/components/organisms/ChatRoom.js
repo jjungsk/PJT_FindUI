@@ -62,16 +62,16 @@ const styles = StyleSheet.create({
   },
 });
 
-const ChatRoom = ({roomName, roomId, navigation}) => {
+const ChatRoom = ({missing, roomId, profile, navigation}) => {
   return (
     <TouchableOpacity onPress={(() => navigation.navigate('Chat'), {roomId})}>
       <View style={styles.container}>
         <View style={styles.profile}>
-          <Image style={styles.profileContent} />
+          <Image src={profile} style={styles.profileContent} />
         </View>
         <View style={styles.content}>
-          <Text style={styles.sender}>{`실종자 ${roomName}의 방`}</Text>
-          <Text>{roomName}</Text>
+          <Text style={styles.sender}>{`실종자 ${missing}의 방`}</Text>
+          <Text>{''}</Text>
         </View>
         <View style={styles.info}>
           <View style={styles.infoUp}>

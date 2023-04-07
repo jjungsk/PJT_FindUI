@@ -18,4 +18,23 @@ const apiGetChatRooms = async () => {
     console.log(err);
   }
 };
+//채팅방 생성
+const apiCreateChatRooms = async (roomName, registId) => {
+  const token = await getAccessTokenFromKeychain();
+
+  try {
+    const response = api.post(
+      `/api/chat/room`,
+      {roomName, registId},
+      {
+        headers: {
+          Authorization: 'Bearer ' + token,
+        },
+      },
+    );
+    return response;
+  } catch (err) {
+    console.log(err);
+  }
+};
 export {apiGetChatRooms};

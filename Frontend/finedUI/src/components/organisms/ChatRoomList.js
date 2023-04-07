@@ -11,13 +11,17 @@ const ChatRoomList = ({navigation}) => {
     await apiGetChatRooms().then(({data}) => {
       // TODO 마지막 메시지 저장하게 바꿔야됨
       // setLastMsg(data.last);
-      setDataList([...data.data]);
+      getProfile();
+
+      setDataList([...data.data, profile]);
       console.log(dataList);
     });
   };
-  // const profile = async () => {
-  //   await apiGetProfile().then({data});
-  // };
+  const getProfile = async () => {
+    await apiGetProfile().then(({data}) => {
+      setProfile(data.imagePath);
+    });
+  };
   useEffect(() => {
     roomList();
     console.log('실행됨');
@@ -33,7 +37,8 @@ const ChatRoomList = ({navigation}) => {
           <ChatRoom
             navigation={navigation}
             roomId={item.roomId}
-            roomName={item.registName}
+            missing={item.registName}
+            profile={item.profile}
           />
         )}
       />
