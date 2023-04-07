@@ -9,7 +9,6 @@ import {
   TouchableOpacity,
   Image,
 } from 'react-native';
-import FloatingButton from '../atoms/FloatingButton';
 import {MissingPersonCard} from '../organisms/MissingPersonCard';
 import {
   fontPercentage,
@@ -155,7 +154,6 @@ const SearchPage = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <FloatingButton />
       <Modal
         animationType="fade"
         transparent={true}

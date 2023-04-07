@@ -25,20 +25,27 @@ import {resetRegistAtoms} from '../store_regist/registStore';
 const MissingPersonCard = ({missingPerson, navigation}) => {
   // recoil data 초기화
   const resetRegistProps = useSetRecoilState(resetRegistAtoms);
-  const [registData, setRegistData] = useState(null);
-
-  // useEffect()
+  if ('url' in missingPerson) {
+    missingPerson.frontImagePath = missingPerson.url;
+  }
+  let imageUrl = new String(missingPerson.frontImagePath);
+  console.log(missingPerson);
+  const urlHeader = imageUrl.search('https') == -1 ? 'http://' : '';
   // default 이미지
   const img = require('../../assets/images/no_profile_image.png');
   return (
     <TouchableOpacity
       onPress={() => {
         resetRegistProps((mode = 4));
+        missingPerson.userId = missingPerson.id;
         navigation.navigate('registMain', {userInfo: missingPerson});
       }}>
       <ImageBackground
         source={{
-          uri: missingPerson.url !== null ? missingPerson.url : img,
+          uri:
+            missingPerson.frontImagePath !== null
+              ? urlHeader + missingPerson.frontImagePath
+              : img,
         }}
         resizeMode="cover"
         style={styles.image}
