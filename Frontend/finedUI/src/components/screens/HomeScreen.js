@@ -10,7 +10,6 @@ import {
   Dimensions,
   ScrollView,
   FlatList,
-  TouchableOpacity,
 } from 'react-native';
 
 // sizes
@@ -21,7 +20,7 @@ import {
 } from '../../styles/ResponsiveSize';
 
 // recoil
-import {useRecoilState, useRecoilValue, useSetRecoilState} from 'recoil';
+import {useRecoilValue, useSetRecoilState, useRecoilState} from 'recoil';
 import {userPosition} from '../store_regist/registStore';
 
 // position
@@ -34,7 +33,6 @@ import {Carousel} from 'react-native-basic-carousel';
 import {MissingPersonCard} from '../organisms/MissingPersonCard';
 
 // apis
-import {apiGetUserRegistMissingPersons} from '../../API/apiHome';
 import {getUserInfo} from '../../API/UserApi';
 import {
   missingSelector,
@@ -60,10 +58,8 @@ const HomeScreen = ({navigation}) => {
   const notices = useRecoilValue(noticeSelector);
 
   // (3) 실시간 & 장기간 실종자 정보
-  // const missingShort = useRecoilValue(missingShortSelector); // 실시간 실종
-  // const missingLong = useRecoilValue(missingLongSelector); // 장기간 실종
-  const missingShort = null; // 실시간 실종
-  const missingLong = null; // 장기간 실종
+  const missingShort = useRecoilValue(missingShortSelector); // 실시간 실종
+  const missingLong = useRecoilValue(missingLongSelector); // 장기간 실종
 
   // useEffect
   useEffect(() => {
@@ -143,6 +139,7 @@ const HomeScreen = ({navigation}) => {
                     <PreRegistCard
                       registUser={item}
                       userInfo={userInfo}
+                      mode={2}
                       navigation={navigation}
                     />
                   </View>
@@ -163,6 +160,7 @@ const HomeScreen = ({navigation}) => {
                   <PreRegistCard
                     registUser={item}
                     userInfo={userInfo}
+                    mode={3}
                     navigation={navigation}
                   />
                 </View>

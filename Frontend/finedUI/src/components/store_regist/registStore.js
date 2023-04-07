@@ -10,6 +10,11 @@ const registImageList = atom({
   default: [],
 });
 
+const registImagePath = atom({
+  key: 'registImagePath',
+  default: [],
+});
+
 const registName = atom({
   key: 'registName',
   default: '',
@@ -60,7 +65,6 @@ const registProps = selector({
     const date = get(registMissingDate);
     const pos = get(registPos);
     const mode = get(registMode);
-    console.log(date);
 
     if (imageList.length < 1) {
       return {prop: '사진', state: false};
@@ -89,6 +93,7 @@ const resetRegistAtoms = selector({
   get: () => {},
   set: ({set}, mode) => {
     set(registImageList, []);
+    set(registImagePath, []);
     set(registName, '');
     set(registBirth, null);
     set(registGender, null);
@@ -103,6 +108,7 @@ const resetRegistAtoms = selector({
 
 export {
   registImageList,
+  registImagePath,
   registName,
   registBirth,
   registGender,

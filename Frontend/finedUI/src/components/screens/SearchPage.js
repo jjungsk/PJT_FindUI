@@ -9,7 +9,6 @@ import {
   TouchableOpacity,
   Image,
 } from 'react-native';
-import FloatingButton from '../atoms/FloatingButton';
 import {MissingPersonCard} from '../organisms/MissingPersonCard';
 import {
   fontPercentage,
@@ -18,6 +17,7 @@ import {
 } from '../../styles/ResponsiveSize';
 import ImagePicker from 'react-native-image-crop-picker';
 import ImgSelectorContainer from '../organisms/ImgSelectorCotainer';
+import {apiSearchMissingPersons} from '../../API/apiSearch';
 
 const styles = StyleSheet.create({
   container: {
@@ -70,62 +70,7 @@ const SearchPage = ({navigation}) => {
   const [query, setQuery] = useState('');
   const [imageFile, setImageFile] = useState(null);
   console.log(imageFile);
-  const [missingPersons, setMissingPerson] = useState([
-    {
-      name: '정세권',
-      identity: 930330,
-      location: '서울',
-      image: null,
-    },
-    {
-      name: '정세권',
-      identity: 930331,
-      location: '서울',
-      image: null,
-    },
-    {
-      name: '정세권',
-      identity: 930401,
-      location: '서울',
-      image: null,
-    },
-    {
-      name: '정세권',
-      identity: 930332,
-      location: '서울',
-      image: null,
-    },
-    {
-      name: '정세권',
-      identity: 930333,
-      location: '서울',
-      image: null,
-    },
-    {
-      name: '정세권',
-      identity: 930404,
-      location: '서울',
-      image: null,
-    },
-    {
-      name: '정세권',
-      identity: 930335,
-      location: '서울',
-      image: null,
-    },
-    {
-      name: '정세권',
-      identity: 930336,
-      location: '서울',
-      image: null,
-    },
-    {
-      name: '정세권',
-      identity: 930407,
-      location: '서울',
-      image: null,
-    },
-  ]);
+  const [missingPersons, setMissingPerson] = useState([]);
 
   const pickImageFromAlbum = async () => {
     setImgSelect(!imgSelect);
@@ -150,6 +95,26 @@ const SearchPage = ({navigation}) => {
       console.log(e);
     }
   };
+
+  useEffect(() => {
+    const getMissingPerson = async () => {
+      try {
+        const response = await apiSearchMissingPersons({
+          data: {
+            limit: 15,
+            offset: 0,
+            image: imageFile,
+          },
+        });
+        setMissingPerson(response);
+      } catch (e) {
+        console.log(e);
+      }
+    };
+    if (imageFile !== null) {
+      getMissingPerson();
+    }
+  }, [imageFile]);
 
   const pickImageFromCamera = async () => {
     setImgSelect(!imgSelect);
@@ -189,7 +154,6 @@ const SearchPage = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-      <FloatingButton />
       <Modal
         animationType="fade"
         transparent={true}
@@ -228,7 +192,7 @@ const SearchPage = ({navigation}) => {
         data={missingPersons}
         numColumns={2}
         renderItem={missingCardRender}
-        keyExtractor={item => String(item.identity)}
+        keyExtractor={item => String(item.id)}
         ItemSeparatorComponent={() => <View style={{marginBottom: 10}} />}
         ListEmptyComponent={() => (
           <View>

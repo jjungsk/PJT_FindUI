@@ -55,8 +55,8 @@ const MapViewDetail = ({navigation, route}) => {
   return (
     <View style={styles.mainContainer}>
       <View style={styles.infoContainer}></View>
-      <GoogleMapDetail position={position} setMarker={!mode} />
-      {mode ? (
+      <GoogleMapDetail position={position} setMarker={mode} />
+      {mode == 1 || mode == 2 || mode == 3 ? (
         <>
           <Image
             source={require('../../assets/images/marker_img.png')}

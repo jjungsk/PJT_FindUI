@@ -18,6 +18,8 @@ import {
   widthPercentage,
 } from '../../styles/ResponsiveSize';
 
+import {MAIN_URL} from '@env';
+
 // position
 import Geolocation from 'react-native-geolocation-service';
 
@@ -33,6 +35,7 @@ import {
   registPos,
   userPosition,
   registId,
+  registImagePath,
 } from '../store_regist/registStore';
 
 import ImagePicker from 'react-native-image-crop-picker';
@@ -42,11 +45,12 @@ import GoogleMapNotTouch from '../organisms/GoogleMapNotTouch';
 import Divider from '../atoms/Divider';
 import {apiGetAddress} from '../../API/apiKakao';
 import ImgSelectorContainer from '../organisms/ImgSelectorCotainer';
+import FloatingButton from '../atoms/FloatingButton';
 
 const modeDict = {
   0: '사전 등록',
   1: '실시간 실종자 등록',
-  2: '이산가족 등록',
+  2: '사전 등록 정보 수정',
   3: '실종자 정보 수정',
   4: '실종자 정보 상세',
 };
@@ -56,6 +60,8 @@ const RegistScreen = ({route, navigation}) => {
   const mode = useRecoilValue(registMode);
   // 이미지
   const [imageList, setImageList] = useRecoilState(registImageList);
+  // 이미지 경로
+  const [imagePath, setImagePath] = useRecoilState(registImagePath);
   // 현재 위치
   const [position, setPosition] = useRecoilState(userPosition);
   // 이동한 주소
@@ -70,51 +76,55 @@ const RegistScreen = ({route, navigation}) => {
   // FUNCTION
   // useEffect - 넘어온 유저의 위치 정보 확인
   useEffect(() => {
-    // console.log(address);
-    // Geolocation.getCurrentPosition(
-    //   position => {
-    //     const {latitude, longitude} = position.coords;
-    //     setPosition({lat: latitude, lng: longitude});
-    //     return {lat: latitude, lng: longitude};
-    //   },
-    //   error => {
-    //     console.log(error);
-    //   },
-    //   {enableHighAccuracy: true, timeout: 5000, maximumAge: 5000},
-    // );
-
     // (1) 등록된 실종자 정보를 수정 할 때
-    if (mode === 3 || mode === 4) {
+    if (mode === 2 || mode === 3 || mode === 4) {
       // 등록번호 셋팅
       setId(route.params.userInfo.registId);
+      const mainUrl = MAIN_URL.substring(7, 29);
       // 이미지 set 1
       if (route.params.userInfo.frontImagePath !== null) {
-        const url = route.params.userInfo.frontImagePath;
-        console.log('(RegistScreen.js) url 길이 : ', url.length);
-        setImageList([
-          ...imageList,
-          {uri: route.params.userInfo.frontImagePath},
-        ]);
+        const initUrl = String(route.params.userInfo.frontImagePath).substring(
+          0,
+          22,
+        );
+        let newUrl = route.params.userInfo.frontImagePath;
+        if (initUrl === mainUrl) {
+          newUrl = 'http://' + newUrl;
+        }
+        setImageList([...imageList, {uri: newUrl}]);
+        setImagePath([...imagePath, {uri: newUrl}]);
       }
       // 이미지 set 2
       if (route.params.userInfo.otherImage1Path !== null) {
-        setImageList([
-          ...imageList,
-          {uri: route.params.userInfo.otherImage1Path},
-        ]);
+        const initUrl = String(route.params.userInfo.otherImage1Path).substring(
+          0,
+          22,
+        );
+        const newUrl = route.params.userInfo.otherImage1Path;
+        if (initUrl === mainUrl) {
+          newUrl = 'http://' + newUrl;
+        }
+        setImageList([...imageList, {uri: newUrl}]);
+        setImagePath([...imagePath, {uri: newUrl}]);
       }
       // 이미지 set 3
       if (route.params.userInfo.otherImage2Path !== null) {
-        setImageList([
-          ...imageList,
-          {uri: route.params.userInfo.otherImage2Path},
-        ]);
+        const initUrl = String(route.params.userInfo.otherImage2Path).substring(
+          0,
+          22,
+        );
+        const newUrl = route.params.userInfo.otherImage2Path;
+        if (initUrl === mainUrl) {
+          newUrl = 'http://' + newUrl;
+        }
+        setImageList([...imageList, {uri: newUrl}]);
+        setImagePath([...imagePath, {uri: newUrl}]);
       }
     }
 
     // (2) setPosition
     if (
-      (mode === 3 || mode === 4) &&
+      (mode === 2 || mode === 3 || mode === 4) &&
       route.params.userInfo.latitude !== null &&
       route.params.userInfo.longitude !== null
     ) {
@@ -122,11 +132,29 @@ const RegistScreen = ({route, navigation}) => {
         lat: route.params.userInfo.latitude,
         lng: route.params.userInfo.longitude,
       });
+      // 주소 api 호출
+      const auto = async () => {
+        const result = await apiGetAddress(
+          route.params.userInfo.longitude,
+          route.params.userInfo.latitude,
+        );
+        setAddress(result['address_name']);
+      };
+      auto();
     } else {
       Geolocation.getCurrentPosition(
         position => {
           const {latitude, longitude} = position.coords;
           setPosition({lat: latitude, lng: longitude});
+          // 주소 api 호출
+          const auto = async () => {
+            const result = await apiGetAddress(
+              position.coords.longitude,
+              position.coords.latitude,
+            );
+            setAddress(result['address_name']);
+          };
+          auto();
           return {lat: latitude, lng: longitude};
         },
         error => {
@@ -135,9 +163,6 @@ const RegistScreen = ({route, navigation}) => {
         {enableHighAccuracy: true, timeout: 5000, maximumAge: 5000},
       );
     }
-
-    // test
-    console.log('(RegistScreen.js) 실종자 정보 : ', route.params.userInfo);
   }, []);
 
   // useEffect[pos] - 등록 위치가 변경 될때
@@ -158,8 +183,15 @@ const RegistScreen = ({route, navigation}) => {
   // FUNCTION
   // 사진 삭제
   const removeImage = item => {
-    const newImageList = imageList.filter(element => element !== item);
+    const newImageList = imageList.filter(
+      element => element.uri !== item.uri && element.uri !== null,
+    );
+    const newImagePath = imageList.filter(element => element.uri !== item.uri);
+
+    console.log('삭제후 이미지 리스트', newImageList);
+    console.log('삭제후 패스 리스트', newImagePath);
     setImageList(newImageList);
+    setImagePath(newImagePath);
   };
 
   const pickImageFromAlbum = async () => {
@@ -180,6 +212,7 @@ const RegistScreen = ({route, navigation}) => {
           type: image.mime,
         };
         setImageList([...imageList, selectImage]);
+        console.log('추가 이미지 리스트', selectImage);
       });
     } catch (e) {
       console.log(e);
@@ -214,6 +247,7 @@ const RegistScreen = ({route, navigation}) => {
     <SafeAreaView style={{flex: 1}}>
       {/* 사진 등록 방법 modal */}
       <ImagePickModal visible={mode === 4 ? false : true} />
+      {mode === 4 ? <FloatingButton /> : null}
       <Modal
         animationType="fade"
         transparent={true}
@@ -295,9 +329,9 @@ const RegistScreen = ({route, navigation}) => {
             <Divider />
             <RegistInputForm userInfo={route.params.userInfo} />
             {/* 맵 설정 */}
-            {mode !== 0 ? (
+            {mode === 1 || mode === 3 || mode === 4 ? (
               <TouchableOpacity
-                disabled={mode === 4 && true}
+                disabled={mode === 4 && false}
                 activeOpacity={0.6}
                 style={styles.selectPos}
                 onPress={() => navigation.navigate('MapDetail', {mode: mode})}>
@@ -309,10 +343,12 @@ const RegistScreen = ({route, navigation}) => {
                       color: '#000000',
                       fontSize: fontPercentage(14),
                     }}>
-                    {address}
+                    {address !== null ? String(address) : address}
                   </Text>
                   <View style={styles.selectPosSubTitle}>
-                    <Text style={styles.selectPosInfo}>위치 선택</Text>
+                    <Text style={styles.selectPosInfo}>
+                      {mode == 4 ? '자세히' : '위치 선택'}
+                    </Text>
                     <Icon
                       name="chevron-right"
                       size={widthPercentage(20)}

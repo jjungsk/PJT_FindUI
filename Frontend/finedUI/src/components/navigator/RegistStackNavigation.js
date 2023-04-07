@@ -29,10 +29,13 @@ import {
 // date format
 import {format} from 'date-fns';
 import ko from 'date-fns/esm/locale/ko/index.js';
-import { reset } from './NavigationService';
-import { setRecoil } from 'recoil-nexus';
-import { addInfoState } from '../../store/atoms/InfoState';
-import { missingSelector, preSelector } from '../../store/selectors/RegistSelector';
+import {reset} from './NavigationService';
+import {setRecoil} from 'recoil-nexus';
+import {addInfoState} from '../../store/atoms/InfoState';
+import {
+  missingSelector,
+  preSelector,
+} from '../../store/selectors/RegistSelector';
 
 const Stack = createNativeStackNavigator();
 
@@ -53,8 +56,7 @@ const RegistStackNavigation = ({navigation}) => {
   const date = useRecoilValue(registMissingDate);
   const pos = useRecoilValue(registPos);
   const mode = useRecoilValue(registMode);
-  const [addInfo, setAddInfo] = useRecoilState(addInfoState)
-  console.log('addInfo', addInfo)
+  const [addInfo, setAddInfo] = useRecoilState(addInfoState);
   return (
     <Stack.Navigator initialRouteName="registRoot">
       <Stack.Screen
@@ -86,7 +88,6 @@ const RegistStackNavigation = ({navigation}) => {
                     ]);
                   } else {
                     if (mode == 0) {
-                      console.log(mode);
                       try {
                         status = await preRegist({
                           data: {
@@ -100,7 +101,6 @@ const RegistStackNavigation = ({navigation}) => {
                         console.log(e);
                       }
                     } else {
-                      console.log(mode);
                       const dateString = format(date, 'yyyy-MM-dd HH:mm:ss', {
                         locale: ko,
                       });
