@@ -6,6 +6,7 @@ import com.ssafy.finedUi.common.oauth.user.AuthProvider;
 import com.ssafy.finedUi.common.oauth.user.OAuth2UserInfo;
 import com.ssafy.finedUi.common.oauth.user.OAuth2UserInfoFactory;
 import com.ssafy.finedUi.common.oauth.user.UserPrincipal;
+import com.ssafy.finedUi.common.properties.JwtProperties;
 import com.ssafy.finedUi.db.entity.Social;
 import com.ssafy.finedUi.db.entity.User;
 import com.ssafy.finedUi.social.SocialRepository;
@@ -67,7 +68,14 @@ public class CustomOAuth2UserService extends DefaultOAuth2UserService {
         if (userOptional.isPresent()) {
             //기존에 존재하던 유저인경우 정보 update.
             user = userOptional.get();
-            if (!user.getSocial().getProvider().equals(AuthProvider.valueOf(oAuth2UserRequest.getClientRegistration().getRegistrationId()))) {
+            log.info(user.getSocial().getProvider());
+            log.info(oAuth2UserRequest.getClientRegistration().getRegistrationId());
+            if(user.getSocial().getProvider().equals(oAuth2UserRequest.getClientRegistration().getRegistrationId())){
+                log.info("같은디..");
+            }
+
+//            if (!user.getSocial().getProvider().equals(AuthProvider.valueOf(oAuth2UserRequest.getClientRegistration().getRegistrationId()))) {
+            if (!user.getSocial().getProvider().equals(oAuth2UserRequest.getClientRegistration().getRegistrationId())) {
 //                클라이언트가 요구한 proivder와 연결된 provider가 일치하지않으면 에러.
                 throw new OAuth2AuthenticationProcessingException("Looks like you're signed up with " +
                         user.getSocial().getProvider() + " account. Please use your " + user.getSocial().getProvider() +
