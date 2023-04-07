@@ -35,6 +35,7 @@ import LinkButtons from '../organisms/LinkButtons';
 
 // apis
 import {apiGetAddress} from '../../API/apiKakao';
+import FloatingButton from '../atoms/FloatingButton';
 
 const DetailScreen = ({navigation, route}) => {
   // State - 실종자 정보
@@ -63,6 +64,7 @@ const DetailScreen = ({navigation, route}) => {
 
   return (
     <SafeAreaView style={{flex: 1}}>
+      <FloatingButton />
       <ScrollView>
         <View style={styles.detailContainer}>
           <View style={styles.titleContainer}>

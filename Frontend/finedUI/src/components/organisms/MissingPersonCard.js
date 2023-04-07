@@ -1,5 +1,5 @@
 // react
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 
 // react-native
 import {
@@ -25,20 +25,26 @@ import {resetRegistAtoms} from '../store_regist/registStore';
 const MissingPersonCard = ({missingPerson, navigation}) => {
   // recoil data 초기화
   const resetRegistProps = useSetRecoilState(resetRegistAtoms);
-
+  if ('url' in missingPerson) {
+    missingPerson.frontImagePath = missingPerson.url;
+  }
+  let imageUrl = new String(missingPerson.frontImagePath);
+  console.log(missingPerson);
+  const urlHeader = imageUrl.search('https') == -1 ? 'http://' : '';
   // default 이미지
   const img = require('../../assets/images/no_profile_image.png');
   return (
     <TouchableOpacity
       onPress={() => {
         resetRegistProps((mode = 4));
+        missingPerson.userId = missingPerson.id;
         navigation.navigate('registMain', {userInfo: missingPerson});
       }}>
       <ImageBackground
         source={{
           uri:
             missingPerson.frontImagePath !== null
-              ? missingPerson.frontImagePath
+              ? urlHeader + missingPerson.frontImagePath
               : img,
         }}
         resizeMode="cover"
@@ -75,7 +81,7 @@ const styles = StyleSheet.create({
     borderRadius: widthPercentage(20),
     borderWidth: 2,
     // elevation: 5,
-    borderColor: '#c7d7fe'
+    borderColor: '#c7d7fe',
   },
   imageText: {
     width: '100%',

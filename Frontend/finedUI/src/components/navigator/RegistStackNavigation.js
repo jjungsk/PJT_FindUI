@@ -57,7 +57,6 @@ const RegistStackNavigation = ({navigation}) => {
   const pos = useRecoilValue(registPos);
   const mode = useRecoilValue(registMode);
   const [addInfo, setAddInfo] = useRecoilState(addInfoState);
-  console.log('addInfo', addInfo);
   return (
     <Stack.Navigator initialRouteName="registRoot">
       <Stack.Screen

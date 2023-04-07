@@ -45,6 +45,7 @@ import GoogleMapNotTouch from '../organisms/GoogleMapNotTouch';
 import Divider from '../atoms/Divider';
 import {apiGetAddress} from '../../API/apiKakao';
 import ImgSelectorContainer from '../organisms/ImgSelectorCotainer';
+import FloatingButton from '../atoms/FloatingButton';
 
 const modeDict = {
   0: '사전 등록',
@@ -82,7 +83,10 @@ const RegistScreen = ({route, navigation}) => {
       const mainUrl = MAIN_URL.substring(7, 29);
       // 이미지 set 1
       if (route.params.userInfo.frontImagePath !== null) {
-        const initUrl = route.params.userInfo.frontImagePath.substring(0, 22);
+        const initUrl = String(route.params.userInfo.frontImagePath).substring(
+          0,
+          22,
+        );
         let newUrl = route.params.userInfo.frontImagePath;
         if (initUrl === mainUrl) {
           newUrl = 'http://' + newUrl;
@@ -92,7 +96,10 @@ const RegistScreen = ({route, navigation}) => {
       }
       // 이미지 set 2
       if (route.params.userInfo.otherImage1Path !== null) {
-        const initUrl = route.params.userInfo.otherImage1Path.substring(0, 22);
+        const initUrl = String(route.params.userInfo.otherImage1Path).substring(
+          0,
+          22,
+        );
         const newUrl = route.params.userInfo.otherImage1Path;
         if (initUrl === mainUrl) {
           newUrl = 'http://' + newUrl;
@@ -102,7 +109,10 @@ const RegistScreen = ({route, navigation}) => {
       }
       // 이미지 set 3
       if (route.params.userInfo.otherImage2Path !== null) {
-        const initUrl = route.params.userInfo.otherImage2Path.substring(0, 22);
+        const initUrl = String(route.params.userInfo.otherImage2Path).substring(
+          0,
+          22,
+        );
         const newUrl = route.params.userInfo.otherImage2Path;
         if (initUrl === mainUrl) {
           newUrl = 'http://' + newUrl;
@@ -237,6 +247,7 @@ const RegistScreen = ({route, navigation}) => {
     <SafeAreaView style={{flex: 1}}>
       {/* 사진 등록 방법 modal */}
       <ImagePickModal visible={mode === 4 ? false : true} />
+      {mode === 4 ? <FloatingButton /> : null}
       <Modal
         animationType="fade"
         transparent={true}
@@ -320,7 +331,7 @@ const RegistScreen = ({route, navigation}) => {
             {/* 맵 설정 */}
             {mode === 1 || mode === 3 || mode === 4 ? (
               <TouchableOpacity
-                disabled={mode === 4 && true}
+                disabled={mode === 4 && false}
                 activeOpacity={0.6}
                 style={styles.selectPos}
                 onPress={() => navigation.navigate('MapDetail', {mode: mode})}>
@@ -332,10 +343,12 @@ const RegistScreen = ({route, navigation}) => {
                       color: '#000000',
                       fontSize: fontPercentage(14),
                     }}>
-                    {address}
+                    {address !== null ? String(address) : address}
                   </Text>
                   <View style={styles.selectPosSubTitle}>
-                    <Text style={styles.selectPosInfo}>위치 선택</Text>
+                    <Text style={styles.selectPosInfo}>
+                      {mode == 4 ? '자세히' : '위치 선택'}
+                    </Text>
                     <Icon
                       name="chevron-right"
                       size={widthPercentage(20)}

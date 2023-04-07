@@ -42,11 +42,11 @@ const GoogleMapDetail = ({position, zoom = 0.005, setMarker = false}) => {
       }}
       onRegionChangeComplete={region => {
         const {latitude, longitude} = region;
-        if (!setMarker) {
+        if (setMarker == 1 || setMarker == 2 || setMarker == 3) {
           setPosition({lat: latitude, lng: longitude});
         }
       }}>
-      {setMarker ? (
+      {setMarker == 4 ? (
         <Marker coordinate={{latitude: position.lat, longitude: position.lng}}>
           <Image
             source={require('../../assets/images/marker_img.png')}
