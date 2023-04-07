@@ -22,55 +22,38 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class PersonalDataRequestDto {
 
-    // 환경변수로 저장된 업로드 경로
     @Value("${image.upload.path}")
-    private String path;
-    private Long missingIdx;
-    private Long userId;
-    private User user;
-    private String name;
-    private Integer birthDate;
-    private Integer gender;
-    private Boolean isMissing;
-    private Point missingLocation;
-    private Timestamp missingTime;
-    private MultipartFile frontImage;
-    private MultipartFile otherImage1;
-    private MultipartFile otherImage2;
-    private Timestamp createDate;
+    private String path;                // 환경변수로 저장된 업로드 경로
 
-    @Builder
-    PersonalDataRequestDto(Long missingIdx, Long userId, String name, Integer birthDate, Integer gender, Boolean isMissing, Point missingLocation, Timestamp missingTime, Timestamp createDate, MultipartFile frontImage, MultipartFile otherImage1, MultipartFile otherImage2) {
-        this.missingIdx = missingIdx;
-        this.userId = userId;
-        this.name = name;
-        this.birthDate = birthDate;
-        this.gender = gender;
-        this.isMissing = isMissing;
-        this.missingLocation = missingLocation;
-        this.missingTime = missingTime;
-        this.frontImage = frontImage;
-        this.otherImage1 = otherImage1;
-        this.otherImage2 = otherImage2;
-        this.createDate = createDate.toString().isEmpty() ? Timestamp.valueOf(LocalDateTime.now()) : createDate;
-    }
-
-    public String uploadPath(MultipartFile file) {
-        return Paths.get(path + "Image" + File.separator + userId + "." + file.getContentType().split("/")[1]).toString(); // 저장 경로
-    }
+    private Long missingId;            // 실종(사전 등록) 번호
+    private Long userId;                // 보호자 번호
+    private User user;                  // 사용자 : 보호자 번호로 조회한 사용자
+    private String name;                // 이름
+    private Integer birthDate;          // 생년월일 (ex: 1996.06.25)
+    private Integer gender;             // 성별 (남자:1 여자:2)
+    private Boolean isMissing;          // 실종 여부
+    private Point missingLocation;      // 실종 위치
+    private Timestamp missingTime;      // 실종 시간
+    private MultipartFile frontImage;   // 정면 사진
+    private MultipartFile otherImage1;  // 추가 사진 1
+    private MultipartFile otherImage2;  // 추가 사진 2
+    private String frontImagePath;      // 정면 사진 저장 경로
+    private String otherImage1Path;     // 추가 사진 1 저장 경로
+    private String otherImage2Path;     // 추가 사진 2 저장 경로
+    private Timestamp createDate;       // 생성 시간
 
     public PersonalData toEntity() {
         return PersonalData.builder()
-                .missing_idx(missingIdx)
+                .missingIdx(missingId)
                 .name(name)
                 .birthDate(birthDate)
                 .gender(gender)
                 .isMissing(isMissing)
                 .missingLocation(missingLocation)
                 .missingTime(missingTime)
-                .frontImage(uploadPath(frontImage))
-                .otherImage1(uploadPath(otherImage1))
-                .otherImage2(uploadPath(otherImage2))
+                .frontImage(frontImagePath)
+                .otherImage1(otherImage1Path)
+                .otherImage2(otherImage2Path)
                 .user(user)
                 .createDate(createDate)
                 .updateDate(Timestamp.valueOf(LocalDateTime.now()))

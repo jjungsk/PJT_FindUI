@@ -24,6 +24,6 @@ public class PersonalImageController {
 
     @PostMapping(path = "")
     public void uploadFile(@RequestParam MultipartFile multipartFile, @RequestParam Long userId) {
-        personalImageService.save(multipartFile, userId);
+        personalImageService.save(new MultipartFile[]{multipartFile}, userId);
     }
 }
