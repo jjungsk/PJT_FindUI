@@ -4,6 +4,8 @@ package com.ssafy.finedUi.chatImage.search;
 import com.ssafy.finedUi.chatImage.search.request.ChatImageSearchRequest;
 import com.ssafy.finedUi.chatImage.search.request.SearchResponse;
 import com.ssafy.finedUi.common.properties.AiServerProperties;
+import com.ssafy.finedUi.db.entity.RegistInfo;
+import com.ssafy.finedUi.registInfo.RegistInfoRepository;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -20,7 +22,9 @@ import org.springframework.web.client.RestTemplate;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @Api(tags = {"Search"})
@@ -29,6 +33,8 @@ public class ChatImageSearchController {
     @Autowired
     private AiServerProperties aiServerProperties;
 
+    @Autowired
+    private RegistInfoRepository registInfoRepository;
     @PostMapping("/api/chat/image/search")
     @ApiOperation(value = "knnSearch 테스트용.", notes = "이미지를 딥러닝서버에 전달.")
     ResponseEntity<?> knnSearch(ChatImageSearchRequest chatImageSearchRequest) {
@@ -55,8 +61,20 @@ public class ChatImageSearchController {
             //        에러처리도하기.
             log.info("Response : {}", response);
             log.info("Response : {}", response.getBody());
-//        fastapi와 연결해보기.
-            return ResponseEntity.status(200).body(response.getBody());
+            List<SearchResponse> matchings = response.getBody();
+//            효율성 생각 안하고 막 구현했음.
+            for(int i=0; i<matchings.size();i++){
+
+                Optional<RegistInfo> optional = registInfoRepository.findById(
+                        matchings.get(i).getId()
+                );
+                if(optional.isPresent()){
+                    matchings.get(i).setName(optional.get().getName());
+                    matchings.get(i).setBirthDate(optional.get().getBirthDate());
+                }
+            }
+
+            return ResponseEntity.status(200).body(matchings);
         } catch (HttpStatusCodeException e) {
             throw new RuntimeException(e);
         }

@@ -1,4 +1,4 @@
-# <h1 align="center"> (가제) Find & You - 사진으로 소중한 사람 찾기 </h1>
+# <h1 align="center">  Find & You - 사진으로 소중한 사람 찾기 </h1>
 
 <!-- ![mainLogo](https://user-images.githubusercontent.com/50399088/218753614-a24db477-a29f-4147-b51a-d46fafca2ed3.png) -->
 
