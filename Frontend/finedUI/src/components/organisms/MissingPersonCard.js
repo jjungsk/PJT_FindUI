@@ -1,5 +1,5 @@
 // react
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 
 // react-native
 import {
@@ -25,7 +25,9 @@ import {resetRegistAtoms} from '../store_regist/registStore';
 const MissingPersonCard = ({missingPerson, navigation}) => {
   // recoil data 초기화
   const resetRegistProps = useSetRecoilState(resetRegistAtoms);
+  const [registData, setRegistData] = useState(null);
 
+  // useEffect()
   // default 이미지
   const img = require('../../assets/images/no_profile_image.png');
   return (
@@ -36,10 +38,7 @@ const MissingPersonCard = ({missingPerson, navigation}) => {
       }}>
       <ImageBackground
         source={{
-          uri:
-            missingPerson.frontImagePath !== null
-              ? missingPerson.frontImagePath
-              : img,
+          uri: missingPerson.url !== null ? missingPerson.url : img,
         }}
         resizeMode="cover"
         style={styles.image}
@@ -75,7 +74,7 @@ const styles = StyleSheet.create({
     borderRadius: widthPercentage(20),
     borderWidth: 2,
     // elevation: 5,
-    borderColor: '#c7d7fe'
+    borderColor: '#c7d7fe',
   },
   imageText: {
     width: '100%',
