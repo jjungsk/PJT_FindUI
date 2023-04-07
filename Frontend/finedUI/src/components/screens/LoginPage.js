@@ -6,9 +6,8 @@ import LoginInput from '../atoms/LoginInput';
 import GoogleButton from '../atoms/GoogleButton';
 import KakaoButton from '../atoms/KakaoButton';
 import Logo from '../atoms/Logo';
-import {login} from '../../API/LoginApi';
+import {login, socialLogin} from '../../API/LoginApi';
 import {
-  getAccessTokenFromKeychain,
   saveAccessToKeychain,
   saveRefreshToKeychain,
 } from '../../store/keychain/loginToken';
@@ -75,26 +74,9 @@ const LoginPage = ({navigation}) => {
     }
   };
 
-  // // 자동 로그인 시도
-  // useEffect(() => {
-  //   const tryAutoLogin = async () => {
-  //     // Keychain에서 Access Token을 가져온다.
-  //     const accessToken = await getAccessTokenFromKeychain();
-  //     if (accessToken) {
-  //       // 서버에 Access Token을 보내 유효성 검사를 한다.
-  //       const isValid = await validateAccessToken(accessToken);
-  //       if (isValid) {
-  //         // Access Token이 유효하면 자동 로그인 성공
-  //         // TODO: 사용자 정보를 가져와 화면을 업데이트, 정보 MainPage로 prop해서 보내면 될 듯?
-  //       } else {
-  //         // Access Token이 유효하지 않으면 Keychain에서 토큰을 삭제한다.
-  //         await deleteTokensFromKeychain();
-  //       }
-  //     }
-  //   };
-
-  //   tryAutoLogin();
-  // }, []);
+  const handleSocial = async (social) => {
+    const response = await socialLogin(social)
+  }
 
   return (
     <View style={styles.container}>
@@ -121,8 +103,8 @@ const LoginPage = ({navigation}) => {
         <Text style={styles.font}>비밀번호 찾기</Text>
       </TouchableOpacity>
       <View style={styles.line} />
-      <GoogleButton />
-      <KakaoButton />
+      <GoogleButton onPress={()=>handleSocial('google')}/>
+      <KakaoButton onPress={()=>handleSocial('kakao')}/>
     </View>
   );
 };

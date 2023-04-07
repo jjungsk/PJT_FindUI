@@ -1,13 +1,14 @@
 import axios from 'axios';
 
 import {MAIN_URL} from '@env';
+import apiInstance from './apiInstance';
 
 // import apiInstance from "./apiInstance";
-// const api = apiInstance();
+const api = apiInstance();
 
 export const login = async (email, password) => {
   try {
-    const response = await axios.post(`${MAIN_URL}/api/user/login`, {
+    const response = await api.post(`/api/user/login`, {
       email,
       password,
     });
@@ -26,18 +27,15 @@ export const login = async (email, password) => {
   }
 };
 
-export const validateAccessToken = async accessToken => {
+// 소셜 로그인
+export const socialLogin = async (social) => {
   try {
-    const response = await api.post(`/valid`, {
-      accessToken,
-    });
-    return {
-      isValid: true,
-    };
+    console.log(social)
+    const response = await api.get(`/oauth2/authorization/${social}?redirect_url=com.finedui://LoginPage`);
+    console.log(response.data)
+    return response;
   } catch (error) {
     console.error(error);
-    return {
-      isValid: null,
-    };
+    return error;
   }
 };

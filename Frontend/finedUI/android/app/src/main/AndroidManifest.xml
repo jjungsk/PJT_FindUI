@@ -28,6 +28,7 @@
         <intent-filter>
             <action android:name="android.intent.action.MAIN" />
             <category android:name="android.intent.category.LAUNCHER" />
+            <data android:scheme="com.finedui" android:host="LoginPage" />
         </intent-filter>
       </activity>
     </application>
