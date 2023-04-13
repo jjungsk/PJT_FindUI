@@ -15,6 +15,8 @@
 
 <!-- | Link  |  [Bundler](https://i8a810.p.ssafy.io/) |<br/><br/> -->
 
+[체험 APK 다운 링크](https://drive.google.com/file/d/1Mm68T9rYOQF_A-D77ZRiPRQnz4TuEGx5/view?usp=share_link)
+
 ## 💻 서비스 소개
 
 국내 & 해외 입양으로 헤어진 가족을 찾고 싶을 떄,
